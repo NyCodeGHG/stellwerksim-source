@@ -1,0 +1,27 @@
+
+weiche:<enr>:umschalten|abzweig|gerade|fehler|zug
+
+signal:<enr>:rot|grün|zs1|fehler|zug
+
+bü:<enr>:schliessen|geschlossen|öffnen|zug
+
+bahnsteig:<name>:zug
+
+trigger:<name>:zug
+
+zug:...?
+
+timer:
+
+init:
+
+Scriptsprache:
+Im Kopf noch z.B. E{a<2}, nur <,<=,>,>=,==,!= und true/false
+
+Kein IF!
+Script wird beim Laden vorkompiliert (Befehle werden erkannt und durch Int-Tokens ersetzt, für Switch/Case)
+Script wird beim Laden anhand der Bedingungen direkt auf Objekte verteilt
+
+Variablen:
+(wert,name,set)
+(name,get)

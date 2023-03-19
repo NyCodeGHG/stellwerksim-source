@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="STS"
+			 targetNamespace="http://www.stellwerksim.de/wsdl/STS"
+			 xmlns="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:tns="http://www.stellwerksim.de/wsdl/STS"
+			 xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+			 xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.stellwerksim.de/wsdl/STS" xmlns:tns="http://www.stellwerksim.de/wsdl/STS">
+			<xsd:simpleType name="getStringArrayResponse">
+				<xsd:list itemType="xsd:string">
+				</xsd:list>
+			</xsd:simpleType>
+			<xsd:complexType name="TipAnswer">
+				<xsd:all>
+					<xsd:element name="title" type="xsd:string"></xsd:element>
+					<xsd:element name="text" type="xsd:string"></xsd:element>
+				</xsd:all>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<message name="getFriendFoeRequest">
+		<part name="token" type="xsd:string"/>
+		<part name="friend" type="xsd:boolean"/>
+	</message>
+	<message name="getFriendFoeResponse">
+		<part name="return" type="tns:getStringArrayResponse"/>
+	</message>
+	<message name="STSWSDLOperationRequest">
+		<part name="part1" type="xsd:string"/>
+	</message>
+	<message name="STSWSDLOperationResponse">
+		<part name="return" type="xsd:string"/>
+	</message>
+	<message name="getTipRequest">
+		<part name="token" type="xsd:string"/>
+	</message>
+	<message name="getTipResponse">
+		<part name="return" type="tns:TipAnswer"/>
+	</message>
+	<message name="isLoginAllowedRequest">
+		<part name="token" type="xsd:string"/>
+	</message>
+	<message name="isLoginAllowedResponse">
+		<part name="return" type="xsd:boolean"/>
+	</message>
+	<message name="StoreLatencyInput">
+		<part name="token" type="xsd:string"/>
+		<part name="type" type="xsd:string"/>
+		<part name="params" type="xsd:string"/>
+		<part name="delay" type="xsd:int"/>
+	</message>
+	<message name="userDataRequest">
+		<part name="token" type="xsd:string"/>
+		<part name="user" type="xsd:string"/>
+	</message>
+	<message name="ConsoleRequest">
+		<part name="token" type="xsd:string"/>
+		<part name="reason" type="xsd:string"/>
+		<part name="content" type="xsd:string"/>
+	</message>
+	<message name="EventOccuredRequest">
+		<part name="part1" type="xsd:string"/>
+		<part name="aid" type="xsd:int"/>
+		<part name="text" type="xsd:string"/>
+		<part name="code" type="xsd:string"/>
+	</message>
+    <message name="getUidRequest">
+        <part name="part1" type="xsd:string"/>
+    </message>
+    <message name="getUidResponse">
+        <part name="return" type="xsd:string"/>
+    </message>
+    <portType name="STSPort">
+		<wsaw:UsingAddressing wsdl:required="true" />
+		<operation name="getFriendFoe" parameterOrder="token friend">
+			<input name="input1" message="tns:getFriendFoeRequest"/>
+			<output name="output1" message="tns:getFriendFoeResponse"/>
+		</operation>
+		<operation name="getName" parameterOrder="part1">
+			<input name="input2" message="tns:STSWSDLOperationRequest"/>
+			<output name="output2" message="tns:STSWSDLOperationResponse"/>
+		</operation>
+		<operation name="getTip">
+			<input name="input3" message="tns:getTipRequest"/>
+			<output name="output3" message="tns:getTipResponse"/>
+		</operation>
+		<operation name="isLoginAllowed">
+			<input name="input4" message="tns:isLoginAllowedRequest"/>
+			<output name="output4" message="tns:isLoginAllowedResponse"/>
+		</operation>
+		<operation name="storeLatency">
+			<input name="input5" message="tns:StoreLatencyInput"/>
+		</operation>
+		<operation name="userData">
+			<input name="input6" message="tns:userDataRequest"/>
+		</operation>
+		<operation name="userConsole">
+			<input name="input7" message="tns:ConsoleRequest"/>
+		</operation>
+		<operation name="eventOccured">
+			<input name="input8" message="tns:EventOccuredRequest"/>
+		</operation>
+	    <operation name="getUid">
+	        <input name="input9" message="tns:getUidRequest"/>
+	        <output name="output5" message="tns:getUidResponse"/>
+	    </operation>
+	</portType>
+	<binding name="STSPortBinding" type="tns:STSPort">
+		<http:binding verb="GET"/>
+		<operation name="getFriendFoe">
+			<http:operation location="" />
+			<input name="input1">
+				<http:urlEncoded/>
+			</input>
+			<output name="output1">
+			</output>
+		</operation>
+		<operation name="getName">
+			<http:operation location=""/>
+			<input name="input2">
+				<http:urlEncoded/>
+			</input>
+			<output name="output2">
+			</output>
+		</operation>
+		<operation name="getTip">
+			<http:operation location=""/>
+			<input name="input3"/>
+			<output name="output3"/>
+		</operation>
+		<operation name="isLoginAllowed">
+			<input name="input4"/>
+			<output name="output4"/>
+		</operation>
+		<operation name="storeLatency">
+			<input name="input5"/>
+			<output name="output5"/>
+		</operation>
+		<operation name="userData">
+			<input name="input6"/>
+		</operation>
+		<operation name="userConsole">
+			<input name="input7"/>
+		</operation>
+		<operation name="eventOccured">
+			<input name="input8"/>
+		</operation>
+	    <operation name="getUid">
+	        <input name="input9"/>
+	        <output name="output5"/>
+	    </operation>
+	</binding>
+	<service name="STSService">
+		<port name="STSPort" binding="tns:STSPortBinding">
+			<http:address location="http://localhost:${HttpDefaultPort}/service"/>
+		</port>
+	</service>
+</definitions>

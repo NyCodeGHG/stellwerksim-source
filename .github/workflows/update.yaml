@@ -26,7 +26,7 @@ jobs:
       - name: Create/Update PR
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: "chore: update StellwerkSim Source (Build ${{ steps.build.outputs.STS_BUILD }}"
+          commit-message: "chore: update StellwerkSim Source (Build ${{ steps.build.outputs.STS_BUILD }})"
           branch: sts-update
           title: Update StellwerkSim to Build ${{ steps.build.outputs.STS_BUILD }}
           labels: sts-updates

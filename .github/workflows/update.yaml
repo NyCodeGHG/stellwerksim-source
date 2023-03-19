@@ -29,5 +29,5 @@ jobs:
           title: Update StellwerkSim to Build ${{ steps.build.outputs.STS_BUILD }}
           labels: sts-updates
           reviewers: nycodeghg
-          committer: GitHub Actions <noreply@github.com>
-          author: GitHub Actions <noreply@github.com>
+          committer: GitHub Actions <41898282+github-actions[bot]@users.noreply.github.com>
+          author: GitHub Actions <41898282+github-actions[bot]@users.noreply.github.com>

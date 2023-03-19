@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="classpath:/STSWSDL.wsdl" uri="wsdl/STSWSDL.wsdl"/>
+    <system systemId="file:/C:/Users/js/Java/STSQuery/src/STSWSDL.wsdl" uri="wsdl/STSWSDL.wsdl"/>
+</catalog>

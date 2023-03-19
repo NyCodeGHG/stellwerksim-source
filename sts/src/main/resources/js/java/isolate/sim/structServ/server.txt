@@ -1,0 +1,17 @@
+Verbindung zum Web-Server, dort Proxy, Port 3288 (timeserv TCP). Verbindet, sobald
+FAT-Code eingegeben wurde. Wenn Verbindung fehlgeschlagen, kein weiterer Versuch.
+
+Proxy kann nur 2 Verbindung annehmen: 1 Sim und 1 Infopanel.
+
+
+Protokoll:
+
+getlist
+<entry type="" name="" id="" />
+Von getStructInfo() die 3 Felder, wobei ID per HashMap<Integer,structinfo> gezählt wird,
+Map bei jedem getlist löschen und neu aufbauen.
+
+getentry ID
+<line key="" value="" />
+Von getStructure() die 2 Felder, ID über HashMap in structinfo.
+

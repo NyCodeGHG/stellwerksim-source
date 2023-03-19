@@ -21,6 +21,8 @@ jobs:
       - name: Capture STS Build Number
         id: build
         run: echo "STS_BUILD=$(cat ./sts/src/main/resources/js/java/build/build.property | awk -F '=' '/^[^#]/ {print $2}')" >> $GITHUB_OUTPUT
+      - name: Enable Commit Signing
+        run: git config commit.gpgsign true
       - name: Create/Update PR
         uses: peter-evans/create-pull-request@v4
         with:
@@ -29,3 +31,5 @@ jobs:
           title: Update StellwerkSim to Build ${{ steps.build.outputs.STS_BUILD }}
           labels: sts-updates
           reviewers: nycodeghg
+          committer: GitHub Actions <noreply@github.com>
+          author: GitHub Actions <noreply@github.com>

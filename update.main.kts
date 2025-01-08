@@ -6,7 +6,7 @@
     "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta",
     "org.quiltmc:quiltflower:1.9.0"
 )
-@file:OptIn(ExperimentalPathApi::class, ExperimentalTime::class)
+@file:OptIn(ExperimentalPathApi::class)
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -137,7 +137,6 @@ fun createSourceDirectories(moduleName: String) {
     }
 }
 
-@Suppress("NAME_SHADOWING")
 class Decompiler(outDir: Path) : IFernflowerLogger() {
     private val engine: Fernflower =
         Fernflower(DirectoryResultSaver(outDir.toFile()), mapOf("hes" to 1), this)
@@ -164,5 +163,10 @@ class Decompiler(outDir: Path) : IFernflowerLogger() {
     override fun writeMessage(message: String, severity: Severity, exception: Throwable) {
         println("${severity.prefix} $message")
         exception.printStackTrace()
+    }
+
+    override fun writeMessage(message: String, t: Throwable) {
+        println(message)
+        t.printStackTrace()
     }
 }

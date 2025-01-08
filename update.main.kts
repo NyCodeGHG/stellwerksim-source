@@ -4,7 +4,7 @@
 @file:DependsOn(
     "org.jetbrains.kotlin:kotlin-stdlib:1.8.10",
     "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta",
-    "org.quiltmc:quiltflower:1.9.0"
+    "org.vineflower:vineflower:1.10.1"
 )
 @file:OptIn(ExperimentalPathApi::class)
 
@@ -156,11 +156,11 @@ class Decompiler(outDir: Path) : IFernflowerLogger() {
         }
     }
 
-    override fun writeMessage(message: String, severity: Severity) {
+    override fun writeMessage(message: String, severity: IFernflowerLogger.Severity) {
         println("${severity.prefix} $message")
     }
 
-    override fun writeMessage(message: String, severity: Severity, exception: Throwable) {
+    override fun writeMessage(message: String, severity: IFernflowerLogger.Severity, exception: Throwable) {
         println("${severity.prefix} $message")
         exception.printStackTrace()
     }

@@ -7,7 +7,6 @@ public class fahrplanBaseModel extends fahrplanModel {
    private final ArrayList<zug> lines = new ArrayList();
 
    fahrplanBaseModel() {
-      super();
    }
 
    @Override
@@ -92,7 +91,7 @@ public class fahrplanBaseModel extends fahrplanModel {
 
    private ZugColorText getValueAt(zug z, int columnIndex) {
       ZugColorText ret = null;
-      switch(columnIndex) {
+      switch (columnIndex) {
          case 0:
             ret = z.getNameCT();
             break;
@@ -125,7 +124,7 @@ public class fahrplanBaseModel extends fahrplanModel {
    }
 
    private void freeze(zug z) {
-      for(int col = 0; col < this.cols.length; ++col) {
+      for (int col = 0; col < this.cols.length; col++) {
          ZugColorText zct = this.getValueAt(z, col);
          zct.freeze();
       }
@@ -133,8 +132,8 @@ public class fahrplanBaseModel extends fahrplanModel {
 
    @Override
    public void freeze() {
-      for(zug z : this.lines) {
-         for(int col = 0; col < this.cols.length; ++col) {
+      for (zug z : this.lines) {
+         for (int col = 0; col < this.cols.length; col++) {
             ZugColorText zct = this.getValueAt(z, col);
             zct.freeze();
          }

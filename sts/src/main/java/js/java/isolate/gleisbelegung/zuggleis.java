@@ -62,7 +62,6 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
    private final zuglist otherstops;
 
    zuggleis(int _zid, gleislist gl, Attributes attrs, belegung _p, zuglist others) {
-      super();
       this.parent = gl;
       this.master = _p;
       this.zid = _zid;
@@ -177,10 +176,10 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
       int am = Math.abs(m);
       Iterator<gleislist> it = this.master.getGleisList();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleislist gl = (gleislist)it.next();
 
-         for(zuggleis zg : gl) {
+         for (zuggleis zg : gl) {
             if (m == 0) {
                zg.setDisplayMode(0);
             } else if (zg.rzid == this.rzid && (am == 1 || zg.hasThemamarker(this.thematag))) {
@@ -231,7 +230,7 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
       }
 
       if (this.displayMode < 0) {
-         for(int i = 0; i < 3; ++i) {
+         for (int i = 0; i < 3; i++) {
             c = c.darker();
          }
 
@@ -280,10 +279,8 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
          return this.flags.dataOfFlag('E') == zid;
       } else if (this.flags.hadFlag('K')) {
          return this.flags.dataOfFlag('K') == zid;
-      } else if (this.flags.hadFlag('F')) {
-         return this.flags.dataOfFlag('F') == zid;
       } else {
-         return false;
+         return this.flags.hadFlag('F') ? this.flags.dataOfFlag('F') == zid : false;
       }
    }
 
@@ -300,7 +297,7 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
    }
 
    boolean hasThemamarker(String othematag) {
-      for(int i = 0; i < this.thematag.length(); ++i) {
+      for (int i = 0; i < this.thematag.length(); i++) {
          char c = this.thematag.charAt(i);
          if (othematag.indexOf(c) >= 0) {
             return true;
@@ -350,7 +347,7 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
       zuggleis prev = (zuggleis)this.otherstops.first();
       Date t = prev.an;
 
-      for(zuggleis zg : this.otherstops) {
+      for (zuggleis zg : this.otherstops) {
          if (zg == this) {
             break;
          }
@@ -464,7 +461,7 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
          this.flagziel.repaint();
       }
 
-      for(zuggleis z : this.flagquelle) {
+      for (zuggleis z : this.flagquelle) {
          z.over2 = true;
          z.repaint();
       }
@@ -478,7 +475,7 @@ class zuggleis extends JComponent implements MouseListener, Comparable {
          this.flagziel.repaint();
       }
 
-      for(zuggleis z : this.flagquelle) {
+      for (zuggleis z : this.flagquelle) {
          z.over2 = false;
          z.repaint();
       }

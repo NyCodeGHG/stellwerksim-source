@@ -39,7 +39,7 @@ public class signalmitknopf extends insert {
       ButtonGroup bg2 = new ButtonGroup();
       Map<gleisElements.RICHTUNG, String> richtungen = gtc.getRichtungen();
 
-      for(Entry<gleisElements.RICHTUNG, String> e : richtungen.entrySet()) {
+      for (Entry<gleisElements.RICHTUNG, String> e : richtungen.entrySet()) {
          JToggleButton r = new JRadioButton((String)e.getValue());
          r.setSelected(e.getKey() == this.richtung);
          r.setFocusable(false);
@@ -69,7 +69,7 @@ public class signalmitknopf extends insert {
 
    private void mklayout() {
       LinkedList<inserttoken> l = new LinkedList();
-      switch(this.richtung) {
+      switch (this.richtung) {
          case left:
             l.add(new streckengleistoken());
             l.add(new streckengleistoken());
@@ -148,7 +148,6 @@ public class signalmitknopf extends insert {
       private final JToggleButton button;
 
       richtungItemListener(Entry<gleisElements.RICHTUNG, String> t, JToggleButton b) {
-         super();
          this.entry = t;
          this.button = b;
       }

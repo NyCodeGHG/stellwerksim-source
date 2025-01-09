@@ -7,7 +7,6 @@ public abstract class fsUserAlloc extends trigger {
    protected final fahrstrasseSelection fs;
 
    public fsUserAlloc(fahrstrasseSelection fs) {
-      super();
       this.fs = fs;
    }
 

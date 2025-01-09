@@ -6,7 +6,6 @@ public class GlowFilter extends GaussianFilter {
    private float amount = 0.5F;
 
    public GlowFilter() {
-      super();
       this.radius = 2.0F;
    }
 
@@ -38,8 +37,8 @@ public class GlowFilter extends GaussianFilter {
       float a = 4.0F * this.amount;
       int index = 0;
 
-      for(int y = 0; y < height; ++y) {
-         for(int x = 0; x < width; ++x) {
+      for (int y = 0; y < height; y++) {
+         for (int x = 0; x < width; x++) {
             int rgb1 = outPixels[index];
             int r1 = rgb1 >> 16 & 0xFF;
             int g1 = rgb1 >> 8 & 0xFF;
@@ -52,7 +51,7 @@ public class GlowFilter extends GaussianFilter {
             g1 = PixelUtils.clamp((int)((float)g1 + a * (float)g2));
             b1 = PixelUtils.clamp((int)((float)b1 + a * (float)b2));
             inPixels[index] = rgb1 & 0xFF000000 | r1 << 16 | g1 << 8 | b1;
-            ++index;
+            index++;
          }
       }
 

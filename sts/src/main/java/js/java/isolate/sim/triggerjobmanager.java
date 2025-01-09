@@ -28,11 +28,10 @@ public class triggerjobmanager extends TimerTask implements structinfo, SessionC
    }
 
    public triggerjobmanager(gleisbildSimControl _my_gleisbild) {
-      super();
       this.glbControl = _my_gleisbild;
       trigger.tjm = this;
 
-      for(int i = 0; i < this.jobqueue.length; ++i) {
+      for (int i = 0; i < this.jobqueue.length; i++) {
          this.jobqueue[i] = new triggerjobmanager.triggerList();
       }
 
@@ -45,7 +44,7 @@ public class triggerjobmanager extends TimerTask implements structinfo, SessionC
       this.cancel();
       this.timer.cancel();
 
-      for(triggerjobmanager.triggerList jobqueue1 : this.jobqueue) {
+      for (triggerjobmanager.triggerList jobqueue1 : this.jobqueue) {
          jobqueue1.clear();
       }
 
@@ -119,7 +118,7 @@ public class triggerjobmanager extends TimerTask implements structinfo, SessionC
          boolean rp = false;
 
          trigger t;
-         while((t = this.jobqueue[runQueue].getNextElement()) != null && this.running) {
+         while ((t = this.jobqueue[runQueue].getNextElement()) != null && this.running) {
             try {
                rp = t.ping() || rp;
             } catch (Exception var5) {
@@ -157,7 +156,7 @@ public class triggerjobmanager extends TimerTask implements structinfo, SessionC
       v.addElement("currentQueue");
       v.addElement(this.currentQueue + "");
 
-      for(int i = 0; i < this.jobqueue.length; ++i) {
+      for (int i = 0; i < this.jobqueue.length; i++) {
          v.addElement("jobqueue[" + i + "]");
          v.addElement(this.jobqueue[i].size() + "");
       }
@@ -176,7 +175,6 @@ public class triggerjobmanager extends TimerTask implements structinfo, SessionC
       private ConcurrentLinkedQueue<trigger> queue = new ConcurrentLinkedQueue();
 
       private triggerList() {
-         super();
       }
 
       void clear() {

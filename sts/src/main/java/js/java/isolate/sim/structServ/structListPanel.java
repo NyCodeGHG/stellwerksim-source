@@ -20,7 +20,6 @@ public class structListPanel extends JPanel {
    private JScrollPane jScrollPane1;
 
    public structListPanel(structListPanel.selectionListener l) {
-      super();
       this.rootNode = new SortedTreeNode("Top");
       this.model = new ChangableTreeModel(this.rootNode);
       this.hook = l;
@@ -91,7 +90,6 @@ public class structListPanel extends JPanel {
       private final structinfo data;
 
       Node(String text, structinfo data) {
-         super();
          this.text = text;
          this.data = data;
       }

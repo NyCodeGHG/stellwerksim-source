@@ -1,10 +1,6 @@
 package org.relayirc.chatengine;
 
 public class ServerAdapter implements ServerListener {
-   public ServerAdapter() {
-      super();
-   }
-
    @Override
    public void onConnect(ServerEvent event) {
    }

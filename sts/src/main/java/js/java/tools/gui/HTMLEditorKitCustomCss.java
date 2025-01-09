@@ -7,7 +7,6 @@ public class HTMLEditorKitCustomCss extends HTMLEditorKit {
    private StyleSheet style = null;
 
    public HTMLEditorKitCustomCss() {
-      super();
       this.style = new StyleSheet();
       this.style.addStyleSheet(super.getStyleSheet());
    }

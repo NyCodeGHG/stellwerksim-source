@@ -105,7 +105,6 @@ public class Base64 {
    }
 
    private Base64() {
-      super();
    }
 
    private static byte[] encode3to4(byte[] threeBytes) {
@@ -127,7 +126,7 @@ public class Base64 {
       int inBuff = (numSigBytes > 0 ? source[srcOffset] << 24 >>> 8 : 0)
          | (numSigBytes > 1 ? source[srcOffset + 1] << 24 >>> 16 : 0)
          | (numSigBytes > 2 ? source[srcOffset + 2] << 24 >>> 24 : 0);
-      switch(numSigBytes) {
+      switch (numSigBytes) {
          case 1:
             destination[destOffset] = ALPHABET[inBuff >>> 18];
             destination[destOffset + 1] = ALPHABET[inBuff >>> 12 & 63];
@@ -277,12 +276,12 @@ public class Base64 {
          int e = 0;
          int len2 = len - 2;
 
-         for(int lineLength = 0; d < len2; e += 4) {
+         for (int lineLength = 0; d < len2; e += 4) {
             encode3to4(source, d + off, 3, outBuff, e);
             lineLength += 4;
             if (breakLines && lineLength == 76) {
                outBuff[e + 4] = 10;
-               ++e;
+               e++;
                lineLength = 0;
             }
 
@@ -307,7 +306,7 @@ public class Base64 {
       int count = decode4to3(fourBytes, 0, outBuff1, 0);
       byte[] outBuff2 = new byte[count];
 
-      for(int i = 0; i < count; ++i) {
+      for (int i = 0; i < count; i++) {
          outBuff2[i] = outBuff1[i];
       }
 
@@ -356,7 +355,7 @@ public class Base64 {
       byte sbiCrop = 0;
       byte sbiDecode = 0;
 
-      for(int var12 = off; var12 < off + len; ++var12) {
+      for (int var12 = off; var12 < off + len; var12++) {
          sbiCrop = (byte)(source[var12] & 127);
          sbiDecode = DECODABET[sbiCrop];
          if (sbiDecode < -5) {
@@ -404,7 +403,7 @@ public class Base64 {
                bais = new ByteArrayInputStream(bytes);
                gzis = new GZIPInputStream(bais);
 
-               while((length = gzis.read(buffer)) >= 0) {
+               while ((length = gzis.read(buffer)) >= 0) {
                   baos.write(buffer, 0, length);
                }
 
@@ -635,12 +634,12 @@ public class Base64 {
                byte[] b4 = new byte[4];
                int i = 0;
 
-               for(i = 0; i < 4; ++i) {
+               for (i = 0; i < 4; i++) {
                   int b = 0;
 
                   do {
                      b = this.in.read();
-                  } while(b >= 0 && Base64.DECODABET[b & 127] <= -5);
+                  } while (b >= 0 && Base64.DECODABET[b & 127] <= -5);
 
                   if (b < 0) {
                      break;
@@ -663,12 +662,12 @@ public class Base64 {
                byte[] b3 = new byte[3];
                int numBinaryBytes = 0;
 
-               for(int i = 0; i < 3; ++i) {
+               for (int i = 0; i < 3; i++) {
                   try {
                      int b = this.in.read();
                      if (b >= 0) {
                         b3[i] = (byte)b;
-                        ++numBinaryBytes;
+                        numBinaryBytes++;
                      }
                   } catch (IOException var5) {
                      if (i == 0) {
@@ -694,13 +693,13 @@ public class Base64 {
                this.lineLength = 0;
                return 10;
             } else {
-               ++this.lineLength;
-               int b = this.buffer[this.position++];
+               this.lineLength++;
+               int bx = this.buffer[this.position++];
                if (this.position >= this.bufferLength) {
                   this.position = -1;
                }
 
-               return b & 0xFF;
+               return bx & 0xFF;
             }
          } else {
             throw new IOException("Error in Base64 code reading stream.");
@@ -709,7 +708,7 @@ public class Base64 {
 
       public int read(byte[] dest, int off, int len) throws IOException {
          int i;
-         for(i = 0; i < len; ++i) {
+         for (i = 0; i < len; i++) {
             int b = this.read();
             if (b < 0) {
                if (i == 0) {
@@ -786,7 +785,7 @@ public class Base64 {
          if (this.suspendEncoding) {
             super.out.write(theBytes, off, len);
          } else {
-            for(int i = 0; i < len; ++i) {
+            for (int i = 0; i < len; i++) {
                this.write(theBytes[off + i]);
             }
          }

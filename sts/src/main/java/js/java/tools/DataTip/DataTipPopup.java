@@ -15,7 +15,6 @@ class DataTipPopup {
    private DataTipCell cell;
 
    DataTipPopup(JComponent parent, DataTipCell cell, Point tipPosition, Dimension tipDimension) {
-      super();
       this.cell = cell;
       Rectangle parentVisibleRect = parent.getVisibleRect();
       Rectangle withoutBorderRectangle = parentVisibleRect.intersection(new Rectangle(tipPosition, tipDimension));

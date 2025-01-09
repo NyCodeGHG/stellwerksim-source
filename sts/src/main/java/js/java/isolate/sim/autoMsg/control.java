@@ -28,7 +28,6 @@ public class control {
    private final XmlMarshal xmlConverter = new XmlMarshal(new Class[]{StoredItem.class, MsgAidStore.class});
 
    public control(stellwerksim_main m, gleisbildModel p) {
-      super();
       this.my_main = m;
       this.my_gleisbild = p;
    }
@@ -48,7 +47,7 @@ public class control {
          Iterator<gleis> it = this.my_gleisbild.findIterator(gleis.ELEMENT_AUSFAHRT);
          TreeSet<String> s = new TreeSet();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis g = (gleis)it.next();
             s.add(g.getSWWert_special().trim());
          }
@@ -72,7 +71,7 @@ public class control {
 
    public void zugEnterFs(zug z, gleis gl) {
       if (gl.getElement() == gleis.ELEMENT_SIGNAL) {
-         for(msgItem mi : this.msgitems) {
+         for (msgItem mi : this.msgitems) {
             try {
                if (mi.signal.sameGleis(gl) && (mi.ziel == null || mi.ziel.equalsIgnoreCase(z.getNachCT().toString()))) {
                   this.my_main.autoMsg(mi.zielnachbar, z);
@@ -92,7 +91,7 @@ public class control {
          MsgAidStore store = new MsgAidStore();
          store.aid = this.my_gleisbild.getAid();
 
-         for(msgItem mi : msgitems) {
+         for (msgItem mi : msgitems) {
             store.items.add(new StoredItem(mi));
          }
 
@@ -125,10 +124,10 @@ public class control {
             LinkedList<msgItem> nmsgitems = new LinkedList();
             Iterator var6 = store.items.iterator();
 
-            while(true) {
+            while (true) {
                StoredItem si;
                gleis signal;
-               while(true) {
+               while (true) {
                   if (!var6.hasNext()) {
                      this.msgitems.clear();
                      this.msgitems = nmsgitems;
@@ -145,7 +144,7 @@ public class control {
                      boolean found = false;
                      ChannelsNameParser.ChannelName[] n = this.getNachbarn();
 
-                     for(ChannelsNameParser.ChannelName c : n) {
+                     for (ChannelsNameParser.ChannelName c : n) {
                         if (c.title.equalsIgnoreCase(si.zielnachbar)) {
                            found = true;
                            break;

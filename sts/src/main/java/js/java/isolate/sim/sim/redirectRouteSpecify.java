@@ -97,7 +97,7 @@ public class redirectRouteSpecify extends JDialog {
             boolean show = false;
             ArrayList<String> l = new ArrayList();
 
-            while(r.hasMoreTokens()) {
+            while (r.hasMoreTokens()) {
                String t = r.nextToken().trim();
                if (t.equals("SUP")) {
                   if (r.hasMoreTokens()) {
@@ -121,7 +121,7 @@ public class redirectRouteSpecify extends JDialog {
 
             if (show || hash == 0) {
                if (hash > 0) {
-                  l = (ArrayList)redirectRouteSpecify.valueCollector.remove(hash);
+                  l = (ArrayList<String>)redirectRouteSpecify.valueCollector.remove(hash);
                }
 
                new redirectRouteSpecify(parent, cmd, res, l, m);
@@ -154,7 +154,7 @@ public class redirectRouteSpecify extends JDialog {
          boolean firstAid = true;
          boolean firstPlan = true;
 
-         for(int i = 0; i < tokens.size(); ++i) {
+         for (int i = 0; i < tokens.size(); i++) {
             if (debugMode != null) {
                debugMode.writeln("token: |" + (String)tokens.get(i) + "|");
             }
@@ -185,42 +185,42 @@ public class redirectRouteSpecify extends JDialog {
                   debugMode.writeln("aid: " + aid + "/" + aname);
                }
             } else if (((String)tokens.get(i)).equals("SKIP")) {
-               int aid = Integer.parseInt((String)tokens.get(++i));
-               String aname = (String)tokens.get(++i);
-               this.aidStore.addStellwerk(aid, aname);
-               this.addSkip(aid, aname);
-               this.planlist.add(aid);
-               this.info_skip.add(aname);
+               int aidx = Integer.parseInt((String)tokens.get(++i));
+               String anamex = (String)tokens.get(++i);
+               this.aidStore.addStellwerk(aidx, anamex);
+               this.addSkip(aidx, anamex);
+               this.planlist.add(aidx);
+               this.info_skip.add(anamex);
                if (debugMode != null) {
-                  debugMode.writeln("skip: " + aid + "/" + aname);
+                  debugMode.writeln("skip: " + aidx + "/" + anamex);
                }
             } else if (((String)tokens.get(i)).equals("PLAN")) {
-               int aid = Integer.parseInt((String)tokens.get(++i));
-               String aname = (String)tokens.get(++i);
-               this.aidStore.addStellwerk(aid, aname);
+               int aidx = Integer.parseInt((String)tokens.get(++i));
+               String anamex = (String)tokens.get(++i);
+               this.aidStore.addStellwerk(aidx, anamex);
                if (firstPlan) {
                   this.addSkipSeparator();
                }
 
-               this.addPlanSkip(aid, aname);
+               this.addPlanSkip(aidx, anamex);
                firstPlan = false;
                if (debugMode != null) {
-                  debugMode.writeln("plan: " + aid + "/" + aname);
+                  debugMode.writeln("plan: " + aidx + "/" + anamex);
                }
             } else if (((String)tokens.get(i)).equals("EXIT")) {
-               int aid = Integer.parseInt((String)tokens.get(++i));
-               String aname = (String)tokens.get(++i);
-               this.aidStore.addStellwerk(aid, aname);
+               int aidxx = Integer.parseInt((String)tokens.get(++i));
+               String anamexx = (String)tokens.get(++i);
+               this.aidStore.addStellwerk(aidxx, anamexx);
                if (debugMode != null) {
-                  debugMode.writeln("exit: " + aid + "/" + aname);
+                  debugMode.writeln("exit: " + aidxx + "/" + anamexx);
                }
 
-               if (this.planlist.contains(aid)) {
-                  aname = "<html><b>" + aname + "</b></html>";
+               if (this.planlist.contains(aidxx)) {
+                  anamexx = "<html><b>" + anamexx + "</b></html>";
                }
 
-               this.addExit(aid, aname, false);
-               ++btncnt;
+               this.addExit(aidxx, anamexx, false);
+               btncnt++;
             }
          }
       } catch (ArrayIndexOutOfBoundsException var16) {
@@ -236,7 +236,7 @@ public class redirectRouteSpecify extends JDialog {
       if (command.equals("ZREDIRECTWAY")) {
          this.infoLabel.setText("<html>Es wird der bisher geplante neue Laufweg angezeigt,<br>bitte das Anschluss-Stellwerk spezifizieren.</html>");
 
-         for(int i = 2 - btncnt % 3; i > 0; --i) {
+         for (int i = 2 - btncnt % 3; i > 0; i--) {
             this.addDummy();
          }
 
@@ -285,7 +285,7 @@ public class redirectRouteSpecify extends JDialog {
                sb.append("<td bgcolor='eeeeee'><b>über</b><p>");
                boolean needk = false;
 
-               for(String s : this.info_newway) {
+               for (String s : this.info_newway) {
                   if (needk) {
                      sb.append("<br>");
                   }
@@ -302,7 +302,7 @@ public class redirectRouteSpecify extends JDialog {
                sb.append("<td bgcolor='eeeeee'><b>umfährt dabei</b><p>");
                boolean needk = false;
 
-               for(String s : this.info_skip) {
+               for (String s : this.info_skip) {
                   if (needk) {
                      sb.append("<br>");
                   }

@@ -16,7 +16,6 @@ class planLine {
    public flagdata flags;
 
    planLine(fahrplaneditor m, int n) {
-      super();
       this.my_main = m;
       String prefix = this.my_main.getParameter("testprefix");
       if (prefix == null) {

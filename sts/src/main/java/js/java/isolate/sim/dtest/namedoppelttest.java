@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class namedoppelttest implements dtest {
-   public namedoppelttest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Name Doppelt";
@@ -27,7 +23,7 @@ public class namedoppelttest implements dtest {
       HashSet<String> names = new HashSet();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ALLE_GLEISE});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          String n = gl.getGleisExtend().getElementName();
          if (!n.isEmpty()) {

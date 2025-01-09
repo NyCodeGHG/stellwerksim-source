@@ -16,7 +16,6 @@ public class LimitLinesDocumentListener implements DocumentListener {
    }
 
    public LimitLinesDocumentListener(int maximumLines, boolean isRemoveFromStart) {
-      super();
       this.setLimitLines(maximumLines);
       this.isRemoveFromStart = isRemoveFromStart;
    }
@@ -52,7 +51,7 @@ public class LimitLinesDocumentListener implements DocumentListener {
       Document document = e.getDocument();
       Element root = document.getDefaultRootElement();
 
-      while(root.getElementCount() > this.maximumLines) {
+      while (root.getElementCount() > this.maximumLines) {
          if (this.isRemoveFromStart) {
             this.removeFromStart(document, root);
          } else {

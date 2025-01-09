@@ -12,7 +12,6 @@ public class enablePanel extends JPanel {
    private JButton enableButton;
 
    public enablePanel(String text, ActionListener call) {
-      super();
       this.text = text;
       this.call = call;
       this.initComponents();

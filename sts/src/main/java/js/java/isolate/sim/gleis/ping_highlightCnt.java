@@ -13,7 +13,7 @@ class ping_highlightCnt extends pingBase {
    public boolean ping(gleis gl) {
       boolean ret = false;
       if (gl.highlighted > 0) {
-         --gl.highlighted;
+         gl.highlighted--;
          gl.tjmAdd();
          ret = true;
       }

@@ -1,10 +1,6 @@
 package org.relayirc.chatengine;
 
 public class ChannelAdapter implements ChannelListener {
-   public ChannelAdapter() {
-      super();
-   }
-
    @Override
    public void onActivation(ChannelEvent event) {
    }

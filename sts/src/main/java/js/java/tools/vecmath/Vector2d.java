@@ -22,7 +22,6 @@ public class Vector2d extends Tuple2d implements Serializable {
    }
 
    public Vector2d() {
-      super();
    }
 
    public final double dot(Vector2d v1) {

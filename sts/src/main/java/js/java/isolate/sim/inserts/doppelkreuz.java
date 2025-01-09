@@ -102,7 +102,7 @@ public class doppelkreuz extends insert {
    protected void initVariables(boolean leftright) {
       BitSet bs = this.glbModel.getENRbitset();
 
-      for(int i = 0; i < 4; ++i) {
+      for (int i = 0; i < 4; i++) {
          int e = bs.nextClearBit(1);
          bs.set(e);
          this.storage.put("enr" + i, e + "");

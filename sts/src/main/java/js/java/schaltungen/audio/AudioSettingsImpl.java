@@ -10,7 +10,6 @@ public class AudioSettingsImpl implements AudioSettings {
    private boolean notSync = false;
 
    public AudioSettingsImpl(UserContextMini uc) {
-      super();
       this.uc = uc;
    }
 
@@ -78,7 +77,6 @@ public class AudioSettingsImpl implements AudioSettings {
       }
 
       OneSoundSetting(String name, float defaultGain) {
-         super();
          this.nameOn = name + "_on";
          this.nameGain = name + "_gain";
          this.defaultGain = defaultGain;

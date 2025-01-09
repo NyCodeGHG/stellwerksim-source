@@ -11,7 +11,6 @@ public class elementsView extends JPanel implements Scrollable {
    private final LinkedList<elementsDynPanel> elements = new LinkedList();
 
    public elementsView() {
-      super();
       this.setLayout(new BoxLayout(this, 0));
    }
 
@@ -57,7 +56,7 @@ public class elementsView extends JPanel implements Scrollable {
       } else {
          int w = Integer.MAX_VALUE;
 
-         for(int i = 0; i < n; ++i) {
+         for (int i = 0; i < n; i++) {
             w = Math.min(w, this.getComponent(i).getWidth());
          }
 

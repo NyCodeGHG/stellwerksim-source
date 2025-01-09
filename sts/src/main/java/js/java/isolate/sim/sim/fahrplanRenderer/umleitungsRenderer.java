@@ -85,9 +85,9 @@ public class umleitungsRenderer extends rendererBase {
          int y = y0 + 1;
          int w = x;
 
-         for(String s : list) {
+         for (String s : list) {
             w = Math.max(this.drawString(g2, this.plainFont, s, x0 + 5, y * this.LINEHEIGHT), w);
-            ++y;
+            y++;
          }
 
          g2.setColor(this.getBackground().darker());

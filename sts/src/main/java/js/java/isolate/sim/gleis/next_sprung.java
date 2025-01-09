@@ -17,12 +17,12 @@ class next_sprung extends nextGleisBase {
       Iterator<gleis> it = gl.getNachbarn();
 
       label37:
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis nextGl = (gleis)it.next();
          if (nextGl.sameGleis(before)) {
             Iterator<gleis> git = gl.glbModel.findIterator(gl.enr, gleis.ELEMENT_SPRUNG);
 
-            while(true) {
+            while (true) {
                if (git.hasNext()) {
                   gleis gl2 = (gleis)git.next();
                   if (gl2 == gl) {

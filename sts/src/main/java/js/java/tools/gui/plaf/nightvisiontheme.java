@@ -40,10 +40,6 @@ public class nightvisiontheme extends BasicLookAndFeel {
    private static final ColorUIResource FOREGROUND = new ColorUIResource(0);
    private static final ColorUIResource ORANGE = new ColorUIResource(16758528);
 
-   public nightvisiontheme() {
-      super();
-   }
-
    public String getName() {
       return "STS/nightvision";
    }
@@ -86,7 +82,7 @@ public class nightvisiontheme extends BasicLookAndFeel {
       LinkedList changes = new LinkedList();
       Enumeration newKeys = table.keys();
 
-      while(newKeys.hasMoreElements()) {
+      while (newKeys.hasMoreElements()) {
          Object key = newKeys.nextElement();
          Font f = table.getFont(key);
          if (f != null) {
@@ -148,7 +144,7 @@ public class nightvisiontheme extends BasicLookAndFeel {
       System.out.println("----");
       Enumeration newKeys = table.keys();
 
-      while(newKeys.hasMoreElements()) {
+      while (newKeys.hasMoreElements()) {
          Object obj = newKeys.nextElement();
          System.out.printf("%50s : %s\n", obj, table.get(obj));
       }
@@ -159,7 +155,7 @@ public class nightvisiontheme extends BasicLookAndFeel {
    private void setColor(UIDefaults table, LinkedList changes, String prop, ColorUIResource col) {
       Enumeration newKeys = table.keys();
 
-      while(newKeys.hasMoreElements()) {
+      while (newKeys.hasMoreElements()) {
          Object key = newKeys.nextElement();
          if (key.toString().endsWith("." + prop)) {
             Color c = table.getColor(key);
@@ -174,10 +170,10 @@ public class nightvisiontheme extends BasicLookAndFeel {
    private void setFor(UIDefaults table, LinkedList changes, String prop, Object res, String... destination) {
       Enumeration newKeys = table.keys();
 
-      while(newKeys.hasMoreElements()) {
+      while (newKeys.hasMoreElements()) {
          Object key = newKeys.nextElement();
 
-         for(String d : destination) {
+         for (String d : destination) {
             if (key.toString().equalsIgnoreCase(d + "." + prop)) {
                changes.add(key);
                changes.add(res);
@@ -503,7 +499,6 @@ public class nightvisiontheme extends BasicLookAndFeel {
 
    private static class CheckBoxIcon implements Icon, UIResource, Serializable {
       private CheckBoxIcon() {
-         super();
       }
 
       protected int getControlSize() {
@@ -541,7 +536,6 @@ public class nightvisiontheme extends BasicLookAndFeel {
 
    private static class RadioButtonIcon implements Icon, UIResource, Serializable {
       private RadioButtonIcon() {
-         super();
       }
 
       protected int getControlSize() {

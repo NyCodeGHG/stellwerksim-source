@@ -45,7 +45,6 @@ public class StartVerify extends JFrame {
    private JPanel testOutputPanel;
 
    public StartVerify(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -60,7 +59,7 @@ public class StartVerify extends JFrame {
       this.addTest(v_token.class);
       int y = 0;
 
-      for(InitTestBase tb : this.tests) {
+      for (InitTestBase tb : this.tests) {
          GridBagConstraints gbc = new GridBagConstraints();
          gbc.gridx = 0;
          gbc.gridy = y;
@@ -82,7 +81,7 @@ public class StartVerify extends JFrame {
          gbc.gridx = 3;
          gbc.gridy = y;
          this.testOutputPanel.add(tb.green, gbc);
-         ++y;
+         y++;
       }
 
       GridBagConstraints gbc = new GridBagConstraints();
@@ -117,7 +116,7 @@ public class StartVerify extends JFrame {
       do {
          oneMissing = false;
 
-         for(InitTestBase tb : this.tests) {
+         for (InitTestBase tb : this.tests) {
             int v = tb.runtest(this.uc);
             if (v == 0) {
                oneMissing = true;
@@ -129,11 +128,11 @@ public class StartVerify extends JFrame {
          }
 
          Thread.sleep(500L);
-      } while(oneMissing);
+      } while (oneMissing);
 
       StringBuilder failedStr = new StringBuilder();
 
-      for(InitTestBase tb : this.tests) {
+      for (InitTestBase tb : this.tests) {
          if (tb.runtest(this.uc) < 0) {
             failedStr.append(tb.name());
             failedStr.append('\n');

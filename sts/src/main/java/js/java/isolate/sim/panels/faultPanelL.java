@@ -96,7 +96,7 @@ public class faultPanelL extends basePanel implements structListPanel.selectionL
       if (e instanceof GecSelectEvent) {
          gleis gl = this.glbControl.getSelectedGleis();
          if (gl != null) {
-            switch(gl.getFluentData().getStatus()) {
+            switch (gl.getFluentData().getStatus()) {
                case 0:
                   this.freiR.setSelected(true);
                   break;
@@ -112,7 +112,7 @@ public class faultPanelL extends basePanel implements structListPanel.selectionL
 
             this.stellungCB.removeAllItems();
 
-            for(gleisElements.Stellungen s : gl.getFluentData().getPossibleStellung()) {
+            for (gleisElements.Stellungen s : gl.getFluentData().getPossibleStellung()) {
                this.stellungCB.addItem(s);
             }
 
@@ -126,7 +126,7 @@ public class faultPanelL extends basePanel implements structListPanel.selectionL
             this.rightWtf.setText("");
             Iterator<gleis> it = gl.getNachbarn();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleis igl = (gleis)it.next();
                if (gleis.ALLE_WEICHEN.matches(igl.getElement())) {
                   int i = igl.getCol() - gl.getCol();
@@ -172,7 +172,7 @@ public class faultPanelL extends basePanel implements structListPanel.selectionL
       Vector v = this.getStructInfo();
       Enumeration e = v.elements();
 
-      while(e.hasMoreElements()) {
+      while (e.hasMoreElements()) {
          Vector vv = (Vector)e.nextElement();
          this.structList.add(vv);
       }
@@ -493,7 +493,7 @@ public class faultPanelL extends basePanel implements structListPanel.selectionL
    }
 
    private void poweroff_modeActionPerformed(ActionEvent evt) {
-      for(gleis gl : this.glbControl.getModel()) {
+      for (gleis gl : this.glbControl.getModel()) {
          gl.getFluentData().setPowerOff(this.poweroff_mode.isSelected());
       }
 

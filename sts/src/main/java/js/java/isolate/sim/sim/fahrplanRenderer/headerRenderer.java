@@ -22,7 +22,7 @@ public class headerRenderer extends clickableRenderer {
       this.setBackground(Color.WHITE);
       int l = 2;
       if (zp.umleitungEinfahrt || zp.umleitungAusfahrt) {
-         ++l;
+         l++;
       }
 
       this.dim = new Dimension(100, this.LINEHEIGHT * l + 2);

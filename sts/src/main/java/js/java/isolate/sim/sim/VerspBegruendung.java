@@ -66,7 +66,7 @@ public class VerspBegruendung extends JDialog implements SessionClose {
          List<String> keys = Arrays.asList(this.node.keys());
          Collections.sort(keys);
 
-         for(String k : keys) {
+         for (String k : keys) {
             data.add(this.node.get(k, ""));
          }
       } catch (BackingStoreException var8) {
@@ -136,18 +136,18 @@ public class VerspBegruendung extends JDialog implements SessionClose {
          List<String> keys = Arrays.asList(this.node.keys());
          Collections.sort(keys);
 
-         for(String k : keys) {
+         for (String k : keys) {
             data.add(this.node.get(k, ""));
          }
 
          data.add(txt);
-         List<String> texts = (List)data.stream().skip((long)Math.max(0, data.size() - 10)).collect(Collectors.toList());
+         List<String> texts = (List<String>)data.stream().skip((long)Math.max(0, data.size() - 10)).collect(Collectors.toList());
          this.node.clear();
          int cnt = 0;
 
-         for(String v : texts) {
+         for (String v : texts) {
             this.node.put("T" + cnt, v);
-            ++cnt;
+            cnt++;
          }
       } catch (BackingStoreException var8) {
          Logger.getLogger(VerspBegruendung.class.getName()).log(Level.SEVERE, null, var8);

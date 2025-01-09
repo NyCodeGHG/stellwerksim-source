@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleis.gleisElements.gleisElements;
 
 @Deprecated
 class elementPainterClassic extends elementPainterBase {
-   elementPainterClassic() {
-      super();
-   }
-
    @Override
    public void paintelement(
       gleis gl, Graphics2D g2, int col, int row, int x, int y, int xscal, int yscal, int fscal, int cc, boolean geradeok, Color colr, int sdp, int ddp
@@ -70,7 +66,7 @@ class elementPainterClassic extends elementPainterBase {
          pgn.addPoint(dcx1 + sx2 + 1, dcy1 + sy2 + 1);
          pgn.addPoint(dcx1 + sx1, dcy1 + sy2 + 1);
          g2.fillPolygon(pgn);
-         switch(sdp) {
+         switch (sdp) {
             case 1:
                scx1 += sx2;
                scy1 += sy1;
@@ -96,7 +92,7 @@ class elementPainterClassic extends elementPainterBase {
                scy2 += sy1;
          }
 
-         switch(ddp) {
+         switch (ddp) {
             case 1:
                dcx1 += dx2;
                dcy1 += dy1;

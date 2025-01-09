@@ -12,7 +12,6 @@ public abstract class RunLater implements Runnable {
    }
 
    protected RunLater(long millisec) {
-      super();
       runlater(this, millisec);
    }
 }

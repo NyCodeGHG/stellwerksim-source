@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 class c_wassignal extends baseChain {
-   c_wassignal() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);

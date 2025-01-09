@@ -9,7 +9,6 @@ public class JScrollDesktopManager extends DefaultDesktopManager {
    private RootDesktopPane desktopPane;
 
    public JScrollDesktopManager(RootDesktopPane desktopPane) {
-      super();
       this.desktopPane = desktopPane;
    }
 

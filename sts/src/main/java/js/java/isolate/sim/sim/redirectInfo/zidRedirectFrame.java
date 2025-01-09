@@ -10,7 +10,6 @@ public class zidRedirectFrame extends JFrame implements SessionClose {
    private final UserContext uc;
 
    public zidRedirectFrame(UserContext uc, JFrame parent, String titel, JPanel pan) {
-      super();
       this.uc = uc;
       this.titel = titel;
       this.initComponents();

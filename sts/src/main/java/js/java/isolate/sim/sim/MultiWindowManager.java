@@ -34,7 +34,6 @@ public class MultiWindowManager implements ItemListener, ActionListener {
       JRadioButtonMenuItem winLayoutMulti,
       JRadioButtonMenuItem winLayoutMulti2
    ) {
-      super();
       this.my_main = m;
       this.winLayout1 = winLayout1;
       this.winLayout2 = winLayout2;
@@ -89,7 +88,6 @@ public class MultiWindowManager implements ItemListener, ActionListener {
       private List<externalPanel> windows = null;
 
       private State_Multi() {
-         super();
       }
 
       protected boolean asDialog() {
@@ -102,7 +100,7 @@ public class MultiWindowManager implements ItemListener, ActionListener {
          int h = MultiWindowManager.this.my_main.getHeight() / this.windows.size();
          int y = MultiWindowManager.this.my_main.getY();
 
-         for(externalPanel ep : this.windows) {
+         for (externalPanel ep : this.windows) {
             ep.setWindowPosition(y, h);
             y += h;
             ep.createStateSaver();
@@ -118,7 +116,6 @@ public class MultiWindowManager implements ItemListener, ActionListener {
 
    private class State_Multi2 extends MultiWindowManager.State_Multi {
       private State_Multi2() {
-         super();
       }
 
       @Override
@@ -129,7 +126,6 @@ public class MultiWindowManager implements ItemListener, ActionListener {
 
    private class State_Single implements MultiWindowManager.StateChange {
       private State_Single() {
-         super();
       }
 
       @Override
@@ -147,7 +143,6 @@ public class MultiWindowManager implements ItemListener, ActionListener {
       private externalPanel eCONTROL = null;
 
       private State_Two() {
-         super();
       }
 
       @Override

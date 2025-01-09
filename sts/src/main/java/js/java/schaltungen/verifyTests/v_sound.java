@@ -10,10 +10,6 @@ public class v_sound extends InitTestBase {
    private AudioPlayer play = null;
    private String error = "";
 
-   public v_sound() {
-      super();
-   }
-
    @Override
    public String name() {
       return "Ton-Test" + this.error;

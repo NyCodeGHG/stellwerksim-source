@@ -8,10 +8,6 @@ import js.java.tools.gui.layout.SimpleOneColumnLayout;
 
 @Deprecated
 public class FahrplanLayout extends SimpleOneColumnLayout {
-   public FahrplanLayout() {
-      super();
-   }
-
    public void layoutContainer(Container parent) {
       if (this.needRecalc) {
          this.setPosAndSize(parent);
@@ -23,7 +19,7 @@ public class FahrplanLayout extends SimpleOneColumnLayout {
       int x = insets.left;
       int y = insets.top;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c;
          if (this.bottomUp) {
             c = parent.getComponent(nComps - i - 1);

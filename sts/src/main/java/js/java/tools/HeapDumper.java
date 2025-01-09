@@ -8,10 +8,6 @@ public class HeapDumper {
    private static final String HOTSPOT_BEAN_NAME = "com.sun.management:type=HotSpotDiagnostic";
    private static volatile HotSpotDiagnosticMXBean hotspotMBean;
 
-   public HeapDumper() {
-      super();
-   }
-
    public static void dumpHeap(String fileName, boolean live) {
       initHotspotMBean();
 
@@ -26,7 +22,7 @@ public class HeapDumper {
 
    private static void initHotspotMBean() {
       if (hotspotMBean == null) {
-         synchronized(HeapDumper.class) {
+         synchronized (HeapDumper.class) {
             if (hotspotMBean == null) {
                hotspotMBean = getHotspotMBean();
             }

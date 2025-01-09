@@ -14,7 +14,6 @@ public class NumberTextField extends JTextField {
    }
 
    public NumberTextField() {
-      super();
    }
 
    public int getInt() {

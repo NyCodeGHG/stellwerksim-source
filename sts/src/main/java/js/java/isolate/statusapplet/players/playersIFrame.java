@@ -11,7 +11,6 @@ public class playersIFrame extends JFrame implements SessionClose {
    private final playersIFrame.closeIFrame closeHook;
 
    public playersIFrame(String titel, JPanel pan, playersIFrame.closeIFrame cls) {
-      super();
       this.closeHook = cls;
       this.initComponents();
       this.setContentPane(pan);

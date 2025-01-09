@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class fahrstrassetest7 implements dtest {
-   public fahrstrassetest7() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Fahrstrassen 7";
@@ -26,7 +22,7 @@ public class fahrstrassetest7 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<fahrstrasse> it = glb.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse f = (fahrstrasse)it.next();
          boolean marked = false;
          if (!f.getExtend().isDeleted() && f.getStart().getElement() == gleis.ELEMENT_SIGNAL) {
@@ -57,8 +53,8 @@ public class fahrstrassetest7 implements dtest {
 
          startit = startings.iterator();
          stopit = stopings.iterator();
-         ++cc;
-      } while(!startings.isEmpty() && !stopings.isEmpty() && cc < 3);
+         cc++;
+      } while (!startings.isEmpty() && !stopings.isEmpty() && cc < 3);
 
       return false;
    }
@@ -66,7 +62,7 @@ public class fahrstrassetest7 implements dtest {
    private LinkedList<fahrstrasse> getOtherStartings(fahrstrasse of, Iterator<fahrstrasse> it) {
       LinkedList<fahrstrasse> ret = new LinkedList();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse f = (fahrstrasse)it.next();
          if (of != f && !f.getExtend().isDeleted() && f.getStart().getElement() == gleis.ELEMENT_SIGNAL && f.getStart() == of.getStart()) {
             ret.add(f);
@@ -79,7 +75,7 @@ public class fahrstrassetest7 implements dtest {
    private LinkedList<fahrstrasse> getOtherStopings(fahrstrasse of, Iterator<fahrstrasse> it) {
       LinkedList<fahrstrasse> ret = new LinkedList();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse f = (fahrstrasse)it.next();
          if (of != f && !f.getExtend().isDeleted() && f.getStart().getElement() == gleis.ELEMENT_SIGNAL && f.getStop() == of.getStop()) {
             ret.add(f);
@@ -90,8 +86,8 @@ public class fahrstrassetest7 implements dtest {
    }
 
    private boolean sameStartStop(LinkedList<fahrstrasse> startings, LinkedList<fahrstrasse> stopings) {
-      for(fahrstrasse fs : startings) {
-         for(fahrstrasse ft : stopings) {
+      for (fahrstrasse fs : startings) {
+         for (fahrstrasse ft : stopings) {
             if (fs.getStop() == ft.getStart()) {
                return true;
             }

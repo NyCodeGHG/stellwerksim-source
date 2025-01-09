@@ -4,7 +4,6 @@ public class ComparableString implements IComparable {
    private String _str = null;
 
    public ComparableString(String str) {
-      super();
       this._str = str;
    }
 

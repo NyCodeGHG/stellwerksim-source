@@ -11,7 +11,6 @@ public class AudioControllerImpl implements AudioController, SessionClose, Audio
    private final AudioSettings settings;
 
    public AudioControllerImpl(UserContext uc) {
-      super();
       this.uc = uc;
       uc.addCloseObject(this);
       this.settings = new AudioSettingsImpl(uc);
@@ -28,7 +27,7 @@ public class AudioControllerImpl implements AudioController, SessionClose, Audio
                this.tablePlayer = null;
             }
          } else {
-            ++this.zugQueueCount;
+            this.zugQueueCount++;
          }
       }
    }
@@ -136,7 +135,7 @@ public class AudioControllerImpl implements AudioController, SessionClose, Audio
          this.tablePlayer = null;
          this.tablePlayerFinished = System.currentTimeMillis();
          if (this.zugQueueCount > 0) {
-            --this.zugQueueCount;
+            this.zugQueueCount--;
             this.tablePlayer = new AudioPlayer(AudioPlayer.SAMPLES.TRAIN);
             this.tablePlayer.setEndListener(this);
             if (this.tablePlayer.play().isPresent()) {

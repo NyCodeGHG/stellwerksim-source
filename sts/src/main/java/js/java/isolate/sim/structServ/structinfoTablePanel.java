@@ -13,7 +13,6 @@ public class structinfoTablePanel extends JPanel {
    private JScrollPane jScrollPane2;
 
    public structinfoTablePanel() {
-      super();
       this.initComponents();
    }
 
@@ -28,7 +27,7 @@ public class structinfoTablePanel extends JPanel {
       DefaultTableModel tm = (DefaultTableModel)this.infoTable.getModel();
       tm.setRowCount(v.size() / 2);
 
-      for(int i = 0; i < v.size(); i += 2) {
+      for (int i = 0; i < v.size(); i += 2) {
          tm.setValueAt(v.elementAt(i), i / 2, 0);
          tm.setValueAt(v.elementAt(i + 1), i / 2, 1);
       }

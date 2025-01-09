@@ -6,10 +6,6 @@ import js.java.isolate.sim.eventsys.eventFactory;
 import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 
 public class pause_factory extends eventFactory {
-   public pause_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Störungen pausieren";

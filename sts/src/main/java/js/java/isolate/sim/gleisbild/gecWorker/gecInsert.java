@@ -9,10 +9,6 @@ import js.java.isolate.sim.inserts.insert;
 public class gecInsert extends gecGSelect {
    private insert nextInsert;
 
-   public gecInsert() {
-      super();
-   }
-
    @Override
    public void init(gleisbildEditorControl gec, gecBase lastMode) {
       super.init(gec, lastMode);
@@ -37,7 +33,7 @@ public class gecInsert extends gecGSelect {
          gleis gl = this.gec.gleisUnderMouse(e);
          this.gec.getModel().clearRolloverGleis();
          if (gl != null) {
-            for(Point p : this.nextInsert.getCoords(this.gec.getModel(), gl.getCol(), gl.getRow())) {
+            for (Point p : this.nextInsert.getCoords(this.gec.getModel(), gl.getCol(), gl.getRow())) {
                gleis gls = this.gec.getModel().getXY_null(p.x, p.y);
                if (gls != null) {
                   this.gec.getModel().addRolloverGleis(gls);

@@ -129,7 +129,6 @@ public class gleis extends trigger implements gleisElements, Comparable {
    }
 
    public gleis(GleisAdapter _theapplet, gleisbildModel _my_gleisbild) {
-      super();
       this.theapplet = _theapplet;
       this.glbModel = _my_gleisbild;
       this.gleisExtend = new gleis_extend();
@@ -138,7 +137,6 @@ public class gleis extends trigger implements gleisElements, Comparable {
    }
 
    public gleis(GleisAdapter _theapplet, gleisbildModel _my_gleisbild, gleis gl) {
-      super();
       this.theapplet = _theapplet;
       this.glbModel = _my_gleisbild;
       this.gleisExtend = new gleis_extend();
@@ -728,7 +726,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
 
             int cc = 0;
 
-            while(this.count > 0 && cc < 7) {
+            while (this.count > 0 && cc < 7) {
                int x = -1;
                int y = -1;
                int sdp = 0;
@@ -766,7 +764,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
                   ddp = 3;
                   cc = 3;
                   if (this.telement == ELEMENT_WEICHEOBEN || this.telement == ELEMENT_WEICHEUNTEN) {
-                     for(gleis gls : this.nachbar) {
+                     for (gleis gls : this.nachbar) {
                         if (gls.myrow < row && gls.mycol > col && this.fdata.stellung == gleisElements.ST_WEICHE_ABZWEIG) {
                            gls.extrastatus = true;
                            painted = true;
@@ -783,7 +781,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
                         }
 
                         if (gls.myrow == row && gls.mycol < col && this.fdata.stellung == gleisElements.ST_WEICHE_GERADE) {
-                           for(gleis gls2 : this.nachbar) {
+                           for (gleis gls2 : this.nachbar) {
                               if (gls2 != gls && gls2.mycol < col) {
                                  gls.extrastatus = true;
                                  painted = true;
@@ -821,15 +819,15 @@ public class gleis extends trigger implements gleisElements, Comparable {
                }
 
                if (x >= 0 && y >= 0 && this.glbModel.getXY(x, y).count > 0) {
-                  --this.count;
+                  this.count--;
                   gleis gls = this.glbModel.getXY(x, y);
-                  --gls.count;
+                  gls.count--;
                   this.nachbar.add(gls, sdp, ddp);
                   gls.addN(this, ddp, sdp);
                   painted = true;
                   this.paintelement(g, 0, 0, x - col, y - row, xscal, yscal, fscal, cc, geradeok, colr, sdp, ddp);
                } else {
-                  ++cc;
+                  cc++;
                }
             }
 
@@ -954,7 +952,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
       boolean kopfgleis = false;
       int dx = 0;
       int dy = 0;
-      switch(this.richtung) {
+      switch (this.richtung) {
          case right:
             dx = 1;
             break;
@@ -1120,7 +1118,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
          int y2;
          int x3;
          int y3;
-         switch(v) {
+         switch (v) {
             case 1:
             case 4:
             default:
@@ -1480,7 +1478,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
       double theta = 0.0;
       int xs;
       int ys;
-      switch(rot) {
+      switch (rot) {
          case 0:
             xs = -XM - LENGTH;
             ys = -HEIGHT / 2;
@@ -1518,7 +1516,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
       double theta = 0.0;
       int xs;
       int ys;
-      switch(rot) {
+      switch (rot) {
          case 0:
             xs = -XM - LENGTH;
             ys = -HEIGHT / 2;
@@ -1588,7 +1586,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
          FontMetrics fm = g.getFontMetrics();
          this.setSmoothText(g, true);
 
-         for(char t = '1'; t < '9'; t = (char)(t + 3)) {
+         for (char t = '1'; t < '9'; t = (char)(t + 3)) {
             text[0] = t;
             int ww = fm.charWidth(t);
             g.drawChars(text, 0, 1, x + (w - ww) / 2, y + fm.getAscent());
@@ -1621,7 +1619,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
       if (s) {
          allowsmooth = 0;
       } else {
-         ++allowsmooth;
+         allowsmooth++;
       }
    }
 
@@ -1688,7 +1686,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
    }
 
    public boolean isNachbar(gleis ig) {
-      for(gleis g : this.nachbar) {
+      for (gleis g : this.nachbar) {
          if (g.sameGleis(ig)) {
             return true;
          }
@@ -1718,11 +1716,11 @@ public class gleis extends trigger implements gleisElements, Comparable {
       if (this.telement == ELEMENT_WEICHEOBEN || this.telement == ELEMENT_WEICHEUNTEN) {
          Iterator<gleis> it = this.nachbar.iterator();
 
-         while(it.hasNext() && ret == null) {
+         while (it.hasNext() && ret == null) {
             gleis gl = (gleis)it.next();
             Iterator<gleis> it2 = this.nachbar.iterator();
 
-            while(it2.hasNext() && ret == null) {
+            while (it2.hasNext() && ret == null) {
                gleis gl2 = (gleis)it2.next();
                if (!gl.sameGleis(gl2) && gl2.mycol == gl.mycol) {
                   if (this.fdata.stellung == gleisElements.ST_WEICHE_GERADE) {
@@ -1746,7 +1744,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
 
    public boolean forUs(gleis before) {
       boolean ret = false;
-      switch(this.richtung) {
+      switch (this.richtung) {
          case right:
             ret = before.mycol < this.mycol;
             break;
@@ -1775,8 +1773,8 @@ public class gleis extends trigger implements gleisElements, Comparable {
       if (this.telement == ELEMENT_WEICHEOBEN || this.telement == ELEMENT_WEICHEUNTEN) {
          gleis temp = null;
 
-         for(gleis gl : this.nachbar) {
-            for(gleis gl2 : this.nachbar) {
+         for (gleis gl : this.nachbar) {
+            for (gleis gl2 : this.nachbar) {
                if (gl != gl2) {
                   if (gl.mycol != gl2.mycol) {
                      ret = temp;
@@ -1794,8 +1792,8 @@ public class gleis extends trigger implements gleisElements, Comparable {
 
    public boolean weicheOfDirection(gleis before_gl, boolean b) {
       if (this.telement == ELEMENT_WEICHEOBEN || this.telement == ELEMENT_WEICHEUNTEN) {
-         for(gleis gl : this.nachbar) {
-            for(gleis gl2 : this.nachbar) {
+         for (gleis gl : this.nachbar) {
+            for (gleis gl2 : this.nachbar) {
                if (gl != gl2 && gl.mycol == gl2.mycol) {
                   if (gl != before_gl && gl2 != before_gl) {
                      return !b;
@@ -1813,7 +1811,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
    public gleis nextByRichtung(boolean invers) {
       gleis ret = null;
 
-      for(gleis gl : this.nachbar) {
+      for (gleis gl : this.nachbar) {
          if (invers && this.forUs(gl) || !invers && !this.forUs(gl)) {
             ret = gl;
             break;
@@ -1842,12 +1840,12 @@ public class gleis extends trigger implements gleisElements, Comparable {
 
    public void informStartingFS(fahrstrasse f) {
       this.autoFW.incFWcount(f);
-      this.signalRfStart |= f.allowsRf();
-      this.signalRfOnlyStart &= f.isRFonly();
+      this.signalRfStart = this.signalRfStart | f.allowsRf();
+      this.signalRfOnlyStart = this.signalRfOnlyStart & f.isRFonly();
    }
 
    public void informStopingFS(fahrstrasse f) {
-      this.signalRfOnlyStop &= f.isRFonly();
+      this.signalRfOnlyStop = this.signalRfOnlyStop & f.isRFonly();
       this.anyStoppingFS = true;
    }
 
@@ -1898,7 +1896,7 @@ public class gleis extends trigger implements gleisElements, Comparable {
             ll.add(this);
             Iterator<gleis> it = this.glbModel.findIterator(ALLE_ENR_BAHNÜBERGÄNGE, this.getENR(), this);
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gl2 = (gleis)it.next();
                ll.add(gl2);
                if (gl2.element_enr > 0) {
@@ -1907,15 +1905,15 @@ public class gleis extends trigger implements gleisElements, Comparable {
             }
 
             if (has_e_enr == 0) {
-               ++element_enr_counter;
+               element_enr_counter++;
                has_e_enr = element_enr_counter;
             }
 
-            for(gleis gl : ll) {
+            for (gleis gl : ll) {
                gl.element_enr = has_e_enr;
             }
          } else {
-            ++element_enr_counter;
+            element_enr_counter++;
             this.element_enr = element_enr_counter;
          }
       }
@@ -1999,7 +1997,6 @@ public class gleis extends trigger implements gleisElements, Comparable {
       private gleis gl;
 
       gleisUIcom(gleis gl) {
-         super();
          this.gl = gl;
          this.element = gl.telement;
          this.richtung = gl.richtung;
@@ -2026,7 +2023,6 @@ public class gleis extends trigger implements gleisElements, Comparable {
       int ddp = 0;
 
       nachbarGleis(gleis gl, int sdp, int ddp) {
-         super();
          this.gl = gl;
          this.sdp = sdp;
          this.ddp = ddp;
@@ -2044,10 +2040,6 @@ public class gleis extends trigger implements gleisElements, Comparable {
       private final CopyOnWriteArrayList<gleis> nachbar2 = new CopyOnWriteArrayList();
       private final ConcurrentLinkedQueue<gleis.nachbarGleis> nachbarExtra = new ConcurrentLinkedQueue();
       private final ConcurrentLinkedQueue<gleis.nachbarGleis> nachbarCache = new ConcurrentLinkedQueue();
-
-      nachbarMgnt() {
-         super();
-      }
 
       private CopyOnWriteArrayList<gleis> c_() {
          return gleis.currentN == 0 ? this.nachbar1 : this.nachbar2;

@@ -7,13 +7,12 @@ public class EthernetAddress implements Serializable {
    private int[] bytes;
 
    public EthernetAddress(String address) throws BadEthernetAddressException {
-      super();
       if (address != null && address.length() == 17) {
          this.bytes = new int[6];
          StringTokenizer st = new StringTokenizer(address, ":");
          int index = 0;
 
-         while(st.hasMoreTokens()) {
+         while (st.hasMoreTokens()) {
             String current_token = st.nextToken();
 
             try {
@@ -30,7 +29,7 @@ public class EthernetAddress implements Serializable {
    public String getAddressAsString() {
       StringBuilder buffer = new StringBuilder();
 
-      for(int loop = 0; loop < this.bytes.length; ++loop) {
+      for (int loop = 0; loop < this.bytes.length; loop++) {
          buffer.append(Integer.toHexString(this.bytes[loop]));
          buffer.append("-");
       }
@@ -42,7 +41,7 @@ public class EthernetAddress implements Serializable {
    public byte[] getAddressAsBytes() {
       byte[] temp_bytes = new byte[6];
 
-      for(int loop = 0; loop < this.bytes.length; ++loop) {
+      for (int loop = 0; loop < this.bytes.length; loop++) {
          temp_bytes[loop] = (byte)this.bytes[loop];
       }
 

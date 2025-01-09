@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class randtest implements dtest {
-   public randtest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Randtest";
@@ -29,7 +25,7 @@ public class randtest implements dtest {
       boolean fbottom = false;
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ALLE_GLEISE});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          if (gl.getRow() == 0) {
             ftop = true;

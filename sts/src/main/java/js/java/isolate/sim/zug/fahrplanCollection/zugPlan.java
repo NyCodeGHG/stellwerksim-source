@@ -27,7 +27,6 @@ public class zugPlan {
    public String userText = "";
 
    public zugPlan(zug z) {
-      super();
       this.zid = z.getZID_num();
       this.name = z.getSpezialName();
    }

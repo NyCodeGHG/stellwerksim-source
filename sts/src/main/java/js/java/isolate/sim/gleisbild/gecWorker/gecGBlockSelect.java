@@ -18,10 +18,6 @@ public class gecGBlockSelect extends gecSelect {
    protected int y2;
    protected LinkedList<gleis> box;
 
-   public gecGBlockSelect() {
-      super();
-   }
-
    protected void disableBox() {
       this.startGleis = null;
       this.endGleis = null;
@@ -87,8 +83,8 @@ public class gecGBlockSelect extends gecSelect {
       this.y1 = Math.min(startGleis.getRow(), gl.getRow());
       this.y2 = Math.max(startGleis.getRow(), gl.getRow());
 
-      for(int y = this.y1; y <= this.y2; ++y) {
-         for(int x = this.x1; x <= this.x2; ++x) {
+      for (int y = this.y1; y <= this.y2; y++) {
+         for (int x = this.x1; x <= this.x2; x++) {
             ret.add(this.gec.getModel().getXY(x, y));
          }
       }
@@ -101,7 +97,7 @@ public class gecGBlockSelect extends gecSelect {
    }
 
    public void clearblock() {
-      for(gleis gl : this.box) {
+      for (gleis gl : this.box) {
          gl.init();
       }
 
@@ -110,7 +106,7 @@ public class gecGBlockSelect extends gecSelect {
    }
 
    public void fillblock() {
-      for(gleis gl : this.box) {
+      for (gleis gl : this.box) {
          this.gec.getModel().setGleisValues(gl);
       }
 
@@ -119,7 +115,7 @@ public class gecGBlockSelect extends gecSelect {
    }
 
    public void fillValue(gleis.EXTENDS name, String value) {
-      for(gleis gl : this.box) {
+      for (gleis gl : this.box) {
          gl.setExtendValue(name, value);
       }
 
@@ -128,7 +124,7 @@ public class gecGBlockSelect extends gecSelect {
    }
 
    public void setMasstab(int m) {
-      for(gleis gl : this.box) {
+      for (gleis gl : this.box) {
          gl.setMasstab(m);
       }
 
@@ -139,7 +135,7 @@ public class gecGBlockSelect extends gecSelect {
    private void scroll(Iterator<gleis> it, int dx, int dy) {
       gleisbildModel model = this.gec.getModel();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis g1 = (gleis)it.next();
          gleis g2 = model.getXY(g1.getCol() + dx, g1.getRow() + dy);
          model.swap(g1, g2);
@@ -197,7 +193,7 @@ public class gecGBlockSelect extends gecSelect {
       int halfW = (this.x2 - this.x1) / 2;
       Iterator<gleis> it = this.box.descendingIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis g1 = (gleis)it.next();
          if (g1.getCol() - this.x1 <= halfW) {
             gleis g2 = model.getXY(this.x2 - (g1.getCol() - this.x1), g1.getRow());
@@ -220,7 +216,7 @@ public class gecGBlockSelect extends gecSelect {
       int halfH = (this.y2 - this.y1) / 2;
       Iterator<gleis> it = this.box.descendingIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis g1 = (gleis)it.next();
          if (g1.getRow() - this.y1 <= halfH) {
             gleis g2 = model.getXY(g1.getCol(), this.y2 - (g1.getRow() - this.y1));

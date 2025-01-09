@@ -23,7 +23,7 @@ public class displayBar {
    private boolean legacy = true;
 
    public void cleanup() {
-      for(connector e : this.bar) {
+      for (connector e : this.bar) {
          if (e.autoremove) {
             this.bar.remove(e);
          } else {
@@ -38,7 +38,6 @@ public class displayBar {
    }
 
    public displayBar(gleisbildModel m, MessagingAdapter main) {
-      super();
       this.glbModel = m;
       this.my_main = main;
    }
@@ -48,7 +47,7 @@ public class displayBar {
          this.bar.clear();
          Iterator<gleis> it = this.glbModel.findIterator(gleis.ALLE_ZUGDISPLAYS);
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis gl = (gleis)it.next();
             connector c = new connector(this.glbModel, gl, gl.getSWWert());
             this.bar.add(c);
@@ -73,7 +72,7 @@ public class displayBar {
       if (!this.legacy) {
          int i = 0;
 
-         for(connector e : this.bar) {
+         for (connector e : this.bar) {
             if (!e.autoremove) {
                i += e.saveData(data, "displayconnect[" + i + "]");
             }
@@ -87,7 +86,7 @@ public class displayBar {
       connector nc = new connector(this.glbModel, display, dest.getSWWert());
       nc.fsconnector = fsconnector;
 
-      for(connector c : this.bar) {
+      for (connector c : this.bar) {
          if (c.destinationDisplay.sameGleis(display) && c.swwert != null && c.swwert.equalsIgnoreCase(nc.swwert)) {
             nc = null;
             break;
@@ -115,7 +114,7 @@ public class displayBar {
       LinkedList<gleis> ret = new LinkedList();
       LinkedList<connector> dis = new LinkedList();
       if (gleis.ALLE_GLEISE.matches(g.getElement()) && g.isDisplayTrigger()) {
-         for(connector c : this.bar) {
+         for (connector c : this.bar) {
             if (c.swwert != null && c.swwert.equalsIgnoreCase(g.getSWWert())) {
                dis.addAll(this.getDisplayData(c.destinationDisplay));
             }
@@ -125,15 +124,15 @@ public class displayBar {
       }
 
       if (!dis.isEmpty()) {
-         for(connector c : dis) {
-            if (!ret.contains(c.destinationDisplay)) {
-               ret.add(c.destinationDisplay);
+         for (connector cx : dis) {
+            if (!ret.contains(cx.destinationDisplay)) {
+               ret.add(cx.destinationDisplay);
             }
 
-            if (c.swwert != null && !c.swwert.isEmpty()) {
-               Iterator<gleis> it = this.glbModel.findIterator(gleis.ALLE_GLEISE, c.swwert);
+            if (cx.swwert != null && !cx.swwert.isEmpty()) {
+               Iterator<gleis> it = this.glbModel.findIterator(gleis.ALLE_GLEISE, cx.swwert);
 
-               while(it.hasNext()) {
+               while (it.hasNext()) {
                   gleis gg = (gleis)it.next();
                   if (gg.isDisplayTriggerSelectable()) {
                      ret.add(gg);
@@ -148,13 +147,15 @@ public class displayBar {
 
    protected ArrayList<gleis> getDisplays() {
       ArrayList<gleis> ret = new ArrayList();
+      Iterator<gleis> it = this.glbModel.findIterator(gleis.ALLE_ZUGDISPLAYS);
 
-      gleis gl;
-      for(Iterator<gleis> it = this.glbModel.findIterator(gleis.ALLE_ZUGDISPLAYS); it.hasNext(); ret.add(gl)) {
-         gl = (gleis)it.next();
+      while (it.hasNext()) {
+         gleis gl = (gleis)it.next();
          if (gl.getSWWert().isEmpty()) {
             gl.setSWWert("Namenloses Display " + gl.hashCode());
          }
+
+         ret.add(gl);
       }
 
       return ret;
@@ -163,7 +164,7 @@ public class displayBar {
    protected LinkedList<connector> getDisplayData(gleis g) {
       LinkedList<connector> ret = new LinkedList();
 
-      for(connector c : this.bar) {
+      for (connector c : this.bar) {
          if (c.destinationDisplay.sameGleis(g)) {
             ret.add(c);
          }
@@ -175,7 +176,7 @@ public class displayBar {
    private LinkedList<connector> findEntry(gleis g, boolean fsconnector) {
       LinkedList<connector> ret = new LinkedList();
 
-      for(connector c : this.bar) {
+      for (connector c : this.bar) {
          if (c.fsconnector == fsconnector
             && (
                c.swwert != null && g.getSWWert().equalsIgnoreCase(c.swwert) && g.isDisplayTriggerSelectable()
@@ -257,14 +258,14 @@ public class displayBar {
    public void status(gleis g) {
       LinkedList<connector> gl = this.findEntry(g, false);
       if (g.getFluentData().isFrei()) {
-         for(connector c : gl) {
+         for (connector c : gl) {
             this.clearDisplay(c, c.disableconnector);
          }
       }
    }
 
    public void zug(gleis g, zug z) {
-      for(connector c : this.findEntry(g, false)) {
+      for (connector c : this.findEntry(g, false)) {
          if (c.disableconnector) {
             this.clearDisplay(c, true);
          } else if (z != null && g.getFluentData().getStatus() == 2) {
@@ -305,7 +306,7 @@ public class displayBar {
    public void fahrstrasse(gleis g, fahrstrasse fs) {
       if (fs != null) {
          if (g.getFluentData().isFrei()) {
-            for(connector c : this.bar) {
+            for (connector c : this.bar) {
                if (c.reffs == fs) {
                   c.registeredZug = null;
                   this.bar.remove(c);
@@ -315,15 +316,15 @@ public class displayBar {
             LinkedList<connector> gl = this.findEntry(g, true);
             gleis startsig = fs.getStart();
 
-            for(connector c : gl) {
+            for (connector cx : gl) {
                connector cstart = new connector(this.glbModel, startsig);
                cstart.autoremove = true;
-               cstart.destinationDisplay = c.destinationDisplay;
+               cstart.destinationDisplay = cx.destinationDisplay;
                cstart.reffs = fs;
-               cstart.referenz = c;
+               cstart.referenz = cx;
                this.bar.add(cstart);
-               if (c.autoremove) {
-                  this.bar.remove(c);
+               if (cx.autoremove) {
+                  this.bar.remove(cx);
                }
             }
          }
@@ -331,27 +332,27 @@ public class displayBar {
    }
 
    public void zug(zug z, displayBar.ZUGTRIGGER t) {
-      switch(t) {
+      switch (t) {
          case KUPPELN:
-            for(connector c : this.bar) {
-               if (c.registeredZug != z || !c.disableconnector && c.reffs == null) {
-                  if (c.registeredZug == z) {
-                     this.clearDisplay(c, false, true);
+            for (connector cxx : this.bar) {
+               if (cxx.registeredZug != z || !cxx.disableconnector && cxx.reffs == null) {
+                  if (cxx.registeredZug == z) {
+                     this.clearDisplay(cxx, false, true);
                   }
                } else {
-                  this.clearDisplay(c, false, true);
+                  this.clearDisplay(cxx, false, true);
                }
             }
             break;
          case RICHTUNG:
-            for(connector c : this.bar) {
-               if (c.registeredZug == z && c.reffs != null) {
-                  this.clearDisplay(c, false);
+            for (connector cx : this.bar) {
+               if (cx.registeredZug == z && cx.reffs != null) {
+                  this.clearDisplay(cx, false);
                }
             }
             break;
          case NAME:
-            for(connector c : this.bar) {
+            for (connector c : this.bar) {
                if (c.registeredZug == z && c.reffs == null) {
                   try {
                      this.setDisplay(c, z, true);
@@ -383,7 +384,6 @@ public class displayBar {
       private ArrayList<gleis> gllist = new ArrayList();
 
       listModel(displayBar m) {
-         super();
          this.my_main = m;
       }
 

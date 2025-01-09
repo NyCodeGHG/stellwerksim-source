@@ -10,7 +10,6 @@ class ListDataTipCell implements DataTipCell {
    private final int rowIndex;
 
    ListDataTipCell(JList list, int rowIndex) {
-      super();
       this.list = list;
       this.rowIndex = rowIndex;
    }

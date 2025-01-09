@@ -13,14 +13,13 @@ public class Node {
    int nodeType = 0;
 
    public Node(String i, int l, Computer c) {
-      super();
       this.id = i;
       this.lNum = l;
       this.comp = c;
    }
 
    public void setAsState() {
-      for(int i = 0; i < this.id.length(); ++i) {
+      for (int i = 0; i < this.id.length(); i++) {
          int val = this.id.charAt(i) - '0';
          int t = i / 3;
          TicTacToe.state[t][i - t * 3] = val;
@@ -31,7 +30,7 @@ public class Node {
       ArrayList<Node> temp = new ArrayList();
       long max = (long)((Node)this.sub_nodes.get(0)).pref;
 
-      for(int i = 0; i < this.sub_nodes.size(); ++i) {
+      for (int i = 0; i < this.sub_nodes.size(); i++) {
          if ((long)((Node)this.sub_nodes.get(i)).pref > max) {
             temp.clear();
             temp.add(this.sub_nodes.get(i));
@@ -42,7 +41,7 @@ public class Node {
       }
 
       int choice = (int)(Math.random() * (double)temp.size());
-      ++((Node)temp.get(choice)).n;
+      ((Node)temp.get(choice)).n++;
       ((Node)temp.get(choice)).setAsState();
    }
 
@@ -50,7 +49,7 @@ public class Node {
       ArrayList<Node> temp = new ArrayList();
       long min = (long)((Node)this.sub_nodes.get(0)).pref;
 
-      for(int i = 0; i < this.sub_nodes.size(); ++i) {
+      for (int i = 0; i < this.sub_nodes.size(); i++) {
          if ((long)((Node)this.sub_nodes.get(i)).pref < min) {
             temp.clear();
             temp.add(this.sub_nodes.get(i));
@@ -61,7 +60,7 @@ public class Node {
       }
 
       int choice = (int)(Math.random() * (double)temp.size());
-      ++((Node)temp.get(choice)).n;
+      ((Node)temp.get(choice)).n++;
       ((Node)temp.get(choice)).setAsState();
    }
 
@@ -70,14 +69,14 @@ public class Node {
       int choice = 0;
       long min = (long)((Node)this.sub_nodes.get(0)).n;
 
-      for(int i = 0; i < this.sub_nodes.size(); ++i) {
+      for (int i = 0; i < this.sub_nodes.size(); i++) {
          if ((long)((Node)this.sub_nodes.get(i)).n < min) {
             min = (long)((Node)this.sub_nodes.get(i)).n;
             choice = i;
          }
       }
 
-      ++((Node)this.sub_nodes.get(choice)).n;
+      ((Node)this.sub_nodes.get(choice)).n++;
       ((Node)this.sub_nodes.get(choice)).setAsState();
    }
 
@@ -86,7 +85,7 @@ public class Node {
          int l = this.subNodes.length();
          String w = "";
 
-         for(int i = 0; i < l; ++i) {
+         for (int i = 0; i < l; i++) {
             char ch = this.subNodes.charAt(i);
             if (ch != ',') {
                w = w + ch;

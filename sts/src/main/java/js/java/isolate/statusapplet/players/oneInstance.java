@@ -36,7 +36,6 @@ public class oneInstance extends JPanel implements BotCalling, playersIFrame.clo
    private JPanel statusPanel;
 
    public oneInstance(stellwerk_players m, UserContext uc, int c) {
-      super();
       this.my_main = m;
       this.uc = uc;
       this.instance = c;

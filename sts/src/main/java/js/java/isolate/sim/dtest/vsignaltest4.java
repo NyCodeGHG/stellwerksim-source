@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class vsignaltest4 implements dtest {
-   public vsignaltest4() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Trenner ohne Vorsignal";
@@ -26,13 +22,13 @@ public class vsignaltest4 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<fahrstrasse> it = glb.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse f = (fahrstrasse)it.next();
          if (!f.isDeleted() && !f.isRFonly()) {
             boolean foundVSig = f.getStart().getGleisExtend().isVorsignal();
             gleis before_gl = f.getStart();
 
-            for(gleis w : f.getGleisweg()) {
+            for (gleis w : f.getGleisweg()) {
                if (w.getElement().matches(gleis.ELEMENT_VORSIGNAL) && w.forUs(before_gl)) {
                   foundVSig = true;
                }

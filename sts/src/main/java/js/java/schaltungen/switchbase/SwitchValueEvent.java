@@ -5,7 +5,6 @@ public class SwitchValueEvent {
    public final boolean enabled;
 
    public SwitchValueEvent(String name, boolean enabled) {
-      super();
       this.name = name;
       this.enabled = enabled;
    }

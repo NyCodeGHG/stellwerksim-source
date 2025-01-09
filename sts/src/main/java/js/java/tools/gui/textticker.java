@@ -43,7 +43,6 @@ public class textticker extends JComponent {
    }
 
    public textticker(int fs) {
-      super();
       this.textlist = new ConcurrentLinkedQueue();
       this.importanttextlist = new ConcurrentLinkedQueue();
       this.fontsize = fs;
@@ -151,7 +150,7 @@ public class textticker extends JComponent {
          if (this.text != null) {
             int ww = 0;
             if (this.logoImage > 0) {
-               switch(this.logoImage) {
+               switch (this.logoImage) {
                   case 1:
                      g.setColor(Color.RED);
                      g.fillRect(this.x, 2, 10, 10);
@@ -167,7 +166,7 @@ public class textticker extends JComponent {
             } catch (ArrayIndexOutOfBoundsException var7) {
             }
 
-            --this.x;
+            this.x--;
             if (this.x + ww < this.width) {
                this.text = null;
                this.x = this.width;

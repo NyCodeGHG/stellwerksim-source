@@ -18,7 +18,7 @@ public class funk_zugRichtungAendern extends funk_zugBase {
    @Override
    public void selected(funkAuftragBase.funkValueItem sel) {
       zug.RICHTUNGWECHELN v;
-      switch(sel.id) {
+      switch (sel.id) {
          case 1:
          default:
             v = zug.RICHTUNGWECHELN.DAUERHAFT;

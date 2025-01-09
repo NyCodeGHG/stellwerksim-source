@@ -9,10 +9,6 @@ import js.java.isolate.sim.gleis.gleisElements.gleisElements;
 import js.java.isolate.sim.sim.TEXTTYPE;
 
 class c_isvorsignal extends baseChain {
-   c_isvorsignal() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);
@@ -40,7 +36,6 @@ class c_isvorsignal extends baseChain {
       private final gleis signal;
 
       signalEvent(gleis signal) {
-         super();
          this.signal = signal;
       }
 

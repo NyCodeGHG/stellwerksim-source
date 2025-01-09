@@ -31,7 +31,6 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
    }
 
    public ConvolveFilter(Kernel kernel) {
-      super();
       this.kernel = kernel;
    }
 
@@ -141,14 +140,14 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
       int rows2 = rows / 2;
       int cols2 = cols / 2;
 
-      for(int y = 0; y < height; ++y) {
-         for(int x = 0; x < width; ++x) {
+      for (int y = 0; y < height; y++) {
+         for (int x = 0; x < width; x++) {
             float r = 0.0F;
             float g = 0.0F;
             float b = 0.0F;
             float a = 0.0F;
 
-            for(int row = -rows2; row <= rows2; ++row) {
+            for (int row = -rows2; row <= rows2; row++) {
                int iy = y + row;
                int ioffset;
                if (0 <= iy && iy < height) {
@@ -165,7 +164,7 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
                int moffset = cols * (row + rows2) + cols2;
 
-               for(int col = -cols2; col <= cols2; ++col) {
+               for (int col = -cols2; col <= cols2; col++) {
                   float f = matrix[moffset + col];
                   if (f != 0.0F) {
                      int ix = x + col;
@@ -205,17 +204,17 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
       int cols = kernel.getWidth();
       int cols2 = cols / 2;
 
-      for(int y = 0; y < height; ++y) {
+      for (int y = 0; y < height; y++) {
          int ioffset = y * width;
 
-         for(int x = 0; x < width; ++x) {
+         for (int x = 0; x < width; x++) {
             float r = 0.0F;
             float g = 0.0F;
             float b = 0.0F;
             float a = 0.0F;
             int moffset = cols2;
 
-            for(int col = -cols2; col <= cols2; ++col) {
+            for (int col = -cols2; col <= cols2; col++) {
                float f = matrix[moffset + col];
                if (f != 0.0F) {
                   int ix = x + col;
@@ -256,14 +255,14 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
       int rows = kernel.getHeight();
       int rows2 = rows / 2;
 
-      for(int y = 0; y < height; ++y) {
-         for(int x = 0; x < width; ++x) {
+      for (int y = 0; y < height; y++) {
+         for (int x = 0; x < width; x++) {
             float r = 0.0F;
             float g = 0.0F;
             float b = 0.0F;
             float a = 0.0F;
 
-            for(int row = -rows2; row <= rows2; ++row) {
+            for (int row = -rows2; row <= rows2; row++) {
                int iy = y + row;
                int ioffset;
                if (iy < 0) {

@@ -26,7 +26,6 @@ public class JScrollDesktopPane extends JPanel implements DesktopConstants {
    }
 
    public JScrollDesktopPane() {
-      super();
       this.setLayout(new BorderLayout());
       this.desktopMediator = new DesktopMediator(this);
    }

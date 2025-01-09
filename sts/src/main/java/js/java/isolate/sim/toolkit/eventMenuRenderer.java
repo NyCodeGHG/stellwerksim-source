@@ -14,7 +14,6 @@ public class eventMenuRenderer extends JLabel implements ListCellRenderer {
    private JLabel lab = new JLabel();
 
    public eventMenuRenderer() {
-      super();
       this.setOpaque(true);
       this.setHorizontalAlignment(2);
       this.setVerticalAlignment(0);

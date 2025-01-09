@@ -7,7 +7,6 @@ public class ModuleCloseEvent {
    public final UserContext uc;
 
    public ModuleCloseEvent(UserContext uc, boolean withError) {
-      super();
       this.uc = uc;
       this.withError = withError;
    }

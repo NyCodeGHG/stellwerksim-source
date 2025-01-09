@@ -24,7 +24,6 @@ public class EmptyIcon implements Icon {
    }
 
    private EmptyIcon(int size, boolean paintImage) {
-      super();
       this.size = Math.abs(size == 0 ? 1 : size);
       this.paintImage = paintImage;
    }

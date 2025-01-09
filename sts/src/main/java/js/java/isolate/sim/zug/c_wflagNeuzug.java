@@ -6,10 +6,6 @@ import js.java.isolate.sim.sim.TEXTTYPE;
 import js.java.isolate.sim.toolkit.HyperlinkCaller;
 
 class c_wflagNeuzug extends baseChain {
-   c_wflagNeuzug() {
-      super();
-   }
-
    private void prepareMsg(zug z) {
       z.wflagDelayed = 0L;
       String zielZug = "";
@@ -40,7 +36,7 @@ class c_wflagNeuzug extends baseChain {
          this.prepareMsg(z);
       }
 
-      for(zug.wflagData wd : z.wflagList) {
+      for (zug.wflagData wd : z.wflagList) {
          if (wd.an <= z.mytime && wd.flags.hasFlag('W')) {
             try {
                ArrayList<String> d = wd.flags.paramsOfFlag('W');
@@ -85,7 +81,6 @@ class c_wflagNeuzug extends baseChain {
       private final zug nzug;
 
       private wflagHyperlink(zug nz) {
-         super();
          this.nzug = nz;
       }
 

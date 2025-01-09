@@ -71,7 +71,6 @@ public final class MigLayout implements LayoutManager2, Externalizable {
    }
 
    public MigLayout(String layoutConstraints, String colConstraints, String rowConstraints) {
-      super();
       this.setLayoutConstraints(layoutConstraints);
       this.setColumnConstraints(colConstraints);
       this.setRowConstraints(rowConstraints);
@@ -86,7 +85,6 @@ public final class MigLayout implements LayoutManager2, Externalizable {
    }
 
    public MigLayout(LC layoutConstraints, AC colConstraints, AC rowConstraints) {
-      super();
       this.setLayoutConstraints(layoutConstraints);
       this.setColumnConstraints(colConstraints);
       this.setRowConstraints(rowConstraints);
@@ -160,13 +158,13 @@ public final class MigLayout implements LayoutManager2, Externalizable {
       this.scrConstrMap.clear();
       this.ccMap.clear();
 
-      for(Entry<Component, Object> e : map.entrySet()) {
+      for (Entry<Component, Object> e : map.entrySet()) {
          this.setComponentConstraintsImpl((Component)e.getKey(), e.getValue(), true);
       }
    }
 
    public Object getComponentConstraints(Component comp) {
-      synchronized(comp.getParent().getTreeLock()) {
+      synchronized (comp.getParent().getTreeLock()) {
          return this.scrConstrMap.get(comp);
       }
    }
@@ -177,7 +175,7 @@ public final class MigLayout implements LayoutManager2, Externalizable {
 
    private void setComponentConstraintsImpl(Component comp, Object constr, boolean noCheck) {
       Container parent = comp.getParent();
-      synchronized(parent != null ? parent.getTreeLock() : new Object()) {
+      synchronized (parent != null ? parent.getTreeLock() : new Object()) {
          if (!noCheck && !this.scrConstrMap.containsKey(comp)) {
             throw new IllegalArgumentException("Component must already be added to parent!");
          } else {
@@ -282,7 +280,7 @@ public final class MigLayout implements LayoutManager2, Externalizable {
                int hash = 0;
                boolean resetLastInvalidOnParent = false;
 
-               for(ComponentWrapper wrapper : this.ccMap.keySet()) {
+               for (ComponentWrapper wrapper : this.ccMap.keySet()) {
                   Object component = wrapper.getComponent();
                   if (component instanceof JTextArea || component instanceof JEditorPane) {
                      resetLastInvalidOnParent = true;
@@ -325,11 +323,13 @@ public final class MigLayout implements LayoutManager2, Externalizable {
    }
 
    private void resetLastInvalidOnParent(Container parent) {
-      for(; parent != null; parent = parent.getParent()) {
+      while (parent != null) {
          LayoutManager layoutManager = parent.getLayout();
          if (layoutManager instanceof MigLayout) {
             ((MigLayout)layoutManager).lastWasInvalid = false;
          }
+
+         parent = parent.getParent();
       }
    }
 
@@ -346,7 +346,7 @@ public final class MigLayout implements LayoutManager2, Externalizable {
    }
 
    public void layoutContainer(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          this.checkCache(parent);
          Insets i = parent.getInsets();
          int[] b = new int[]{i.left, i.top, parent.getWidth() - i.left - i.right, parent.getHeight() - i.top - i.bottom};
@@ -410,15 +410,15 @@ public final class MigLayout implements LayoutManager2, Externalizable {
    }
 
    public Dimension minimumLayoutSize(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          return this.getSizeImpl(parent, 0);
       }
    }
 
    public Dimension preferredLayoutSize(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          if (this.lastParentSize == null || !parent.getSize().equals(this.lastParentSize)) {
-            for(ComponentWrapper wrapper : this.ccMap.keySet()) {
+            for (ComponentWrapper wrapper : this.ccMap.keySet()) {
                Component c = (Component)wrapper.getComponent();
                if (c instanceof JTextArea
                   || c instanceof JEditorPane
@@ -459,13 +459,13 @@ public final class MigLayout implements LayoutManager2, Externalizable {
    }
 
    public void addLayoutComponent(Component comp, Object constraints) {
-      synchronized(comp.getParent().getTreeLock()) {
+      synchronized (comp.getParent().getTreeLock()) {
          this.setComponentConstraintsImpl(comp, constraints, true);
       }
    }
 
    public void removeLayoutComponent(Component comp) {
-      synchronized(comp.getParent().getTreeLock()) {
+      synchronized (comp.getParent().getTreeLock()) {
          this.scrConstrMap.remove(comp);
          this.ccMap.remove(new SwingComponentWrapper(comp));
       }
@@ -491,7 +491,6 @@ public final class MigLayout implements LayoutManager2, Externalizable {
 
    private class MyDebugRepaintListener implements ActionListener {
       private MyDebugRepaintListener() {
-         super();
       }
 
       public void actionPerformed(ActionEvent e) {

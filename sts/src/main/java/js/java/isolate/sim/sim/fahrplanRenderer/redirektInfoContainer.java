@@ -7,8 +7,4 @@ public class redirektInfoContainer {
    public String nach = "";
    public final LinkedList<String> newway = new LinkedList();
    public final LinkedList<String> skipway = new LinkedList();
-
-   public redirektInfoContainer() {
-      super();
-   }
 }

@@ -15,7 +15,6 @@ public class AlphaImageIcon extends ImageIcon {
    private float alpha;
 
    public AlphaImageIcon(Icon icon, float alpha) {
-      super();
       this.icon = icon;
       this.alpha = alpha;
    }

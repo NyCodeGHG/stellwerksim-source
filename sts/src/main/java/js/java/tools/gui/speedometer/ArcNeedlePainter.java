@@ -15,7 +15,6 @@ public class ArcNeedlePainter extends NeedlePainterBase {
    }
 
    public ArcNeedlePainter(int pos) {
-      super();
       this.pos = pos;
    }
 

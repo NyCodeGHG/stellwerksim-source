@@ -84,10 +84,12 @@ public class funk_hotline extends funk_zugBase {
 
    private boolean match(zug z) {
       boolean match = z.getAusEnr() != 0;
-      zug zz;
       if (match) {
-         for(Iterator<zug> it = z.getAllUnseenFahrplanzeilen(); it.hasNext() && match; match &= !this.hasMatchingFlag(zz)) {
-            zz = (zug)it.next();
+         Iterator<zug> it = z.getAllUnseenFahrplanzeilen();
+
+         while (it.hasNext() && match) {
+            zug zz = (zug)it.next();
+            match &= !this.hasMatchingFlag(zz);
          }
       }
 

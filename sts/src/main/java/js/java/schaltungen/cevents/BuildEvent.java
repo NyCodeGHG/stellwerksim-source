@@ -18,11 +18,9 @@ public class BuildEvent {
    public int apiLevel;
 
    public BuildEvent() {
-      super();
    }
 
    public BuildEvent(int b) {
-      super();
       this.build = b;
       this.apiLevel = 1;
    }

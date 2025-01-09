@@ -35,7 +35,6 @@ public class RelaunchModuleQuery extends JFrame implements ActionListener {
    private JLabel timeLabel;
 
    public RelaunchModuleQuery(UserContextMini uc, LaunchModule event) {
-      super();
       this.uc = uc;
       this.event = event;
       this.startTime = System.currentTimeMillis();

@@ -29,7 +29,7 @@ public class colorPanel extends basePanel {
       this.setLayout(new ColumnLayout(2));
       TreeMap<String, Color> cols = gleisColor.getInstance().getBGcolors();
 
-      for(String k : cols.keySet()) {
+      for (String k : cols.keySet()) {
          ColorText c = new ColorText(k, (Color)cols.get(k));
          AbstractButton b = this.createButton(c);
          b.setIcon(new ColorTextIcon(c));
@@ -69,7 +69,7 @@ public class colorPanel extends basePanel {
       if (e instanceof colorModifiedEvent) {
          TreeMap<String, Color> cols = gleisColor.getInstance().getBGcolors();
 
-         for(AbstractButton b : this.blist) {
+         for (AbstractButton b : this.blist) {
             String k = b.getActionCommand();
             ColorText c = new ColorText(k, (Color)cols.get(k));
             b.setIcon(new ColorTextIcon(c));

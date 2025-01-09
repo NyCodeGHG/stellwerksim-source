@@ -19,7 +19,6 @@ public class SandboxChat implements chatInterface, SessionClose {
    private final BotCalling client;
 
    public SandboxChat(BotCalling client, UserContext uc) {
-      super();
       this.client = client;
       this.uc = uc;
       uc.addCloseObject(this);

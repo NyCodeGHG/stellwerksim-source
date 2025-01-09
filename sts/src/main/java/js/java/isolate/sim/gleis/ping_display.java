@@ -21,7 +21,7 @@ class ping_display extends pingBase {
             gl.fdata.display_stellung = gl.fdata.display_new_stellung;
          } else {
             if (gl.fdata.display_blink_count > 0) {
-               --gl.fdata.display_blink_count;
+               gl.fdata.display_blink_count--;
             }
 
             gl.fdata.display_stellung = "";
@@ -30,7 +30,7 @@ class ping_display extends pingBase {
          gl.tjmAdd();
          ret = true;
       } else {
-         ++gl.blinkcc;
+         gl.blinkcc++;
          if (gl.blinkcc < 20) {
             gl.tjmAdd();
          } else {

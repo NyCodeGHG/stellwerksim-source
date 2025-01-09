@@ -4,10 +4,6 @@ import js.java.isolate.sim.eventsys.event;
 import js.java.isolate.sim.eventsys.eventFactory;
 
 public class hotlineDefektEvent_factory extends eventFactory {
-   public hotlineDefektEvent_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Hotline gestört";

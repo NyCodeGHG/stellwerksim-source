@@ -16,7 +16,6 @@ public class zugListPanel extends JTable {
    private final zugListPanel.Model model = new zugListPanel.Model();
 
    public zugListPanel() {
-      super();
       this.setModel(this.model);
       this.setSelectionMode(0);
       this.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -76,10 +75,10 @@ public class zugListPanel extends JTable {
       int min = Integer.MAX_VALUE;
       int max = 0;
 
-      for(karten_zug z : this.zuegelist) {
+      for (karten_zug z : this.zuegelist) {
          if (z.visible) {
             sum += (double)z.verspaetung;
-            ++c;
+            c++;
          }
 
          if (z.verspaetung > 0) {
@@ -104,7 +103,6 @@ public class zugListPanel extends JTable {
 
    private class Model extends AbstractTableModel {
       private Model() {
-         super();
       }
 
       public int getRowCount() {
@@ -117,7 +115,7 @@ public class zugListPanel extends JTable {
 
       public Object getValueAt(int rowIndex, int columnIndex) {
          karten_zug kz = (karten_zug)zugListPanel.this.zuegelist.get(rowIndex);
-         switch(columnIndex) {
+         switch (columnIndex) {
             case 0:
                return kz.getSpezialName();
             case 1:
@@ -141,7 +139,7 @@ public class zugListPanel extends JTable {
       }
 
       public String getColumnName(int column) {
-         switch(column) {
+         switch (column) {
             case 0:
                return "Zug";
             case 1:

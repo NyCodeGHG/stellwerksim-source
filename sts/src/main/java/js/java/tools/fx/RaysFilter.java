@@ -12,10 +12,6 @@ public class RaysFilter extends MotionBlurOp {
    private boolean raysOnly = false;
    private Colormap colormap;
 
-   public RaysFilter() {
-      super();
-   }
-
    public void setOpacity(float opacity) {
       this.opacity = opacity;
    }
@@ -65,10 +61,10 @@ public class RaysFilter extends MotionBlurOp {
       BufferedImage rays = new BufferedImage(width, height, 2);
       int threshold3 = (int)(this.threshold * 3.0F * 255.0F);
 
-      for(int y = 0; y < height; ++y) {
+      for (int y = 0; y < height; y++) {
          this.getRGB(src, 0, y, width, 1, pixels);
 
-         for(int x = 0; x < width; ++x) {
+         for (int x = 0; x < width; x++) {
             int rgb = pixels[x];
             int a = rgb & 0xFF000000;
             int r = rgb >> 16 & 0xFF;
@@ -88,12 +84,12 @@ public class RaysFilter extends MotionBlurOp {
 
       rays = super.filter(rays, null);
 
-      for(int y = 0; y < height; ++y) {
+      for (int y = 0; y < height; y++) {
          this.getRGB(rays, 0, y, width, 1, pixels);
          this.getRGB(src, 0, y, width, 1, srcPixels);
 
-         for(int x = 0; x < width; ++x) {
-            int rgb = pixels[x];
+         for (int xx = 0; xx < width; xx++) {
+            int rgb = pixels[xx];
             int a = rgb & 0xFF000000;
             int r = rgb >> 16 & 0xFF;
             int g = rgb >> 8 & 0xFF;
@@ -108,7 +104,7 @@ public class RaysFilter extends MotionBlurOp {
                rgb = a | r << 16 | g << 8 | b;
             }
 
-            pixels[x] = rgb;
+            pixels[xx] = rgb;
          }
 
          this.setRGB(rays, 0, y, width, 1, pixels);

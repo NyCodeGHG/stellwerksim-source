@@ -9,14 +9,12 @@ class dataFailures {
    private LinkedList<solutionInterface> solutions = null;
 
    dataFailures(IconPopupButton b, String m) {
-      super();
       this.button = b;
       this.message = m;
       this.solutions = new LinkedList();
    }
 
    dataFailures(IconPopupButton b, String m, LinkedList<solutionInterface> s) {
-      super();
       this.button = b;
       this.message = m;
       this.solutions = s;

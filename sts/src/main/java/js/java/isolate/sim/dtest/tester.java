@@ -93,7 +93,6 @@ public class tester {
    }
 
    public tester(tester.callback ed, gleisbildModelSts glb) {
-      super();
       this.glbModel = glb;
       this.my_main = ed;
       this.construct();
@@ -111,7 +110,7 @@ public class tester {
       this.glbModel.purgeFahrwege();
       int i = 0;
 
-      for(dtest t : this.tests) {
+      for (dtest t : this.tests) {
          this.my_main.setProgress(i * 100 / this.tests.length);
          this.my_main.showStatus("Test " + t.getName() + " (" + t.getVersion() + ").", 0);
 
@@ -125,7 +124,7 @@ public class tester {
             results.add(d);
          }
 
-         ++i;
+         i++;
       }
 
       this.my_main.setProgress(100);

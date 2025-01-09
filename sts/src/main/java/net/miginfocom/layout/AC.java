@@ -12,7 +12,6 @@ public final class AC implements Externalizable {
    private transient int curIx = 0;
 
    public AC() {
-      super();
       this.cList.add(new DimConstraint());
    }
 
@@ -28,7 +27,7 @@ public final class AC implements Externalizable {
       this.cList.clear();
       this.cList.ensureCapacity(constr.length);
 
-      for(DimConstraint c : constr) {
+      for (DimConstraint c : constr) {
          this.cList.add(c);
       }
    }
@@ -47,7 +46,7 @@ public final class AC implements Externalizable {
    }
 
    public final AC noGrid(int... indexes) {
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setNoGrid(true);
@@ -67,7 +66,7 @@ public final class AC implements Externalizable {
    }
 
    public final AC fill(int... indexes) {
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setFill(true);
@@ -85,7 +84,7 @@ public final class AC implements Externalizable {
    }
 
    public final AC sizeGroup(String s, int... indexes) {
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setSizeGroup(s);
@@ -101,7 +100,7 @@ public final class AC implements Externalizable {
    public final AC size(String size, int... indexes) {
       BoundSize bs = ConstraintParser.parseBoundSize(size, false, true);
 
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setSize(bs);
@@ -111,7 +110,7 @@ public final class AC implements Externalizable {
    }
 
    public final AC gap() {
-      ++this.curIx;
+      this.curIx++;
       return this;
    }
 
@@ -122,7 +121,7 @@ public final class AC implements Externalizable {
    public final AC gap(String size, int... indexes) {
       BoundSize bsa = size != null ? ConstraintParser.parseBoundSize(size, true, true) : null;
 
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          if (bsa != null) {
@@ -143,7 +142,7 @@ public final class AC implements Externalizable {
          al = ConstraintParser.parseAlignKeywords(side, false);
       }
 
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setAlign(al);
@@ -157,7 +156,7 @@ public final class AC implements Externalizable {
    }
 
    public final AC growPrio(int p, int... indexes) {
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setGrowPriority(p);
@@ -177,7 +176,7 @@ public final class AC implements Externalizable {
    public final AC grow(float w, int... indexes) {
       Float gw = new Float(w);
 
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setGrow(gw);
@@ -191,7 +190,7 @@ public final class AC implements Externalizable {
    }
 
    public final AC shrinkPrio(int p, int... indexes) {
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setShrinkPriority(p);
@@ -211,7 +210,7 @@ public final class AC implements Externalizable {
    public final AC shrink(float w, int... indexes) {
       Float sw = new Float(w);
 
-      for(int i = indexes.length - 1; i >= 0; --i) {
+      for (int i = indexes.length - 1; i >= 0; i--) {
          int ix = indexes[i];
          this.makeSize(ix);
          ((DimConstraint)this.cList.get(ix)).setShrink(sw);
@@ -234,7 +233,7 @@ public final class AC implements Externalizable {
       if (this.cList.size() <= sz) {
          this.cList.ensureCapacity(sz);
 
-         for(int i = this.cList.size(); i <= sz; ++i) {
+         for (int i = this.cList.size(); i <= sz; i++) {
             this.cList.add(new DimConstraint());
          }
       }

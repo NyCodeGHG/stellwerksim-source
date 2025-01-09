@@ -5,10 +5,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class fahrstrassetest4 implements dtest {
-   public fahrstrassetest4() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Fahrstrassen 4";
@@ -23,7 +19,7 @@ public class fahrstrassetest4 implements dtest {
    public LinkedList<dtestresult> runTest(gleisbildModelSts glb) {
       LinkedList<dtestresult> r = new LinkedList();
 
-      for(int i = 0; i < glb.countFahrwege(); ++i) {
+      for (int i = 0; i < glb.countFahrwege(); i++) {
          fahrstrasse f = glb.getFahrweg(i);
          if (f.hasÜP() && f.getExtend().getFSType() == 2) {
             dtestresult d = new dtestresult(0, "Fahrstraße " + f.getName() + " hat eine manuelle AutoFS mit ÜP!", f);

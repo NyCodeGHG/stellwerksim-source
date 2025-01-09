@@ -5,10 +5,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class swwerttest1 implements dtest {
-   public swwerttest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "SW-Wert vorhanden";
@@ -23,7 +19,7 @@ public class swwerttest1 implements dtest {
    public LinkedList<dtestresult> runTest(gleisbildModelSts glb) {
       LinkedList<dtestresult> r = new LinkedList();
 
-      for(gleis gl : glb) {
+      for (gleis gl : glb) {
          if (gl.typRequiresSWwert()) {
             if (gl.getSWWert() == null || gl.getSWWert().trim().isEmpty()) {
                dtestresult d = new dtestresult(2, "Gleiselement fehlt der SW-Wert!", gl);

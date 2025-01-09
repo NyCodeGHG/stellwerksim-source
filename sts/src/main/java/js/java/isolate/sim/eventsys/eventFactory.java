@@ -45,7 +45,6 @@ public abstract class eventFactory extends JPanel {
    private SpinnerNumberModel gewichtModel;
 
    protected eventFactory() {
-      super();
       this.cardpanel = new JPanel();
       this.cardpanel.setLayout(new CardLayout());
    }
@@ -78,11 +77,7 @@ public abstract class eventFactory extends JPanel {
    }
 
    public boolean equals(Object o) {
-      if (o instanceof eventFactory) {
-         return this.getEventTyp() == ((eventFactory)o).getEventTyp();
-      } else {
-         return false;
-      }
+      return o instanceof eventFactory ? this.getEventTyp() == ((eventFactory)o).getEventTyp() : false;
    }
 
    protected final void add(String card, String label, JComponent c, boolean above) {
@@ -114,7 +109,7 @@ public abstract class eventFactory extends JPanel {
             gridBagConstraints.weightx = 0.0;
             gridBagConstraints.gridwidth = 2;
             cd.p.add(l, gridBagConstraints);
-            ++cd.gy;
+            cd.gy++;
          }
 
          JLabel l = new JLabel(label);
@@ -129,7 +124,7 @@ public abstract class eventFactory extends JPanel {
          gridBagConstraints.insets = new Insets(0, 0, 2, 4);
          cd.p.add(l, gridBagConstraints);
          if (above) {
-            ++cd.gy;
+            cd.gy++;
          }
       }
 
@@ -142,7 +137,7 @@ public abstract class eventFactory extends JPanel {
          gridBagConstraints.weightx = 1.0;
          gridBagConstraints.gridwidth = above ? 2 : 1;
          cd.p.add(c, gridBagConstraints);
-         ++cd.gy;
+         cd.gy++;
       }
    }
 
@@ -186,7 +181,7 @@ public abstract class eventFactory extends JPanel {
          this.wahrscheinlichkeitsgroup = new ButtonGroup();
          int i = 0;
 
-         for(eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
+         for (eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
             this.wahrscheinlichkeit[i] = new JRadioButton(eventHaeufigkeiten.create(this.glbModel).get(h));
             this.wahrscheinlichkeit[i].setActionCommand(h.toString());
             this.wahrscheinlichkeit[i].setMargin(new Insets(0, 0, 0, 0));
@@ -197,7 +192,7 @@ public abstract class eventFactory extends JPanel {
             }
 
             p.add(this.wahrscheinlichkeit[i]);
-            ++i;
+            i++;
          }
 
          this.add("Basisdaten", "Häufigkeit", p, false);
@@ -218,7 +213,7 @@ public abstract class eventFactory extends JPanel {
          p.setLayout(new GridBagLayout());
          int yy = 0;
 
-         for(thema t : thema.themen) {
+         for (thema t : thema.themen) {
             MXbuttonGroup bg = new MXbuttonGroup();
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
@@ -252,7 +247,7 @@ public abstract class eventFactory extends JPanel {
             gridBagConstraints.anchor = 17;
             l = new JLabel(" " + t.guiname + " ");
             p.add(l, gridBagConstraints);
-            ++yy;
+            yy++;
          }
 
          gridBagConstraints = new GridBagConstraints();
@@ -263,7 +258,7 @@ public abstract class eventFactory extends JPanel {
          gridBagConstraints.fill = 2;
          sep = new JSeparator(0);
          p.add(sep, gridBagConstraints);
-         ++yy;
+         yy++;
          gridBagConstraints = new GridBagConstraints();
          gridBagConstraints.gridx = 0;
          gridBagConstraints.gridy = yy;
@@ -272,11 +267,11 @@ public abstract class eventFactory extends JPanel {
          gridBagConstraints.fill = 2;
          l = new JLabel("<html>Ausschluss hat Vorrang vor Einschluss.</html>");
          p.add(l, gridBagConstraints);
-         ++yy;
+         yy++;
          this.add("Themen", null, p, true);
       }
 
-      for(eventFactory.cardData cd : this.cards.values()) {
+      for (eventFactory.cardData cd : this.cards.values()) {
          gridBagConstraints = new GridBagConstraints();
          gridBagConstraints.gridx = 0;
          gridBagConstraints.gridy = cd.gy;
@@ -308,7 +303,7 @@ public abstract class eventFactory extends JPanel {
          eventHaeufigkeiten.HAEUFIGKEITEN v = eventHaeufigkeiten.fromString(ev.getValue("occurrence"));
          this.wahrscheinlichkeit[eventHaeufigkeiten.value2int(v)].setSelected(true);
 
-         for(int i = 0; i < this.wahrscheinlichkeit.length; ++i) {
+         for (int i = 0; i < this.wahrscheinlichkeit.length; i++) {
             this.wahrscheinlichkeit[i].setEnabled(editmode);
          }
 
@@ -320,13 +315,13 @@ public abstract class eventFactory extends JPanel {
          Set<String> thoff = ev.getThemeList(true);
          Set<String> thon = ev.getThemeList(false);
 
-         for(thema t : this.themaboxesOFF.keySet()) {
+         for (thema t : this.themaboxesOFF.keySet()) {
             JCheckBox cb = (JCheckBox)this.themaboxesOFF.get(t);
             cb.setEnabled(editmode);
             cb.setSelected(thoff.contains(t.name));
          }
 
-         for(thema t : this.themaboxesON.keySet()) {
+         for (thema t : this.themaboxesON.keySet()) {
             JCheckBox cb = (JCheckBox)this.themaboxesON.get(t);
             cb.setEnabled(editmode);
             cb.setSelected(thon.contains(t.name));
@@ -348,17 +343,17 @@ public abstract class eventFactory extends JPanel {
          HashSet<String> thoff = new HashSet();
          HashSet<String> thon = new HashSet();
 
-         for(thema t : this.themaboxesOFF.keySet()) {
+         for (thema t : this.themaboxesOFF.keySet()) {
             JCheckBox cb = (JCheckBox)this.themaboxesOFF.get(t);
             if (cb.isSelected()) {
                thoff.add(t.name);
             }
          }
 
-         for(thema t : this.themaboxesON.keySet()) {
-            JCheckBox cb = (JCheckBox)this.themaboxesON.get(t);
+         for (thema tx : this.themaboxesON.keySet()) {
+            JCheckBox cb = (JCheckBox)this.themaboxesON.get(tx);
             if (cb.isSelected()) {
-               thon.add(t.name);
+               thon.add(tx.name);
             }
          }
 
@@ -388,10 +383,6 @@ public abstract class eventFactory extends JPanel {
       JScrollPane sc;
       int gy = 0;
       String name;
-
-      cardData() {
-         super();
-      }
 
       public String toString() {
          return this.name;

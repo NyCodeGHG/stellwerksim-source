@@ -41,7 +41,7 @@ public class displayausfall extends event {
          this.dauer = e.getIntValue("dauer") + (this.my_main.isRealistic() ? random(5, 20) : 0);
          Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_ZUGDISPLAYS});
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis gl = (gleis)it.next();
             this.displays.add(new displayausfall.ddata(gl));
          }
@@ -56,7 +56,7 @@ public class displayausfall extends event {
                nsize = 2;
             }
 
-            while(this.displays.size() > nsize) {
+            while (this.displays.size() > nsize) {
                this.displays.remove();
             }
 
@@ -81,7 +81,7 @@ public class displayausfall extends event {
    private void fillDisplay(gleis g, int nr, int l) {
       String dtext = "";
 
-      for(int i = 0; i < l; ++i) {
+      for (int i = 0; i < l; i++) {
          dtext = dtext + nr;
       }
 
@@ -98,18 +98,18 @@ public class displayausfall extends event {
    @Override
    public boolean pong() {
       int dcc = 0;
-      switch(this.state) {
+      switch (this.state) {
          case 0:
             Collections.shuffle(this.displays);
 
-            for(displayausfall.ddata d : this.displays) {
-               ++dcc;
+            for (displayausfall.ddata dxx : this.displays) {
+               dcc++;
                String n = "";
 
-               for(int i = 0; i < 8; ++i) {
+               for (int i = 0; i < 8; i++) {
                   String c = "\\ ";
-                  if (i < d.swwert.length()) {
-                     c = d.swwert.charAt(i) + "";
+                  if (i < dxx.swwert.length()) {
+                     c = dxx.swwert.charAt(i) + "";
                   }
 
                   if (Math.random() > 0.7) {
@@ -125,7 +125,7 @@ public class displayausfall extends event {
                   }
                }
 
-               d.display.getFluentData().displaySet(n);
+               dxx.display.getFluentData().displaySet(n);
                if (dcc > this.displays.size() / 2) {
                   break;
                }
@@ -136,13 +136,13 @@ public class displayausfall extends event {
             this.callMe();
             break;
          case 1:
-            --this.counter;
+            this.counter--;
             if (this.counter <= 0) {
                Collections.shuffle(this.displays);
 
-               for(displayausfall.ddata d : this.displays) {
-                  ++dcc;
-                  this.fillDisplay(d.display, (int)(Math.random() * 10.0), (int)(Math.random() * 8.0));
+               for (displayausfall.ddata dx : this.displays) {
+                  dcc++;
+                  this.fillDisplay(dx.display, (int)(Math.random() * 10.0), (int)(Math.random() * 8.0));
                   if (dcc > this.displays.size() / 2) {
                      break;
                   }
@@ -154,8 +154,8 @@ public class displayausfall extends event {
             this.callMe();
             break;
          case 2:
-            for(displayausfall.ddata d : this.displays) {
-               d.display.getFluentData().displayClear(true);
+            for (displayausfall.ddata dx : this.displays) {
+               dx.display.getFluentData().displayClear(true);
             }
 
             this.callMeIn(this.dauer);
@@ -164,14 +164,14 @@ public class displayausfall extends event {
          case 3:
             this.callMe();
 
-            for(displayausfall.ddata d : this.displays) {
-               this.fillDisplay(d.display, this.pos, this.len);
+            for (displayausfall.ddata dx : this.displays) {
+               this.fillDisplay(dx.display, this.pos, this.len);
             }
 
-            ++this.pos;
+            this.pos++;
             if (this.pos > 9) {
                this.pos = 0;
-               ++this.len;
+               this.len++;
                if (this.len > 8) {
                   this.state = 4;
                }
@@ -215,7 +215,6 @@ public class displayausfall extends event {
       String swwert;
 
       ddata(gleis g) {
-         super();
          this.display = g;
          this.swwert = g.getFluentData().displayGetValue();
       }

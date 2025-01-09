@@ -15,10 +15,6 @@ public class SimpleOneColumnLayout implements LayoutManager {
    protected int fixedLineHeight = 0;
    protected boolean bottomUp = false;
 
-   public SimpleOneColumnLayout() {
-      super();
-   }
-
    public void addLayoutComponent(String name, Component comp) {
       this.needRecalc = true;
    }
@@ -33,15 +29,15 @@ public class SimpleOneColumnLayout implements LayoutManager {
       this.preferredWidth = this.minWidth = 0;
       this.preferredHeight = this.minHeight = 0;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
          if (c.isVisible()) {
             d = c.getPreferredSize();
             this.minWidth = this.preferredWidth = Math.max(d.width, this.preferredWidth);
             if (this.fixedLineHeight > 0) {
-               this.preferredHeight += this.fixedLineHeight;
+               this.preferredHeight = this.preferredHeight + this.fixedLineHeight;
             } else {
-               this.preferredHeight += d.height;
+               this.preferredHeight = this.preferredHeight + d.height;
             }
          }
       }
@@ -79,7 +75,7 @@ public class SimpleOneColumnLayout implements LayoutManager {
       int x = insets.left;
       int y = insets.top;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c;
          if (this.bottomUp) {
             c = parent.getComponent(nComps - i - 1);

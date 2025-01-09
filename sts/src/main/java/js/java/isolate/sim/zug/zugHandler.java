@@ -3,10 +3,6 @@ package js.java.isolate.sim.zug;
 import js.java.tools.ColorText;
 
 abstract class zugHandler {
-   zugHandler() {
-      super();
-   }
-
    int compare(ZugColorText ct, frozenZug z, ZugColorText other, frozenZug otherz) {
       int r = this.compareImpl(ct, z, other, otherz);
       return r != 0 ? r : z.zid - otherz.zid;

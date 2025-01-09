@@ -47,7 +47,7 @@ public class blockcolorPanel extends colorPanel {
    }
 
    public void blockEnabled(boolean e) {
-      for(Component c : this.getComponents()) {
+      for (Component c : this.getComponents()) {
          c.setEnabled(e);
       }
    }

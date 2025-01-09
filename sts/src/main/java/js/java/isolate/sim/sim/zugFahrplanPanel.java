@@ -13,7 +13,6 @@ public class zugFahrplanPanel extends JPanel {
    private JScrollPane scroller;
 
    public zugFahrplanPanel(zugUndPlanPanel my_main) {
-      super();
       this.my_main = my_main;
       this.initComponents();
       this.zugPanel = new zugRenderer(my_main);

@@ -13,10 +13,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 public class sperreelementeaufzeit_factory extends sperrungBaseFactory {
    private JSpinner num;
 
-   public sperreelementeaufzeit_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Sperre Elemente dynamisch";
@@ -49,7 +45,7 @@ public class sperreelementeaufzeit_factory extends sperrungBaseFactory {
    @Override
    public void readContainer(eventContainer ev) {
       super.readContainer(ev);
-      ev.setIntValue("dauer", Math.max(this.num.getValue(), 1));
+      ev.setIntValue("dauer", Math.max((Integer)this.num.getValue(), 1));
    }
 
    @Override
@@ -73,7 +69,7 @@ public class sperreelementeaufzeit_factory extends sperrungBaseFactory {
                ev.setName("Sperrung " + (glb.events.size() + 1));
                HashSet<gleis> set = new HashSet();
 
-               for(int i = 0; i < p.length; ++i) {
+               for (int i = 0; i < p.length; i++) {
                   String t = p[i];
                   if (t.startsWith("DAUER=")) {
                      t = t.substring(6);

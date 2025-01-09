@@ -4,7 +4,6 @@ class tl_langsam implements tl_base {
    private final double max_tempo;
 
    tl_langsam(double m) {
-      super();
       this.max_tempo = m;
    }
 

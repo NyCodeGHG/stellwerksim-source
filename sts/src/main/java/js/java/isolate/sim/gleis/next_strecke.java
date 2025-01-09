@@ -16,7 +16,7 @@ class next_strecke extends nextGleisBase {
       gleis ret = null;
       Iterator<gleis> it = gl.getNachbarn();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis nextGl = (gleis)it.next();
          if (!nextGl.sameGleis(before)) {
             ret = nextGl;

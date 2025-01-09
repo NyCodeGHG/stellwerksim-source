@@ -14,7 +14,6 @@ public class TasterImage implements Icon {
    private boolean lightOn = false;
 
    public TasterImage(boolean pressed, boolean rollover) {
-      super();
       this.pressed = pressed;
       this.rollover = rollover;
    }

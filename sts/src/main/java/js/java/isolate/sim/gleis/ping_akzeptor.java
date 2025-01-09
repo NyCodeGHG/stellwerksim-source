@@ -15,7 +15,7 @@ class ping_akzeptor extends pingBase {
    public boolean ping(gleis gl) {
       boolean ret = false;
       if (gl.fdata.stellung == gleisElements.ST_ÜBERGABEAKZEPTOR_ANFRAGE) {
-         ++gl.blinkcc;
+         gl.blinkcc++;
          if (gl.blinkcc > 6) {
             if (gl.blinkcc > 9) {
                gl.blinkcc = 0;
@@ -28,7 +28,7 @@ class ping_akzeptor extends pingBase {
          gl.tjmAdd();
          ret = true;
       } else if (gl.fdata.stellung == gleisElements.ST_ÜBERGABEAKZEPTOR_NOK) {
-         ++gl.blinkcc;
+         gl.blinkcc++;
          if (gl.blinkcc > 60) {
             gl.blinkcc = 0;
             gl.getFluentData().setStellung(gleisElements.ST_ÜBERGABEAKZEPTOR_UNDEF);

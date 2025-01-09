@@ -123,7 +123,7 @@ public class belegung extends AbstractTopFrame implements Runnable, xmllistener,
    }
 
    private void searchZug(String t) {
-      for(gleislist gl : this.gleise.values()) {
+      for (gleislist gl : this.gleise.values()) {
          gl.searchZug(t);
       }
    }
@@ -237,7 +237,7 @@ public class belegung extends AbstractTopFrame implements Runnable, xmllistener,
       p.setLayout(l);
       boolean odd = true;
 
-      for(Iterator<gleislist> it = this.getGleisList(); it.hasNext(); odd = !odd) {
+      for (Iterator<gleislist> it = this.getGleisList(); it.hasNext(); odd = !odd) {
          gleislist gl = (gleislist)it.next();
          p.add(gl.getNamePane());
          gl.setBGcolnum(odd);
@@ -249,7 +249,7 @@ public class belegung extends AbstractTopFrame implements Runnable, xmllistener,
       p.setLayout(l);
       Iterator<gleislist> var9 = this.getGleisList();
 
-      while(var9.hasNext()) {
+      while (var9.hasNext()) {
          gleislist gl = (gleislist)var9.next();
          p.add(gl);
          gl.render();
@@ -264,7 +264,7 @@ public class belegung extends AbstractTopFrame implements Runnable, xmllistener,
    private void clearview() {
       Iterator<gleislist> it = this.getGleisList();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleislist gl = (gleislist)it.next();
          gl.clear();
       }
@@ -529,7 +529,7 @@ public class belegung extends AbstractTopFrame implements Runnable, xmllistener,
          public void run() {
             Iterator<gleislist> it = belegung.this.getGleisList();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleislist gl = (gleislist)it.next();
                gl.clear();
                gl.render();
@@ -558,7 +558,7 @@ public class belegung extends AbstractTopFrame implements Runnable, xmllistener,
          if (this.showCollisionsCB.isSelected()) {
             Iterator<gleislist> it = this.getGleisList();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleislist gl = (gleislist)it.next();
                this.ui.add(gl.getCollsions());
             }

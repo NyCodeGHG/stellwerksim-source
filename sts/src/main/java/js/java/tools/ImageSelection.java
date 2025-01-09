@@ -33,7 +33,6 @@ public class ImageSelection implements Transferable {
    }
 
    private ImageSelection(Image image) {
-      super();
       this.image = image;
    }
 

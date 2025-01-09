@@ -20,7 +20,6 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public AnimCardLayout(int hgap, int vgap) {
-      super();
       this.hgap = hgap;
       this.vgap = vgap;
    }
@@ -42,7 +41,7 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void addLayoutComponent(Component comp, Object constraints) {
-      synchronized(comp.getTreeLock()) {
+      synchronized (comp.getTreeLock()) {
          if (constraints instanceof String) {
             this.addLayoutComponent((String)constraints, comp);
          } else {
@@ -53,12 +52,12 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
 
    @Deprecated
    public void addLayoutComponent(String name, Component comp) {
-      synchronized(comp.getTreeLock()) {
+      synchronized (comp.getTreeLock()) {
          if (!this.vector.isEmpty()) {
             comp.setVisible(false);
          }
 
-         for(int i = 0; i < this.vector.size(); ++i) {
+         for (int i = 0; i < this.vector.size(); i++) {
             if (((AnimCardLayout.Card)this.vector.get(i)).name.equals(name)) {
                ((AnimCardLayout.Card)this.vector.get(i)).comp = comp;
                return;
@@ -70,8 +69,8 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void removeLayoutComponent(Component comp) {
-      synchronized(comp.getTreeLock()) {
-         for(int i = 0; i < this.vector.size(); ++i) {
+      synchronized (comp.getTreeLock()) {
+         for (int i = 0; i < this.vector.size(); i++) {
             if (((AnimCardLayout.Card)this.vector.get(i)).comp == comp) {
                if (comp.isVisible() && comp.getParent() != null) {
                   this.next(comp.getParent());
@@ -79,7 +78,7 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
 
                this.vector.remove(i);
                if (this.currentCard > i) {
-                  --this.currentCard;
+                  this.currentCard--;
                }
                break;
             }
@@ -88,13 +87,13 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public Dimension preferredLayoutSize(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          Insets insets = parent.getInsets();
          int ncomponents = parent.getComponentCount();
          int w = 0;
          int h = 0;
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             Component comp = parent.getComponent(i);
             Dimension d = comp.getPreferredSize();
             if (d.width > w) {
@@ -111,13 +110,13 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public Dimension minimumLayoutSize(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          Insets insets = parent.getInsets();
          int ncomponents = parent.getComponentCount();
          int w = 0;
          int h = 0;
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             Component comp = parent.getComponent(i);
             Dimension d = comp.getMinimumSize();
             if (d.width > w) {
@@ -149,13 +148,13 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void layoutContainer(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          Insets insets = parent.getInsets();
          int ncomponents = parent.getComponentCount();
          Component comp = null;
          boolean currentFound = false;
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             comp = parent.getComponent(i);
             comp.setBounds(
                this.hgap + insets.left,
@@ -181,11 +180,11 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void first(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          this.checkLayout(parent);
          int ncomponents = parent.getComponentCount();
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             Component comp = parent.getComponent(i);
             if (comp.isVisible()) {
                comp.setVisible(false);
@@ -202,11 +201,11 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void next(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          this.checkLayout(parent);
          int ncomponents = parent.getComponentCount();
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             Component comp = parent.getComponent(i);
             if (comp.isVisible()) {
                comp.setVisible(false);
@@ -223,11 +222,11 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void previous(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          this.checkLayout(parent);
          int ncomponents = parent.getComponentCount();
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             Component comp = parent.getComponent(i);
             if (comp.isVisible()) {
                comp.setVisible(false);
@@ -252,11 +251,11 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void last(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          this.checkLayout(parent);
          int ncomponents = parent.getComponentCount();
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             Component comp = parent.getComponent(i);
             if (comp.isVisible()) {
                comp.setVisible(false);
@@ -273,12 +272,12 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
    }
 
    public void show(Container parent, String name) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          this.checkLayout(parent);
          Component next = null;
          int ncomponents = this.vector.size();
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             AnimCardLayout.Card card = (AnimCardLayout.Card)this.vector.get(i);
             if (card.name.equals(name)) {
                next = card.comp;
@@ -290,8 +289,8 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
          if (next != null && !next.isVisible()) {
             ncomponents = parent.getComponentCount();
 
-            for(int i = 0; i < ncomponents; ++i) {
-               Component comp = parent.getComponent(i);
+            for (int ix = 0; ix < ncomponents; ix++) {
+               Component comp = parent.getComponent(ix);
                if (comp.isVisible()) {
                   if (!this.initial) {
                      next.setVisible(true);
@@ -319,7 +318,6 @@ public class AnimCardLayout extends CardLayout implements LayoutManager2 {
       public Component comp;
 
       Card(String cardName, Component cardComponent) {
-         super();
          this.name = cardName;
          this.comp = cardComponent;
       }

@@ -15,10 +15,6 @@ public class gleisModel extends AbstractTableModel {
    private final HashMap<NumString, zug> data = new HashMap();
    private final ArrayList<Boolean> linesLower = new ArrayList();
 
-   public gleisModel() {
-      super();
-   }
-
    public void clear() {
       this.lines.clear();
       this.linesCT.clear();
@@ -40,7 +36,7 @@ public class gleisModel extends AbstractTableModel {
    }
 
    public ZugTableComparator getComparator(int columnIndex) {
-      switch(columnIndex) {
+      switch (columnIndex) {
          case 0:
             return new gleisNameComparator();
          default:
@@ -81,7 +77,7 @@ public class gleisModel extends AbstractTableModel {
    }
 
    public Object getValueAt(int rowIndex, int columnIndex) {
-      switch(columnIndex) {
+      switch (columnIndex) {
          case 0:
             return this.linesCT.get(rowIndex);
          case 1:
@@ -107,7 +103,7 @@ public class gleisModel extends AbstractTableModel {
    }
 
    public boolean isGleisLower(int row) {
-      return this.linesLower.get(row);
+      return (Boolean)this.linesLower.get(row);
    }
 
    public void setGleisLower(int row, boolean lower) {
@@ -134,7 +130,7 @@ public class gleisModel extends AbstractTableModel {
 
    public int getIndexOf(zug z) {
       if (this.data.containsValue(z)) {
-         for(NumString b : this.data.keySet()) {
+         for (NumString b : this.data.keySet()) {
             if (this.data.get(b) == z) {
                return this.lines.indexOf(b);
             }
@@ -166,7 +162,6 @@ public class gleisModel extends AbstractTableModel {
       private final NumString gleis;
 
       private emptyColorText(NumString gleis) {
-         super();
          this.gleis = gleis;
       }
 

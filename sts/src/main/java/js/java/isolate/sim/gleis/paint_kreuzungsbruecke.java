@@ -19,14 +19,14 @@ class paint_kreuzungsbruecke extends paint2Base {
       int cc = 0;
       Iterator<gleis> it = gl.getNachbarn();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis ngl = (gleis)it.next();
          if (ngl.getCol() == gl.getCol()) {
-            ++cc;
+            cc++;
          }
 
          if (ngl.getRow() == gl.getRow()) {
-            ++rc;
+            rc++;
          }
       }
 

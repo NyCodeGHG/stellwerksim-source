@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 public class zugDefaultComparator extends baseZugTableComparator implements ZugTableComparator {
-   public zugDefaultComparator() {
-      super();
-   }
-
    @Override
    public int compare(Object o1, Object o2) {
       int r = super.compare(o1, o2);

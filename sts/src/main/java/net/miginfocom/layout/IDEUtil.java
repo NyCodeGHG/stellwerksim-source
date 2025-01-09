@@ -16,10 +16,6 @@ public class IDEUtil {
    public static final UnitValue BASELINE_IDENTITY = UnitValue.BASELINE_IDENTITY;
    private static final String[] X_Y_STRINGS = new String[]{"x", "y", "x2", "y2"};
 
-   public IDEUtil() {
-      super();
-   }
-
    public String getIDEUtilVersion() {
       return "1.0";
    }
@@ -41,7 +37,7 @@ public class IDEUtil {
       DimConstraint[] dims = ac.getConstaints();
       BoundSize defGap = isCols ? PlatformDefaults.getGridGapX() : PlatformDefaults.getGridGapY();
 
-      for(int i = 0; i < dims.length; ++i) {
+      for (int i = 0; i < dims.length; i++) {
          DimConstraint dc = dims[i];
          addRowDimConstraintString(dc, sb, asAPI);
          if (i < dims.length - 1) {
@@ -318,7 +314,7 @@ public class IDEUtil {
       if (pad != null) {
          sb.append(asAPI ? ".pad(\"" : ",pad ");
 
-         for(int i = 0; i < pad.length; ++i) {
+         for (int i = 0; i < pad.length; i++) {
             sb.append(getUV(pad[i])).append(i < pad.length - 1 ? " " : "");
          }
 
@@ -330,7 +326,7 @@ public class IDEUtil {
       UnitValue[] pos = cc.getPos();
       if (pos != null) {
          if (cc.isBoundsInGrid()) {
-            for(int i = 0; i < 4; ++i) {
+            for (int i = 0; i < 4; i++) {
                if (pos[i] != null) {
                   if (asAPI) {
                      sb.append('.').append(X_Y_STRINGS[i]).append("(\"").append(getUV(pos[i])).append("\")");
@@ -343,8 +339,8 @@ public class IDEUtil {
             sb.append(asAPI ? ".pos(\"" : ",pos ");
             int iSz = pos[2] == null && pos[3] == null ? 2 : 4;
 
-            for(int i = 0; i < iSz; ++i) {
-               sb.append(getUV(pos[i])).append(i < iSz - 1 ? " " : "");
+            for (int ix = 0; ix < iSz; ix++) {
+               sb.append(getUV(pos[ix])).append(ix < iSz - 1 ? " " : "");
             }
 
             if (asAPI) {
@@ -550,7 +546,7 @@ public class IDEUtil {
          } else {
             sb.append(asAPI ? ".insets(\"" : ",insets ");
 
-            for(int i = 0; i < insets.length; ++i) {
+            for (int i = 0; i < insets.length; i++) {
                sb.append(getUV(insets[i])).append(i < insets.length - 1 ? " " : "");
             }
 

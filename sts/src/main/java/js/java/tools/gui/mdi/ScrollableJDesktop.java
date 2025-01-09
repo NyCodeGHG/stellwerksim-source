@@ -10,10 +10,6 @@ import javax.swing.JViewport;
 import javax.swing.Scrollable;
 
 public class ScrollableJDesktop extends JDesktopPane implements Scrollable {
-   public ScrollableJDesktop() {
-      super();
-   }
-
    public Dimension getPreferredScrollableViewportSize() {
       return new Dimension(2000, 2000);
    }
@@ -28,7 +24,7 @@ public class ScrollableJDesktop extends JDesktopPane implements Scrollable {
          maxY = b.height;
       }
 
-      for(int i = 0; i < frames.length; ++i) {
+      for (int i = 0; i < frames.length; i++) {
          Rectangle r = frames[i].getBounds();
          maxX = Math.max(r.x + r.width, maxX);
          maxY = Math.max(r.y + r.height, maxY);
@@ -61,7 +57,6 @@ public class ScrollableJDesktop extends JDesktopPane implements Scrollable {
       DesktopManager dtm;
 
       ScrollableDesktopManager(DesktopManager d) {
-         super();
          this.dtm = d;
       }
 

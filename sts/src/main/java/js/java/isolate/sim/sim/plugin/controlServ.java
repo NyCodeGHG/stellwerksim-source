@@ -228,7 +228,7 @@ public class controlServ extends ServImpl {
    private void unregisterZug(BufferedWriter output) {
       controlServ.cmdHook hook = (controlServ.cmdHook)this.hookList.get(output);
       if (hook != null) {
-         for(gleis g : this.gleisHookList) {
+         for (gleis g : this.gleisHookList) {
             g.unregisterHook(eventGenerator.T_GLEIS_STATUS, hook);
          }
       }
@@ -238,7 +238,6 @@ public class controlServ extends ServImpl {
       private final BufferedWriter output;
 
       cmdHook(BufferedWriter output) {
-         super();
          this.output = output;
       }
 
@@ -279,11 +278,7 @@ public class controlServ extends ServImpl {
       }
 
       public boolean equals(Object o) {
-         if (o instanceof controlServ.cmdHook) {
-            return ((controlServ.cmdHook)o).output == this.output;
-         } else {
-            return false;
-         }
+         return o instanceof controlServ.cmdHook ? ((controlServ.cmdHook)o).output == this.output : false;
       }
 
       public int compareTo(Object o) {
@@ -310,7 +305,6 @@ public class controlServ extends ServImpl {
       private final BufferedWriter output;
 
       fsSetResponseHook(BufferedWriter output, long ref, int enr1, int enr2, ServBase.FAILREASON success) {
-         super();
          this.success = success;
          this.enr1 = enr1;
          this.enr2 = enr2;

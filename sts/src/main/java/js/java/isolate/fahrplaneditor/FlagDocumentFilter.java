@@ -6,14 +6,10 @@ import javax.swing.text.DocumentFilter;
 import javax.swing.text.DocumentFilter.FilterBypass;
 
 public class FlagDocumentFilter extends DocumentFilter {
-   public FlagDocumentFilter() {
-      super();
-   }
-
    private String filter(String string) {
       StringBuilder s = new StringBuilder();
 
-      for(int i = 0; i < string.length(); ++i) {
+      for (int i = 0; i < string.length(); i++) {
          char c = string.charAt(i);
          s.append(Character.toUpperCase(c));
       }

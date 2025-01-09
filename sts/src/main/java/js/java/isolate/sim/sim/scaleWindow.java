@@ -78,15 +78,16 @@ public class scaleWindow extends JDialog implements ActionListener {
 
    private void analyseButtons() {
       TreeMap<String, AbstractButton> labels = new TreeMap();
+      Enumeration<AbstractButton> en = this.scaleButtonGroup.getElements();
 
-      AbstractButton ab;
-      String scalev;
-      for(Enumeration<AbstractButton> en = this.scaleButtonGroup.getElements(); en.hasMoreElements(); labels.put(scalev + "z", ab)) {
-         ab = (AbstractButton)en.nextElement();
-         scalev = ab.getActionCommand();
+      while (en.hasMoreElements()) {
+         AbstractButton ab = (AbstractButton)en.nextElement();
+         String scalev = ab.getActionCommand();
          if (scalev.charAt(0) > '2') {
             scalev = "0" + scalev;
          }
+
+         labels.put(scalev + "z", ab);
       }
 
       this.zoomLevels = new ArrayList(labels.values());

@@ -35,7 +35,7 @@ public class bstflaecheConnectionSearch extends gleisbildWorkerBase<gleisbildMod
             this.continueSearch(this.glbModel.getXY_null(x + 1, current.getRow()), this.name);
             this.continueSearch(this.glbModel.getXY_null(x - 1, current.getRow()), this.name);
 
-            while(!this.searchlist.isEmpty()) {
+            while (!this.searchlist.isEmpty()) {
                res = this.find();
                if (res != null) {
                   return res;

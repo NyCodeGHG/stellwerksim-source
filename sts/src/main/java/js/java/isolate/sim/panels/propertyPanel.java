@@ -65,7 +65,7 @@ public class propertyPanel extends basePanel {
 
    @Override
    public void shown(String n, gecBase gec) {
-      switch(this.glbControl.getModel().gleisbildextend.getSignalversion()) {
+      switch (this.glbControl.getModel().gleisbildextend.getSignalversion()) {
          case 0:
          default:
             this.classic_RB.setSelected(true);

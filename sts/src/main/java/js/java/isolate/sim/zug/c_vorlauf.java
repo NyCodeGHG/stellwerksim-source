@@ -27,8 +27,8 @@ class c_vorlauf extends baseChain1Chain {
                z.ein_stw = null;
             }
 
-            z.outputValueChanged |= z.von.setBGColor(5);
-            synchronized(z.my_main.getFSallocator()) {
+            z.outputValueChanged = z.von.setBGColor(5) | z.outputValueChanged;
+            synchronized (z.my_main.getFSallocator()) {
                int al = z.my_main.getFSallocator().isFreeToSignal(z, z.ein_enr, z.gotüp);
                if (al > 0) {
                   if (al == 1) {
@@ -75,7 +75,7 @@ class c_vorlauf extends baseChain1Chain {
                   }
 
                   z.startCnt = 5;
-                  z.outputValueChanged |= z.von.setBGColor(1);
+                  z.outputValueChanged = z.von.setBGColor(1) | z.outputValueChanged;
                   ret = true;
                } else {
                   z.eingangbelegt = true;

@@ -39,13 +39,13 @@ public class weichenueberwachung extends event {
             return this.hookStellung(ge.g, ge.st, ge.f);
          }
       } else if (e != null && e instanceof fahrstrassemsg) {
-         fahrstrassemsg ge = (fahrstrassemsg)e;
+         fahrstrassemsg gex = (fahrstrassemsg)e;
          if (typ == eventGenerator.T_FS_SETZEN) {
-            return this.hookSet(ge.f);
+            return this.hookSet(gex.f);
          }
 
          if (typ == eventGenerator.T_FS_LOESCHEN) {
-            return this.hookClear(ge.f);
+            return this.hookClear(gex.f);
          }
       }
 
@@ -71,8 +71,8 @@ public class weichenueberwachung extends event {
          this.dauer = e.getIntValue("dauer");
          this.weichen = new LinkedList();
 
-         for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
-            for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+         for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
+            for (int x = 0; x < this.glbModel.getGleisWidth(); x++) {
                gleis gl = this.glbModel.getXY_null(x, y);
                if (gl != null && gl.getElement().matches(gleis.ALLE_WEICHEN)) {
                   gl.registerHook(eventGenerator.T_GLEIS_STELLUNG, this);
@@ -122,7 +122,7 @@ public class weichenueberwachung extends event {
 
    @Override
    public boolean pong() {
-      for(gleis gl : this.weichen) {
+      for (gleis gl : this.weichen) {
          gl.unregisterHook(eventGenerator.T_GLEIS_STELLUNG, this);
       }
 

@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.gleisbildWorker.emptyLineFinder;
 
 public class bvtest1 implements dtest {
-   public bvtest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bildverarbeitung 1";
@@ -24,7 +20,7 @@ public class bvtest1 implements dtest {
    protected int cntSprünge(gleisbildModelSts glb) {
       int sc = 0;
 
-      for(Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ELEMENT_SPRUNG}); it.hasNext(); ++sc) {
+      for (Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ELEMENT_SPRUNG}); it.hasNext(); sc++) {
          gleis gl = (gleis)it.next();
       }
 
@@ -42,7 +38,7 @@ public class bvtest1 implements dtest {
       int rc = emptyRows.size();
       LinkedList<gleis> m = new LinkedList();
 
-      for(int y : emptyRows) {
+      for (int y : emptyRows) {
          gleis gl = glb.getXY_null(0, y);
          if (gl != null) {
             lf.markHLine(gl, glb.getGleisWidth(), m);

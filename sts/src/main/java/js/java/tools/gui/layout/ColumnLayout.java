@@ -21,7 +21,6 @@ public class ColumnLayout implements LayoutManager {
    }
 
    public ColumnLayout(int cols, int hgap, int vgap) {
-      super();
       if (cols == 0) {
          throw new IllegalArgumentException("rows and cols cannot both be zero");
       } else {
@@ -70,7 +69,7 @@ public class ColumnLayout implements LayoutManager {
    }
 
    public Dimension preferredLayoutSize(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          Insets insets = parent.getInsets();
          int ncomponents = parent.getComponentCount();
          int ncols = this.cols;
@@ -81,7 +80,7 @@ public class ColumnLayout implements LayoutManager {
             int w = 0;
             int h = 0;
 
-            for(int i = 0; i < ncomponents; ++i) {
+            for (int i = 0; i < ncomponents; i++) {
                Component comp = parent.getComponent(i);
                Dimension d = comp.getPreferredSize();
                if (w < d.width) {
@@ -101,7 +100,7 @@ public class ColumnLayout implements LayoutManager {
    }
 
    public Dimension minimumLayoutSize(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          Insets insets = parent.getInsets();
          int ncomponents = parent.getComponentCount();
          int ncols = this.cols;
@@ -112,7 +111,7 @@ public class ColumnLayout implements LayoutManager {
             int w = 0;
             int h = 0;
 
-            for(int i = 0; i < ncomponents; ++i) {
+            for (int i = 0; i < ncomponents; i++) {
                Component comp = parent.getComponent(i);
                Dimension d = comp.getMinimumSize();
                if (w < d.width) {
@@ -132,7 +131,7 @@ public class ColumnLayout implements LayoutManager {
    }
 
    public void layoutContainer(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          Insets insets = parent.getInsets();
          int ncomponents = parent.getComponentCount();
          int ncols = this.cols;
@@ -145,10 +144,10 @@ public class ColumnLayout implements LayoutManager {
             h = this.validateHeight((h - (nrows - 1) * this.vgap) / nrows);
             int c = 0;
 
-            for(int x = insets.left; c < ncols; x += w + this.hgap) {
+            for (int x = insets.left; c < ncols; x += w + this.hgap) {
                int r = 0;
 
-               for(int y = insets.top; r < nrows; y += h + this.vgap) {
+               for (int y = insets.top; r < nrows; y += h + this.vgap) {
                   int i = r + c * nrows;
                   if (rtl) {
                      i = ncomponents - i - 1;
@@ -158,10 +157,10 @@ public class ColumnLayout implements LayoutManager {
                      parent.getComponent(i).setBounds(x, y, w, h);
                   }
 
-                  ++r;
+                  r++;
                }
 
-               ++c;
+               c++;
             }
          }
       }

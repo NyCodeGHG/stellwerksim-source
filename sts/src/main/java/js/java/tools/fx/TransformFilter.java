@@ -17,10 +17,6 @@ public abstract class TransformFilter extends AbstractBufferedImageOp {
    protected Rectangle transformedSpace;
    protected Rectangle originalSpace;
 
-   public TransformFilter() {
-      super();
-   }
-
    public void setEdgeAction(int edgeAction) {
       this.edgeAction = edgeAction;
    }
@@ -74,8 +70,8 @@ public abstract class TransformFilter extends AbstractBufferedImageOp {
          int outY = this.transformedSpace.y;
          float[] out = new float[2];
 
-         for(int y = 0; y < outHeight; ++y) {
-            for(int x = 0; x < outWidth; ++x) {
+         for (int y = 0; y < outHeight; y++) {
+            for (int x = 0; x < outWidth; x++) {
                this.transformInverse(outX + x, outY + y, out);
                int srcX = (int)Math.floor((double)out[0]);
                int srcY = (int)Math.floor((double)out[1]);
@@ -112,7 +108,7 @@ public abstract class TransformFilter extends AbstractBufferedImageOp {
       if (x >= 0 && x < width && y >= 0 && y < height) {
          return pixels[y * width + x];
       } else {
-         switch(this.edgeAction) {
+         switch (this.edgeAction) {
             case 0:
             default:
                return 0;
@@ -137,8 +133,8 @@ public abstract class TransformFilter extends AbstractBufferedImageOp {
       int[] rgb = new int[4];
       float[] out = new float[2];
 
-      for(int y = 0; y < outHeight; ++y) {
-         for(int x = 0; x < outWidth; ++x) {
+      for (int y = 0; y < outHeight; y++) {
+         for (int x = 0; x < outWidth; x++) {
             this.transformInverse(outX + x, outY + y, out);
             int srcX = (int)out[0];
             int srcY = (int)out[1];
@@ -148,7 +144,7 @@ public abstract class TransformFilter extends AbstractBufferedImageOp {
                outPixels[x] = inPixels[i];
             } else {
                int p;
-               switch(this.edgeAction) {
+               switch (this.edgeAction) {
                   case 0:
                   default:
                      p = 0;

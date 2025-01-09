@@ -10,10 +10,6 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorModel;
 
 public abstract class AbstractBufferedImageOp implements BufferedImageOp, Cloneable {
-   public AbstractBufferedImageOp() {
-      super();
-   }
-
    public BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel dstCM) {
       if (dstCM == null) {
          dstCM = src.getColorModel();

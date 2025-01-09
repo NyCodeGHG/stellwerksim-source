@@ -18,7 +18,7 @@ class paint_display extends paint2Base {
       g.setColor(gleis.colors.col_stellwerk_schwarz);
       g.fillRect(0, 0, l * xscal, yscal);
 
-      for(int i = 0; i < l; ++i) {
+      for (int i = 0; i < l; i++) {
          gl.paintDisplay(g, i * xscal, 0, xscal);
       }
 
@@ -37,7 +37,7 @@ class paint_display extends paint2Base {
          String redu = "";
          boolean bsmode = false;
 
-         for(int i = 0; i < gl.fdata.display_stellung.length(); ++i) {
+         for (int i = 0; i < gl.fdata.display_stellung.length(); i++) {
             char c = gl.fdata.display_stellung.charAt(i);
             if (c == '\\') {
                bsmode = true;
@@ -55,23 +55,23 @@ class paint_display extends paint2Base {
          int x = 0;
          bsmode = false;
 
-         for(int i = 0; i < l && i < redu.length(); ++i) {
+         for (int i = 0; i < l && i < redu.length(); i++) {
             if (bsmode) {
                bsmode = false;
-               switch(redu.charAt(i)) {
+               switch (redu.charAt(i)) {
                   case ' ':
-                     ++x;
+                     x++;
                      break;
                   case '<':
                      if (x > 0) {
-                        --x;
+                        x--;
                      }
                }
             } else if (redu.charAt(i) == '\\') {
                bsmode = true;
             } else {
                gl.printDisplay(g, redu.charAt(i), x * xscal, 0, xscal, dcol, true);
-               ++x;
+               x++;
             }
          }
       }
@@ -84,7 +84,7 @@ class paint_display extends paint2Base {
       Color dcol = gl.telement == gleis.ELEMENT_AIDDISPLAY ? gleis.colors.col_stellwerk_aiddisplay : gleis.colors.col_stellwerk_zugdisplay;
       int l = this.paint(gl, g, xscal, yscal, fscal, dcol);
       if (gl.swwert != null) {
-         for(int i = 0; i < l && i < gl.swwert.length(); ++i) {
+         for (int i = 0; i < l && i < gl.swwert.length(); i++) {
             gl.printDisplay(g, gl.swwert.charAt(i), i * xscal, 0, xscal, dcol, false);
          }
       }

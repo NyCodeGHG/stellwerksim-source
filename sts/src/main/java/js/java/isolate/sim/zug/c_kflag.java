@@ -32,7 +32,7 @@ class c_kflag extends baseChain1Chain {
                z.lastmasstab = z.pos_gl.getMasstab();
                z.triggerDisplayBar(displayBar.ZUGTRIGGER.KUPPELN);
                z.shortenZug();
-               neuzug.laenge += z.laenge;
+               neuzug.laenge = neuzug.laenge + z.laenge;
                boolean drehen = neuzug.pos_gl.sameGleis(z.next_gl);
                if (drehen) {
                   neuzug.richtungUmkehren();
@@ -42,7 +42,7 @@ class c_kflag extends baseChain1Chain {
                }
 
                try {
-                  while(z.zugbelegt.size() > 0) {
+                  while (z.zugbelegt.size() > 0) {
                      neuzug.zugbelegt.addFirst(z.zugbelegt.removeLast());
                   }
                } catch (NoSuchElementException var7) {
@@ -79,8 +79,8 @@ class c_kflag extends baseChain1Chain {
             zug neuzug = z.my_main.findZug(dazug.flags.dataOfFlag('K'));
             if (neuzug != null && z.zid == neuzug.zid) {
                if (!dazug.hasHook(eventGenerator.T_ZUG_KUPPELN) || dazug.call(eventGenerator.T_ZUG_KUPPELN, new zugmsg(dazug, neuzug))) {
-                  String text = "Züge " + dazug.getSpezialName() + " und " + z.getSpezialName() + " gekuppelt!";
-                  z.my_main.showText(text, TEXTTYPE.ANRUF, z);
+                  String textx = "Züge " + dazug.getSpezialName() + " und " + z.getSpezialName() + " gekuppelt!";
+                  z.my_main.showText(textx, TEXTTYPE.ANRUF, z);
                   z.my_main.playAnruf();
                   dazug.flags.removeFlag('K');
                   z.pos_gl.getFluentData().setStatusByZug(2, z, z.before_gl);
@@ -90,9 +90,9 @@ class c_kflag extends baseChain1Chain {
                   z.lastmasstab = z.pos_gl.getMasstab();
                   z.zugbelegt.addLast(z.pos_gl);
                   z.shortenZug();
-                  z.laenge += dazug.laenge;
-                  boolean drehen = dazug.pos_gl.sameGleis(z.next_gl);
-                  if (drehen) {
+                  z.laenge = z.laenge + dazug.laenge;
+                  boolean drehenx = dazug.pos_gl.sameGleis(z.next_gl);
+                  if (drehenx) {
                      dazug.richtungUmkehren();
                      if (zug.debugMode != null) {
                         zug.debugMode.writeln("zug (" + z.getName() + ")", "K-Flag drehen");
@@ -100,7 +100,7 @@ class c_kflag extends baseChain1Chain {
                   }
 
                   try {
-                     while(dazug.zugbelegt.size() > 0) {
+                     while (dazug.zugbelegt.size() > 0) {
                         z.zugbelegt.addLast(dazug.zugbelegt.removeFirst());
                      }
                   } catch (NoSuchElementException var8) {
@@ -119,7 +119,7 @@ class c_kflag extends baseChain1Chain {
                      z.lastBahnsteig = dazug.lastBahnsteig;
                      z.ist_tempo = 0.0;
                      z.my_main.setZugOnBahnsteig(z.gestopptgleis, z, z.pos_gl);
-                     ++z.c_richtigbahnsteig;
+                     z.c_richtigbahnsteig++;
                      tl_langsam.remove(z);
                      tl_vorsignal.remove(z);
                      tl_sichtfahrt.remove(z);

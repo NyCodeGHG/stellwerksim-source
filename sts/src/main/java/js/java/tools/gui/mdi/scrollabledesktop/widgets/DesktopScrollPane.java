@@ -17,7 +17,6 @@ public class DesktopScrollPane extends JScrollPane {
    private FramePositioning positioning;
 
    public DesktopScrollPane(DesktopMediator desktopMediator) {
-      super();
       this.desktopMediator = desktopMediator;
       this.desktopPane = new RootDesktopPane(this);
       this.setViewportView(this.desktopPane);
@@ -168,7 +167,7 @@ public class DesktopScrollPane extends JScrollPane {
             JInternalFrame f = null;
             JInternalFrame[] frames = DesktopScrollPane.this.getAllFrames();
 
-            for(int i = 0; i < frames.length; ++i) {
+            for (int i = 0; i < frames.length; i++) {
                f = frames[i];
                if (f.getX() < minX) {
                   minX = f.getX();
@@ -189,7 +188,7 @@ public class DesktopScrollPane extends JScrollPane {
 
             DesktopScrollPane.this.setVisible(false);
             if (minX != 0 || minY != 0) {
-               for(int i = 0; i < frames.length; ++i) {
+               for (int i = 0; i < frames.length; i++) {
                   f = frames[i];
                   f.setLocation(f.getX() - minX, f.getY() - minY);
                }

@@ -63,7 +63,6 @@ public class TableSorter extends AbstractTableModel {
    }
 
    public TableSorter() {
-      super();
       this.mouseListener = new TableSorter.MouseHandler();
       this.tableModelListener = new TableSorter.TableModelHandler();
    }
@@ -136,7 +135,7 @@ public class TableSorter extends AbstractTableModel {
    }
 
    private TableSorter.Directive getDirective(int column) {
-      for(int i = 0; i < this.sortingColumns.size(); ++i) {
+      for (int i = 0; i < this.sortingColumns.size(); i++) {
          TableSorter.Directive directive = (TableSorter.Directive)this.sortingColumns.get(i);
          if (directive.column == column) {
             return directive;
@@ -203,7 +202,7 @@ public class TableSorter extends AbstractTableModel {
 
    private void selectedSet() {
       if (this.mytable != null && this.selectionStorage != null) {
-         for(int i = 0; i < this.getRowCount(); ++i) {
+         for (int i = 0; i < this.getRowCount(); i++) {
             Object o = this.getValueAt(i, 0);
             if (o == this.selectionStorage) {
                if (this.mytable.getSelectionModel().getMinSelectionIndex() != i) {
@@ -265,7 +264,7 @@ public class TableSorter extends AbstractTableModel {
          int tableModelRowCount = this.tableModel.getRowCount();
          this.viewToModel = new TableSorter.Row[tableModelRowCount];
 
-         for(int row = 0; row < tableModelRowCount; ++row) {
+         for (int row = 0; row < tableModelRowCount; row++) {
             this.viewToModel[row] = new TableSorter.Row(row);
          }
 
@@ -291,7 +290,7 @@ public class TableSorter extends AbstractTableModel {
          this.modelToView = new int[n];
          int i = 0;
 
-         while(i < n) {
+         while (i < n) {
             this.modelToView[this.modelIndex(i)] = i++;
          }
       }
@@ -353,7 +352,6 @@ public class TableSorter extends AbstractTableModel {
       private int priority;
 
       Arrow(boolean descending, int size, int priority) {
-         super();
          this.descending = descending;
          this.size = size;
          this.priority = priority;
@@ -397,7 +395,6 @@ public class TableSorter extends AbstractTableModel {
       private int direction;
 
       Directive(int column, int direction) {
-         super();
          this.column = column;
          this.direction = direction;
       }
@@ -405,7 +402,6 @@ public class TableSorter extends AbstractTableModel {
 
    private class MouseHandler extends MouseAdapter {
       private MouseHandler() {
-         super();
       }
 
       public void mouseClicked(MouseEvent e) {
@@ -432,7 +428,6 @@ public class TableSorter extends AbstractTableModel {
       private int modelIndex;
 
       Row(int index) {
-         super();
          this.modelIndex = index;
       }
 
@@ -440,7 +435,7 @@ public class TableSorter extends AbstractTableModel {
          int row1 = this.modelIndex;
          int row2 = ((TableSorter.Row)o).modelIndex;
 
-         for(TableSorter.Directive directive : TableSorter.this.sortingColumns) {
+         for (TableSorter.Directive directive : TableSorter.this.sortingColumns) {
             int column = directive.column;
             Object o1 = TableSorter.this.tableModel.getValueAt(row1, column);
             Object o2 = TableSorter.this.tableModel.getValueAt(row2, column);
@@ -468,7 +463,6 @@ public class TableSorter extends AbstractTableModel {
       private TableCellRenderer tableCellRenderer;
 
       SortableHeaderRenderer(TableCellRenderer tableCellRenderer) {
-         super();
          this.tableCellRenderer = tableCellRenderer;
       }
 
@@ -487,7 +481,6 @@ public class TableSorter extends AbstractTableModel {
 
    private class TableModelHandler implements TableModelListener {
       private TableModelHandler() {
-         super();
       }
 
       public void tableChanged(TableModelEvent e) {

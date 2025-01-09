@@ -10,10 +10,6 @@ import js.java.isolate.sim.gleis.gleisElements.gleisElements;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class texttest1 implements dtest {
-   public texttest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Textrichtung";
@@ -31,7 +27,7 @@ public class texttest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ALLE_TEXTE});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          element e = gl.getElement();
          if (!e.getAllowedRichtung().contains(gl.getRichtung())) {

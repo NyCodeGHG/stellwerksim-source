@@ -36,7 +36,7 @@ public class c_richtungDrehen extends baseChain1Chain {
                z.my_main.playAnruf();
                this.zurueckFertig(z, false);
             } else {
-               for(gleis gl : z.zugbelegt) {
+               for (gleis gl : z.zugbelegt) {
                   gl.getFluentData().setStatusByZug(2, z);
                }
             }

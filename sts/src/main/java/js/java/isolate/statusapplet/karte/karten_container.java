@@ -31,7 +31,6 @@ class karten_container {
    public int heatSize = 0;
 
    karten_container() {
-      super();
       this.einfahrten.put(0, "---");
       this.ausfahrten.put(0, "---");
    }

@@ -58,7 +58,7 @@ public class mehrgleisbue extends insert {
       l.add(bt);
       l.add(new newlinetoken());
 
-      for(int i = 0; i < this.anzahl; ++i) {
+      for (int i = 0; i < this.anzahl; i++) {
          l.add(new streckengleistoken());
          element e = gleis.ELEMENT_BAHNÜBERGANG;
          if (this.büart == 1) {

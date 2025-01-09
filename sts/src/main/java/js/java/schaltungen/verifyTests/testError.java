@@ -6,12 +6,10 @@ public class testError extends InitTestBase {
    private final String msg;
 
    public testError(Class<? extends InitTestBase> t) {
-      super();
       this.msg = "Java Kompatiblitätsfehler mit " + t.getSimpleName();
    }
 
    public testError(String test) {
-      super();
       this.msg = "Test Ladefehler mit " + test;
    }
 

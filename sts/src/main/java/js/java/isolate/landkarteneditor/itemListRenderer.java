@@ -18,7 +18,6 @@ public class itemListRenderer extends JPanel implements ListCellRenderer {
    private JLabel right;
 
    public itemListRenderer() {
-      super();
       this.setOpaque(true);
       this.setLayout(new BorderLayout());
       this.nodeIcon = new ImageIcon(this.getClass().getResource("/js/java/tools/resources/node16.png"));

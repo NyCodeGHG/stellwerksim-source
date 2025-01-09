@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 class tempoLimit implements tl_base {
-   tempoLimit() {
-      super();
-   }
-
    @Override
    public double calc_tempo(zug z, double omx) {
       double mx = (double)z.variables.soll_tempo(z.soll_tempo, z.zielgleis);

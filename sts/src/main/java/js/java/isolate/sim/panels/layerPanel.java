@@ -52,13 +52,13 @@ public class layerPanel extends basePanel {
       gleisTypContainer gtc = gleisTypContainer.getInstance();
       this.itemsPanel.setLayout(new CompactLayout(2));
 
-      for(int t : gtc.getTypes()) {
+      for (int t : gtc.getTypes()) {
          String typ = gtc.getTypName(t);
          JPanel pan = new JPanel();
          pan.setLayout(new BoxLayout(pan, 3));
          pan.setBorder(BorderFactory.createTitledBorder(typ));
 
-         for(int e : gtc.getTypElements(t)) {
+         for (int e : gtc.getTypElements(t)) {
             if (decor.getDecor().typHasLayer2Painter(gleisHelper.findElement(t, e))) {
                String element = gtc.getTypElementName(t, e);
                JCheckBox cb = new JCheckBox(element);
@@ -87,13 +87,13 @@ public class layerPanel extends basePanel {
    }
 
    private void selectAll(boolean selected) {
-      for(JCheckBox cb : this.boxes.keySet()) {
+      for (JCheckBox cb : this.boxes.keySet()) {
          cb.setSelected(selected);
       }
    }
 
    private void refreshAll() {
-      for(layerPanel.elementEntry ee : this.boxes.values()) {
+      for (layerPanel.elementEntry ee : this.boxes.values()) {
          ee.cb.setSelected(this.glbControl.getModel().isLayerDisabled(gleisHelper.findElement(ee.typ, ee.element)));
       }
    }
@@ -150,7 +150,6 @@ public class layerPanel extends basePanel {
       JCheckBox cb;
 
       elementEntry(int t, int e, JCheckBox cb) {
-         super();
          this.typ = t;
          this.element = e;
          this.cb = cb;

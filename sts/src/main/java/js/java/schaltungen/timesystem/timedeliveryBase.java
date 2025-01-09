@@ -3,10 +3,6 @@ package js.java.schaltungen.timesystem;
 public abstract class timedeliveryBase implements timedelivery {
    private TimeFormat df = TimeFormat.getInstance(TimeFormat.STYLE.HMS);
 
-   public timedeliveryBase() {
-      super();
-   }
-
    public void setPause(boolean on) {
    }
 

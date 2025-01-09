@@ -5,10 +5,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class zwergzdstest implements dtest {
-   public zwergzdstest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Schutzsignal wenn ZD-Signal";

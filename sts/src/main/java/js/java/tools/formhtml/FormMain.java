@@ -31,7 +31,6 @@ public class FormMain extends JFrame {
    private JButton saveButton;
 
    public FormMain() {
-      super();
       this.initComponents();
       System.out.println("-------- START setText() ----------");
       this.edit

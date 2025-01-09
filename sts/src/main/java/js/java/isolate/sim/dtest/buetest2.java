@@ -8,10 +8,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class buetest2 implements dtest {
-   public buetest2() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Anruf-Bü Anruf-Störung";
@@ -27,11 +23,11 @@ public class buetest2 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ELEMENT_ANRUFÜBERGANG});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          boolean found = false;
 
-         for(eventContainer c : glb.events) {
+         for (eventContainer c : glb.events) {
             int e = c.getENR();
             boolean m = bahnueberganganruf.class.isAssignableFrom(c.getFactory().getEventTyp());
             if (m && e == gl.getENR()) {

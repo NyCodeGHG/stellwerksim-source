@@ -13,7 +13,7 @@ class ping_reserving extends pingBase {
    public boolean ping(gleis gl) {
       boolean ret = false;
       if (gl.getFluentData().getStatus() == 3 || gl.getFluentData().getStatus() == 4) {
-         ++gl.blinkcc;
+         gl.blinkcc++;
          if ((double)gl.blinkcc > 8.0 + 20.0 * Math.random()) {
             if (gl.getFluentData().getStatus() == 4) {
                gl.getFluentData().setStatus(0);

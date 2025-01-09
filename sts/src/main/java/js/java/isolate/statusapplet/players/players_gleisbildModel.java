@@ -73,7 +73,6 @@ public class players_gleisbildModel extends gleisbildModelSts {
       int paint_last_rot = 0;
 
       public zugdata(players_zug z) {
-         super();
          this.zug = z;
       }
    }

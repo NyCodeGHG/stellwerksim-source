@@ -4,7 +4,6 @@ public class ChatLinkEvent {
    public final String channel;
 
    public ChatLinkEvent(String channel) {
-      super();
       this.channel = channel;
    }
 }

@@ -5,7 +5,6 @@ public class IrcDisconnectedEvent {
    public final boolean isDisconnecting;
 
    IrcDisconnectedEvent(boolean isDisconnecting, String message) {
-      super();
       this.isDisconnecting = isDisconnecting;
       this.message = message != null ? message : "";
    }

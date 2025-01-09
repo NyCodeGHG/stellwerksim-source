@@ -5,7 +5,6 @@ public class PrivateMessageEvent {
    public final String text;
 
    PrivateMessageEvent(String sender, String text) {
-      super();
       this.sender = sender;
       this.text = text;
    }

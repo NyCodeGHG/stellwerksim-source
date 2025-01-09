@@ -62,7 +62,7 @@ public class relaisgruppestoerung extends gleisevent {
 
                   ret.glbModel = this.glbModel;
                   if (ret.init(gl.getENR(), dauer) && !(ret instanceof signalausfall)) {
-                     ++this.totalEvents;
+                     this.totalEvents++;
                      this.defektgl.add(gl);
                   }
                } else {
@@ -73,7 +73,7 @@ public class relaisgruppestoerung extends gleisevent {
                   break;
                }
             }
-         } while(gl != null);
+         } while (gl != null);
       }
 
       ll = this.glbModel.findAllWithStellungLevel(this.level, new Object[]{gleis.ALLE_WEICHEN});
@@ -94,11 +94,11 @@ public class relaisgruppestoerung extends gleisevent {
                && !gl.hasHook(eventGenerator.HOOKKIND.WORKER, eventGenerator.T_GLEIS_STELLUNG)
                && !gl.getFluentData().isGesperrt()) {
                if (cnt < 2) {
-                  weicheevent ret = new weichenausfall(this.my_main);
-                  ret.glbModel = this.glbModel;
-                  ret.setParent(this);
-                  if (ret.init(gl.getENR(), dauer)) {
-                     ++this.totalEvents;
+                  weicheevent retx = new weichenausfall(this.my_main);
+                  retx.glbModel = this.glbModel;
+                  retx.setParent(this);
+                  if (retx.init(gl.getENR(), dauer)) {
+                     this.totalEvents++;
                      this.defektgl.add(gl);
                   }
                } else {
@@ -109,7 +109,7 @@ public class relaisgruppestoerung extends gleisevent {
                   break;
                }
             }
-         } while(gl != null);
+         } while (gl != null);
       }
 
       if (this.totalEvents <= 0) {
@@ -137,7 +137,7 @@ public class relaisgruppestoerung extends gleisevent {
    @Override
    public void done(event child) {
       if (!this.isEventDone()) {
-         --this.totalEvents;
+         this.totalEvents--;
          if (this.totalEvents <= 0) {
             eventContainer ev = new eventContainer(this.glbModel, sperreelementeaufzeit.class);
             ev.setIntValue("dauer", this.repdauer);

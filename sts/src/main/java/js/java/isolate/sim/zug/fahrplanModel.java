@@ -3,10 +3,6 @@ package js.java.isolate.sim.zug;
 import javax.swing.table.AbstractTableModel;
 
 public abstract class fahrplanModel extends AbstractTableModel {
-   public fahrplanModel() {
-      super();
-   }
-
    public static fahrplanModel createModel() {
       return new fahrplanBaseModel();
    }

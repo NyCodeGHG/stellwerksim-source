@@ -14,7 +14,6 @@ public class TimeoutTimer {
    private final AtomicReference<ScheduledFuture<?>> ticket = new AtomicReference();
 
    public TimeoutTimer(ScheduledExecutorService scheduler, long timeout, TimeUnit timeUnit, Runnable task) {
-      super();
       this.scheduler = scheduler;
       this.timeout = timeout;
       this.timeUnit = timeUnit;
@@ -27,7 +26,7 @@ public class TimeoutTimer {
 
    public TimeoutTimer reset(boolean mayInterruptIfRunning) {
       ScheduledFuture<?> newTicket = this.scheduler.schedule(this.task, this.timeout, this.timeUnit);
-      ScheduledFuture<?> oldTicket = (ScheduledFuture)this.ticket.getAndSet(newTicket);
+      ScheduledFuture<?> oldTicket = (ScheduledFuture<?>)this.ticket.getAndSet(newTicket);
       if (oldTicket != null) {
          oldTicket.cancel(mayInterruptIfRunning);
       }

@@ -7,12 +7,8 @@ import java.util.Map.Entry;
 import js.java.isolate.sim.structServ.structinfo;
 
 public class threadHelper {
-   public threadHelper() {
-      super();
-   }
-
    public static Collection addThreadInfo(Vector v, StackTraceElement[] value) {
-      for(int i = 0; i < value.length; ++i) {
+      for (int i = 0; i < value.length; i++) {
          StackTraceElement e = value[i];
          v.add(i + ".");
          v.add(e.toString());
@@ -37,7 +33,7 @@ public class threadHelper {
       try {
          Map<Thread, StackTraceElement[]> m = Thread.getAllStackTraces();
 
-         for(Entry<Thread, StackTraceElement[]> e : m.entrySet()) {
+         for (Entry<Thread, StackTraceElement[]> e : m.entrySet()) {
             Vector v = new Vector();
             v.addElement("Thread");
             v.addElement(((Thread)e.getKey()).toString());
@@ -60,7 +56,6 @@ public class threadHelper {
       private final StackTraceElement[] value;
 
       private threadData(String name, StackTraceElement[] value) {
-         super();
          this.name = name;
          this.value = value;
       }

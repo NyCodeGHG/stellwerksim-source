@@ -104,7 +104,7 @@ public class displayBarL extends basePanel implements gleisbildViewPanel.glbOver
          GraphicTools.enableGfxAA(g2);
          g2.setStroke(new BasicStroke(3.0F));
 
-         for(connector c : d) {
+         for (connector c : d) {
             if (c.isFSconnector()) {
                g2.setColor(Color.YELLOW);
             } else {
@@ -114,7 +114,7 @@ public class displayBarL extends basePanel implements gleisbildViewPanel.glbOver
             String sw = c.getSWwert();
             Iterator<gleis> it = this.glbControl.getModel().findIterator(new Object[]{gleis.ALLE_GLEISE, sw});
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleis gl = (gleis)it.next();
                if (gl.isDisplayTriggerSelectable()) {
                   double cY = (double)disp.getRow() * scaler.getYScale() + scaler.getYScale() / 2.0;

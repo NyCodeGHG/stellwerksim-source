@@ -5,7 +5,6 @@ public class LaunchModule {
    public final String parameterUrl;
 
    public LaunchModule(Module modul, String parameterUrl) {
-      super();
       this.modul = modul;
       this.parameterUrl = parameterUrl;
    }

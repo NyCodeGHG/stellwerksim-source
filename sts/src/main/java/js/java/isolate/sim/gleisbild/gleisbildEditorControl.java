@@ -110,7 +110,7 @@ public class gleisbildEditorControl extends gleisbildControl<gleisbildModelSts> 
    }
 
    public void run() {
-      while(this.threadRunning) {
+      while (this.threadRunning) {
          try {
             this.paintCommand.poll(1L, TimeUnit.DAYS);
             this.paintCommand.clear();

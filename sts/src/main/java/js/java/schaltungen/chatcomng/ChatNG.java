@@ -40,7 +40,6 @@ public class ChatNG implements ServerListener, ChatNGMBean {
    private String channelToEnter = null;
 
    public ChatNG(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.bus = EventBusService.getInstance();
       String nick = "U" + uc.getUid().replace(' ', '_');
@@ -50,7 +49,7 @@ public class ChatNG implements ServerListener, ChatNGMBean {
       this.bus.subscribe(this);
       this.readyRoomStateChannels.add(uc.getReadyRoom());
 
-      for(ChannelsNameParser.ChannelName cc : new ChannelsNameParser(uc.getParameter(UserContextMini.DATATYPE.READYROOMCHANNELS), 20)) {
+      for (ChannelsNameParser.ChannelName cc : new ChannelsNameParser(uc.getParameter(UserContextMini.DATATYPE.READYROOMCHANNELS), 20)) {
          this.channelNameTranslate.put(cc.name, cc);
          this.readyRoomStateChannels.add(cc.name);
       }
@@ -73,7 +72,7 @@ public class ChatNG implements ServerListener, ChatNGMBean {
 
    public void setRoomState(UserContextMini fuc, StartRoomState s) {
       this.nonPublicChannels.clear();
-      switch(s) {
+      switch (s) {
          case INIT:
             this.server.sendJoin(fuc.getReadyRoom());
             break;
@@ -86,12 +85,12 @@ public class ChatNG implements ServerListener, ChatNGMBean {
 
    public void setRoomState(UserContext fuc, RoomState s) {
       this.nonPublicChannels.clear();
-      switch(s) {
+      switch (s) {
          case SANDBOXGAME:
             this.setChannelToEnter(fuc.getParameter("startchannel"));
-            String channelName = fuc.getParameter("channel");
-            if (channelName != null) {
-               for(ChannelsNameParser.ChannelName cc : new ChannelsNameParser(channelName, 10)) {
+            String channelNamex = fuc.getParameter("channel");
+            if (channelNamex != null) {
+               for (ChannelsNameParser.ChannelName cc : new ChannelsNameParser(channelNamex, 10)) {
                   cc.customdata = "channel";
                   this.channelNameTranslate.put(cc.name, cc);
                   this.leaveChannels.add(cc.name);
@@ -101,12 +100,12 @@ public class ChatNG implements ServerListener, ChatNGMBean {
             break;
          case ONLINEGAME:
             this.setChannelToEnter(fuc.getParameter("startchannel"));
-            String controlName = fuc.getParameter("ochannel");
-            if (controlName != null) {
-               this.nonPublicChannels.put(controlName.toLowerCase(), new IC_BotControlRoom.Factory());
-               this.leaveChannels.add(controlName);
-               this.server.sendJoin(controlName);
-               String exchangeName = controlName + "e";
+            String controlNamex = fuc.getParameter("ochannel");
+            if (controlNamex != null) {
+               this.nonPublicChannels.put(controlNamex.toLowerCase(), new IC_BotControlRoom.Factory());
+               this.leaveChannels.add(controlNamex);
+               this.server.sendJoin(controlNamex);
+               String exchangeName = controlNamex + "e";
                this.nonPublicChannels.put(exchangeName.toLowerCase(), new IC_ExchangeRoom.Factory());
                this.leaveChannels.add(exchangeName);
                this.server.sendJoin(exchangeName);
@@ -121,7 +120,7 @@ public class ChatNG implements ServerListener, ChatNGMBean {
 
             String channelName = fuc.getParameter("channel");
             if (channelName != null) {
-               for(ChannelsNameParser.ChannelName cc : new ChannelsNameParser(channelName, 10)) {
+               for (ChannelsNameParser.ChannelName cc : new ChannelsNameParser(channelName, 10)) {
                   cc.customdata = "channel";
                   this.channelNameTranslate.put(cc.name, cc);
                   this.leaveChannels.add(cc.name);
@@ -131,7 +130,7 @@ public class ChatNG implements ServerListener, ChatNGMBean {
 
             String morechannels = fuc.getParameter("dchannel");
             if (morechannels != null) {
-               for(ChannelsNameParser.ChannelName cc : new ChannelsNameParser(morechannels, 50)) {
+               for (ChannelsNameParser.ChannelName cc : new ChannelsNameParser(morechannels, 50)) {
                   cc.customdata = "dchannel";
                   this.channelNameTranslate.put(cc.name, cc);
                   this.leaveChannels.add(cc.name);
@@ -142,7 +141,7 @@ public class ChatNG implements ServerListener, ChatNGMBean {
          case STATUS:
             String controlName = fuc.getParameter("ochannel");
             if (controlName != null) {
-               for(int i = 0; i < 2; ++i) {
+               for (int i = 0; i < 2; i++) {
                   String controlNameI = controlName + i;
                   this.nonPublicChannels.put(controlNameI.toLowerCase(), new IC_BotControlRoom.Factory());
                   this.leaveChannels.add(controlNameI);
@@ -153,11 +152,11 @@ public class ChatNG implements ServerListener, ChatNGMBean {
          case READYROOM:
             this.setChannelToEnter(fuc.getParameter(UserContextMini.DATATYPE.STARTCHANNEL));
 
-            for(String n : this.readyRoomStateChannels) {
+            for (String n : this.readyRoomStateChannels) {
                this.server.sendJoin(n);
             }
 
-            for(String c : this.leaveChannels) {
+            for (String c : this.leaveChannels) {
                this.server.sendPart(c);
             }
 
@@ -237,12 +236,12 @@ public class ChatNG implements ServerListener, ChatNGMBean {
          this.setChannelToEnter(this.uc.getParameter(UserContextMini.DATATYPE.STARTCHANNEL));
          int cc = 0;
 
-         for(String n : this.readyRoomStateChannels) {
+         for (String n : this.readyRoomStateChannels) {
             this.bus.publish(new DelayEvent(new JoinChannelEvent(n), 10 + cc, TimeUnit.SECONDS));
-            ++cc;
+            cc++;
          }
       } else if (this.nonPublicChannels.containsKey(name.toLowerCase())) {
-         ICFactory<? extends IrcChannel> factory = (ICFactory)this.nonPublicChannels.get(name.toLowerCase());
+         ICFactory<? extends IrcChannel> factory = (ICFactory<? extends IrcChannel>)this.nonPublicChannels.get(name.toLowerCase());
          ic = factory.newInstance(this, name);
       } else {
          ChannelsNameParser.ChannelName cnt = (ChannelsNameParser.ChannelName)this.channelNameTranslate.get(name.toLowerCase());
@@ -367,7 +366,7 @@ public class ChatNG implements ServerListener, ChatNGMBean {
    public Map<String, String> getKnownUsers() {
       TreeMap<String, String> ret = new TreeMap();
 
-      for(ChatUser cu : this.knownUsers.values()) {
+      for (ChatUser cu : this.knownUsers.values()) {
          ret.put(cu.nick, cu.toString());
       }
 
@@ -382,7 +381,7 @@ public class ChatNG implements ServerListener, ChatNGMBean {
    public Map<String, String> getChannels() {
       HashMap<String, String> ret = new HashMap();
 
-      for(Entry<String, IrcChannel> e : this.joinedChannels.entrySet()) {
+      for (Entry<String, IrcChannel> e : this.joinedChannels.entrySet()) {
          ret.put(e.getKey(), ((IrcChannel)e.getValue()).getClass().getSimpleName());
       }
 

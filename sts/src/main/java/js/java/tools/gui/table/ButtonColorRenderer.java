@@ -23,7 +23,6 @@ public class ButtonColorRenderer extends JComponent implements TableCellRenderer
    protected EventListenerList buttonPressedList = new EventListenerList();
 
    public ButtonColorRenderer() {
-      super();
       this.setLabel(this.s);
    }
 
@@ -100,7 +99,7 @@ public class ButtonColorRenderer extends JComponent implements TableCellRenderer
    protected void fireEditingStopped() {
       Object[] listeners = this.listenerList.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == CellEditorListener.class) {
             ((CellEditorListener)listeners[i + 1]).editingStopped(new ChangeEvent(this));
          }
@@ -110,7 +109,7 @@ public class ButtonColorRenderer extends JComponent implements TableCellRenderer
    protected void fireEditingCanceled() {
       Object[] listeners = this.listenerList.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == CellEditorListener.class) {
             ((CellEditorListener)listeners[i + 1]).editingCanceled(new ChangeEvent(this));
          }
@@ -162,7 +161,7 @@ public class ButtonColorRenderer extends JComponent implements TableCellRenderer
    protected void fireButtonPressed(ButtonColorText f) {
       Object[] listeners = this.buttonPressedList.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == ButtonPressedListener.class) {
             ((ButtonPressedListener)listeners[i + 1]).clicked(new ChangeEvent(f));
          }

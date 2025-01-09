@@ -44,7 +44,7 @@ public enum OperatingSystem {
    }
 
    public static final OperatingSystem getCurrent() {
-      for(OperatingSystem os : values()) {
+      for (OperatingSystem os : values()) {
          if (os.isCurrent()) {
             return os;
          }

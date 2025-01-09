@@ -13,13 +13,11 @@ public class enrtoken extends inserttoken {
    private final String enrname;
 
    public enrtoken(element _element, String e) {
-      super();
       this.element = _element;
       this.enrname = e;
    }
 
    public enrtoken(element _element, String _bgcolor, String e) {
-      super();
       this.element = _element;
       this.bgcolor = _bgcolor;
       this.enrname = e;

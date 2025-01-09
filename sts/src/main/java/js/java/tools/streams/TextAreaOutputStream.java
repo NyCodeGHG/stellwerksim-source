@@ -20,7 +20,6 @@ public class TextAreaOutputStream extends OutputStream implements ActionListener
    private int oldLen = 0;
 
    private TextAreaOutputStream(JTextArea textArea, OutputStream old) {
-      super();
       this.outWriter = textArea;
       this.old = old;
       DefaultCaret caret = (DefaultCaret)this.outWriter.getCaret();

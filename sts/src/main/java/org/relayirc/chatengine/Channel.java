@@ -29,7 +29,6 @@ public class Channel implements IChatObject, Serializable {
    private transient Channel._ChannelMux _mux = new Channel._ChannelMux();
 
    public Channel(String name) {
-      super();
       this._name = name;
       this._propChangeSupport = new PropertyChangeSupport(this);
    }
@@ -51,7 +50,7 @@ public class Channel implements IChatObject, Serializable {
    }
 
    private synchronized void notifyListeners(Channel._ChannelEventNotifier notifier) {
-      for(int i = 0; i < this._listeners.size(); ++i) {
+      for (int i = 0; i < this._listeners.size(); i++) {
          ChannelListener listener = (ChannelListener)this._listeners.elementAt(i);
          notifier.notify(listener);
       }
@@ -215,7 +214,7 @@ public class Channel implements IChatObject, Serializable {
                if (this.isConnected()) {
                   this._numDroppedMessages = 0;
 
-                  for(int i = 0; i < len; ++i) {
+                  for (int i = 0; i < len; i++) {
                      this.sendPrivMsgNoBuffer((String)this._unsentMessagesBuffer.firstElement());
                      if (!this.isConnected()) {
                         break;
@@ -250,7 +249,7 @@ public class Channel implements IChatObject, Serializable {
    public void sendMessage(String message) {
       StringTokenizer lines = new StringTokenizer(message, "\n", true);
 
-      while(lines.hasMoreTokens()) {
+      while (lines.hasMoreTokens()) {
          String token = lines.nextToken();
          if (token.equals("\n")) {
             this.sendPrivMsg(this._messageLineBuffer.toString());
@@ -282,9 +281,9 @@ public class Channel implements IChatObject, Serializable {
 
          this._unsentMessagesBuffer.addElement(str);
          if (this._maxNumBufferedUnsentMessages > 0) {
-            while(this._unsentMessagesBuffer.size() > this._maxNumBufferedUnsentMessages) {
+            while (this._unsentMessagesBuffer.size() > this._maxNumBufferedUnsentMessages) {
                this._unsentMessagesBuffer.removeElementAt(0);
-               ++this._numDroppedMessages;
+               this._numDroppedMessages++;
             }
          }
       }
@@ -304,7 +303,6 @@ public class Channel implements IChatObject, Serializable {
 
    private class _ChannelMux extends IRCConnectionAdapter {
       private _ChannelMux() {
-         super();
       }
 
       @Override

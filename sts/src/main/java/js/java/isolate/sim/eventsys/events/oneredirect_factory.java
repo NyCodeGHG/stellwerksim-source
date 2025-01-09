@@ -6,10 +6,6 @@ import js.java.isolate.sim.eventsys.eventFactory;
 import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 
 public class oneredirect_factory extends eventFactory {
-   public oneredirect_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Eine Umleitung";

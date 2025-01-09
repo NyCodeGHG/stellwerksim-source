@@ -9,7 +9,6 @@ public class DesktopListener implements ComponentListener, ActionListener {
    private DesktopMediator desktopMediator;
 
    public DesktopListener(DesktopMediator desktopMediator) {
-      super();
       this.desktopMediator = desktopMediator;
    }
 

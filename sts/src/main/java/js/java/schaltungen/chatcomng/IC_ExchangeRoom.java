@@ -14,10 +14,6 @@ public class IC_ExchangeRoom extends IrcChannel {
    }
 
    public static class Factory implements ICFactory<IC_ExchangeRoom> {
-      public Factory() {
-         super();
-      }
-
       public IC_ExchangeRoom newInstance(ChatNG chat, String name) {
          return new IC_ExchangeRoom(chat, name);
       }

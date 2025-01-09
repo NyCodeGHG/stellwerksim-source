@@ -10,7 +10,6 @@ public abstract class funkAuftragBase {
    private final LinkedList<funkAuftragBase.funkValueItem> items = new LinkedList();
 
    protected funkAuftragBase(String t, zugUndPlanPanel.funkAdapter a) {
-      super();
       this.titel = t;
       this.my_main = a;
    }
@@ -49,14 +48,12 @@ public abstract class funkAuftragBase {
       public final String iconName;
 
       funkValueItem(String text, int id) {
-         super();
          this.text = text;
          this.id = id;
          this.iconName = null;
       }
 
       funkValueItem(String text, int id, String iconName) {
-         super();
          this.text = text;
          this.id = id;
          this.iconName = iconName;

@@ -123,7 +123,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       boolean notallmarkers = false;
 
       label382:
-      for(int i = 0; i < this.tmarker.length; ++i) {
+      for (int i = 0; i < this.tmarker.length; i++) {
          char c = (char)(65 + i);
          this.markerWarn[i].clearWarning();
          dataFailures markerf = null;
@@ -182,7 +182,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
             int ab = this.getAb();
             boolean meseen = false;
 
-            for(bahnhof b : this.my_main.getBhfs()) {
+            for (bahnhof b : this.my_main.getBhfs()) {
                if (b != this.my_parent) {
                   int min = b.getMinAn(i);
                   int max = b.getMaxAb(i);
@@ -217,22 +217,22 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
 
             try {
                String flag = this.flags.getText();
-               flagdata fd = new flagdata(flag);
-               hasEKF = fd.hasFlag('E') || fd.hasFlag('K') || fd.hasFlag('F');
+               flagdata fdx = new flagdata(flag);
+               hasEKF = fdx.hasFlag('E') || fdx.hasFlag('K') || fdx.hasFlag('F');
             } catch (Exception var22) {
             }
 
             Iterator var63 = this.my_parent.getHalte().iterator();
 
-            while(true) {
-               bahnhofHalt b;
-               while(true) {
+            while (true) {
+               bahnhofHalt bx;
+               while (true) {
                   if (!var63.hasNext()) {
                      continue label382;
                   }
 
-                  b = (bahnhofHalt)var63.next();
-                  if (b != this && b.hasMarker(i) && b.gleisCB.getSelectedItem() != null) {
+                  bx = (bahnhofHalt)var63.next();
+                  if (bx != this && bx.hasMarker(i) && bx.gleisCB.getSelectedItem() != null) {
                      if (!hasEKF) {
                         break;
                      }
@@ -240,9 +240,9 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
                      boolean BhasEKF = false;
 
                      try {
-                        String flag = b.flags.getText();
-                        flagdata fd = new flagdata(flag);
-                        BhasEKF = fd.hasFlag('E') || fd.hasFlag('K') || fd.hasFlag('F');
+                        String flag = bx.flags.getText();
+                        flagdata fdx = new flagdata(flag);
+                        BhasEKF = fdx.hasFlag('E') || fdx.hasFlag('K') || fdx.hasFlag('F');
                      } catch (Exception var21) {
                      }
 
@@ -252,32 +252,32 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
                   }
                }
 
-               if (an >= b.getAn() && an <= b.getAb()) {
-                  dataFailures f = new dataFailures(this.ankunftWarn, "Ankunft Zeitkonflikt Gleis " + b.gleisCB.getSelectedItem().toString());
+               if (an >= bx.getAn() && an <= bx.getAb()) {
+                  dataFailures f = new dataFailures(this.ankunftWarn, "Ankunft Zeitkonflikt Gleis " + bx.gleisCB.getSelectedItem().toString());
                   l.add(f);
                }
 
-               if (ab >= b.getAn() && ab <= b.getAb()) {
-                  dataFailures f = new dataFailures(this.abfahrtWarn, "Abfahrt Zeitkonflikt Gleis " + b.gleisCB.getSelectedItem().toString());
+               if (ab >= bx.getAn() && ab <= bx.getAb()) {
+                  dataFailures f = new dataFailures(this.abfahrtWarn, "Abfahrt Zeitkonflikt Gleis " + bx.gleisCB.getSelectedItem().toString());
                   l.add(f);
                }
             }
          }
       }
 
-      boolean justadded = false;
+      boolean justaddedx = false;
 
       try {
          FPEaidData a = this.my_parent.getAidData();
          String flag = this.flags.getText();
-         flagdata fd = new flagdata(flag);
-         if ((fd.hasFlag('E') || fd.hasFlag('K') || fd.hasFlag('F')) && notallmarkers && l != null) {
+         flagdata fdx = new flagdata(flag);
+         if ((fdx.hasFlag('E') || fdx.hasFlag('K') || fdx.hasFlag('F')) && notallmarkers && l != null) {
             ausf = new dataFailures(this.flagsWarn, "E/K/F nur mit allen Themenmarkern");
             l.add(ausf);
             ausf.addSolution(new tmSolver("Alle Marker setzen", this.tmarker));
          }
 
-         if (!fd.hasFlag('E') && !fd.hasFlag('K')) {
+         if (!fdx.hasFlag('E') && !fdx.hasFlag('K')) {
             if ((this.ausfahrtCB.getSelectedItem() == null || ((enritem)this.ausfahrtCB.getSelectedItem()).enr == 0)
                && this.my_parent.ausfahrtenTM.containsKey('A')
                && ((enritem)this.my_parent.ausfahrtenTM.get('A')).enr != 0) {
@@ -292,49 +292,49 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
                   ausf.addSolution(new einausSolver("Ausfahrt anpassen auf: " + a.getENR0().text, this.ausfahrtCB, a.getENR0()));
                }
             } else {
-               for(int i = 0; i < this.tmarker.length; ++i) {
-                  char c = (char)(65 + i);
-                  this.my_parent.ausfahrtenTM.put(c, a.getENR0());
+               for (int i = 0; i < this.tmarker.length; i++) {
+                  char cx = (char)(65 + i);
+                  this.my_parent.ausfahrtenTM.put(cx, a.getENR0());
                }
             }
 
-            for(int i = 0; i < this.tmarker.length; ++i) {
-               char c = (char)(65 + i);
-               this.my_main.hasEKTM.put(c, this.my_parent);
+            for (int i = 0; i < this.tmarker.length; i++) {
+               char cx = (char)(65 + i);
+               this.my_main.hasEKTM.put(cx, this.my_parent);
             }
 
-            justadded = true;
+            justaddedx = true;
          }
 
          if (l != null
             && (
-               fd.hasFlag('E') && (fd.hasFlag('K') || fd.hasFlag('F'))
-                  || fd.hasFlag('K') && (fd.hasFlag('E') || fd.hasFlag('F'))
-                  || fd.hasFlag('F') && (fd.hasFlag('K') || fd.hasFlag('E'))
+               fdx.hasFlag('E') && (fdx.hasFlag('K') || fdx.hasFlag('F'))
+                  || fdx.hasFlag('K') && (fdx.hasFlag('E') || fdx.hasFlag('F'))
+                  || fdx.hasFlag('F') && (fdx.hasFlag('K') || fdx.hasFlag('E'))
             )) {
             ausf = new dataFailures(this.flagsWarn, "E/K/F nur einmal pro Halt");
             l.add(ausf);
          }
 
-         if (fd.hasFlag('E')) {
-            if (l != null && this.my_main.hadEKF.containsKey(fd.getLongFlag('E')) && this.my_main.hadEKF.get(fd.getLongFlag('E')) != this) {
-               ausf = new dataFailures(this.flagsWarn, "Flag " + fd.getLongFlag('E') + " nur 1x pro Fahrplan erlaubt");
+         if (fdx.hasFlag('E')) {
+            if (l != null && this.my_main.hadEKF.containsKey(fdx.getLongFlag('E')) && this.my_main.hadEKF.get(fdx.getLongFlag('E')) != this) {
+               ausf = new dataFailures(this.flagsWarn, "Flag " + fdx.getLongFlag('E') + " nur 1x pro Fahrplan erlaubt");
                l.add(ausf);
             }
 
             if (l == null) {
-               this.my_main.hadEKF.put(fd.getLongFlag('E'), this);
+               this.my_main.hadEKF.put(fdx.getLongFlag('E'), this);
             }
          }
 
-         if (fd.hasFlag('K')) {
-            if (l != null && this.my_main.hadEKF.containsKey(fd.getLongFlag('K')) && this.my_main.hadEKF.get(fd.getLongFlag('K')) != this) {
-               ausf = new dataFailures(this.flagsWarn, "Flag " + fd.getLongFlag('K') + " nur 1x pro Fahrplan erlaubt");
+         if (fdx.hasFlag('K')) {
+            if (l != null && this.my_main.hadEKF.containsKey(fdx.getLongFlag('K')) && this.my_main.hadEKF.get(fdx.getLongFlag('K')) != this) {
+               ausf = new dataFailures(this.flagsWarn, "Flag " + fdx.getLongFlag('K') + " nur 1x pro Fahrplan erlaubt");
                l.add(ausf);
             }
 
             if (l == null) {
-               this.my_main.hadEKF.put(fd.getLongFlag('K'), this);
+               this.my_main.hadEKF.put(fdx.getLongFlag('K'), this);
             }
          }
       } catch (Exception var20) {
@@ -344,7 +344,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
          }
       }
 
-      if (this.my_main.hasEKTM.containsKey('A') && !justadded && l != null) {
+      if (this.my_main.hasEKTM.containsKey('A') && !justaddedx && l != null) {
          dataFailures f = new dataFailures(this.gleisWarn, "Fahrplan trotz E/K-Flag");
          l.add(f);
       }
@@ -471,7 +471,6 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
    }
 
    bahnhofHalt(fahrplaneditor m, bahnhof parent) {
-      super();
       this.my_main = m;
       this.my_parent = parent;
       this.setLayout(new planLayoutManager());
@@ -495,7 +494,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       this.gleisCB = new JComboBox();
       this.gleisCB.setFocusable(keysupport);
 
-      for(gleisData gleis : a.getGleise()) {
+      for (gleisData gleis : a.getGleise()) {
          this.gleisCB.addItem(gleis);
       }
 
@@ -573,7 +572,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       this.einfahrtCB = new JComboBox();
       this.einfahrtCB.setFocusable(keysupport);
 
-      for(enritem e : a.getEinfahrten()) {
+      for (enritem e : a.getEinfahrten()) {
          this.einfahrtCB.addItem(e);
       }
 
@@ -592,7 +591,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       this.ausfahrtCB = new JComboBox();
       this.ausfahrtCB.setFocusable(keysupport);
 
-      for(enritem e : a.getAusfahrten()) {
+      for (enritem e : a.getAusfahrten()) {
          this.ausfahrtCB.addItem(e);
       }
 
@@ -658,7 +657,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       this.add(this.hinweis);
       TMbuttonGroup bg = new TMbuttonGroup();
 
-      for(int i = 0; i < this.tmarker.length; ++i) {
+      for (int i = 0; i < this.tmarker.length; i++) {
          this.markerWarn[i] = this.newWarn();
          this.tmarker[i] = new markerBox();
          this.tmarker[i].setFocusPainted(false);
@@ -698,7 +697,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       FPEaidData a = this.my_parent.getAidData();
       boolean foundgl = false;
 
-      for(gleisData gleis : a.getGleise()) {
+      for (gleisData gleis : a.getGleise()) {
          if (gleis.name.equalsIgnoreCase(p.gleis)) {
             this.gleisCB.setSelectedItem(gleis);
             this.gleisCB.setToolTipText(gleis.name);
@@ -714,16 +713,16 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       enritem ausitem = null;
       enritem einitem = null;
 
-      for(enritem e : a.getEinfahrten()) {
+      for (enritem e : a.getEinfahrten()) {
          if (e.enr == p.ein_enr) {
             this.einfahrtCB.setSelectedItem(e);
             break;
          }
       }
 
-      for(enritem e : a.getAusfahrten()) {
-         if (e.enr == p.aus_enr) {
-            this.ausfahrtCB.setSelectedItem(e);
+      for (enritem ex : a.getAusfahrten()) {
+         if (ex.enr == p.aus_enr) {
+            this.ausfahrtCB.setSelectedItem(ex);
             break;
          }
       }
@@ -733,7 +732,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       this.hinweis.setText(p.hinweise);
       this.flags.setText(p.flags.toString());
 
-      for(int i = 0; i < this.tmarker.length; ++i) {
+      for (int i = 0; i < this.tmarker.length; i++) {
          boolean v = p.thematag.indexOf((char)(65 + i)) >= 0;
          this.tmarker[i].setSelected(v);
          char var12 = (char)(65 + i);
@@ -781,7 +780,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
    private void action_elementTM() {
       boolean isa = false;
 
-      for(int i = 1; i < this.tmarker.length; ++i) {
+      for (int i = 1; i < this.tmarker.length; i++) {
          isa = isa || this.tmarker[i].isSelected();
       }
 
@@ -866,11 +865,11 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
    private void action_a2zButton() {
       boolean oneUnselected = false;
 
-      for(markerBox tmarker1 : this.tmarker) {
+      for (markerBox tmarker1 : this.tmarker) {
          oneUnselected |= !tmarker1.isSelected();
       }
 
-      for(markerBox tmarker1 : this.tmarker) {
+      for (markerBox tmarker1 : this.tmarker) {
          tmarker1.setSelected(oneUnselected);
       }
 
@@ -959,7 +958,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       data.append('&');
       String thematag = "";
 
-      for(int i = 0; i < this.tmarker.length; ++i) {
+      for (int i = 0; i < this.tmarker.length; i++) {
          if (this.tmarker[i].isSelected()) {
             char c = (char)(65 + i);
             thematag = thematag + c;
@@ -1003,7 +1002,7 @@ class bahnhofHalt extends JPanel implements xmllistener, Comparable {
       }
 
       if (r == 0) {
-         for(int i = 0; i < this.tmarker.length; ++i) {
+         for (int i = 0; i < this.tmarker.length; i++) {
             if (this.tmarker[i].isSelected() != b.tmarker[i].isSelected()) {
                if (this.tmarker[i].isSelected()) {
                   r = -1;

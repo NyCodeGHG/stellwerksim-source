@@ -102,7 +102,7 @@ public class alarmClock extends JDialog {
       if (!this.setting) {
          alarmItem sel = (alarmItem)this.alarmList.getSelectedValue();
          if (sel != null) {
-            sel.update(this.hourSpinner.getValue(), this.minuteSpinner.getValue(), this.alarmText.getText());
+            sel.update((Integer)this.hourSpinner.getValue(), (Integer)this.minuteSpinner.getValue(), this.alarmText.getText());
             this.alarmList.repaint();
          }
       }

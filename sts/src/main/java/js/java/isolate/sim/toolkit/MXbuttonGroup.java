@@ -7,10 +7,6 @@ import javax.swing.ButtonModel;
 public class MXbuttonGroup extends ButtonGroup {
    ButtonModel selection = null;
 
-   public MXbuttonGroup() {
-      super();
-   }
-
    public void add(AbstractButton b) {
       if (b != null) {
          this.buttons.addElement(b);

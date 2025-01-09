@@ -44,7 +44,6 @@ public class RestartRequiredMessageWindow extends JFrame implements ActionListen
    }
 
    public RestartRequiredMessageWindow(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.startTime = System.currentTimeMillis();
       this.initComponents();

@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class zielknopftest2 implements dtest {
-   public zielknopftest2() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Zielknopf aus FS zum Ziel";
@@ -26,17 +22,17 @@ public class zielknopftest2 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_SIGNAL_ZIELKNOPF, gleis.ELEMENT_AUSFAHRT_ZIELKNOPF});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          boolean anyFound = false;
          Iterator<fahrstrasse> fit = glb.fahrstrassenIterator();
 
-         while(fit.hasNext()) {
+         while (fit.hasNext()) {
             fahrstrasse fs = (fahrstrasse)fit.next();
             if (fs.getStopEnr() == gl.getENR()) {
                boolean found = false;
 
-               for(gleis g : fs) {
+               for (gleis g : fs) {
                   if (found && gleis.ALLE_WEICHEN.matches(g.getElement())) {
                      dtestresult d = new dtestresult(2, "Weiche nach Zielknopf " + gl.getENR() + ".", gl, g);
                      r.add(d);

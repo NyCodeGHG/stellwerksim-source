@@ -74,7 +74,7 @@ public class stellwerk_players
 
       this.game_time.end();
 
-      for(oneInstance i : this.instances) {
+      for (oneInstance i : this.instances) {
          i.clean();
       }
    }
@@ -102,7 +102,7 @@ public class stellwerk_players
       this.add(topPan, "North");
       topPan.setLayout(new GridLayout(0, 1));
 
-      for(int i = 0; i < 2; ++i) {
+      for (int i = 0; i < 2; i++) {
          this.instances[i] = new oneInstance(this, uc, i);
          topPan.add(this.instances[i]);
          JComponent pp = this.instances[i].getPlayerPanel();
@@ -179,7 +179,7 @@ public class stellwerk_players
 
    @Override
    public void setProgress(int p) {
-      for(int i = 0; i < 2; ++i) {
+      for (int i = 0; i < 2; i++) {
          this.instances[i].setProgress(p);
       }
    }
@@ -224,7 +224,7 @@ public class stellwerk_players
       if (this.viewPanel.getSelectedIndex() == this.lastSelTab && e.getClickCount() == 2) {
          int instanz = 0;
 
-         for(int i = 0; i < 2; ++i) {
+         for (int i = 0; i < 2; i++) {
             JPanel p = (JPanel)this.viewPanel.getSelectedComponent();
             JComponent comp = (JComponent)p.getComponent(0);
             if (this.instances[i].getPlayerPanel() == comp) {

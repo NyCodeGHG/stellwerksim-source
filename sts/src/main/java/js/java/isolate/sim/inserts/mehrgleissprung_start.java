@@ -43,7 +43,7 @@ public class mehrgleissprung_start extends insert {
       LinkedList<inserttoken> l = new LinkedList();
       String bgcolor = "bgcolor";
 
-      for(int i = 0; i < this.anzahl; ++i) {
+      for (int i = 0; i < this.anzahl; i++) {
          bgcolortoken bt = new bgcolortoken(bgcolor);
          l.add(bt);
          gleistoken gt = new enrgleistoken(gleis.ELEMENT_SPRUNG, gleisElements.RICHTUNG.left, "enr" + i);
@@ -114,7 +114,7 @@ public class mehrgleissprung_start extends insert {
    protected void initVariables(boolean leftright) {
       BitSet bs = this.glbModel.getENRbitset();
 
-      for(int i = 0; i < this.anzahl; ++i) {
+      for (int i = 0; i < this.anzahl; i++) {
          int e = bs.nextClearBit(1);
          bs.set(e);
          this.storage.put("enr" + i, e + "");

@@ -62,7 +62,7 @@ public class displayBarR extends basePanel implements SessionClose {
       this.triggerScrollPane.setViewport(new SmoothViewport(this.triggerPanel));
       this.triggerPanel.setLayout(new GridLayout(0, 5) {
          public void layoutContainer(Container parent) {
-            synchronized(parent.getTreeLock()) {
+            synchronized (parent.getTreeLock()) {
                Insets insets = parent.getInsets();
                int ncomponents = parent.getComponentCount();
                int nrows = this.getRows();
@@ -82,10 +82,10 @@ public class displayBarR extends basePanel implements SessionClose {
                   if (ltr) {
                      int c = 0;
 
-                     for(int x = insets.left; c < ncols; x += w + this.getHgap()) {
+                     for (int x = insets.left; c < ncols; x += w + this.getHgap()) {
                         int r = 0;
 
-                        for(int y = insets.top; r < nrows; y += h + this.getVgap()) {
+                        for (int y = insets.top; r < nrows; y += h + this.getVgap()) {
                            int i = r * ncols + c;
                            if (i < ncomponents) {
                               Dimension d = parent.getComponent(i).getPreferredSize();
@@ -109,10 +109,10 @@ public class displayBarR extends basePanel implements SessionClose {
                               }
                            }
 
-                           ++r;
+                           r++;
                         }
 
-                        ++c;
+                        c++;
                      }
                   } else {
                      super.layoutContainer(parent);
@@ -155,10 +155,10 @@ public class displayBarR extends basePanel implements SessionClose {
          if (this.currentDisplay != null && l != null) {
             this.displayNameField.setText(this.currentDisplay.getSWWert());
 
-            for(displayBarR.gleisLine gl : this.trigger) {
+            for (displayBarR.gleisLine gl : this.trigger) {
                connector d = null;
 
-               for(connector c : l) {
+               for (connector c : l) {
                   try {
                      if (c.getSWwert().equalsIgnoreCase(gl.gl.getSWWert())) {
                         d = c;
@@ -175,7 +175,7 @@ public class displayBarR extends basePanel implements SessionClose {
          } else {
             this.displayNameField.setText("");
 
-            for(displayBarR.gleisLine gl : this.trigger) {
+            for (displayBarR.gleisLine gl : this.trigger) {
                gl.setConnector(null);
                gl.setEnabled(false);
             }
@@ -184,7 +184,7 @@ public class displayBarR extends basePanel implements SessionClose {
          try {
             String sw = this.glbControl.getSelectedGleis().getSWWert();
 
-            for(displayBarR.gleisLine gl : this.trigger) {
+            for (displayBarR.gleisLine gl : this.trigger) {
                if (gl.gl.getSWWert().equals(sw)) {
                   gl.element.scrollRectToVisible(new Rectangle(0, 0, gl.element.getWidth(), gl.element.getHeight()));
                   gl.britzel();
@@ -223,7 +223,7 @@ public class displayBarR extends basePanel implements SessionClose {
    }
 
    private void updateOthers(displayBarR.gleisLine othergl) {
-      for(displayBarR.gleisLine gl : this.trigger) {
+      for (displayBarR.gleisLine gl : this.trigger) {
          if (gl != othergl && othergl.swwert.getText().equalsIgnoreCase(gl.swwert.getText())) {
             gl.setConnector(othergl.set);
          }
@@ -234,15 +234,15 @@ public class displayBarR extends basePanel implements SessionClose {
       this.triggerPanel.removeAll();
       this.trigger.clear();
 
-      for(gleis gl : this.glbControl.getModel()) {
+      for (gleis gl : this.glbControl.getModel()) {
          if (gl.isDisplayTriggerSelectable()) {
             this.trigger.add(new displayBarR.gleisLine(gl));
          }
       }
 
-      for(displayBarR.gleisLine gl : this.trigger) {
-         gl.setEnabled(false);
-         gl.add(this.triggerPanel);
+      for (displayBarR.gleisLine glx : this.trigger) {
+         glx.setEnabled(false);
+         glx.add(this.triggerPanel);
       }
 
       this.triggerScrollPane.revalidate();
@@ -299,7 +299,6 @@ public class displayBarR extends basePanel implements SessionClose {
       final Timer fxTimer = new Timer(800, this);
 
       gleisLine(gleis g) {
-         super();
          this.gl = g;
          this.element = new JLabel(gleisTypContainer.getInstance().getTypElementName(this.gl));
          this.element.setHorizontalAlignment(0);

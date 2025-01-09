@@ -27,7 +27,6 @@ class saver extends SwingWorker<String, Integer> {
    }
 
    saver(fahrplaneditor m, String _url, StringBuffer d) {
-      super();
       this.my_main = m;
       this.url = _url;
       this.data = d;
@@ -36,7 +35,7 @@ class saver extends SwingWorker<String, Integer> {
    public void dump() {
       String[] s = this.data.toString().split("&");
 
-      for(String t : s) {
+      for (String t : s) {
          System.out.println(URLDecoder.decode(t));
       }
    }
@@ -58,7 +57,7 @@ class saver extends SwingWorker<String, Integer> {
    }
 
    protected void process(List<Integer> chunks) {
-      for(int i : chunks) {
+      for (int i : chunks) {
          this.my_main.setLoad(i, 100);
       }
    }
@@ -116,7 +115,7 @@ class saver extends SwingWorker<String, Integer> {
             this.publish(new Integer[]{80});
 
             String str;
-            while(null != (str = input.readLine())) {
+            while (null != (str = input.readLine())) {
                System.out.println(str);
                if (str.equalsIgnoreCase("[DONE]")) {
                   this.success = true;

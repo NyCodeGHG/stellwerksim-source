@@ -15,7 +15,7 @@ class ping_bueVerwaltung extends pingBase {
    public boolean ping(gleis gl) {
       boolean ret = false;
       if (gl.fdata.stellung == gleisElements.ST_BAHNÜBERGANG_GESCHLOSSEN) {
-         ++gl.blinkcc;
+         gl.blinkcc++;
          if ((double)gl.blinkcc > 8.0 + 30.0 * Math.random()) {
             if (gl.fdata.status == 4) {
                gl.getFluentData().setStatus(0);

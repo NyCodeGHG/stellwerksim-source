@@ -4,7 +4,6 @@ class tl_setvmax implements tl_base {
    private final double vmax;
 
    tl_setvmax(double v) {
-      super();
       this.vmax = v;
    }
 

@@ -9,10 +9,6 @@ public class gecGleisLine extends gecSelect {
    private gleis startGleis;
    private boolean drawOver = true;
 
-   public gecGleisLine() {
-      super();
-   }
-
    public void setDrawOver(boolean o) {
       this.drawOver = o;
    }

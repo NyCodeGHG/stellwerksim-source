@@ -43,7 +43,6 @@ class bahnhof extends JPanel implements Comparable {
    private JComboBox regionCB;
 
    bahnhof(fahrplaneditor m, FPEaidData a) {
-      super();
       this.my_main = m;
       this.aid = a;
       this.duringInit = true;
@@ -53,7 +52,7 @@ class bahnhof extends JPanel implements Comparable {
       this.bahnhofCB.setSelectedItem(null);
       this.regionCB.setSelectedItem(null);
 
-      for(String r : this.my_main.regionen) {
+      for (String r : this.my_main.regionen) {
          this.regionCB.addItem(r);
       }
 
@@ -97,7 +96,7 @@ class bahnhof extends JPanel implements Comparable {
 
    void addLine(planLine p) {
       bahnhofHalt b = new bahnhofHalt(this.my_main, this, p);
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          this.halte.add(b);
       }
 
@@ -128,8 +127,8 @@ class bahnhof extends JPanel implements Comparable {
 
    public void sort() {
       TreeSet<bahnhofHalt> sort = new TreeSet();
-      synchronized(this.halte) {
-         for(bahnhofHalt b : this.halte) {
+      synchronized (this.halte) {
+         for (bahnhofHalt b : this.halte) {
             if (b != this.lastadded) {
                sort.add(b);
             }
@@ -138,9 +137,9 @@ class bahnhof extends JPanel implements Comparable {
          this.halte.clear();
          this.haltePanel.removeAll();
 
-         for(bahnhofHalt b : sort) {
-            this.halte.add(b);
-            this.haltePanel.add(b.getThis());
+         for (bahnhofHalt bx : sort) {
+            this.halte.add(bx);
+            this.haltePanel.add(bx.getThis());
          }
 
          if (this.lastadded != null) {
@@ -165,7 +164,7 @@ class bahnhof extends JPanel implements Comparable {
             protected void done() {
                try {
                   bahnhofHalt b = new bahnhofHalt(bahnhof.this.my_main, bahnhof.this);
-                  synchronized(bahnhof.this.halte) {
+                  synchronized (bahnhof.this.halte) {
                      bahnhof.this.halte.add(b);
                   }
 
@@ -189,7 +188,7 @@ class bahnhof extends JPanel implements Comparable {
    public void entriesChanged(bahnhofHalt caller, boolean remove) {
       if (this.aid != null && this.aid.isErlaubt()) {
          if (remove) {
-            synchronized(this.halte) {
+            synchronized (this.halte) {
                this.halte.remove(caller);
             }
 
@@ -226,8 +225,8 @@ class bahnhof extends JPanel implements Comparable {
    }
 
    public void removed() {
-      synchronized(this.halte) {
-         for(bahnhofHalt b : this.halte) {
+      synchronized (this.halte) {
+         for (bahnhofHalt b : this.halte) {
             b.removed();
          }
       }
@@ -237,18 +236,18 @@ class bahnhof extends JPanel implements Comparable {
    }
 
    public int saveData(StringBuffer data, int counter) {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          int i = 0;
 
-         for(bahnhofHalt b : this.halte) {
-            ++i;
+         for (bahnhofHalt b : this.halte) {
+            i++;
             if (this.lastadded != b) {
                data.append(TextHelper.urlEncode("aaid[" + counter + "]"));
                data.append("=");
                data.append(TextHelper.urlEncode(this.aid.getAid() + ""));
                data.append("&");
                b.saveData(data, counter);
-               ++counter;
+               counter++;
             } else {
                System.out.println("Ignored BHF, lastadded, line " + i);
             }
@@ -264,8 +263,8 @@ class bahnhof extends JPanel implements Comparable {
 
    public int getMinAn(int marker) {
       int minan = Integer.MAX_VALUE;
-      synchronized(this.halte) {
-         for(bahnhofHalt b : this.halte) {
+      synchronized (this.halte) {
+         for (bahnhofHalt b : this.halte) {
             if (b != this.lastadded && (marker == -1 || b.hasMarker(marker))) {
                int an = b.getAn();
                minan = Math.min(minan, an);
@@ -282,8 +281,8 @@ class bahnhof extends JPanel implements Comparable {
 
    public int getMaxAb(int marker) {
       int maxab = Integer.MIN_VALUE;
-      synchronized(this.halte) {
-         for(bahnhofHalt b : this.halte) {
+      synchronized (this.halte) {
+         for (bahnhofHalt b : this.halte) {
             if (b != this.lastadded && (marker == -1 || b.hasMarker(marker))) {
                int ab = b.getAb();
                maxab = Math.max(maxab, ab);
@@ -295,7 +294,7 @@ class bahnhof extends JPanel implements Comparable {
    }
 
    public LinkedList<bahnhofHalt> getHalte() {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          return (LinkedList<bahnhofHalt>)this.halte.stream().filter(b -> b != this.lastadded).collect(Collectors.toCollection(LinkedList::new));
       }
    }
@@ -319,7 +318,7 @@ class bahnhof extends JPanel implements Comparable {
    }
 
    public void updateLayout() {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          this.halte.stream().forEach(b -> b.doLayout());
       }
 
@@ -334,15 +333,15 @@ class bahnhof extends JPanel implements Comparable {
       }
 
       TreeSet<bahnhofHalt> sort;
-      synchronized(this.halte) {
-         sort = (TreeSet)this.halte.stream().filter(bx -> bx != this.lastadded).collect(Collectors.toCollection(TreeSet::new));
+      synchronized (this.halte) {
+         sort = (TreeSet<bahnhofHalt>)this.halte.stream().filter(bx -> bx != this.lastadded).collect(Collectors.toCollection(TreeSet::new));
       }
 
       boolean foundEK = false;
       boolean foundEnr0 = false;
       boolean lastEK = false;
 
-      for(bahnhofHalt b : sort) {
+      for (bahnhofHalt b : sort) {
          b.validate(l);
          lastEK = b.hasEK();
          foundEK |= lastEK;
@@ -367,38 +366,38 @@ class bahnhof extends JPanel implements Comparable {
    }
 
    void cleanSaveStatus() {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          this.halte.forEach(b -> b.cleanSaveStatus());
       }
    }
 
    void fadeOff(boolean off) {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          this.halte.stream().forEach(b -> b.fadeOff(off));
       }
    }
 
    void fade2Off(boolean off) {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          this.halte.stream().forEach(b -> b.fade2Off(off));
       }
    }
 
    void fade3Off(boolean off) {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          this.halte.stream().forEach(b -> b.fade3Off(off));
       }
    }
 
    void shiftMinutes(int min) {
-      synchronized(this.halte) {
+      synchronized (this.halte) {
          this.halte.stream().filter(b -> b != this.lastadded).forEach(b -> b.shiftMinutes(min));
       }
    }
 
    void filterMarker(char c) {
-      synchronized(this.halte) {
-         for(bahnhofHalt b : this.halte) {
+      synchronized (this.halte) {
+         for (bahnhofHalt b : this.halte) {
             if (b != this.lastadded) {
                if (c == '*') {
                   b.fadeOff(false);
@@ -503,11 +502,11 @@ class bahnhof extends JPanel implements Comparable {
       if (oldaid != null && !oldaid.isErlaubt()) {
          this.bahnhofCB.addItem(oldaid);
       } else {
-         for(FPEaidData b : this.my_main.aids) {
+         for (FPEaidData b : this.my_main.aids) {
             if (b.getRegion().equalsIgnoreCase((String)this.regionCB.getSelectedItem()) && b.isErlaubt()) {
                boolean canadd = true;
 
-               for(bahnhof bb : this.my_main.getBhfs()) {
+               for (bahnhof bb : this.my_main.getBhfs()) {
                   if (bb != this && bb.getAidData() != null) {
                      canadd &= bb.getAidData().getAid() != b.getAid();
                   }

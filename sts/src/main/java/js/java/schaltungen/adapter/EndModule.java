@@ -8,7 +8,6 @@ public class EndModule {
    public final UserContext uc;
 
    public EndModule(Module modul, UserContext uc, boolean witherror) {
-      super();
       this.modul = modul;
       this.uc = uc;
       this.witherror = witherror;

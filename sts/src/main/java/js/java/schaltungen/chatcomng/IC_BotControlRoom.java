@@ -26,10 +26,6 @@ public class IC_BotControlRoom extends IrcChannel {
    }
 
    public static class Factory implements ICFactory<IC_BotControlRoom> {
-      public Factory() {
-         super();
-      }
-
       public IC_BotControlRoom newInstance(ChatNG chat, String name) {
          return new IC_BotControlRoom(chat, name);
       }

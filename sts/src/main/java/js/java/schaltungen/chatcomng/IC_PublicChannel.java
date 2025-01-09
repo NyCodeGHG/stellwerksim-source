@@ -52,7 +52,7 @@ public class IC_PublicChannel extends IrcChannel {
    public void onJoins(ChannelEvent event) {
       String[] jusers = event.getValue().toString().split(" ");
 
-      for(String u : jusers) {
+      for (String u : jusers) {
          if (u.startsWith("@") || u.startsWith("+") || u.startsWith("%")) {
             u = u.substring(1);
          }

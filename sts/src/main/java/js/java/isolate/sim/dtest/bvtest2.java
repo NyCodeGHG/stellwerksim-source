@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.gleisbildWorker.areaFinder;
 
 public class bvtest2 extends bvtest1 {
-   public bvtest2() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bildverarbeitung 2";

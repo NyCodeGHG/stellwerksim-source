@@ -53,7 +53,7 @@ public class DropDownListButton extends JButton {
    protected void fireItemStateChanged(ItemEvent event) {
       Object[] listeners = this.listenerList.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == ItemListener.class) {
             ((ItemListener)listeners[i + 1]).itemStateChanged(event);
          }
@@ -61,7 +61,6 @@ public class DropDownListButton extends JButton {
    }
 
    public DropDownListButton() {
-      super();
       BasicButtonUI bbui = (BasicButtonUI)this.getUI();
       this.buttonListener = (BasicButtonListener)this.getClientProperty(bbui);
       this.removeMouseListener(this.buttonListener);
@@ -150,7 +149,7 @@ public class DropDownListButton extends JButton {
          if (m instanceof JMenu) {
             JMenu jm = (JMenu)m;
 
-            for(int i = 0; i < jm.getItemCount(); ++i) {
+            for (int i = 0; i < jm.getItemCount(); i++) {
                Component c2 = jm.getItem(i);
                this.prepareMenu(c2, nd);
             }
@@ -166,7 +165,7 @@ public class DropDownListButton extends JButton {
          nd.height = Math.max(this.minsize.height, nd.height);
       }
 
-      for(int i = 0; i < this.popup.getComponentCount(); ++i) {
+      for (int i = 0; i < this.popup.getComponentCount(); i++) {
          Component c = this.popup.getComponent(i);
          this.prepareMenu(c, nd);
       }
@@ -189,7 +188,6 @@ public class DropDownListButton extends JButton {
 
    private class DropDownButtonMouseListener implements MouseListener {
       private DropDownButtonMouseListener() {
-         super();
       }
 
       public void mouseClicked(MouseEvent e) {

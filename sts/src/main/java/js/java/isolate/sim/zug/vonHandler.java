@@ -3,10 +3,6 @@ package js.java.isolate.sim.zug;
 import js.java.tools.ColorText;
 
 class vonHandler extends zugHandler {
-   vonHandler() {
-      super();
-   }
-
    @Override
    protected int compareImpl(ZugColorText ct, frozenZug z, ZugColorText other, frozenZug otherz) {
       if (z.getVon().isEmpty() && !otherz.getVon().isEmpty()) {

@@ -36,10 +36,6 @@ public class scaleHolder {
       "60", "80", "100", "115", "130", "145", "160", "175", "145:115", "130:115", "130:100", "115:100", "100:80", "145:115", "130:115", "130:100", "115:100"
    };
 
-   public scaleHolder() {
-      super();
-   }
-
    Graphics2D createScaledGraphics(Graphics2D _g) {
       Graphics2D g = (Graphics2D)_g.create();
       if (this.xscale != 12.0 || this.yscale != 12.0) {

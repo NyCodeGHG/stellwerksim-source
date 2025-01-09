@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class sprungfarbetest implements dtest {
-   public sprungfarbetest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Sprungfarbe";
@@ -25,7 +21,7 @@ public class sprungfarbetest implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_SPRUNG});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          gleis gl2 = glb.findFirst(new Object[]{gl, gleis.ELEMENT_SPRUNG, gl.getENR()});
          if (gl2 != null && !gl2.getExtendFarbe().equalsIgnoreCase(gl.getExtendFarbe())) {

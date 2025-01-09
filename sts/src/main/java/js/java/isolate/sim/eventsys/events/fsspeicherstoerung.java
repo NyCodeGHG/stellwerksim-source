@@ -31,7 +31,7 @@ public class fsspeicherstoerung extends event {
       this.dauer = e.getIntValue("dauer") + (this.my_main.isRealistic() ? random(5, 30) : 0);
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          gl.registerHook(eventGenerator.T_GLEIS_FSSPEICHER, this);
       }
@@ -65,7 +65,7 @@ public class fsspeicherstoerung extends event {
    public boolean pong() {
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          gl.unregisterHook(eventGenerator.T_GLEIS_FSSPEICHER, this);
       }

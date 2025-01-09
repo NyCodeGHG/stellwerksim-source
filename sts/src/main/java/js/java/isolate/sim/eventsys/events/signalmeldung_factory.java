@@ -3,10 +3,6 @@ package js.java.isolate.sim.eventsys.events;
 import js.java.isolate.sim.eventsys.event;
 
 public class signalmeldung_factory extends signalstoerung_factory {
-   public signalmeldung_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Signalmelderstörung";

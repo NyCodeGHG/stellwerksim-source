@@ -28,7 +28,7 @@ class players_paint_signal extends paint2Base {
       }
 
       boolean kopfgleis = gl.isKopfSignal();
-      switch(gl.getRichtung()) {
+      switch (gl.getRichtung()) {
          case right:
             gl.paintSignal(
                g,

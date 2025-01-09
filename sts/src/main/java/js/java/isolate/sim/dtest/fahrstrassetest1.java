@@ -4,10 +4,6 @@ import java.util.LinkedList;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class fahrstrassetest1 implements dtest {
-   public fahrstrassetest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Fahrstrassen 1";

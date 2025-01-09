@@ -9,7 +9,6 @@ public class cbCallMeIn implements callBehaviour {
    }
 
    public cbCallMeIn(int dauer, boolean shortMessage) {
-      super();
       this.dauer = dauer;
       this.shortMessage = shortMessage;
    }

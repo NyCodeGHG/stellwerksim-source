@@ -9,7 +9,6 @@ public class zugVariables {
    private final ConcurrentHashMap<String, zugVariables.variables> values = new ConcurrentHashMap();
 
    public zugVariables() {
-      super();
       this.values.put("maxrandom_*", new zugVariables.variables(4));
       this.values.put("minstop_*", new zugVariables.variables(0));
       this.values.put("minstopR_*", new zugVariables.variables(30));
@@ -39,7 +38,7 @@ public class zugVariables {
    public Vector getStructure() {
       Vector v = new Vector();
 
-      for(String k : this.values.keySet()) {
+      for (String k : this.values.keySet()) {
          zugVariables.variables vs = (zugVariables.variables)this.values.get(k);
          vs.getStructure(k, v);
       }
@@ -163,11 +162,9 @@ public class zugVariables {
       public boolean isAll = false;
 
       variables() {
-         super();
       }
 
       variables(int d) {
-         super();
          this.value = d;
          this.default_value = d;
       }

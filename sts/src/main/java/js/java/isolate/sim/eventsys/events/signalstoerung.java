@@ -55,7 +55,7 @@ public class signalstoerung extends signalevent {
                if (gl != null) {
                   return this.init(gl.getENR(), e.getIntValue("dauer"));
                }
-            } while(gl != null);
+            } while (gl != null);
 
             return false;
          }

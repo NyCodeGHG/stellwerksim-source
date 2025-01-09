@@ -8,19 +8,15 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 public class LocalAddressFinder {
-   public LocalAddressFinder() {
-      super();
-   }
-
    public InetAddress find(LocalAddressFinder.LAFfilter f) throws SocketException {
       Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
 
-      while(interfaces.hasMoreElements()) {
+      while (interfaces.hasMoreElements()) {
          NetworkInterface current = (NetworkInterface)interfaces.nextElement();
          if (current.isUp() && !current.isLoopback() && !current.isVirtual()) {
             Enumeration<InetAddress> addresses = current.getInetAddresses();
 
-            while(addresses.hasMoreElements()) {
+            while (addresses.hasMoreElements()) {
                InetAddress current_addr = (InetAddress)addresses.nextElement();
                if (!current_addr.isLoopbackAddress() && f.filter(current_addr)) {
                   return current_addr;
@@ -33,10 +29,6 @@ public class LocalAddressFinder {
    }
 
    public static class IPv4Filter implements LocalAddressFinder.LAFfilter {
-      public IPv4Filter() {
-         super();
-      }
-
       @Override
       public boolean filter(InetAddress current_addr) {
          return current_addr instanceof Inet4Address;
@@ -44,10 +36,6 @@ public class LocalAddressFinder {
    }
 
    public static class IPv6Filter implements LocalAddressFinder.LAFfilter {
-      public IPv6Filter() {
-         super();
-      }
-
       @Override
       public boolean filter(InetAddress current_addr) {
          return current_addr instanceof Inet6Address;

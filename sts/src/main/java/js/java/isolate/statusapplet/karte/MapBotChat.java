@@ -39,7 +39,6 @@ public class MapBotChat implements chatInterface, SessionClose {
    }
 
    public MapBotChat(BotCalling client, UserContext uc, String updateurl) {
-      super();
       this.client = client;
       this.uc = uc;
       this.updateurl = updateurl;

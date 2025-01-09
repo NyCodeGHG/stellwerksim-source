@@ -34,7 +34,7 @@ public class clickableRenderer extends rendererBase implements MouseListener, Mo
          FontMetrics fm = g2.getFontMetrics();
          String[] tokens = text.split("\\|");
 
-         for(int i = 0; i < tokens.length; ++i) {
+         for (int i = 0; i < tokens.length; i++) {
             if (i == 1) {
                if (this.overClickArea) {
                   g2.setColor(Color.RED);

@@ -6,10 +6,6 @@ import js.java.tools.ColorText;
 public abstract class massBase {
    private massBase.MasstabItem[] t = null;
 
-   public massBase() {
-      super();
-   }
-
    protected abstract int calcLaengeImpl(int var1, int var2);
 
    protected abstract int calcMaxSpeedImpl(int var1);
@@ -26,7 +22,7 @@ public abstract class massBase {
          int[] is = this.getMasstabValues();
          this.t = new massBase.MasstabItem[Math.min(s.length, gleis.colors.col_stellwerk_masstab.length)];
 
-         for(int i = 0; i < this.t.length; ++i) {
+         for (int i = 0; i < this.t.length; i++) {
             this.t[i] = new massBase.MasstabItem();
             this.t[i].label = new ColorText(s[i], gleis.colors.col_stellwerk_masstab[i]);
             this.t[i].value = is[i];
@@ -40,12 +36,12 @@ public abstract class massBase {
       int[] is = this.getMasstabValues();
       int cnt = 0;
 
-      for(int i : is) {
+      for (int i : is) {
          if (i == masstab) {
             return cnt;
          }
 
-         ++cnt;
+         cnt++;
       }
 
       return 0;
@@ -67,9 +63,5 @@ public abstract class massBase {
    public static class MasstabItem {
       public ColorText label;
       public int value;
-
-      public MasstabItem() {
-         super();
-      }
    }
 }

@@ -10,7 +10,6 @@ public class ChangableTreeNode extends DefaultMutableTreeNode implements TreeMod
    protected EventListenerList listenerList = new EventListenerList();
 
    public ChangableTreeNode() {
-      super();
    }
 
    public ChangableTreeNode(Object userObject) {
@@ -79,7 +78,7 @@ public class ChangableTreeNode extends DefaultMutableTreeNode implements TreeMod
          int cCount = childIndices.length;
          Object[] newChildren = new Object[cCount];
 
-         for(int counter = 0; counter < cCount; ++counter) {
+         for (int counter = 0; counter < cCount; counter++) {
             newChildren[counter] = this.getChildAt(childIndices[counter]);
          }
 
@@ -117,7 +116,7 @@ public class ChangableTreeNode extends DefaultMutableTreeNode implements TreeMod
       Object[] listeners = this.listenerList.getListenerList();
       TreeModelEvent e = null;
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == TreeModelListener.class) {
             if (e == null) {
                e = new TreeModelEvent(source, path, childIndices, children);
@@ -136,7 +135,7 @@ public class ChangableTreeNode extends DefaultMutableTreeNode implements TreeMod
       Object[] listeners = this.listenerList.getListenerList();
       TreeModelEvent e = null;
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == TreeModelListener.class) {
             if (e == null) {
                e = new TreeModelEvent(source, path, childIndices, children);
@@ -155,7 +154,7 @@ public class ChangableTreeNode extends DefaultMutableTreeNode implements TreeMod
       Object[] listeners = this.listenerList.getListenerList();
       TreeModelEvent e = null;
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == TreeModelListener.class) {
             if (e == null) {
                e = new TreeModelEvent(source, path, childIndices, children);
@@ -178,7 +177,7 @@ public class ChangableTreeNode extends DefaultMutableTreeNode implements TreeMod
       Object[] listeners = this.listenerList.getListenerList();
       TreeModelEvent e = null;
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == TreeModelListener.class) {
             if (e == null) {
                e = new TreeModelEvent(source, path, childIndices, children);

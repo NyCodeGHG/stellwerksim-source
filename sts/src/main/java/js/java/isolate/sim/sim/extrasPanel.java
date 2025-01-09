@@ -60,7 +60,6 @@ public class extrasPanel extends JPanel implements SessionClose {
    private JLabel xtr_zählwerk;
 
    public extrasPanel(stellwerksim_main m, gleisbildSimControl glb) {
-      super();
       this.my_main = m;
       this.glbControl = glb;
       this.initComponents();
@@ -98,7 +97,7 @@ public class extrasPanel extends JPanel implements SessionClose {
    private void setEnabled(boolean e, Container cp) {
       Component[] c = cp.getComponents();
 
-      for(Component cc : c) {
+      for (Component cc : c) {
          cc.setEnabled(e);
          if (cc instanceof Container) {
             this.setEnabled(e, (Container)cc);
@@ -141,7 +140,7 @@ public class extrasPanel extends JPanel implements SessionClose {
          Component[] c = p.getComponents();
          p.setBackground(col);
 
-         for(Component cc : c) {
+         for (Component cc : c) {
             cc.setBackground(col);
          }
       }
@@ -309,7 +308,7 @@ public class extrasPanel extends JPanel implements SessionClose {
       if (!search.isEmpty()) {
          Iterator<gleis> it = this.glbControl.getModel().findIteratorWithElementName(search, new Object[]{1});
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             ((gleis)it.next()).setHightlight(true);
          }
       }

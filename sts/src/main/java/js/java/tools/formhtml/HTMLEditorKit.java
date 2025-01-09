@@ -17,10 +17,6 @@ import javax.swing.text.html.HTMLEditorKit.HTMLFactory;
 public class HTMLEditorKit extends javax.swing.text.html.HTMLEditorKit {
    private final HashMap<String, FormView> elements = new HashMap();
 
-   public HTMLEditorKit() {
-      super();
-   }
-
    public Document createDefaultDocument() {
       StyleSheet styles = this.getStyleSheet();
       StyleSheet ss = new StyleSheet();
@@ -54,14 +50,14 @@ public class HTMLEditorKit extends javax.swing.text.html.HTMLEditorKit {
    public void save() {
       FormView one = null;
 
-      for(Entry<String, FormView> e : this.elements.entrySet()) {
+      for (Entry<String, FormView> e : this.elements.entrySet()) {
          one = (FormView)e.getValue();
          System.out.println((String)e.getKey() + ":" + ((FormView)e.getValue()).getName() + " = " + ((FormView)e.getValue()).getData());
       }
 
       System.out.println("---------------------------");
 
-      for(Entry<String, String> e : one.getValues().entrySet()) {
+      for (Entry<String, String> e : one.getValues().entrySet()) {
          System.out.println((String)e.getKey() + ":" + (String)e.getValue());
       }
 

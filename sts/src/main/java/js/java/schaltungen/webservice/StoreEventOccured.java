@@ -6,7 +6,6 @@ public class StoreEventOccured {
    public final String code;
 
    public StoreEventOccured(int aid, String name, String code) {
-      super();
       this.aid = aid;
       this.name = name;
       this.code = code;

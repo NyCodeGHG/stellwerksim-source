@@ -36,7 +36,7 @@ public class statisticsPanel extends JPanel {
    void updateDelayStats(zugListPanel kp) {
       double[] v = kp.verspätungsDurchschnitt();
 
-      for(int i = 0; i < v.length; ++i) {
+      for (int i = 0; i < v.length; i++) {
          this.verspätungSchnitt.setValue(i, v[i]);
       }
    }

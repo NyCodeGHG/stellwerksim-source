@@ -75,7 +75,6 @@ public interface pluginDataAdapter {
       public final Map<String, String> attrs;
 
       public WegElement(String xmlelement, Map<String, String> attrs) {
-         super();
          this.xmlelement = xmlelement;
          this.attrs = attrs;
       }
@@ -107,10 +106,6 @@ public interface pluginDataAdapter {
       public boolean amgleis;
       public String usertext;
       public String usertextsender;
-
-      public zugDetails() {
-         super();
-      }
    }
 
    public static class zugPlanLine {
@@ -120,9 +115,5 @@ public interface pluginDataAdapter {
       public String ab;
       public String flags;
       public String hinweistext;
-
-      public zugPlanLine() {
-         super();
-      }
    }
 }

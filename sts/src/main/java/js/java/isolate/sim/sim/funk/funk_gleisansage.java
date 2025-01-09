@@ -11,9 +11,9 @@ public class funk_gleisansage extends funkAuftragBase {
       this.d = a.my_gleisbild().getAid() % 4 + 1;
       int i = 0;
 
-      for(String b : this.my_main.alleBahnsteige().getAlleBahnsteig()) {
+      for (String b : this.my_main.alleBahnsteige().getAlleBahnsteig()) {
          this.addValueItem(new funkAuftragBase.funkValueItem(b, i));
-         ++i;
+         i++;
       }
    }
 

@@ -19,7 +19,6 @@ public class frozenZug {
    private String abfahrt;
 
    frozenZug() {
-      super();
    }
 
    void update(zug z) {

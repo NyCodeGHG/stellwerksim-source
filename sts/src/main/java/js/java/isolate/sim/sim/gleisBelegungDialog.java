@@ -86,7 +86,7 @@ public class gleisBelegungDialog extends JDialog implements SessionClose {
          }
       };
 
-      for(String bst : this.fahrplanPanel.getBahnsteige().getAlleBahnsteig()) {
+      for (String bst : this.fahrplanPanel.getBahnsteige().getAlleBahnsteig()) {
          JCheckBox cb = new JCheckBox(bst);
          cb.addItemListener(ilts);
          this.gleisPanel.add(cb);
@@ -113,7 +113,7 @@ public class gleisBelegungDialog extends JDialog implements SessionClose {
          LinkedList<zugUndPlanPanel.gleisPlan> bplan = new LinkedList();
          String gl = "";
 
-         for(Entry<String, JCheckBox> g : this.boxen.entrySet()) {
+         for (Entry<String, JCheckBox> g : this.boxen.entrySet()) {
             if (((JCheckBox)g.getValue()).isSelected()) {
                bplan.addAll(this.fahrplanPanel.getBelegungsPlan(((String)g.getKey()).toString(), 10, 60));
                if (!gl.isEmpty()) {

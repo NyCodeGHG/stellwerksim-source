@@ -73,14 +73,14 @@ public class gleisPropertyPanel extends basePanel {
       this.jPanel1.remove(this.entscheiderSignalCB);
       TreeMap<String, Color> cols = gleisColor.getInstance().getBGcolors();
 
-      for(String k : cols.keySet()) {
+      for (String k : cols.keySet()) {
          this.farbeCB.addItem(new ColorText(k, (Color)cols.get(k)));
          this.farbCBpos.add(k);
       }
 
       massBase.MasstabItem[] m = this.glbControl.getModel().getMasstabCalculator().getMasstabList();
 
-      for(massBase.MasstabItem it : m) {
+      for (massBase.MasstabItem it : m) {
          this.masstabCB.addItem("<html>" + it.label.getText() + "</html>");
       }
 
@@ -353,7 +353,7 @@ public class gleisPropertyPanel extends basePanel {
          if (g != null && gleis.ALLE_BAHNSTEIGE.matches(g.getElement())) {
             String n = g.getSWWert();
 
-            for(String s : this.glbControl.getModel().findNeighborBahnsteig(this.glbControl.getModel().findBahnsteig(n), true)) {
+            for (String s : this.glbControl.getModel().findNeighborBahnsteig(this.glbControl.getModel().findBahnsteig(n), true)) {
                this.dataModel.addElement(s);
             }
          }
@@ -371,7 +371,7 @@ public class gleisPropertyPanel extends basePanel {
          this.dataModel.clear();
          gleis g = this.glbControl.getSelectedGleis();
          if (g != null) {
-            for(gleis s : this.glbControl.getModel().getDisplayBar().getConnectedItems(g)) {
+            for (gleis s : this.glbControl.getModel().getDisplayBar().getConnectedItems(g)) {
                this.dataModel
                   .addElement(
                      s.getCol()
@@ -412,7 +412,7 @@ public class gleisPropertyPanel extends basePanel {
             Set<gleis> b = this.glbControl.getModel().findAllConnectedBahnsteig(n, true);
             HashSet<String> seen = new HashSet();
 
-            for(gleis g2 : b) {
+            for (gleis g2 : b) {
                this.glbControl.getModel().addMarkedGleis(g2);
                String n2 = g2.getSWWert_special();
                if (!seen.contains(n2)) {
@@ -440,7 +440,7 @@ public class gleisPropertyPanel extends basePanel {
             Set<String> b = bds.getAlternativebahnsteigeOf(g.getSWWert());
             System.out.println("Runtime Alternativsuche: " + (System.currentTimeMillis() - startTime) + " ms");
 
-            for(String gl : b) {
+            for (String gl : b) {
                this.glbControl.getModel().addMarkedGleis(this.glbControl.getModel().findBahnsteig(gl));
                this.dataModel.addElement(gl);
             }

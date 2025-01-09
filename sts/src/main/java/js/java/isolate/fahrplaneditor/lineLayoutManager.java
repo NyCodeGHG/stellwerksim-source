@@ -18,7 +18,6 @@ class lineLayoutManager implements LayoutManager {
    private int xoffset = 0;
 
    lineLayoutManager(int h) {
-      super();
       this.lineheight = h;
    }
 
@@ -40,15 +39,15 @@ class lineLayoutManager implements LayoutManager {
       this.minWidth = this.xoffset;
       this.preferredHeight = this.minHeight = 0;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
          if (c.isVisible()) {
             d = c.getPreferredSize();
             this.minWidth = this.preferredWidth = Math.max(d.width, this.preferredWidth);
             if (this.lineheight > 0) {
-               this.preferredHeight += this.lineheight;
+               this.preferredHeight = this.preferredHeight + this.lineheight;
             } else {
-               this.preferredHeight += d.height;
+               this.preferredHeight = this.preferredHeight + d.height;
             }
 
             this.minHeight = this.preferredHeight;
@@ -86,7 +85,7 @@ class lineLayoutManager implements LayoutManager {
          this.setSizes(parent);
       }
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
          if (c.isVisible()) {
             Dimension d = c.getPreferredSize();

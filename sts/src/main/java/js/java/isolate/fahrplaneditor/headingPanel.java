@@ -19,7 +19,6 @@ class headingPanel extends JPanel {
    }
 
    headingPanel(int xoffset) {
-      super();
       this.initComponents();
       this.topPanel.setLayout(new planLayoutManager(true, xoffset));
       this.addLabel("");
@@ -57,7 +56,7 @@ class headingPanel extends JPanel {
       this.bottomPanel.add(new JLabel(""));
       Font f = new Font("SansSerif", 0, 8);
 
-      for(char i = 'A'; i <= 'Z'; ++i) {
+      for (char i = 'A'; i <= 'Z'; i++) {
          JLabel l = new JLabel(i + "");
          l.setHorizontalAlignment(0);
          l.setFont(f);

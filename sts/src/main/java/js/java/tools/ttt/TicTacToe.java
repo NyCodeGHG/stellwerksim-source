@@ -50,7 +50,6 @@ public class TicTacToe extends JFrame {
    private JPanel jPanel2;
 
    public TicTacToe() {
-      super();
       this.initComponents();
    }
 
@@ -63,7 +62,7 @@ public class TicTacToe extends JFrame {
       int turn = 1;
       int w = 0;
 
-      while((w = checkWin(turn, state)) == 0) {
+      while ((w = checkWin(turn, state)) == 0) {
          if (current == 1) {
             this.pl1.playTurn(1, turn);
             this.refreshGrid();
@@ -74,7 +73,7 @@ public class TicTacToe extends JFrame {
             current = 1;
          }
 
-         ++turn;
+         turn++;
 
          try {
             Thread.sleep(0L);
@@ -87,15 +86,15 @@ public class TicTacToe extends JFrame {
          this.pl1.notifyWin(1);
          this.pl2.notifyLose(2);
          this.print("Player 1 Won The Game !");
-         ++this.w1;
+         this.w1++;
       } else if (w == 2) {
          this.pl2.notifyWin(1);
          this.pl1.notifyLose(2);
          this.print("Player 2 Won The Game !");
-         ++this.w2;
+         this.w2++;
       } else if (w == -1) {
          this.print("Game DRAW !");
-         ++this.dr;
+         this.dr++;
       }
 
       try {
@@ -128,9 +127,9 @@ public class TicTacToe extends JFrame {
       int j = 0;
       int c = 0;
 
-      for(int p = 0; p < 3; ++p) {
-         for(int q = 0; q < 3; ++q) {
-            ++c;
+      for (int p = 0; p < 3; p++) {
+         for (int q = 0; q < 3; q++) {
+            c++;
             if (st[p][q] == 1) {
                x = x + c;
             } else if (st[p][q] == 2) {
@@ -150,7 +149,7 @@ public class TicTacToe extends JFrame {
    public static int checkWin2(String x, String o) {
       int ret = 0;
 
-      for(int p = 0; p < 8; ++p) {
+      for (int p = 0; p < 8; p++) {
          if (x.indexOf((char)winComb[p][0] + '0') > -1 && x.indexOf((char)winComb[p][1] + '0') > -1 && x.indexOf((char)winComb[p][2] + '0') > -1) {
             ret = 1;
             break;
@@ -487,7 +486,7 @@ public class TicTacToe extends JFrame {
 
    public static void main(String[] args) {
       try {
-         for(LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+         for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                UIManager.setLookAndFeel(info.getClassName());
                break;
@@ -506,7 +505,7 @@ public class TicTacToe extends JFrame {
       TicTacToe t = new TicTacToe();
       t.setVisible(true);
 
-      while(true) {
+      while (true) {
          t.start();
          t.gameInit();
       }

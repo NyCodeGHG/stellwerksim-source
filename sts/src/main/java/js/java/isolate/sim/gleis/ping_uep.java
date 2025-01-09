@@ -13,7 +13,7 @@ class ping_uep extends pingBase {
    public boolean ping(gleis gl) {
       boolean ret = false;
       if (gl.getFluentData().getStatus() == 3 || gl.getFluentData().getStatus() == 4) {
-         ++gl.blinkcc;
+         gl.blinkcc++;
          if (gl.blinkcc > 20) {
             gl.blinkcc = 0;
             gl.theapplet.getFSallocator().reserveAusfahrt(gl.enr);

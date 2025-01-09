@@ -37,7 +37,7 @@ public class IconPopupButton extends AbstractButton {
          if (IconPopupButton.this.wlist != null) {
             ActionEvent e2 = null;
 
-            for(warningItems i : IconPopupButton.this.wlist) {
+            for (warningItems i : IconPopupButton.this.wlist) {
                if (currentVisible == i.getMenu()) {
                   IconPopupButton.this.lastSelected = i;
                   e2 = new ActionEvent(currentVisible, e.getID(), e.getActionCommand());
@@ -64,7 +64,6 @@ public class IconPopupButton extends AbstractButton {
    };
 
    public IconPopupButton() {
-      super();
       BasicButtonUI bbui = (BasicButtonUI)this.getUI();
       this.buttonListener = (BasicButtonListener)this.getClientProperty(bbui);
       this.removeMouseListener(this.buttonListener);
@@ -149,7 +148,7 @@ public class IconPopupButton extends AbstractButton {
 
          ImageIcon ic = new ImageIcon(this.getClass().getResource("/js/java/tools/resources/warningSolution.png"));
 
-         for(warningItems i : this.wlist) {
+         for (warningItems i : this.wlist) {
             JMenuItem jm = new JMenuItem(i.getMessage(), ic);
             jm.setEnabled(this.solutionsenabled);
             jm.addActionListener(this.popupItemListener);
@@ -188,7 +187,7 @@ public class IconPopupButton extends AbstractButton {
 
          ImageIcon ic = new ImageIcon(this.getClass().getResource("/js/java/tools/resources/warningSolution.png"));
 
-         for(warningItems i : w) {
+         for (warningItems i : w) {
             JMenuItem jm = new JMenuItem(i.getMessage(), ic);
             jm.setEnabled(this.solutionsenabled);
             jm.addActionListener(this.popupItemListener);
@@ -222,7 +221,6 @@ public class IconPopupButton extends AbstractButton {
 
    private class IconPopupButtonMouseListener implements MouseListener {
       private IconPopupButtonMouseListener() {
-         super();
       }
 
       public void mouseClicked(MouseEvent e) {

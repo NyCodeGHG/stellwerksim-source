@@ -89,7 +89,6 @@ public final class UnitValue implements Serializable {
    }
 
    private UnitValue(float value, String unitStr, int unit, boolean isHor, int oper, UnitValue sub1, UnitValue sub2, String createString) {
-      super();
       if (oper >= 100 && oper <= 107) {
          if (oper < 101 || oper > 107 || sub1 != null && sub2 != null) {
             this.value = value;
@@ -115,7 +114,7 @@ public final class UnitValue implements Serializable {
       if (parent == null) {
          return 1.0F;
       } else if (this.oper == 100) {
-         switch(this.unit) {
+         switch (this.unit) {
             case -1:
             case 10:
             case 11:
@@ -193,7 +192,7 @@ public final class UnitValue implements Serializable {
                }
             case 26:
                float res = this.lookup(refValue, parent, comp);
-               if (res != -8.7654312E7F) {
+               if (res != -8.765431E7F) {
                   return res;
                }
             case 27:
@@ -203,7 +202,7 @@ public final class UnitValue implements Serializable {
          if (this.subUnits != null && this.subUnits.length == 2) {
             float r1 = this.subUnits[0].getPixelsExact(refValue, parent, comp);
             float r2 = this.subUnits[1].getPixelsExact(refValue, parent, comp);
-            switch(this.oper) {
+            switch (this.oper) {
                case 101:
                   return r1 + r2;
                case 102:
@@ -226,11 +225,11 @@ public final class UnitValue implements Serializable {
    }
 
    private float lookup(float refValue, ContainerWrapper parent, ComponentWrapper comp) {
-      float res = -8.7654312E7F;
+      float res = -8.765431E7F;
 
-      for(int i = CONVERTERS.size() - 1; i >= 0; --i) {
+      for (int i = CONVERTERS.size() - 1; i >= 0; i--) {
          res = (float)((UnitConverter)CONVERTERS.get(i)).convertToPixels(this.value, this.unitStr, this.isHor, refValue, parent, comp);
-         if (res != -8.7654312E7F) {
+         if (res != -8.765431E7F) {
             return res;
          }
       }
@@ -250,7 +249,7 @@ public final class UnitValue implements Serializable {
             return this.isHor ? 1 : 2;
          } else if (this.unitStr.equals("sp")) {
             return this.isHor ? 8 : 9;
-         } else if (this.lookup(0.0F, null, null) != -8.7654312E7F) {
+         } else if (this.lookup(0.0F, null, null) != -8.765431E7F) {
             return 26;
          } else {
             int pIx = this.unitStr.indexOf(46);
@@ -303,7 +302,7 @@ public final class UnitValue implements Serializable {
       if (this.subUnits == null) {
          return this.linkId != null;
       } else {
-         for(UnitValue subUnit : this.subUnits) {
+         for (UnitValue subUnit : this.subUnits) {
             if (subUnit.isLinkedDeep()) {
                return true;
             }

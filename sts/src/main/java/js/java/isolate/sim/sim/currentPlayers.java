@@ -6,10 +6,6 @@ import js.java.isolate.sim.sim.redirectInfo.RedirectStellwerkInfo;
 public class currentPlayers implements RedirectStellwerkInfo {
    private ConcurrentHashMap<Integer, currentPlayers.aidData> aidMap = new ConcurrentHashMap();
 
-   public currentPlayers() {
-      super();
-   }
-
    @Override
    public String getStellwerkName(int aid) {
       currentPlayers.aidData d = (currentPlayers.aidData)this.aidMap.get(aid);
@@ -61,7 +57,6 @@ public class currentPlayers implements RedirectStellwerkInfo {
       public String user;
 
       private aidData(int aid, String name) {
-         super();
          this.aid = aid;
          this.name = name;
          this.user = null;

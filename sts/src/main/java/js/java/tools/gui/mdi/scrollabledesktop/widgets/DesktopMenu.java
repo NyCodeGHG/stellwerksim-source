@@ -53,7 +53,7 @@ public class DesktopMenu extends JMenu implements ActionListener {
       Enumeration e = this.frameRadioButtonMenuItemGroup.getElements();
       int displayedCount = 1;
 
-      for(int currentMenuCount = 0; e.hasMoreElements(); ++displayedCount) {
+      for (int currentMenuCount = 0; e.hasMoreElements(); displayedCount++) {
          RootRadioButtonMenuItem b = (RootRadioButtonMenuItem)e.nextElement();
          currentMenuCount = displayedCount;
          if (displayedCount > 9) {

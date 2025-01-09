@@ -40,7 +40,7 @@ public class sperreelemente extends event {
             eventContainer.getDebug().writeln("Sperre");
          }
 
-         for(gleis g : e.getGleisList()) {
+         for (gleis g : e.getGleisList()) {
             if (g.getElement() == gleis.ELEMENT_SIGNAL
                || g.getElement() == gleis.ELEMENT_WEICHEOBEN
                || g.getElement() == gleis.ELEMENT_WEICHEUNTEN

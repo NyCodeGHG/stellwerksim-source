@@ -54,7 +54,7 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
    }
 
    private void loop(BitSet enrset, renewEnr.condition cond, renewEnr.caller cal) {
-      for(gleis gl : this.glbModel) {
+      for (gleis gl : this.glbModel) {
          if (cond == null || cond.check(gl)) {
             cal.call(gl, enrset);
          }
@@ -64,7 +64,7 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
    private void loopDoubleCheck(BitSet enrset, renewEnr.condition cond, renewEnr.caller cal) {
       BitSet seenset = new BitSet();
 
-      for(gleis gl : this.glbModel) {
+      for (gleis gl : this.glbModel) {
          if (cond == null || cond.check(gl)) {
             if (seenset.get(Math.abs(gl.getENR()))) {
                cal.call(gl, enrset);
@@ -81,7 +81,6 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
 
    private class cleanDoubles extends renewEnr.setEnr {
       cleanDoubles() {
-         super();
       }
 
       cleanDoubles(int base) {
@@ -105,7 +104,6 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
       private final element te;
 
       filterElement(element element) {
-         super();
          this.te = element;
       }
 
@@ -117,7 +115,6 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
 
    private class initEnr implements renewEnr.caller {
       private initEnr() {
-         super();
       }
 
       @Override
@@ -136,7 +133,6 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
 
    private class initEnrFull implements renewEnr.caller {
       private initEnrFull() {
-         super();
       }
 
       @Override
@@ -157,13 +153,12 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
       }
 
       multiCall(renewEnr.caller fallback) {
-         super();
          this.fallback = fallback;
       }
 
       @Override
       public void call(gleis gl, BitSet enrset) {
-         for(Entry<element, renewEnr.caller> e : this.entrySet()) {
+         for (Entry<element, renewEnr.caller> e : this.entrySet()) {
             if (((element)e.getKey()).matches(gl.getElement())) {
                ((renewEnr.caller)e.getValue()).call(gl, enrset);
             }
@@ -188,7 +183,6 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
       }
 
       partnerEnr(int base, int max) {
-         super();
          this.base = base;
          this.max = max;
       }
@@ -198,11 +192,11 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
          if (gl.typHasEnrPartner() && gl.getENR() < 0) {
             int enr = enrset.nextClearBit(this.base);
 
-            for(element te : gl.typPartner()) {
+            for (element te : gl.typPartner()) {
                int cc = 0;
                Iterator<gleis> it = renewEnr.this.glbModel.findIterator(new Object[]{te, gl.getENR()});
 
-               while(it.hasNext()) {
+               while (it.hasNext()) {
                   gleis gl2 = (gleis)it.next();
                   if (gl2 != gl) {
                      if (this.max > 0 && cc >= this.max) {
@@ -212,7 +206,7 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
                      }
 
                      gl2.setENR(enr);
-                     ++cc;
+                     cc++;
                   }
                }
             }
@@ -250,7 +244,6 @@ public class renewEnr extends gleisbildWorkerBase<gleisbildModelFahrweg> {
       }
 
       setEnr(int base) {
-         super();
          this.base = base;
       }
 

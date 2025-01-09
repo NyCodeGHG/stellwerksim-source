@@ -22,7 +22,6 @@ public class Point2d extends Tuple2d implements Serializable {
    }
 
    public Point2d() {
-      super();
    }
 
    public final double distanceSquared(Point2d p1) {

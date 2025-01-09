@@ -8,7 +8,7 @@ public class TimeFormat {
    private String formatString = "";
 
    public static TimeFormat getInstance(TimeFormat.STYLE format) {
-      switch(format) {
+      switch (format) {
          case HM:
             return new TimeFormat("%02d:%02d");
          case HMS:
@@ -19,7 +19,6 @@ public class TimeFormat {
    }
 
    protected TimeFormat(String formatString) {
-      super();
       this.formatString = formatString;
    }
 
@@ -37,8 +36,8 @@ public class TimeFormat {
          String[] spl = timestring.split(":");
 
          try {
-            for(int i = 0; i < spl.length; ++i) {
-               switch(i) {
+            for (int i = 0; i < spl.length; i++) {
+               switch (i) {
                   case 0:
                      h = Integer.parseInt(spl[i]);
                      break;

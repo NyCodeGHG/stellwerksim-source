@@ -12,10 +12,6 @@ public class v_timeserv extends InitTestBase implements timerecipient {
    private timeSync serv = null;
    private int delay = 10;
 
-   public v_timeserv() {
-      super();
-   }
-
    @Override
    public int test(UserContextMini uc) {
       int ret = 0;

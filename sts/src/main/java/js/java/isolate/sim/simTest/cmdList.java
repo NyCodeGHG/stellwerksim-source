@@ -6,10 +6,6 @@ import java.util.Vector;
 import js.java.isolate.sim.sim.stellwerksim_main;
 
 class cmdList implements simCmd {
-   cmdList() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "list";
@@ -21,7 +17,7 @@ class cmdList implements simCmd {
          Vector v = my_main.getStructInfo();
          Enumeration e = v.elements();
 
-         while(e.hasMoreElements()) {
+         while (e.hasMoreElements()) {
             Vector vv = (Vector)e.nextElement();
             if (opts[1].equalsIgnoreCase((String)vv.get(0))) {
                out.println(vv.get(1));

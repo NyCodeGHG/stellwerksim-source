@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.mass.massLenNextGen;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class massbigtest implements dtest {
-   public massbigtest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Maßstab unendlich zu oft";
@@ -28,10 +24,10 @@ public class massbigtest implements dtest {
          int w = glb.getGleisWidth();
          massLenNextGen mass = (massLenNextGen)glb.getMasstabCalculator();
 
-         for(int y = 0; y < h; ++y) {
+         for (int y = 0; y < h; y++) {
             int mcc = 0;
 
-            for(int x = 0; x < w; ++x) {
+            for (int x = 0; x < w; x++) {
                gleis gl = glb.getXY_null(x, y);
                if (gl != null) {
                   if (mass.isLimitedMass(gl.getMasstab())) {
@@ -41,7 +37,7 @@ public class massbigtest implements dtest {
                         break;
                      }
                   } else if (mcc > 0) {
-                     --mcc;
+                     mcc--;
                   }
                }
             }

@@ -8,10 +8,6 @@ import javax.swing.ButtonModel;
 class TMbuttonGroup extends ButtonGroup {
    private HashMap<ButtonModel, Boolean> selected = new HashMap();
 
-   TMbuttonGroup() {
-      super();
-   }
-
    public void add(AbstractButton b) {
       if (b != null) {
          this.buttons.addElement(b);
@@ -46,6 +42,6 @@ class TMbuttonGroup extends ButtonGroup {
    }
 
    public boolean isSelected(ButtonModel m) {
-      return this.selected.get(m);
+      return (Boolean)this.selected.get(m);
    }
 }

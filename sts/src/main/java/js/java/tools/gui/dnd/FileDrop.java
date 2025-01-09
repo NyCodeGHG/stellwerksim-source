@@ -64,7 +64,6 @@ public class FileDrop {
    }
 
    public FileDrop(final PrintStream out, final Component c, final Border dragBorder, boolean recursive, final FileDrop.Listener listener) {
-      super();
       if (supportsDnD()) {
          this.dropListener = new DropTargetListener() {
             public void dragEnter(DropTargetDragEvent evt) {
@@ -111,7 +110,7 @@ public class FileDrop {
                      DataFlavor[] flavors = tr.getTransferDataFlavors();
                      boolean handled = false;
 
-                     for(int zz = 0; zz < flavors.length; ++zz) {
+                     for (int zz = 0; zz < flavors.length; zz++) {
                         if (flavors[zz].isRepresentationClassReader()) {
                            evt.acceptDrop(1);
                            FileDrop.log(out, "FileDrop: reader accepted.");
@@ -198,7 +197,7 @@ public class FileDrop {
          List list = new ArrayList();
          String line = null;
 
-         while((line = bReader.readLine()) != null) {
+         while ((line = bReader.readLine()) != null) {
             try {
                if (!ZERO_CHAR_STRING.equals(line)) {
                   File file = new File(new URI(line));
@@ -247,7 +246,7 @@ public class FileDrop {
          Container cont = (Container)c;
          Component[] comps = cont.getComponents();
 
-         for(int i = 0; i < comps.length; ++i) {
+         for (int i = 0; i < comps.length; i++) {
             this.makeDropTarget(out, comps[i], recursive);
          }
       }
@@ -257,7 +256,7 @@ public class FileDrop {
       boolean ok = false;
       DataFlavor[] flavors = evt.getCurrentDataFlavors();
 
-      for(int i = 0; !ok && i < flavors.length; ++i) {
+      for (int i = 0; !ok && i < flavors.length; i++) {
          DataFlavor curFlavor = flavors[i];
          if (curFlavor.equals(DataFlavor.javaFileListFlavor) || curFlavor.isRepresentationClassReader()) {
             ok = true;
@@ -269,7 +268,7 @@ public class FileDrop {
             log(out, "FileDrop: no data flavors.");
          }
 
-         for(int var7 = 0; var7 < flavors.length; ++var7) {
+         for (int var7 = 0; var7 < flavors.length; var7++) {
             log(out, flavors[var7].toString());
          }
       }
@@ -296,7 +295,7 @@ public class FileDrop {
          if (recursive && c instanceof Container) {
             Component[] comps = ((Container)c).getComponents();
 
-            for(int i = 0; i < comps.length; ++i) {
+            for (int i = 0; i < comps.length; i++) {
                remove(out, comps[i], recursive);
             }
 
@@ -332,18 +331,15 @@ public class FileDrop {
       private DataFlavor customFlavor;
 
       public TransferableObject(Object data) {
-         super();
          this.data = data;
          this.customFlavor = new DataFlavor(data.getClass(), "application/x-net.iharder.dnd.TransferableObject");
       }
 
       public TransferableObject(FileDrop.TransferableObject.Fetcher fetcher) {
-         super();
          this.fetcher = fetcher;
       }
 
       public TransferableObject(Class dataClass, FileDrop.TransferableObject.Fetcher fetcher) {
-         super();
          this.fetcher = fetcher;
          this.customFlavor = new DataFlavor(dataClass, "application/x-net.iharder.dnd.TransferableObject");
       }
@@ -369,11 +365,7 @@ public class FileDrop {
       }
 
       public boolean isDataFlavorSupported(DataFlavor flavor) {
-         if (flavor.equals(DATA_FLAVOR)) {
-            return true;
-         } else {
-            return flavor.equals(DataFlavor.stringFlavor);
-         }
+         return flavor.equals(DATA_FLAVOR) ? true : flavor.equals(DataFlavor.stringFlavor);
       }
 
       public interface Fetcher {

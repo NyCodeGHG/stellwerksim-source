@@ -15,9 +15,7 @@ class kartenzuglistrenderer extends DefaultListCellRenderer implements TableCell
    private int dcol = 0;
 
    kartenzuglistrenderer() {
-      super();
-
-      for(int i = 0; i < 5; ++i) {
+      for (int i = 0; i < 5; i++) {
          this.col[0][i] = new Color(255, 255, 255 - i * 8);
          this.col[1][i] = new Color(238, 238, 238 - i * 8);
       }

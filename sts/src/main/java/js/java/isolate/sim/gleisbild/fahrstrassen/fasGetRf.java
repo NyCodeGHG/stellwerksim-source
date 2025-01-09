@@ -12,7 +12,7 @@ class fasGetRf extends fahrstrassenState {
       boolean allesok = true;
       int rl = this.getFS().rangierlänge;
 
-      for(gleis g : this.getFS().gleisweg) {
+      for (gleis g : this.getFS().gleisweg) {
          if (rl > 0) {
             if (this.getFS().weichen.get(g) != null) {
                if (g.getFluentData().getStellung() == this.getFS().weichen.get(g)) {
@@ -40,7 +40,7 @@ class fasGetRf extends fahrstrassenState {
             this.getFS().lastGleis = g;
          }
 
-         --rl;
+         rl--;
       }
 
       if (allesok) {
@@ -56,7 +56,7 @@ class fasGetRf extends fahrstrassenState {
       if (!allesok) {
          rl = this.getFS().rangierlänge;
 
-         for(gleis g : this.getFS().gleisweg) {
+         for (gleis g : this.getFS().gleisweg) {
             if (rl > 0) {
                if (g.getElement() == gleis.ELEMENT_WEICHEUNTEN && g.getElement() == gleis.ELEMENT_WEICHEOBEN && g.getFluentData().getStatus() == 3) {
                   g.getFluentData().setStatusByFs(4, this.getFS());
@@ -65,7 +65,7 @@ class fasGetRf extends fahrstrassenState {
                }
             }
 
-            --rl;
+            rl--;
          }
 
          this.setNextState(new fasNullState());

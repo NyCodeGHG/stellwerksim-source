@@ -76,11 +76,10 @@ public class chatPanel extends chatPanelBase implements SessionClose {
    private JTabbedPane tabPanel;
 
    public chatPanel(UserContext uc) {
-      super();
       this.uc = uc;
       this.initComponents();
 
-      for(ChannelsNameParser.ChannelName cc : new ChannelsNameParser(uc.getParameter(UserContextMini.DATATYPE.MIXFILTERCHANNELS), 20)) {
+      for (ChannelsNameParser.ChannelName cc : new ChannelsNameParser(uc.getParameter(UserContextMini.DATATYPE.MIXFILTERCHANNELS), 20)) {
          this.filterChannels.add(cc.name);
       }
 
@@ -119,7 +118,7 @@ public class chatPanel extends chatPanelBase implements SessionClose {
       });
       channelsSorted.addAll(ch.channels);
 
-      for(final IrcChannel i : channelsSorted) {
+      for (final IrcChannel i : channelsSorted) {
          if (i.userChannel) {
             this.knownChannels.add(i.channel.title);
             final JCheckBoxMenuItem menu = new JCheckBoxMenuItem(i.channel.title);
@@ -135,8 +134,8 @@ public class chatPanel extends chatPanelBase implements SessionClose {
 
       Iterator<Entry<String, chatPanel.FilterElement>> it = this.filter.entrySet().iterator();
 
-      while(it.hasNext()) {
-         Entry<String, chatPanel.FilterElement> e = (Entry)it.next();
+      while (it.hasNext()) {
+         Entry<String, chatPanel.FilterElement> e = (Entry<String, chatPanel.FilterElement>)it.next();
          if (!this.knownChannels.contains(e.getKey())) {
             this.tabPanel.remove((Component)e.getValue());
             it.remove();
@@ -160,7 +159,7 @@ public class chatPanel extends chatPanelBase implements SessionClose {
                this.text.add(line);
             }
 
-            while(this.text.size() > 100) {
+            while (this.text.size() > 100) {
                this.text.removeFirst();
             }
 
@@ -274,7 +273,6 @@ public class chatPanel extends chatPanelBase implements SessionClose {
       final String channel;
 
       FilterElement(String channel) {
-         super();
          this.channel = channel;
          this.setLayout(new BorderLayout());
          this.scroller.setViewportView(this.textPane);
@@ -293,7 +291,7 @@ public class chatPanel extends chatPanelBase implements SessionClose {
       void append(String str) {
          this.text.add(str);
 
-         while(this.text.size() > 100) {
+         while (this.text.size() > 100) {
             this.text.removeFirst();
          }
 

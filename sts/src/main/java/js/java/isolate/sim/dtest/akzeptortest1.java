@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class akzeptortest1 implements dtest {
-   public akzeptortest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Akzeptor mit Einfahrt";
@@ -25,12 +21,12 @@ public class akzeptortest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ELEMENT_ÜBERGABEAKZEPTOR});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          LinkedList<gleis> m = new LinkedList();
          Iterator<gleis> it2 = glb.findIterator(new Object[]{gleis.ELEMENT_EINFAHRT, gl.getENR()});
 
-         while(it2.hasNext()) {
+         while (it2.hasNext()) {
             gleis gl2 = (gleis)it2.next();
             if (gl2 != gl) {
                m.add(gl2);

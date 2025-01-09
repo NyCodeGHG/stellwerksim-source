@@ -8,10 +8,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class bahnsteigtest3 implements dtest {
-   public bahnsteigtest3() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bahnsteigflächenanschluss";
@@ -28,16 +24,16 @@ public class bahnsteigtest3 implements dtest {
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ALLE_BAHNSTEIGE});
       HashSet<String> bstg = new HashSet();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          bstg.add(gl.getSWWert());
       }
 
-      for(String bst : bstg) {
+      for (String bst : bstg) {
          Set<gleis> gls = glb.findAllConnectedBahnsteig(bst, false);
          HashSet<String> seen = new HashSet();
 
-         for(gleis g : gls) {
+         for (gleis g : gls) {
             seen.add(g.getSWWert());
          }
 

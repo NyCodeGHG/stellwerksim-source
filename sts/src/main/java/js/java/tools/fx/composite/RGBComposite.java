@@ -14,7 +14,6 @@ public abstract class RGBComposite implements Composite {
    }
 
    public RGBComposite(float alpha) {
-      super();
       if (!(alpha < 0.0F) && !(alpha > 1.0F)) {
          this.extraAlpha = alpha;
       } else {
@@ -45,7 +44,6 @@ public abstract class RGBComposite implements Composite {
       private ColorModel dstColorModel;
 
       public RGBCompositeContext(float alpha, ColorModel srcColorModel, ColorModel dstColorModel) {
-         super();
          this.alpha = alpha;
          this.srcColorModel = srcColorModel;
          this.dstColorModel = dstColorModel;
@@ -74,7 +72,7 @@ public abstract class RGBComposite implements Composite {
          int y0 = dstOut.getMinY();
          int y1 = y0 + dstOut.getHeight();
 
-         for(int y = y0; y < y1; ++y) {
+         for (int y = y0; y < y1; y++) {
             srcPix = src.getPixels(x, y, w, 1, srcPix);
             dstPix = dstIn.getPixels(x, y, w, 1, dstPix);
             this.composeRGB(srcPix, dstPix, alpha);

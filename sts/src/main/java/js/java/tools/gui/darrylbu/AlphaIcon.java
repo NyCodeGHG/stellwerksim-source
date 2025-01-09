@@ -11,7 +11,6 @@ public class AlphaIcon implements Icon {
    private float alpha;
 
    public AlphaIcon(Icon icon, float alpha) {
-      super();
       this.icon = icon;
       this.alpha = alpha;
    }

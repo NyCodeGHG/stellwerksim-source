@@ -51,14 +51,12 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
    }
 
    public eventContainer(gleisbildModelEventsys glb, Attributes attrs) {
-      super();
       this.glbModel = glb;
       glb.events.addLast(this);
       this.name = "unbenannte Störung " + (glb.events.indexOf(this) + 1);
    }
 
    public eventContainer(gleisbildModelEventsys glb) {
-      super();
       this.glbModel = glb;
       this.name = "habsNichtGeschafftDenNamenZuAendern." + (glb.events.size() + 1);
       glb.events.addLast(this);
@@ -66,7 +64,6 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
    }
 
    public eventContainer(gleisbildModelEventsys glb, Simulator sim, String t, boolean force) {
-      super();
       this.glbModel = glb;
       this.name = "Störung " + this.hashCode();
       String pa = "";
@@ -84,7 +81,6 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
    }
 
    public eventContainer(gleisbildModelEventsys glb, Class t) {
-      super();
       this.glbModel = glb;
       this.name = "Störung " + this.hashCode() + " C" + t.getName();
       this.typ = t.getSimpleName();
@@ -158,14 +154,14 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
          } else if (k.equals("enrs")) {
             StringTokenizer tk = new StringTokenizer(pcdata.trim(), ",");
 
-            while(tk.hasMoreTokens()) {
+            while (tk.hasMoreTokens()) {
                String s = tk.nextToken();
                if (s != null && !s.isEmpty()) {
                   int v = Integer.parseInt(s);
                   if (v > 0) {
                      Iterator<gleis> it = this.glbModel.findIterator(new Object[]{v});
 
-                     while(it.hasNext()) {
+                     while (it.hasNext()) {
                         gleis g = (gleis)it.next();
                         this.gleislist.add(g);
                      }
@@ -295,7 +291,7 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
       if (b != null) {
          StringTokenizer tk = new StringTokenizer(b, ",");
 
-         while(tk.hasMoreTokens()) {
+         while (tk.hasMoreTokens()) {
             String s = tk.nextToken();
             if (s != null && !s.isEmpty()) {
                ret.add(s);
@@ -357,7 +353,7 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
    public void setListValue(String k, Set<String> v) {
       String b = "";
 
-      for(String s : v) {
+      for (String s : v) {
          b = b + s + ",";
       }
 
@@ -406,7 +402,7 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
          if (!this.gleislist.isEmpty()) {
             String s = "";
 
-            for(gleis g : this.gleislist) {
+            for (gleis g : this.gleislist) {
                if (g.getENR() > 0) {
                   if (!s.isEmpty()) {
                      s = s + ",";
@@ -424,7 +420,7 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
             }
          }
 
-         for(eventContainer.dataItem k : this.values.keySet()) {
+         for (eventContainer.dataItem k : this.values.keySet()) {
             if (this.values.get(k) != null) {
                data.append(TextHelper.urlEncode(prefix + "[" + k.toString() + "]"));
                data.append("=");
@@ -458,7 +454,7 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
       double v;
       do {
          v = rnd.nextGaussian();
-      } while(v < -1.0 || v > 1.0);
+      } while (v < -1.0 || v > 1.0);
 
       if (max == n && v > 0.0) {
          v = -v;
@@ -508,17 +504,17 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
          v.addElement("---");
       }
 
-      for(String tm : this.getThemeList(false)) {
+      for (String tm : this.getThemeList(false)) {
          v.addElement("include theme");
          v.addElement(tm);
       }
 
-      for(String tm : this.getThemeList(true)) {
+      for (String tm : this.getThemeList(true)) {
          v.addElement("exclude theme");
          v.addElement(tm);
       }
 
-      for(eventContainer.dataItem n : this.values.keySet()) {
+      for (eventContainer.dataItem n : this.values.keySet()) {
          v.addElement(":" + n.toString());
          v.addElement(this.values.get(n));
          v.addElement(":- hash");
@@ -568,7 +564,6 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
       LinkedList<gleis> allgl = null;
 
       private dataItem(String string) {
-         super();
          this.name = string;
          if (string.contains("::")) {
             String k1 = string.substring(0, string.indexOf("::"));
@@ -576,28 +571,31 @@ public class eventContainer implements Comparable, structinfo, SessionClose {
             int enr = Integer.parseInt(k2);
             this.name = k1;
             this.allgl = new LinkedList();
+            Iterator<gleis> it = eventContainer.this.glbModel.findIterator(new Object[]{enr});
 
-            gleis g2;
-            for(Iterator<gleis> it = eventContainer.this.glbModel.findIterator(new Object[]{enr}); it.hasNext(); this.allgl.add(g2)) {
-               g2 = (gleis)it.next();
+            while (it.hasNext()) {
+               gleis g2 = (gleis)it.next();
                if (this.gl == null) {
                   this.gl = g2;
                }
+
+               this.allgl.add(g2);
             }
          }
       }
 
       private dataItem(String k, gleis g) {
-         super();
          this.name = k;
          this.allgl = new LinkedList();
+         Iterator<gleis> it = eventContainer.this.glbModel.findIterator(new Object[]{g.getENR()});
 
-         gleis g2;
-         for(Iterator<gleis> it = eventContainer.this.glbModel.findIterator(new Object[]{g.getENR()}); it.hasNext(); this.allgl.add(g2)) {
-            g2 = (gleis)it.next();
+         while (it.hasNext()) {
+            gleis g2 = (gleis)it.next();
             if (this.gl == null) {
                this.gl = g2;
             }
+
+            this.allgl.add(g2);
          }
       }
 

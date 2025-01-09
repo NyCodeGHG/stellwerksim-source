@@ -33,7 +33,7 @@ public class designtestResultPanel extends basePanel {
          dtestresultEvent ee = (dtestresultEvent)e;
          this.listm.removeAllElements();
 
-         for(dtestresult d : ee.getResults()) {
+         for (dtestresult d : ee.getResults()) {
             this.listm.addElement(d);
          }
       }

@@ -174,7 +174,7 @@ public class gleisElementPanel extends basePanel {
 
    private void setUI(gleis.gleisUIcom gl) {
       if (this.lockSet == 0) {
-         ++this.inSet;
+         this.inSet++;
          this.setTyp(gl.element.getTyp());
          this.setElement(gl.element);
          this.setRichtung(gl.richtung);
@@ -182,7 +182,7 @@ public class gleisElementPanel extends basePanel {
          this.enrField.setEnabled(gl.typAllowesENRedit());
          this.swwertTF.setText(gl.swwert);
          this.swwertTF.setEnabled(gl.typAllowesSWwertedit());
-         --this.inSet;
+         this.inSet--;
       }
    }
 
@@ -195,21 +195,21 @@ public class gleisElementPanel extends basePanel {
    }
 
    private void setTyp(int typ) {
-      ++this.inSet;
+      this.inSet++;
 
       try {
          ((JToggleButton)this.typButtons.get(typ)).setSelected(true);
       } catch (NullPointerException var3) {
       }
 
-      --this.inSet;
+      this.inSet--;
    }
 
    private void setElement(element element) {
-      ++this.inSet;
+      this.inSet++;
       Enumeration e = this.elementsButtons.elements();
 
-      while(e.hasMoreElements()) {
+      while (e.hasMoreElements()) {
          gleisElementPanel.elementEntry ee = (gleisElementPanel.elementEntry)e.nextElement();
          if (ee.element == element) {
             this.elementList.setSelectedValue(ee, true);
@@ -217,24 +217,24 @@ public class gleisElementPanel extends basePanel {
          }
       }
 
-      --this.inSet;
+      this.inSet--;
    }
 
    private void setRichtung(gleisElements.RICHTUNG richtung) {
-      ++this.inSet;
+      this.inSet++;
 
       try {
          ((JToggleButton)this.richtungButtons.get(richtung)).setSelected(true);
       } catch (NullPointerException var3) {
       }
 
-      --this.inSet;
+      this.inSet--;
    }
 
    private int getCurrentTyp() {
-      for(Entry<Integer, JToggleButton> e : this.typButtons.entrySet()) {
+      for (Entry<Integer, JToggleButton> e : this.typButtons.entrySet()) {
          if (((JToggleButton)e.getValue()).isSelected()) {
-            return e.getKey();
+            return (Integer)e.getKey();
          }
       }
 
@@ -251,7 +251,7 @@ public class gleisElementPanel extends basePanel {
    }
 
    private gleisElements.RICHTUNG getCurrentRichtung() {
-      for(Entry<gleisElements.RICHTUNG, JToggleButton> e : this.richtungButtons.entrySet()) {
+      for (Entry<gleisElements.RICHTUNG, JToggleButton> e : this.richtungButtons.entrySet()) {
          if (((JToggleButton)e.getValue()).isSelected()) {
             return (gleisElements.RICHTUNG)e.getKey();
          }
@@ -274,7 +274,7 @@ public class gleisElementPanel extends basePanel {
       gleisTypContainer gtc = gleisTypContainer.getInstance();
       int i = 0;
 
-      for(int t : gtc.getTypes()) {
+      for (int t : gtc.getTypes()) {
          JToggleButton r = new SimpleToggleButton(gtc.getTypName(t));
          if (this.typButtons.isEmpty()) {
             r.setSelected(true);
@@ -286,7 +286,7 @@ public class gleisElementPanel extends basePanel {
 
          try {
             r.setMnemonic(this.keyRow1[i]);
-            ++i;
+            i++;
          } catch (ArrayIndexOutOfBoundsException var13) {
          }
 
@@ -299,7 +299,7 @@ public class gleisElementPanel extends basePanel {
       ButtonGroup bg2 = new ButtonGroup();
       Map<gleisElements.RICHTUNG, String> richtung = gtc.getRichtungen();
 
-      for(Entry<gleisElements.RICHTUNG, String> e : richtung.entrySet()) {
+      for (Entry<gleisElements.RICHTUNG, String> e : richtung.entrySet()) {
          JToggleButton r = new SimpleToggleButton((String)e.getValue());
          if (this.richtungButtons.isEmpty()) {
             r.setSelected(true);
@@ -311,7 +311,7 @@ public class gleisElementPanel extends basePanel {
 
          try {
             r.setMnemonic(this.keyRow2[i]);
-            ++i;
+            i++;
          } catch (ArrayIndexOutOfBoundsException var12) {
          }
 
@@ -330,7 +330,7 @@ public class gleisElementPanel extends basePanel {
       this.elementsButtons.removeAllElements();
       gleisTypContainer gtc = gleisTypContainer.getInstance();
 
-      for(int e : gtc.getTypElements(typ)) {
+      for (int e : gtc.getTypElements(typ)) {
          gleisElementPanel.elementEntry ee = new gleisElementPanel.elementEntry(gleisHelper.findElement(typ, e), gtc.getTypElementName(typ, e));
          this.elementsButtons.addElement(ee);
       }
@@ -609,7 +609,6 @@ public class gleisElementPanel extends basePanel {
       String text;
 
       elementEntry(element e, String t) {
-         super();
          this.element = e;
          this.text = t;
       }
@@ -633,7 +632,6 @@ public class gleisElementPanel extends basePanel {
       private JToggleButton button;
 
       richtungItemListener(Entry<gleisElements.RICHTUNG, String> t, JToggleButton b) {
-         super();
          this.entry = t;
          this.button = b;
       }
@@ -648,7 +646,6 @@ public class gleisElementPanel extends basePanel {
       private JToggleButton button;
 
       typItemListener(int t, JToggleButton b) {
-         super();
          this.typ = t;
          this.button = b;
       }

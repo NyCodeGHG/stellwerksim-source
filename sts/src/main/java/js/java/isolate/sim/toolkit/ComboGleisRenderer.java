@@ -9,7 +9,6 @@ import js.java.isolate.sim.gleis.gleisTypContainer;
 
 public class ComboGleisRenderer extends JLabel implements ListCellRenderer {
    public ComboGleisRenderer() {
-      super();
       this.setOpaque(true);
       this.setHorizontalAlignment(2);
       this.setVerticalAlignment(0);

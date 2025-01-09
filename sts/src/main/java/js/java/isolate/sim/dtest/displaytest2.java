@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleis.displayBar.displayBar;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class displaytest2 implements dtest {
-   public displaytest2() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Display verbunden";
@@ -22,7 +18,7 @@ public class displaytest2 implements dtest {
    }
 
    protected void iterate(gleisbildModelSts glb, Iterator<gleis> it, String message, LinkedList<dtestresult> r) {
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          boolean error;
          if (glb.getDisplayBar().isLegacy()) {
@@ -56,7 +52,7 @@ public class displaytest2 implements dtest {
       LinkedList<gleis> conlist = db.getConnectedItems(gl);
       Iterator<gleis> it = conlist.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis tgl = (gleis)it.next();
          if (!tgl.isDisplayTriggerSelectable()) {
             it.remove();

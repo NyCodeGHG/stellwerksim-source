@@ -17,7 +17,7 @@ public class fasWaitRf extends fahrstrassenState {
       boolean checked = false;
       int rl = this.getFS().rangierlänge;
 
-      for(Iterator<gleis> it = this.getFS().gleisweg.iterator(); it.hasNext() && !checked; --rl) {
+      for (Iterator<gleis> it = this.getFS().gleisweg.iterator(); it.hasNext() && !checked; rl--) {
          gleis g = (gleis)it.next();
          if (rl > 0) {
             checked = checked || g.getFluentData().getStatus() == 3;
@@ -31,12 +31,12 @@ public class fasWaitRf extends fahrstrassenState {
          } else {
             rl = this.getFS().rangierlänge;
 
-            for(gleis g : this.getFS().gleisweg) {
+            for (gleis g : this.getFS().gleisweg) {
                if (rl > 0 && g.getFluentData().getStatus() != 2) {
                   g.getFluentData().setStatusByFs(0, this.getFS());
                }
 
-               --rl;
+               rl--;
             }
 
             this.setNextState(new fasNullState());

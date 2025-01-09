@@ -8,7 +8,6 @@ public class ZugColorText extends ColorText {
    private final frozenZug fz;
 
    ZugColorText(zug _z, zugHandler zh) {
-      super();
       this.z = _z;
       this.h = zh;
       this.fz = new frozenZug();

@@ -13,7 +13,6 @@ public class ComboSeparatorRenderer implements ListCellRenderer {
    private JSeparator separator = new JSeparator();
 
    public ComboSeparatorRenderer(ListCellRenderer delegate) {
-      super();
       this.delegate = delegate;
    }
 

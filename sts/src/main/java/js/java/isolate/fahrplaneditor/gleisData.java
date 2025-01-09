@@ -5,13 +5,11 @@ class gleisData implements Comparable {
    public boolean haltepunkt = false;
 
    gleisData(String n, boolean h) {
-      super();
       this.name = n;
       this.haltepunkt = h;
    }
 
    gleisData(String n) {
-      super();
       this.name = n;
    }
 

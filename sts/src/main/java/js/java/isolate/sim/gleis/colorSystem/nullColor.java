@@ -6,10 +6,9 @@ import java.util.TreeMap;
 
 public class nullColor extends colorStruct {
    public nullColor() {
-      super();
       Field[] fs = this.getClass().getDeclaredFields();
 
-      for(Field f : fs) {
+      for (Field f : fs) {
          try {
             Object o = null;
             if (f.getDeclaringClass().isAssignableFrom(Color.class)) {

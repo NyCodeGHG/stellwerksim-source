@@ -3,10 +3,6 @@ package js.java.tools.actions;
 import javax.swing.event.EventListenerList;
 
 public class ListenerList<T extends AbstractEvent> extends EventListenerList {
-   public ListenerList() {
-      super();
-   }
-
    public void addListener(AbstractListener<T> l) {
       this.add(AbstractListener.class, l);
    }
@@ -18,7 +14,7 @@ public class ListenerList<T extends AbstractEvent> extends EventListenerList {
    public void fireEvent(T fooEvent) {
       Object[] listeners = this.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == AbstractListener.class) {
             ((AbstractListener)listeners[i + 1]).action(fooEvent);
          }

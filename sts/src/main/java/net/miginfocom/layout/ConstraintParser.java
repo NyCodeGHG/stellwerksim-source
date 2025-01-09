@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 
 public final class ConstraintParser {
    private ConstraintParser() {
-      super();
    }
 
    public static LC parseLayoutConstraint(String s) {
@@ -17,7 +16,7 @@ public final class ConstraintParser {
       } else {
          String[] parts = toTrimmedTokens(s, ',');
 
-         for(int i = 0; i < parts.length; ++i) {
+         for (int i = 0; i < parts.length; i++) {
             String part = parts[i];
             if (part != null) {
                int len = part.length();
@@ -35,7 +34,7 @@ public final class ConstraintParser {
             }
          }
 
-         for(String part : parts) {
+         for (String part : parts) {
             if (part != null && part.length() != 0) {
                try {
                   int ix = -1;
@@ -257,7 +256,7 @@ public final class ConstraintParser {
          int i = 0;
          int iSz = parts.size();
 
-         for(int gIx = 0; i < iSz; ++gIx) {
+         for (int gIx = 0; i < iSz; gIx++) {
             gaps[gIx] = parseBoundSize((String)parts.get(i), true, isCols);
             i += 2;
          }
@@ -265,13 +264,13 @@ public final class ConstraintParser {
          DimConstraint[] colSpecs = new DimConstraint[parts.size() >> 1];
          iSz = 0;
 
-         for(int gIx = 0; iSz < colSpecs.length; ++gIx) {
+         for (int gIx = 0; iSz < colSpecs.length; gIx++) {
             if (gIx >= gaps.length - 1) {
                gIx = gaps.length - 2;
             }
 
             colSpecs[iSz] = parseDimConstraint((String)parts.get((iSz << 1) + 1), gaps[gIx], gaps[gIx + 1], isCols);
-            ++iSz;
+            iSz++;
          }
 
          AC ac = new AC();
@@ -286,7 +285,7 @@ public final class ConstraintParser {
       dimConstraint.setGapAfter(gapAfter);
       String[] parts = toTrimmedTokens(s, ',');
 
-      for(int i = 0; i < parts.length; ++i) {
+      for (int i = 0; i < parts.length; i++) {
          String part = parts[i];
 
          try {
@@ -359,7 +358,7 @@ public final class ConstraintParser {
    public static Map<ComponentWrapper, CC> parseComponentConstraints(Map<ComponentWrapper, String> constrMap) {
       HashMap<ComponentWrapper, CC> flowConstrMap = new HashMap();
 
-      for(Entry<ComponentWrapper, String> entry : constrMap.entrySet()) {
+      for (Entry<ComponentWrapper, String> entry : constrMap.entrySet()) {
          flowConstrMap.put(entry.getKey(), parseComponentConstraint((String)entry.getValue()));
       }
 
@@ -373,7 +372,7 @@ public final class ConstraintParser {
       } else {
          String[] parts = toTrimmedTokens(s, ',');
 
-         for(String part : parts) {
+         for (String part : parts) {
             try {
                if (part.length() != 0) {
                   int ix = -1;
@@ -562,10 +561,10 @@ public final class ConstraintParser {
 
                         ix = startsWithLenient(part, "align", 2, true);
                         if (ix > -1) {
-                           String[] gaps = toTrimmedTokens(part.substring(ix).trim(), ' ');
-                           cc.getHorizontal().setAlign(parseUnitValueOrAlign(gaps[0], true, null));
-                           if (gaps.length > 1) {
-                              cc.getVertical().setAlign(parseUnitValueOrAlign(gaps[1], false, null));
+                           String[] gapsx = toTrimmedTokens(part.substring(ix).trim(), ' ');
+                           cc.getHorizontal().setAlign(parseUnitValueOrAlign(gapsx[0], true, null));
+                           if (gapsx.length > 1) {
+                              cc.getVertical().setAlign(parseUnitValueOrAlign(gapsx[1], false, null));
                            }
                            continue;
                         }
@@ -620,7 +619,7 @@ public final class ConstraintParser {
                            String[] pos = toTrimmedTokens(part.substring(ix).trim(), ' ');
                            UnitValue[] bounds = new UnitValue[4];
 
-                           for(int j = 0; j < pos.length; ++j) {
+                           for (int j = 0; j < pos.length; j++) {
                               bounds[j] = parseUnitValue(pos[j], null, j % 2 == 0);
                            }
 
@@ -738,10 +737,10 @@ public final class ConstraintParser {
 
                            ix = startsWithLenient(part, new String[]{"endgroupx", "endgroupy", "egx", "egy"}, new int[]{-1, -1, -1, -1}, true);
                            if (ix > -1) {
-                              String sg = part.substring(ix).trim();
-                              char lc = part.charAt(ix - 1);
-                              DimConstraint dc = lc == 'x' ? cc.getHorizontal() : cc.getVertical();
-                              dc.setEndGroup(sg);
+                              String sgx = part.substring(ix).trim();
+                              char lcx = part.charAt(ix - 1);
+                              DimConstraint dc = lcx == 'x' ? cc.getHorizontal() : cc.getVertical();
+                              dc.setEndGroup(sgx);
                               continue;
                            }
                         }
@@ -806,7 +805,7 @@ public final class ConstraintParser {
          String[] insS = toTrimmedTokens(s, ' ');
          UnitValue[] ins = new UnitValue[4];
 
-         for(int j = 0; j < 4; ++j) {
+         for (int j = 0; j < 4; j++) {
             UnitValue insSz = parseUnitValue(insS[j < insS.length ? j : insS.length - 1], UnitValue.ZERO, j % 2 == 1);
             ins[j] = insSz != null ? insSz : PlatformDefaults.getPanelInsets(j);
          }
@@ -818,7 +817,7 @@ public final class ConstraintParser {
          boolean isPanel = s.startsWith("p");
          UnitValue[] ins = new UnitValue[4];
 
-         for(int j = 0; j < 4; ++j) {
+         for (int j = 0; j < 4; j++) {
             ins[j] = isPanel ? PlatformDefaults.getPanelInsets(j) : PlatformDefaults.getDialogInsets(j);
          }
 
@@ -1074,7 +1073,7 @@ public final class ConstraintParser {
    private static String[] getNumTextParts(String s) {
       int i = 0;
 
-      for(int iSz = s.length(); i < iSz; ++i) {
+      for (int iSz = s.length(); i < iSz; i++) {
          char c = s.charAt(i);
          if (c == ' ') {
             throw new IllegalArgumentException("Space in UnitValue: '" + s + "'");
@@ -1107,15 +1106,15 @@ public final class ConstraintParser {
             }
          }
 
-         for(int j = 0; j < 2; ++j) {
+         for (int j = 0; j < 2; j++) {
             int i = len - 1;
 
-            for(int p = 0; i > 0; --i) {
+            for (int p = 0; i > 0; i--) {
                char c = s.charAt(i);
                if (c == ')') {
-                  ++p;
+                  p++;
                } else if (c == '(') {
-                  --p;
+                  p--;
                } else if (p == 0) {
                   if (j == 0) {
                      if (c == '+') {
@@ -1143,7 +1142,7 @@ public final class ConstraintParser {
    }
 
    private static int startsWithLenient(String s, String[] matches, int[] minChars, boolean acceptTrailing) {
-      for(int i = 0; i < matches.length; ++i) {
+      for (int i = 0; i < matches.length; i++) {
          int minChar = minChars != null ? minChars[i] : -1;
          int ix = startsWithLenient(s, matches[i], minChar, acceptTrailing);
          if (ix > -1) {
@@ -1169,16 +1168,16 @@ public final class ConstraintParser {
             int mSz = match.length();
             int sIx = 0;
 
-            for(int mIx = 0; mIx < mSz; ++mIx) {
-               while(sIx < sSz && (s.charAt(sIx) == ' ' || s.charAt(sIx) == '_')) {
-                  ++sIx;
+            for (int mIx = 0; mIx < mSz; mIx++) {
+               while (sIx < sSz && (s.charAt(sIx) == ' ' || s.charAt(sIx) == '_')) {
+                  sIx++;
                }
 
                if (sIx >= sSz || s.charAt(sIx) != match.charAt(mIx)) {
                   return mIx < minChars || !acceptTrailing && sIx < sSz || sIx < sSz && s.charAt(sIx - 1) != 32 ? -1 : sIx;
                }
 
-               ++sIx;
+               sIx++;
             }
 
             return sIx < sSz && !acceptTrailing && s.charAt(sIx) != 32 ? -1 : sIx;
@@ -1192,17 +1191,17 @@ public final class ConstraintParser {
       boolean disregardDoubles = sep == ' ';
       int p = 0;
 
-      for(int i = 0; i < sSize; ++i) {
+      for (int i = 0; i < sSize; i++) {
          char c = s.charAt(i);
          if (c == '(') {
-            ++p;
+            p++;
          } else if (c == ')') {
-            --p;
+            p--;
          } else if (p == 0 && c == sep) {
-            ++toks;
+            toks++;
 
-            while(disregardDoubles && i < sSize - 1 && s.charAt(i + 1) == ' ') {
-               ++i;
+            while (disregardDoubles && i < sSize - 1 && s.charAt(i + 1) == ' ') {
+               i++;
             }
          }
 
@@ -1221,18 +1220,18 @@ public final class ConstraintParser {
          int pNr = 0;
          p = 0;
 
-         for(int i = 0; i < sSize; ++i) {
-            char c = s.charAt(i);
-            if (c == '(') {
-               ++p;
-            } else if (c == ')') {
-               --p;
-            } else if (p == 0 && c == sep) {
+         for (int i = 0; i < sSize; i++) {
+            char cx = s.charAt(i);
+            if (cx == '(') {
+               p++;
+            } else if (cx == ')') {
+               p--;
+            } else if (p == 0 && cx == sep) {
                retArr[pNr++] = s.substring(st, i).trim();
                st = i + 1;
 
-               while(disregardDoubles && i < sSize - 1 && s.charAt(i + 1) == ' ') {
-                  ++i;
+               while (disregardDoubles && i < sSize - 1 && s.charAt(i + 1) == ' ') {
+                  i++;
                }
             }
          }
@@ -1253,16 +1252,16 @@ public final class ConstraintParser {
       int st = 0;
       int i = 0;
 
-      for(int iSz = s.length(); i < iSz; ++i) {
+      for (int iSz = s.length(); i < iSz; i++) {
          char c = s.charAt(i);
          if (c == '[') {
-            ++s0;
+            s0++;
          } else {
             if (c != ']') {
                continue;
             }
 
-            ++s1;
+            s1++;
          }
 
          if (s0 != s1 && s0 - 1 != s1) {

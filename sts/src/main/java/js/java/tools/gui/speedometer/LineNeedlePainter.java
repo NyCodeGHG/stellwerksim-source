@@ -5,10 +5,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D.Double;
 
 public class LineNeedlePainter extends NeedlePainterBase {
-   public LineNeedlePainter() {
-      super();
-   }
-
    @Override
    Shape paint(SpeedometerPanel parent, double x0, double y0, double r, double phi) {
       double radius = 0.5;

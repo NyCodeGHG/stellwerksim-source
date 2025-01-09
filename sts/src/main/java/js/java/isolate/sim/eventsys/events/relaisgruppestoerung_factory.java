@@ -12,10 +12,6 @@ public class relaisgruppestoerung_factory extends eventFactory {
    private JSpinner num;
    private JCheckBox stark;
 
-   public relaisgruppestoerung_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Relaisgruppenstörung";
@@ -47,7 +43,7 @@ public class relaisgruppestoerung_factory extends eventFactory {
    @Override
    public void readContainer(eventContainer ev) {
       super.readContainer(ev);
-      ev.setIntValue("dauer", Math.max(this.num.getValue(), 5));
+      ev.setIntValue("dauer", Math.max((Integer)this.num.getValue(), 5));
       ev.setValue("stark", this.stark.isSelected());
    }
 

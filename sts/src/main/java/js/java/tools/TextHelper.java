@@ -16,10 +16,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class TextHelper {
-   public TextHelper() {
-      super();
-   }
-
    public static String deAccent(String str) {
       String nfdNormalizedString = Normalizer.normalize(str, Form.NFD);
       Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
@@ -40,7 +36,7 @@ public class TextHelper {
       String s = "";
       boolean inQuote = false;
 
-      for(int i = 0; i < cmd.length(); ++i) {
+      for (int i = 0; i < cmd.length(); i++) {
          char c = cmd.charAt(i);
          if (c == '"') {
             inQuote = !inQuote;
@@ -73,7 +69,7 @@ public class TextHelper {
    public static String[] tokenizerToArray(StringTokenizer zst) {
       String[] ret = new String[zst.countTokens()];
 
-      for(int i = 0; zst.hasMoreTokens(); ++i) {
+      for (int i = 0; zst.hasMoreTokens(); i++) {
          ret[i] = zst.nextToken();
       }
 

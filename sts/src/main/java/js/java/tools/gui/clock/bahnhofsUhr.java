@@ -83,7 +83,6 @@ public class bahnhofsUhr extends JComponent {
    private double lastS = 0.0;
 
    public bahnhofsUhr(bahnhofsUhr.timeDeliverer del, String text) {
-      super();
       this.deliverer = del;
       this.uhrText = text;
       this.setBackground(new Color(136, 136, 136));
@@ -329,7 +328,7 @@ public class bahnhofsUhr extends JComponent {
             g2.setColor(this.zeigercolor);
             g2.fillOval(this.x0 - this.radius_mini, this.y0 - this.radius_mini, this.radius_mini * 2, this.radius_mini * 2);
 
-            for(int m = 0; m < 60; ++m) {
+            for (int m = 0; m < 60; m++) {
                int x1 = (int)((double)this.x0 + (double)this.radius_randover * Math.cos((double)(m * 6) * Math.PI / 180.0));
                int y1 = (int)((double)this.y0 + (double)this.radius_randover * Math.sin((double)(m * 6) * Math.PI / 180.0));
                int sw;
@@ -367,7 +366,7 @@ public class bahnhofsUhr extends JComponent {
                   this.x0 - this.radius_24stdRand - 1, this.y0 - this.radius_24stdRand - 1, this.radius_24stdRand * 2 + 2, this.radius_24stdRand * 2 + 2
                );
 
-               for(int s = 0; s < 24; ++s) {
+               for (int s = 0; s < 24; s++) {
                   int x1 = (int)((double)this.x0 + (double)this.radius_24stdRand * Math.cos((double)(s * 15) * Math.PI / 180.0));
                   int y1 = (int)((double)this.y0 + (double)this.radius_24stdRand * Math.sin((double)(s * 15) * Math.PI / 180.0));
                   int x2 = (int)((double)this.x0 + (double)this.radius_24stdRandZahlen * Math.cos((double)(s * 15) * Math.PI / 180.0));

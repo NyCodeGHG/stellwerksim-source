@@ -5,7 +5,6 @@ public class UserChatMessageEvent {
    public final String msg;
 
    public UserChatMessageEvent(String channel, String msg) {
-      super();
       this.channel = channel;
       this.msg = msg;
    }

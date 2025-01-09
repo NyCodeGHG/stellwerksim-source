@@ -2,7 +2,6 @@ package js.java.tools.fx;
 
 public class GrayscaleFilter extends PointFilter {
    public GrayscaleFilter() {
-      super();
       this.canFilterIndexColorModel = true;
    }
 

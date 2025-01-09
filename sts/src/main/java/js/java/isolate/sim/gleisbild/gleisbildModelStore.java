@@ -164,14 +164,14 @@ public class gleisbildModelStore extends gleisbildModel implements xmllistener, 
             }
          }
 
-         ++this.pet_x;
+         this.pet_x++;
       } else if (tag.compareTo("gleise") == 0) {
-         for(gleis gl : this) {
+         for (gleis gl : this) {
             gl.reset();
             gl.resetN();
          }
 
-         for(gleis gl : this) {
+         for (gleis gl : this) {
             gl.paint1(null, null, 1, 1, 1);
          }
       } else if (tag.compareTo("gleisbild") == 0) {
@@ -188,7 +188,7 @@ public class gleisbildModelStore extends gleisbildModel implements xmllistener, 
          System.out.println("Savedata:");
          String[] lines = data.toString().split("&");
 
-         for(String l : lines) {
+         for (String l : lines) {
             System.out.println(URLDecoder.decode(l));
          }
 
@@ -221,7 +221,7 @@ public class gleisbildModelStore extends gleisbildModel implements xmllistener, 
             this.theapplet.setProgress(-95);
 
             String str;
-            while(null != (str = input.readLine())) {
+            while (null != (str = input.readLine())) {
                if (str.equalsIgnoreCase("[DONE]")) {
                   success = true;
                } else {
@@ -259,7 +259,7 @@ public class gleisbildModelStore extends gleisbildModel implements xmllistener, 
       this.setSelectedGleis(null, true);
       int total = this.getGleisHeight();
 
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          this.theapplet.setProgress((total - gl.getRow()) / 10);
          data.append(TextHelper.urlEncode("data[]"));
          data.append('=');
@@ -392,7 +392,6 @@ public class gleisbildModelStore extends gleisbildModel implements xmllistener, 
       }
 
       ioRunner(String run_data, gleisbildModelStore.ioDoneMessage m) {
-         super();
          this.run_data = run_data;
          this.done = m;
       }

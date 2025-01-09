@@ -41,7 +41,7 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
       LinkedList<Future> futures = new LinkedList();
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_EINFAHRT});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          final gleis eingl = (gleis)it.next();
          gleis gl = eingl;
          gleis before_gl = null;
@@ -65,10 +65,10 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
                }));
                break;
             }
-         } while(next_gl == null);
+         } while (next_gl == null);
       }
 
-      for(Future f : futures) {
+      for (Future f : futures) {
          if (!f.isDone()) {
             try {
                f.get();
@@ -84,7 +84,7 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
    private void runFahrstrassen(gleis signal, gleis einfahrt, LinkedList<fahrstrasse> weg) {
       Iterator<fahrstrasse> it = this.glbModel.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse fs = (fahrstrasse)it.next();
          if (!weg.contains(fs) && !fs.getExtend().isDeleted() && fs.getStart() == signal && !fs.isRFonly()) {
             LinkedList<fahrstrasse> newweg = new LinkedList(weg);
@@ -107,11 +107,11 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
       System.out.println("Kreuz-Test");
       LinkedList<Future> futures = new LinkedList();
 
-      for(eaConnectionTracking.aWay w1 : this.wege) {
+      for (eaConnectionTracking.aWay w1 : this.wege) {
          futures.add(this.searchSub(w1));
       }
 
-      for(Future f : futures) {
+      for (Future f : futures) {
          if (!f.isDone()) {
             try {
                f.get();
@@ -130,14 +130,14 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
             new Runnable() {
                public void run() {
                   System.out.println("K: " + w1.getEinfahrt().getSWWert() + " -> " + w1.getAusfahrt().getSWWert());
-      
-                  for(eaConnectionTracking.aWay w2 : eaConnectionTracking.this.wege) {
+
+                  for (eaConnectionTracking.aWay w2 : eaConnectionTracking.this.wege) {
                      if (w1 != w2
                         && w1.getEinfahrt() != w2.getEinfahrt()
                         && w1.getAusfahrt() != w2.getAusfahrt()
                         && !eaConnectionTracking.this.alreadyAdded(w1.getEinfahrt(), w2.getAusfahrt())) {
-                        for(fahrstrasse fs1 : w1.weg) {
-                           for(fahrstrasse fs2 : w2.weg) {
+                        for (fahrstrasse fs1 : w1.weg) {
+                           for (fahrstrasse fs2 : w2.weg) {
                               if (fs2.intersects(fs1, gleis.ELEMENT_KREUZUNGBRUECKE, gleis.ELEMENT_KREUZUNG)) {
                                  eaConnectionTracking.this.addIndirectWay(w1.getEinfahrt(), w2.getAusfahrt());
                                  break;
@@ -156,7 +156,7 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
    }
 
    private boolean alreadyAdded(gleis einfahrt, gleis ausfahrt) {
-      for(eaConnectionTracking.eaConnection w1 : this.iwege) {
+      for (eaConnectionTracking.eaConnection w1 : this.iwege) {
          if (w1.getEinfahrt() == einfahrt && w1.getAusfahrt() == ausfahrt) {
             return true;
          }
@@ -169,10 +169,10 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
       System.out.println("prepareResult");
       LinkedList<eaConnectionTracking.eaConnection> ret = new LinkedList();
 
-      for(eaConnectionTracking.eaConnection w1 : this.wege) {
+      for (eaConnectionTracking.eaConnection w1 : this.wege) {
          boolean found = false;
 
-         for(eaConnectionTracking.eaConnection w2 : ret) {
+         for (eaConnectionTracking.eaConnection w2 : ret) {
             if (w2.getEinfahrt() == w1.getEinfahrt() && w2.getAusfahrt() == w1.getAusfahrt()) {
                found = true;
                break;
@@ -184,11 +184,11 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
          }
       }
 
-      for(eaConnectionTracking.eaConnection w1 : this.iwege) {
+      for (eaConnectionTracking.eaConnection w1 : this.iwege) {
          boolean found = false;
 
-         for(eaConnectionTracking.eaConnection w2 : ret) {
-            if (w2.getEinfahrt() == w1.getEinfahrt() && w2.getAusfahrt() == w1.getAusfahrt()) {
+         for (eaConnectionTracking.eaConnection w2x : ret) {
+            if (w2x.getEinfahrt() == w1.getEinfahrt() && w2x.getAusfahrt() == w1.getAusfahrt()) {
                found = true;
                break;
             }
@@ -252,7 +252,6 @@ public class eaConnectionTracking extends gleisbildWorkerBase<gleisbildModelFahr
       protected final gleis ausfahrt;
 
       startStop(gleis einfahrt, gleis ausfahrt) {
-         super();
          this.einfahrt = einfahrt;
          this.ausfahrt = ausfahrt;
       }

@@ -44,10 +44,6 @@ public abstract class sperrungBaseFactory extends eventFactory {
    private final element_list allowedElements = new element_list(gleis.ELEMENT_EINFAHRT, gleis.ELEMENT_AUSFAHRT, gleis.ALLE_STRECKENSIGNALE, gleis.ALLE_WEICHEN);
    private gleis selectedgleis = null;
 
-   public sperrungBaseFactory() {
-      super();
-   }
-
    @Override
    protected void initGui() {
       GridBagLayout b = new GridBagLayout();
@@ -103,7 +99,7 @@ public abstract class sperrungBaseFactory extends eventFactory {
                      sperrungBaseFactory.this.dmodel.addElement(g);
                      sperrungBaseFactory.this.glist.setSelectedValue(g, true);
                   }
-      
+
                   sperrungBaseFactory.this.addb.setEnabled(false);
                }
             }
@@ -119,7 +115,7 @@ public abstract class sperrungBaseFactory extends eventFactory {
       this.delb = new JButton("entfernen");
       this.delb.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            for(Object o : sperrungBaseFactory.this.glist.getSelectedValues()) {
+            for (Object o : sperrungBaseFactory.this.glist.getSelectedValues()) {
                sperrungBaseFactory.this.dmodel.removeElement(o);
             }
 
@@ -194,7 +190,7 @@ public abstract class sperrungBaseFactory extends eventFactory {
          this.gdetails.removeAllItems();
          Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_EINFAHRT});
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis gl = (gleis)it.next();
             if (gl != g) {
                this.gdetails.addItem(gl);
@@ -234,7 +230,7 @@ public abstract class sperrungBaseFactory extends eventFactory {
       this.addb.setEnabled(editmode && this.selectedgleis != null && this.selectedgleis.typRequiresENR());
       this.delb.setEnabled(editmode && this.glist.getSelectedIndex() >= 0);
 
-      for(gleis g : ev.getGleisList()) {
+      for (gleis g : ev.getGleisList()) {
          if (g.getElement() == gleis.ELEMENT_EINFAHRT
             || g.getElement() == gleis.ELEMENT_AUSFAHRT
             || g.getElement() == gleis.ELEMENT_SIGNAL
@@ -271,7 +267,7 @@ public abstract class sperrungBaseFactory extends eventFactory {
       HashSet<gleis> hg = new HashSet();
       Enumeration e = this.dmodel.elements();
 
-      while(e.hasMoreElements()) {
+      while (e.hasMoreElements()) {
          gleis g = (gleis)e.nextElement();
          hg.add(g);
          if (g.getElement() == gleis.ELEMENT_WEICHEOBEN || g.getElement() == gleis.ELEMENT_WEICHEUNTEN) {

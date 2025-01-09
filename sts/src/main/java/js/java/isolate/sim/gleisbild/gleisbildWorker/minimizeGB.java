@@ -10,8 +10,8 @@ public class minimizeGB extends gleisbildWorkerBase<gleisbildModel> {
    }
 
    private void cutLeft() {
-      while(this.glbModel.getGleisWidth() > 1) {
-         for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
+      while (this.glbModel.getGleisWidth() > 1) {
+         for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
             gleis gl = this.glbModel.getXY_null(0, y);
             if (!gl.isEmpty()) {
                return;
@@ -23,8 +23,8 @@ public class minimizeGB extends gleisbildWorkerBase<gleisbildModel> {
    }
 
    private void cutRight() {
-      while(this.glbModel.getGleisWidth() > 1) {
-         for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
+      while (this.glbModel.getGleisWidth() > 1) {
+         for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
             gleis gl = this.glbModel.getXY_null(this.glbModel.getGleisWidth() - 1, y);
             if (!gl.isEmpty()) {
                return;
@@ -36,8 +36,8 @@ public class minimizeGB extends gleisbildWorkerBase<gleisbildModel> {
    }
 
    private void cutTop() {
-      while(this.glbModel.getGleisWidth() > 1) {
-         for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+      while (this.glbModel.getGleisWidth() > 1) {
+         for (int x = 0; x < this.glbModel.getGleisWidth(); x++) {
             gleis gl = this.glbModel.getXY_null(x, 0);
             if (!gl.isEmpty()) {
                return;
@@ -49,8 +49,8 @@ public class minimizeGB extends gleisbildWorkerBase<gleisbildModel> {
    }
 
    private void cutBottom() {
-      while(this.glbModel.getGleisHeight() > 1) {
-         for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+      while (this.glbModel.getGleisHeight() > 1) {
+         for (int x = 0; x < this.glbModel.getGleisWidth(); x++) {
             gleis gl = this.glbModel.getXY_null(x, this.glbModel.getGleisHeight() - 1);
             if (!gl.isEmpty()) {
                return;

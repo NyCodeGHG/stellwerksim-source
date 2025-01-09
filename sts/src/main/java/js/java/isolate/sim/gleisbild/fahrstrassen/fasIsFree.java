@@ -22,12 +22,12 @@ public class fasIsFree extends fasChecker {
                boolean festgelegt = false;
                int wcc = this.getFS().weichen.size();
 
-               while(it.hasNext() && ret) {
+               while (it.hasNext() && ret) {
                   gleis g = (gleis)it.next();
                   if (!festgelegt) {
                      if (g.getElement() != gleis.ELEMENT_ZDECKUNGSSIGNAL || !this.getFS().zdeckungssignale.contains(g)) {
                         if (g.getElement() == gleis.ELEMENT_WEICHEOBEN || g.getElement() == gleis.ELEMENT_WEICHEUNTEN) {
-                           --wcc;
+                           wcc--;
                         }
                      } else if (!g.getFluentData().isFrei()) {
                         this.getFS().falseReason = 1;
@@ -68,9 +68,9 @@ public class fasIsFree extends fasChecker {
                }
 
                if (ret) {
-                  for(gleis g : this.getFS().flankenweichen.keySet()) {
-                     if (g.getFluentData().getStellung() != this.getFS().flankenweichen.get(g)) {
-                        ret = ret && g.getFluentData().isFrei();
+                  for (gleis gx : this.getFS().flankenweichen.keySet()) {
+                     if (gx.getFluentData().getStellung() != this.getFS().flankenweichen.get(gx)) {
+                        ret = ret && gx.getFluentData().isFrei();
                         if (!ret) {
                            this.getFS().falseReason = 4;
                         }
@@ -79,8 +79,8 @@ public class fasIsFree extends fasChecker {
                }
 
                if (ret) {
-                  for(gleis g : this.getFS().zwerge) {
-                     if (g.getFluentData().getStellung() != gleisElements.ST_SIGNAL_ROT) {
+                  for (gleis gxx : this.getFS().zwerge) {
+                     if (gxx.getFluentData().getStellung() != gleisElements.ST_SIGNAL_ROT) {
                         this.getFS().falseReason = 5;
                         ret = false;
                      }

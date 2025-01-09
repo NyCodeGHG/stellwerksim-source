@@ -1,10 +1,6 @@
 package js.java.isolate.sim.gleis;
 
 public class gleisGroupNull extends gleisGroup {
-   public gleisGroupNull() {
-      super();
-   }
-
    @Override
    void updateStatus(gleis gl, int status) {
    }

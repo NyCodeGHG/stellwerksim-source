@@ -14,7 +14,6 @@ class timemeasurement {
    protected long[] starttime = new long[7];
 
    protected timemeasurement() {
-      super();
    }
 
    protected void C_init() {

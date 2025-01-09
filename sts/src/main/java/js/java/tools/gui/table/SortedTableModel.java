@@ -19,14 +19,13 @@ public class SortedTableModel extends AbstractTableModel {
    private Comparator m_Comparator;
 
    public SortedTableModel(TableModel model, Comparator comparator) {
-      super();
       this.m_Model = model;
       this.m_Model.addTableModelListener(new TableModelListener() {
          public void tableChanged(TableModelEvent e) {
             if (e.getType() == 0 && e.getLastRow() != Integer.MAX_VALUE) {
                int nColumn = e.getColumn();
 
-               for(int i = e.getFirstRow(); i <= e.getLastRow(); ++i) {
+               for (int i = e.getFirstRow(); i <= e.getLastRow(); i++) {
                   int nSortedRow = SortedTableModel.this.getSortedIndex(i);
                   if (nSortedRow != -1) {
                      if (nColumn == -1) {
@@ -72,7 +71,7 @@ public class SortedTableModel extends AbstractTableModel {
       this.m_Indexes = new int[this.m_Model.getRowCount()];
       int i = 0;
 
-      while(i < this.m_Model.getRowCount()) {
+      while (i < this.m_Model.getRowCount()) {
          this.m_Indexes[i] = i++;
       }
 
@@ -136,11 +135,11 @@ public class SortedTableModel extends AbstractTableModel {
          int p = low;
          int q = middle;
          if (high - low >= 4 && this.compareRows(from[middle - 1], from[middle]) <= 0) {
-            for(int i = low; i < high; ++i) {
+            for (int i = low; i < high; i++) {
                to[i] = from[i];
             }
          } else {
-            for(int i = low; i < high; ++i) {
+            for (int i = low; i < high; i++) {
                if (q < high && (p >= middle || this.compareRows(from[p], from[q]) > 0)) {
                   to[i] = from[q++];
                } else {
@@ -170,7 +169,7 @@ public class SortedTableModel extends AbstractTableModel {
    }
 
    private int getSortedIndex(int nModelIndex) {
-      for(int i = 0; i < this.m_Indexes.length; ++i) {
+      for (int i = 0; i < this.m_Indexes.length; i++) {
          if (this.m_Indexes[i] == nModelIndex) {
             return i;
          }
@@ -188,10 +187,6 @@ public class SortedTableModel extends AbstractTableModel {
    }
 
    public static class DefaultComparator implements Comparator {
-      public DefaultComparator() {
-         super();
-      }
-
       public int compare(Object o1, Object o2) {
          if (o1 == null && o2 == null) {
             return 0;

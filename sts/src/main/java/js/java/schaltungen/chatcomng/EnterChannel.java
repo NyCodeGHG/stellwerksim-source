@@ -9,7 +9,6 @@ public class EnterChannel {
    public final String channelname;
 
    public EnterChannel(String channelname) {
-      super();
       this.channelname = channelname;
    }
 }

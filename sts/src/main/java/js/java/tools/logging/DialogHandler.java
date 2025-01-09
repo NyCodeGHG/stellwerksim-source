@@ -7,7 +7,6 @@ import javax.swing.SwingUtilities;
 
 public class DialogHandler extends Handler {
    public DialogHandler() {
-      super();
       this.setLevel(Level.ALL);
    }
 

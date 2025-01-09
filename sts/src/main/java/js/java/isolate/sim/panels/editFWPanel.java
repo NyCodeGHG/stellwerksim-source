@@ -98,11 +98,11 @@ public class editFWPanel extends basePanel {
    public void shown(String n, gecBase gec) {
       this.fsnodes.clear();
 
-      for(SortedTreeNode p : this.fstreelist.values()) {
+      for (SortedTreeNode p : this.fstreelist.values()) {
          p.removeAllChildren();
       }
 
-      for(fahrstrasse f : this.glbControl.getModel().getFahrwegModel()) {
+      for (fahrstrasse f : this.glbControl.getModel().getFahrwegModel()) {
          SortedTreeNode p = (SortedTreeNode)this.fstreelist.get(f.getExtend().getFSType());
          listFWPanel.FsNode nd = new listFWPanel.FsNode(f);
          p.add(nd);
@@ -114,10 +114,10 @@ public class editFWPanel extends basePanel {
    }
 
    private void showFS(fahrstrasse fs) {
-      for(Entry<Integer, JRadioButton> b : this.fstypes.entrySet()) {
+      for (Entry<Integer, JRadioButton> b : this.fstypes.entrySet()) {
          if (fs != null) {
             fahrstrasse_extend fe = fs.getExtend();
-            if (b.getKey() == fe.getFSType()) {
+            if ((Integer)b.getKey() == fe.getFSType()) {
                ((JRadioButton)b.getValue()).setSelected(true);
             }
          }

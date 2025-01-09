@@ -14,7 +14,6 @@ public class DefaultTableHeaderCellRenderer extends DefaultTableCellRenderer {
    private DefaultTableCellRenderer deligate = null;
 
    public DefaultTableHeaderCellRenderer() {
-      super();
       this.setHorizontalAlignment(0);
       this.setHorizontalTextPosition(2);
       this.setVerticalAlignment(3);
@@ -44,7 +43,7 @@ public class DefaultTableHeaderCellRenderer extends DefaultTableCellRenderer {
    protected Icon getIcon(JTable table, int column) {
       SortKey sortKey = this.getSortKey(table, column);
       if (sortKey != null && table.convertColumnIndexToView(sortKey.getColumn()) == column) {
-         switch(sortKey.getSortOrder()) {
+         switch (sortKey.getSortOrder()) {
             case ASCENDING:
                return UIManager.getIcon("Table.ascendingSortIcon");
             case DESCENDING:

@@ -81,7 +81,7 @@ public class simTest extends JDialog implements Runnable {
                   this.out.println(opts[1] + " unbekannt.");
                }
             } else {
-               for(simCmd c : this.cmdList.values()) {
+               for (simCmd c : this.cmdList.values()) {
                   this.out.println("* " + c.getName() + ":");
                   c.usage(this.out);
                   this.out.println();

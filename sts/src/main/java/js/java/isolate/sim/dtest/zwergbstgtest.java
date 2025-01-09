@@ -9,10 +9,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class zwergbstgtest implements dtest {
-   public zwergbstgtest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Zugdeckungssignal mit Bahnsteig";
@@ -30,7 +26,7 @@ public class zwergbstgtest implements dtest {
       element[] bstgelm = new element[]{gleis.ELEMENT_BAHNSTEIG};
       Iterator<fahrstrasse> it = glb.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse fs = (fahrstrasse)it.next();
          HashSet<gleis> zwerge = fs.getZDSignale();
          if (!zwerge.isEmpty() && !fs.hasElements(bstgelm)) {

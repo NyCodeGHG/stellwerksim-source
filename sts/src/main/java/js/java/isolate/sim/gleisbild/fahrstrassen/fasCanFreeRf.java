@@ -16,7 +16,7 @@ public class fasCanFreeRf extends fasChecker {
          ret = true;
          int rl = this.getFS().rangierlänge;
 
-         for(gleis g : this.getFS().gleisweg) {
+         for (gleis g : this.getFS().gleisweg) {
             boolean match = g.getFluentData().isReserviert() || g.getElement() == gleis.ELEMENT_KREUZUNGBRUECKE;
             if (rl <= 0) {
                if (!match) {
@@ -30,7 +30,7 @@ public class fasCanFreeRf extends fasChecker {
             }
 
             ret = ret && match;
-            --rl;
+            rl--;
          }
       }
 

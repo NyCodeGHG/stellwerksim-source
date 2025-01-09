@@ -42,7 +42,6 @@ public final class LayoutUtil {
    }
 
    private LayoutUtil() {
-      super();
    }
 
    public static String getVersion() {
@@ -115,7 +114,7 @@ public final class LayoutUtil {
       float[] lengths = new float[sizes.length];
       float usedLength = 0.0F;
 
-      for(int i = 0; i < sizes.length; ++i) {
+      for (int i = 0; i < sizes.length; i++) {
          if (sizes[i] != null) {
             float len = sizes[i][startSizeType] != -2147471302 ? (float)sizes[i][startSizeType] : 0.0F;
             int newSizeBounded = getBrokenBoundary(len, sizes[i][0], sizes[i][2]);
@@ -133,8 +132,8 @@ public final class LayoutUtil {
          boolean isGrow = useLengthI < bounds;
          TreeSet<Integer> prioList = new TreeSet();
 
-         for(int i = 0; i < sizes.length; ++i) {
-            ResizeConstraint resC = (ResizeConstraint)getIndexSafe(resConstr, i);
+         for (int ix = 0; ix < sizes.length; ix++) {
+            ResizeConstraint resC = (ResizeConstraint)getIndexSafe(resConstr, ix);
             if (resC != null) {
                prioList.add(isGrow ? resC.growPrio : resC.shrinkPrio);
             }
@@ -142,28 +141,28 @@ public final class LayoutUtil {
 
          Integer[] prioIntegers = (Integer[])prioList.toArray(new Integer[prioList.size()]);
 
-         for(int force = 0; force <= (isGrow && defPushWeights != null ? 1 : 0); ++force) {
-            for(int pr = prioIntegers.length - 1; pr >= 0; --pr) {
+         for (int force = 0; force <= (isGrow && defPushWeights != null ? 1 : 0); force++) {
+            for (int pr = prioIntegers.length - 1; pr >= 0; pr--) {
                int curPrio = prioIntegers[pr];
                float totWeight = 0.0F;
                Float[] resizeWeight = new Float[sizes.length];
 
-               for(int i = 0; i < sizes.length; ++i) {
-                  if (sizes[i] != null) {
-                     ResizeConstraint resC = (ResizeConstraint)getIndexSafe(resConstr, i);
+               for (int ixx = 0; ixx < sizes.length; ixx++) {
+                  if (sizes[ixx] != null) {
+                     ResizeConstraint resC = (ResizeConstraint)getIndexSafe(resConstr, ixx);
                      if (resC != null) {
                         int prio = isGrow ? resC.growPrio : resC.shrinkPrio;
                         if (curPrio == prio) {
                            if (!isGrow) {
-                              resizeWeight[i] = resC.shrink;
+                              resizeWeight[ixx] = resC.shrink;
                            } else {
-                              resizeWeight[i] = force != 0 && resC.grow == null
-                                 ? defPushWeights[i < defPushWeights.length ? i : defPushWeights.length - 1]
+                              resizeWeight[ixx] = force != 0 && resC.grow == null
+                                 ? defPushWeights[ixx < defPushWeights.length ? ixx : defPushWeights.length - 1]
                                  : resC.grow;
                            }
 
-                           if (resizeWeight[i] != null) {
-                              totWeight += resizeWeight[i];
+                           if (resizeWeight[ixx] != null) {
+                              totWeight += resizeWeight[ixx];
                            }
                         }
                      }
@@ -171,28 +170,28 @@ public final class LayoutUtil {
                }
 
                if (totWeight > 0.0F) {
-                  while(true) {
+                  while (true) {
                      float toChange = (float)bounds - usedLength;
                      boolean hit = false;
                      float changedWeight = 0.0F;
 
-                     for(int i = 0; i < sizes.length && totWeight > 1.0E-4F; ++i) {
-                        Float weight = resizeWeight[i];
+                     for (int ixxx = 0; ixxx < sizes.length && totWeight > 1.0E-4F; ixxx++) {
+                        Float weight = resizeWeight[ixxx];
                         if (weight != null) {
                            float sizeDelta = toChange * weight / totWeight;
-                           float newSize = lengths[i] + sizeDelta;
-                           if (sizes[i] != null) {
-                              int newSizeBounded = getBrokenBoundary(newSize, sizes[i][0], sizes[i][2]);
+                           float newSize = lengths[ixxx] + sizeDelta;
+                           if (sizes[ixxx] != null) {
+                              int newSizeBounded = getBrokenBoundary(newSize, sizes[ixxx][0], sizes[ixxx][2]);
                               if (newSizeBounded != -2147471302) {
-                                 resizeWeight[i] = null;
+                                 resizeWeight[ixxx] = null;
                                  hit = true;
                                  changedWeight += weight;
                                  newSize = (float)newSizeBounded;
-                                 sizeDelta = newSize - lengths[i];
+                                 sizeDelta = newSize - lengths[ixxx];
                               }
                            }
 
-                           lengths[i] = newSize;
+                           lengths[ixxx] = newSize;
                            usedLength += sizeDelta;
                         }
                      }
@@ -230,7 +229,7 @@ public final class LayoutUtil {
       int s = 0;
       int i = start;
 
-      for(int iSz = start + len; i < iSz; ++i) {
+      for (int iSz = start + len; i < iSz; i++) {
          s += terms[i];
       }
 
@@ -256,18 +255,14 @@ public final class LayoutUtil {
    }
 
    public static boolean isLeftToRight(LC lc, ContainerWrapper container) {
-      if (lc != null && lc.getLeftToRight() != null) {
-         return lc.getLeftToRight();
-      } else {
-         return container == null || container.isLeftToRight();
-      }
+      return lc != null && lc.getLeftToRight() != null ? lc.getLeftToRight() : container == null || container.isLeftToRight();
    }
 
    static int[] roundSizes(float[] sizes) {
       int[] retInts = new int[sizes.length];
       float posD = 0.0F;
 
-      for(int i = 0; i < retInts.length; ++i) {
+      for (int i = 0; i < retInts.length; i++) {
          int posI = (int)(posD + 0.5F);
          posD += sizes[i];
          retInts[i] = (int)(posD + 0.5F) - posI;
@@ -368,13 +363,13 @@ public final class LayoutUtil {
    }
 
    public static void setSerializedObject(Object caller, Object o) {
-      synchronized(SER_MAP) {
+      synchronized (SER_MAP) {
          SER_MAP.put(caller, o);
       }
    }
 
    public static Object getSerializedObject(Object caller) {
-      synchronized(SER_MAP) {
+      synchronized (SER_MAP) {
          return SER_MAP.remove(caller);
       }
    }

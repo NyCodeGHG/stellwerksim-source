@@ -8,11 +8,9 @@ class msgItem {
    String zielnachbar = "";
 
    msgItem() {
-      super();
    }
 
    msgItem(msgItem mi) {
-      super();
       this.signal = mi.signal;
       this.ziel = mi.ziel;
       this.zielnachbar = mi.zielnachbar;

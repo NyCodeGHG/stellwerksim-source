@@ -77,7 +77,6 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    }
 
    public gleisbildModel(GleisAdapter _theapplet) {
-      super();
       this.theapplet = _theapplet;
       this.gColor = gleisColor.getInstance();
       this.gColor.setNormalColor();
@@ -95,7 +94,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       this.disabledLayers.clear();
       this.markedGleis.clear();
 
-      for(gleis g : this) {
+      for (gleis g : this) {
          g.close();
       }
 
@@ -168,7 +167,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public static LinkedList<gleis> iterator2list(Iterator<gleis> it) {
       LinkedList<gleis> ret = new LinkedList();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          ret.add(it.next());
       }
 
@@ -189,7 +188,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    private Iterator<gleis> findStart(Object... search) {
       gleis start = null;
 
-      for(Object o : search) {
+      for (Object o : search) {
          if (o instanceof gleis) {
             start = (gleis)o;
             break;
@@ -202,9 +201,9 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    private LinkedList extractFindPart(Class c, Object... search) {
       LinkedList s = new LinkedList();
 
-      for(Object o : search) {
+      for (Object o : search) {
          if (o.getClass().isArray()) {
-            for(Object oo : o) {
+            for (Object oo : (Object[])o) {
                if (c.isInstance(oo)) {
                   s.add(oo);
                }
@@ -234,7 +233,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       this.clearMarkedGleis();
       this.clearHighlightedGleis();
 
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          gl.init();
          gl.resetExtend();
       }
@@ -245,7 +244,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    }
 
    public void smallClearStatus() {
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          gl.createName();
          gl.getFluentData().setStatus(0);
          gl.getFluentData().setStellung(gl.getFluentData().getInitialStellung());
@@ -253,7 +252,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    }
 
    public void smallFreeStatus() {
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          gl.getFluentData().setStatus(0);
       }
    }
@@ -316,7 +315,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
 
    public void addMarkedGleis(List<gleis> gl) {
       if (gl != null) {
-         for(gleis g : gl) {
+         for (gleis g : gl) {
             this.markedGleis.add(g);
          }
       }
@@ -349,7 +348,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public void addHighlightedGleis(List<gleis> gl) {
       this.setSelectedGleis(null);
       if (gl != null) {
-         for(gleis g : gl) {
+         for (gleis g : gl) {
             this.highlightedGleis.add(g);
          }
       }
@@ -373,7 +372,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
 
    public void addRolloverGleis(List<gleis> gl) {
       if (gl != null) {
-         for(gleis g : gl) {
+         for (gleis g : gl) {
             this.rolloverGleis.add(g);
          }
       }
@@ -480,7 +479,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
 
    public static massBase createMasstabCalculator(int masstabName) {
       massBase masstabCalc;
-      switch(masstabName) {
+      switch (masstabName) {
          case 0:
          default:
             masstabCalc = new massLenClassic();
@@ -529,7 +528,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    }
 
    protected void clearMasstab() {
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          gl.setMasstab(0);
       }
    }
@@ -574,7 +573,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       int m = 0;
       this.usedenr.clear();
 
-      for(gleis gl2 : this) {
+      for (gleis gl2 : this) {
          m = gl2.getENR();
          if (m > 0) {
             this.usedenr.set(m);
@@ -587,7 +586,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public int getFreeENR() {
       BitSet enrset = new BitSet();
 
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          if (gl.getENR() > 0) {
             enrset.set(gl.getENR());
          }
@@ -599,7 +598,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public BitSet getENRbitset() {
       BitSet enrset = new BitSet();
 
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          if (gl.getENR() > 0) {
             enrset.set(gl.getENR());
          }
@@ -617,12 +616,12 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    }
 
    private void resizeRow(CopyOnWriteArrayList<gleis> r, int newwidth) {
-      while(r.size() < newwidth) {
+      while (r.size() < newwidth) {
          gleis gl = this.createGleis();
          r.add(gl);
       }
 
-      while(r.size() > newwidth) {
+      while (r.size() > newwidth) {
          r.remove(r.size() - 1);
       }
    }
@@ -642,7 +641,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       }
 
       if (this.rows.size() < newheight) {
-         while(this.rows.size() < newheight) {
+         while (this.rows.size() < newheight) {
             CopyOnWriteArrayList<gleis> r = new CopyOnWriteArrayList();
             this.resizeRow(r, newwidth);
             this.rows.add(r);
@@ -650,7 +649,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       } else if (this.rows.size() > newheight) {
          this.height = newheight;
 
-         while(this.rows.size() > newheight) {
+         while (this.rows.size() > newheight) {
             this.rows.remove(this.rows.size() - 1);
          }
       }
@@ -660,7 +659,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
             this.width = newwidth;
          }
 
-         for(CopyOnWriteArrayList<gleis> r : this.rows) {
+         for (CopyOnWriteArrayList<gleis> r : this.rows) {
             this.resizeRow(r, newwidth);
          }
       }
@@ -672,10 +671,10 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    }
 
    protected void setXYonGleis() {
-      for(int y = 0; y < this.rows.size(); ++y) {
-         CopyOnWriteArrayList<gleis> row = (CopyOnWriteArrayList)this.rows.get(y);
+      for (int y = 0; y < this.rows.size(); y++) {
+         CopyOnWriteArrayList<gleis> row = (CopyOnWriteArrayList<gleis>)this.rows.get(y);
 
-         for(int x = 0; x < row.size(); ++x) {
+         for (int x = 0; x < row.size(); x++) {
             gleis gl = (gleis)row.get(x);
             gl.setXY(x, y);
          }
@@ -687,23 +686,23 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       this.resizeRow(emptyr, this.width);
       this.rows.add(emptyr);
 
-      for(int y = this.rows.size() - 1; y > r; --y) {
+      for (int y = this.rows.size() - 1; y > r; y--) {
          this.rows.set(y, this.rows.get(y - 1));
       }
 
       this.rows.set(r, emptyr);
       this.changeC(this.width / 10);
-      ++this.height;
+      this.height++;
       this.setXYonGleis();
       this.structureChanged();
    }
 
    public void insertColumn(int c) {
-      for(CopyOnWriteArrayList<gleis> col : this.rows) {
+      for (CopyOnWriteArrayList<gleis> col : this.rows) {
          gleis gl = this.createGleis();
          col.add(gl);
 
-         for(int x = col.size() - 1; x > c; --x) {
+         for (int x = col.size() - 1; x > c; x--) {
             col.set(x, col.get(x - 1));
          }
 
@@ -711,7 +710,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       }
 
       this.changeC(this.height / 10);
-      ++this.width;
+      this.width++;
       this.setXYonGleis();
       this.structureChanged();
    }
@@ -719,24 +718,24 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public void deleteRow(int r) {
       this.rows.remove(r);
       this.changeC(this.width / 10);
-      --this.height;
+      this.height--;
       this.setXYonGleis();
       this.structureChanged();
    }
 
    public void deleteColumn(int c) {
-      for(CopyOnWriteArrayList<gleis> col : this.rows) {
+      for (CopyOnWriteArrayList<gleis> col : this.rows) {
          col.remove(c);
       }
 
       this.changeC(this.height / 10);
-      --this.width;
+      this.width--;
       this.setXYonGleis();
       this.structureChanged();
    }
 
    public void drawline(List<gleis> line, String color, boolean drawOver) {
-      for(gleis gl : line) {
+      for (gleis gl : line) {
          if (drawOver || gl.getElement() == gleis.ELEMENT_LEER) {
             gl.init(gleis.ELEMENT_STRECKE, gleisElements.RICHTUNG.right, 0, "", 0);
             gl.setExtendFarbe(color);
@@ -770,7 +769,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
             mul = -1;
          }
 
-         for(int x = 0; x < x11; ++x) {
+         for (int x = 0; x < x11; x++) {
             int kx = x1 + x;
             gleis gl;
             if (swapped) {
@@ -784,31 +783,31 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
             }
          }
 
-         for(int x = 0; x < aq; ++x) {
-            int kx = x1 + x11 + x;
+         for (int x = 0; x < aq; x++) {
+            int kxx = x1 + x11 + x;
             int ky = y1 + (x + 1) * mul;
-            gleis gl;
+            gleis glx;
             if (swapped) {
-               gl = this.getXY_null(ky, kx);
+               glx = this.getXY_null(ky, kxx);
             } else {
-               gl = this.getXY_null(kx, ky);
+               glx = this.getXY_null(kxx, ky);
             }
 
-            if (gl != null) {
-               ret.add(gl);
+            if (glx != null) {
+               ret.add(glx);
             }
          }
 
-         for(int x = x2 - x11 - rounder; x <= x2; ++x) {
-            gleis gl;
+         for (int x = x2 - x11 - rounder; x <= x2; x++) {
+            gleis glxx;
             if (swapped) {
-               gl = this.getXY_null(y2, x);
+               glxx = this.getXY_null(y2, x);
             } else {
-               gl = this.getXY_null(x, y2);
+               glxx = this.getXY_null(x, y2);
             }
 
-            if (gl != null) {
-               ret.add(gl);
+            if (glxx != null) {
+               ret.add(glxx);
             }
          }
 
@@ -859,7 +858,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       LinkedList<gleis> ll = new LinkedList();
       Iterator<gleis> it = this.findIterator(search);
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl2 = (gleis)it.next();
          if (gl2.getCntStellung() > (long)mincntlevel) {
             ll.add(gl2);
@@ -873,7 +872,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       LinkedList<gleis> ll = new LinkedList();
       Iterator<gleis> it = this.findIterator(search);
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl2 = (gleis)it.next();
          if (gl2.getCntZug() > (long)mincntlevel) {
             ll.add(gl2);
@@ -887,7 +886,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       Iterator<gleis> it = this.findIterator(gleis.ALLE_BAHNSTEIGE, name);
       LinkedList<gleis> ret = new LinkedList();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          ret.add(gl);
       }
@@ -899,7 +898,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       Iterator<gleis> it = this.findIterator(e);
       TreeMap<String, Integer> ret = new TreeMap();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          ret.put(gl.getSWWert(), gl.getENR());
       }
@@ -912,7 +911,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       LinkedList<gleis> r1 = this.findNeighbor(g1, gleis.ELEMENT_BAHNSTEIG, gleis.ALLE_BSTTRENNER, false);
       TreeSet<String> ret = new TreeSet(new AlphanumComparator());
 
-      for(gleis gl : r1) {
+      for (gleis gl : r1) {
          ret.add(gl.getSWWert());
       }
 
@@ -926,8 +925,8 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public TreeSet<String> findNeighborBahnsteig(Collection<gleis> lgl, boolean mark) {
       TreeSet<String> ret = new TreeSet(new AlphanumComparator());
 
-      for(gleis g1 : lgl) {
-         for(gleis gl : this.findNeighbor(g1, gleis.ELEMENT_BAHNSTEIG, gleis.ALLE_BSTTRENNER, mark)) {
+      for (gleis g1 : lgl) {
+         for (gleis gl : this.findNeighbor(g1, gleis.ELEMENT_BAHNSTEIG, gleis.ALLE_BSTTRENNER, mark)) {
             ret.add(gl.getSWWert());
          }
       }
@@ -944,7 +943,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public boolean isNeighborBahnsteigOf(Collection<gleis> g1, gleis g2) {
       boolean r = false;
 
-      for(gleis gl : g1) {
+      for (gleis gl : g1) {
          r |= this.isNeighborOf(gl, g2, gleis.ELEMENT_BAHNSTEIG, gleis.ALLE_BSTTRENNER, false);
       }
 
@@ -953,7 +952,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
 
    @Deprecated
    public gleis findConnectedBahnsteig(String name, String other) {
-      for(gleis b : this.findBahnsteig(name)) {
+      for (gleis b : this.findBahnsteig(name)) {
          bstflaecheOtherConnectionSearch bscs = new bstflaecheOtherConnectionSearch(this, this.theapplet, b, name, other, false);
          gleis match = bscs.find();
          if (match != null) {
@@ -971,7 +970,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
    public Set<gleis> findAllConnectedBahnsteig(Collection<gleis> bst, boolean highlight) {
       HashSet<gleis> ret = new HashSet();
 
-      for(gleis b : bst) {
+      for (gleis b : bst) {
          bstflaecheAllConnectionSearch bscs = new bstflaecheAllConnectionSearch(this, this.theapplet, b, b.getSWWert(), highlight);
          bscs.find();
          Set<gleis> match1 = bscs.getResult();
@@ -996,11 +995,11 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
          int leerc = 0;
          int lockWidth = this.getLookWidth();
 
-         while(true) {
+         while (true) {
             int y = g1.getRow() + yr;
             boolean leerb = true;
             if (y >= 0 && y < this.rows.size()) {
-               for(int xr = -lockWidth; xr <= lockWidth; ++xr) {
+               for (int xr = -lockWidth; xr <= lockWidth; xr++) {
                   gleis gl = this.getXY_null(g1.getCol() + xr, y);
                   if (gl != null) {
                      if (gleis.ALLE_GLEISE.matches(gl.getElement())) {
@@ -1026,7 +1025,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
             }
 
             if (leerb) {
-               ++leerc;
+               leerc++;
             } else {
                leerc = 0;
             }
@@ -1055,11 +1054,11 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
          int leerc = 0;
          int lookWidth = this.getLookWidth();
 
-         while(true) {
+         while (true) {
             int y = g1.getRow() + yr;
             boolean leerb = true;
             if (y >= 0 && y < this.rows.size()) {
-               for(int xr = -lookWidth; xr <= lookWidth; ++xr) {
+               for (int xr = -lookWidth; xr <= lookWidth; xr++) {
                   gleis gl = this.getXY_null(g1.getCol() + xr, y);
                   if (gl != null) {
                      if (gleis.ALLE_GLEISE.matches(gl.getElement())) {
@@ -1081,7 +1080,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
             }
 
             if (leerb) {
-               ++leerc;
+               leerc++;
             } else {
                leerc = 0;
             }
@@ -1123,13 +1122,11 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       private final LinkedList search;
 
       findgIterator(Iterator<gleis> parent, LinkedList search) {
-         super();
          this.parent = parent;
          this.search = search;
       }
 
       findgIterator(Iterator<gleis> parent) {
-         super();
          this.parent = parent;
          this.search = null;
       }
@@ -1138,7 +1135,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
 
       public boolean hasNext() {
          label26:
-         while(this.parent.hasNext()) {
+         while (this.parent.hasNext()) {
             this.current = (gleis)this.parent.next();
             if (this.search == null) {
                if (this.compare(this.current, null)) {
@@ -1154,7 +1151,7 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
                   }
 
                   e = var1.next();
-               } while(!this.compare(this.current, e));
+               } while (!this.compare(this.current, e));
 
                return true;
             }
@@ -1177,21 +1174,18 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       int ccol;
 
       gbIterator() {
-         super();
          this.crow = 0;
          this.ccol = 0;
       }
 
       gbIterator(gleis start) {
-         super();
-
          try {
             this.crow = start.getRow();
             this.ccol = start.getCol();
-            ++this.ccol;
+            this.ccol++;
             if (this.ccol >= gleisbildModel.this.width) {
                this.ccol = 0;
-               ++this.crow;
+               this.crow++;
             }
          } catch (NullPointerException var4) {
             this.crow = 0;
@@ -1206,10 +1200,10 @@ public class gleisbildModel implements Iterable<gleis>, SessionClose {
       public gleis next() {
          int c = this.ccol;
          int r = this.crow;
-         ++this.ccol;
+         this.ccol++;
          if (this.ccol >= gleisbildModel.this.width) {
             this.ccol = 0;
-            ++this.crow;
+            this.crow++;
          }
 
          if (c >= gleisbildModel.this.width) {

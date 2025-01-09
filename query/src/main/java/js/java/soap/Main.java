@@ -8,10 +8,6 @@ public class Main {
    private static final String URL = "https://js.sandbox.stellwerksim.de/soap.php";
    private static ServiceAccessor webService;
 
-   public Main() {
-      super();
-   }
-
    public static void main(String[] argv) throws InterruptedException, MalformedURLException {
       String user = System.getProperty("jnlp.netbeans_user");
       String pass = System.getProperty("jnlp.netbeans_pass");
@@ -26,13 +22,13 @@ public class Main {
          System.out.println("service");
          String[] friends = service.getFriendFoe(token, true);
 
-         for(String f : friends) {
+         for (String f : friends) {
             System.out.println("Fr:" + f);
          }
 
          String[] foes = service.getFriendFoe(token, false);
 
-         for(String f : foes) {
+         for (String f : foes) {
             System.out.println("Fo:" + f);
          }
 
@@ -51,7 +47,6 @@ public class Main {
       final String kpass;
 
       MyAuthenticator(String user, String pass) {
-         super();
          this.kuser = user;
          this.kpass = pass;
       }

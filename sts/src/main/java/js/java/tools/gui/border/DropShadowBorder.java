@@ -73,7 +73,6 @@ public class DropShadowBorder implements Border {
       boolean showBottomShadow,
       boolean showRightShadow
    ) {
-      super();
       this.lineColor = lineColor;
       this.lineWidth = lineWidth;
       this.shadowSize = shadowSize;
@@ -235,7 +234,7 @@ public class DropShadowBorder implements Border {
    }
 
    private Map<DropShadowBorder.Position, BufferedImage> getImages(Graphics2D g2) {
-      Map<DropShadowBorder.Position, BufferedImage> images = (Map)CACHE.get(this.shadowSize);
+      Map<DropShadowBorder.Position, BufferedImage> images = (Map<DropShadowBorder.Position, BufferedImage>)CACHE.get(this.shadowSize);
       if (images == null) {
          images = new HashMap();
          int rectWidth = this.cornerSize + 1;
@@ -253,7 +252,7 @@ public class DropShadowBorder implements Border {
          float blurry = 1.0F / (float)(this.shadowSize * this.shadowSize);
          float[] blurKernel = new float[this.shadowSize * this.shadowSize];
 
-         for(int i = 0; i < blurKernel.length; ++i) {
+         for (int i = 0; i < blurKernel.length; i++) {
             blurKernel[i] = blurry;
          }
 

@@ -41,7 +41,6 @@ public class BalloonTip extends JPanel {
    }
 
    public BalloonTip(Component attachedComponent, Color fillColor, int borderWidth, int offset) {
-      super();
       this.attachedComponent = attachedComponent;
       this.label.setBorder(new EmptyBorder(borderWidth, borderWidth, borderWidth, borderWidth));
       this.label.setBackground(fillColor);
@@ -72,7 +71,7 @@ public class BalloonTip extends JPanel {
       Container parent = attachedComponent.getParent();
 
       JLayeredPane layeredPane;
-      while(true) {
+      while (true) {
          if (parent instanceof JFrame) {
             layeredPane = ((JFrame)parent).getLayeredPane();
             break;

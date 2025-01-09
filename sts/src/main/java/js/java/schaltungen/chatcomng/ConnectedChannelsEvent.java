@@ -10,7 +10,6 @@ public class ConnectedChannelsEvent {
    public final Collection<IrcChannel> channels;
 
    ConnectedChannelsEvent(Collection<IrcChannel> channels) {
-      super();
       this.channels = channels;
    }
 }

@@ -111,10 +111,10 @@ public class verspaetungColumnSorterOption extends JDialog {
       try {
          int c = 0;
 
-         for(verspaetungHandler.COMPARETYPES k : verspaetungHandler.compareOrder) {
+         for (verspaetungHandler.COMPARETYPES k : verspaetungHandler.compareOrder) {
             verspaetungColumnSorterOption.item i = (verspaetungColumnSorterOption.item)this.items.get(k);
             this.optionPanel.setComponentZOrder(i.pan, c);
-            ++c;
+            c++;
          }
       } catch (Exception var5) {
          Logger.getLogger("stslogger").log(Level.SEVERE, "Caught", var5);
@@ -220,8 +220,8 @@ public class verspaetungColumnSorterOption extends JDialog {
    private void okButtonActionPerformed(ActionEvent evt) {
       ArrayList<verspaetungHandler.COMPARETYPES> ca = new ArrayList();
 
-      for(int i = 0; i < this.optionPanel.getComponentCount(); ++i) {
-         for(verspaetungColumnSorterOption.item it : this.items.values()) {
+      for (int i = 0; i < this.optionPanel.getComponentCount(); i++) {
+         for (verspaetungColumnSorterOption.item it : this.items.values()) {
             if (it.cb.isSelected() && it.pan == this.optionPanel.getComponent(i)) {
                ca.add(it.key);
                break;
@@ -254,7 +254,6 @@ public class verspaetungColumnSorterOption extends JDialog {
       Box pan;
 
       private item() {
-         super();
       }
    }
 }

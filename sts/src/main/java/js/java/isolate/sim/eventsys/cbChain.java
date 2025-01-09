@@ -5,7 +5,6 @@ public class cbChain implements callBehaviour {
    private final callBehaviour two;
 
    public cbChain(callBehaviour one, callBehaviour two) {
-      super();
       this.one = one;
       this.two = two;
    }

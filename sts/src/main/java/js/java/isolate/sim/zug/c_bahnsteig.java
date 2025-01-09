@@ -17,7 +17,7 @@ class c_bahnsteig extends baseChain1Chain {
          z.outputValueChanged = true;
       }
 
-      for(gleis gl : z.zugbelegt) {
+      for (gleis gl : z.zugbelegt) {
          gl.getFluentData().setStatusByZug(2, z);
       }
 

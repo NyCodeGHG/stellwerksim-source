@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 
 public final class Icons {
    private Icons() {
-      super();
    }
 
    public static final Image asImage(Icon icon) {

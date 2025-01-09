@@ -10,7 +10,7 @@ class tmSolver extends solutionInterface {
 
    @Override
    void solve() {
-      for(markerBox tmarker1 : this.tmarker) {
+      for (markerBox tmarker1 : this.tmarker) {
          tmarker1.setSelected(true);
       }
    }

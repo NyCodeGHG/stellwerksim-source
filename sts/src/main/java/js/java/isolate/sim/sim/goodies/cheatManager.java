@@ -22,7 +22,6 @@ public class cheatManager implements ActionListener, SessionClose {
    private Timer chTimer = null;
 
    public cheatManager(stellwerksim_main my_main, JMenuItem cheatMenu) {
-      super();
       this.my_main = my_main;
       this.cheatMenu = cheatMenu;
       this.waitTime = System.currentTimeMillis() + 2400000L;
@@ -75,7 +74,7 @@ public class cheatManager implements ActionListener, SessionClose {
 
    private String createAction(String kind) {
       String ret = "Code unbekannt";
-      switch(kind) {
+      switch (kind) {
          case "randstoerung":
             ret = "Zufällige Störung";
             this.action = new GAction() {
@@ -155,7 +154,7 @@ public class cheatManager implements ActionListener, SessionClose {
    public void result(final int res, String kind) {
       if (this.openWin != null) {
          final String ktext;
-         switch(res) {
+         switch (res) {
             case 200:
                ktext = this.createAction(kind);
                break;

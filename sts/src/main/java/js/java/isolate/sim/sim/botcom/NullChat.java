@@ -8,10 +8,6 @@ import js.java.schaltungen.chatcomng.BOTCOMMAND;
 import js.java.schaltungen.chatcomng.ChannelsNameParser;
 
 public class NullChat implements chatInterface {
-   public NullChat() {
-      super();
-   }
-
    @Override
    public Set<ChannelsNameParser.ChannelName> channelsSet() {
       return new TreeSet();

@@ -9,10 +9,6 @@ import java.net.SocketException;
 public class WOL {
    public static final int WOL_PORT = 7;
 
-   public WOL() {
-      super();
-   }
-
    public static void wakeup(EthernetAddress etheraddress, InetAddress inetaddress) throws SocketException, IOException {
       byte[] data = PacketFactory.createMagicPacket(etheraddress);
       DatagramPacket packet = new DatagramPacket(data, data.length, inetaddress, 7);

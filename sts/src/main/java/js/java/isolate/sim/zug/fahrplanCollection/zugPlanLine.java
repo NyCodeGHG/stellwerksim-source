@@ -25,8 +25,4 @@ public class zugPlanLine {
    public int kErwartetZid = 0;
    public String hinweistext;
    public boolean gMode = false;
-
-   public zugPlanLine() {
-      super();
-   }
 }

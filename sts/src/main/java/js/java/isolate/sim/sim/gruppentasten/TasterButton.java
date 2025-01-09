@@ -36,7 +36,6 @@ public class TasterButton extends JRadioButton implements SessionClose {
    }
 
    public TasterButton(boolean white, Color background, gtBase gtHandler, String fkey) {
-      super();
       this.gtHandler = gtHandler;
       String text = gtHandler.getText();
       char key = gtHandler.getKey();
@@ -86,7 +85,7 @@ public class TasterButton extends JRadioButton implements SessionClose {
       this.blickOn = !this.blickOn;
       boolean b = this.lmode == TasterButton.LIGHTMODE.ON || this.blickOn && this.lmode == TasterButton.LIGHTMODE.BLINK;
 
-      for(TasterImage ti : this.images) {
+      for (TasterImage ti : this.images) {
          ti.setLight(b);
       }
 

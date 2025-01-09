@@ -17,10 +17,6 @@ import java.awt.image.WritableRaster;
 public abstract class ImageUtils {
    private static BufferedImage backgroundImage = null;
 
-   public ImageUtils() {
-      super();
-   }
-
    public static BufferedImage createImage(ImageProducer producer) {
       PixelGrabber pg = new PixelGrabber(producer, 0, 0, -1, -1, null, 0, 0);
 
@@ -74,8 +70,8 @@ public abstract class ImageUtils {
          backgroundImage = new BufferedImage(64, 64, 2);
          Graphics bg = backgroundImage.createGraphics();
 
-         for(int by = 0; by < 64; by += 8) {
-            for(int bx = 0; bx < 64; bx += 8) {
+         for (int by = 0; by < 64; by += 8) {
+            for (int bx = 0; bx < 64; bx += 8) {
                bg.setColor(((bx ^ by) & 8) != 0 ? Color.lightGray : Color.white);
                bg.fillRect(bx, by, 8, 8);
             }
@@ -101,8 +97,8 @@ public abstract class ImageUtils {
             int x2 = (r.x + r.width + w - 1) / w * w;
             int y2 = (r.y + r.height + h - 1) / h * h;
 
-            for(int var15 = y1; var15 < y2; var15 += h) {
-               for(int var14 = x1; var14 < x2; var14 += w) {
+            for (int var15 = y1; var15 < y2; var15 += h) {
+               for (int var14 = x1; var14 < x2; var14 += w) {
                   g.drawImage(backgroundImage, var14, var15, c);
                }
             }
@@ -123,10 +119,10 @@ public abstract class ImageUtils {
       int[] pixels = null;
 
       int y1;
-      for(y1 = height - 1; y1 >= 0; --y1) {
+      for (y1 = height - 1; y1 >= 0; y1--) {
          pixels = getRGB(p, 0, y1, width, 1, pixels);
 
-         for(int x = 0; x < minX; ++x) {
+         for (int x = 0; x < minX; x++) {
             if ((pixels[x] & 0xFF000000) != 0) {
                minX = x;
                maxY = y1;
@@ -135,9 +131,9 @@ public abstract class ImageUtils {
             }
          }
 
-         for(int x = width - 1; x >= maxX; --x) {
-            if ((pixels[x] & 0xFF000000) != 0) {
-               maxX = x;
+         for (int xx = width - 1; xx >= maxX; xx--) {
+            if ((pixels[xx] & 0xFF000000) != 0) {
+               maxX = xx;
                maxY = y1;
                anySelected = true;
                break;
@@ -151,12 +147,12 @@ public abstract class ImageUtils {
 
       pixels = null;
 
-      for(int y = 0; y < y1; ++y) {
+      for (int y = 0; y < y1; y++) {
          pixels = getRGB(p, 0, y, width, 1, pixels);
 
-         for(int x = 0; x < minX; ++x) {
-            if ((pixels[x] & 0xFF000000) != 0) {
-               minX = x;
+         for (int xxx = 0; xxx < minX; xxx++) {
+            if ((pixels[xxx] & 0xFF000000) != 0) {
+               minX = xxx;
                if (y < minY) {
                   minY = y;
                }
@@ -166,9 +162,9 @@ public abstract class ImageUtils {
             }
          }
 
-         for(int x = width - 1; x >= maxX; --x) {
-            if ((pixels[x] & 0xFF000000) != 0) {
-               maxX = x;
+         for (int xxxx = width - 1; xxxx >= maxX; xxxx--) {
+            if ((pixels[xxxx] & 0xFF000000) != 0) {
+               maxX = xxxx;
                if (y < minY) {
                   minY = y;
                }
@@ -191,13 +187,13 @@ public abstract class ImageUtils {
       int[] selRGB = null;
       int[] dstRGB = null;
 
-      for(int i = 0; i < h; ++i) {
+      for (int i = 0; i < h; i++) {
          srcRGB = src.getPixels(x, y, w, 1, srcRGB);
          selRGB = sel.getPixels(x, y, w, 1, selRGB);
          dstRGB = dst.getPixels(x, y, w, 1, dstRGB);
          int k = x;
 
-         for(int j = 0; j < w; ++j) {
+         for (int j = 0; j < w; j++) {
             int sr = srcRGB[k];
             int dir = dstRGB[k];
             int sg = srcRGB[k + 1];
@@ -216,7 +212,7 @@ public abstract class ImageUtils {
          }
 
          dst.setPixels(x, y, w, 1, dstRGB);
-         ++y;
+         y++;
       }
    }
 

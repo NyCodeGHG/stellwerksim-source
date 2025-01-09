@@ -99,14 +99,14 @@ public class HTMLDocument extends javax.swing.text.html.HTMLDocument {
             if (t == Tag.OPTION) {
                HTMLReader.this.option = new Option(attr);
                if (this.selectModel instanceof OptionListModel) {
-                  OptionListModel<Option> m = (OptionListModel)this.selectModel;
+                  OptionListModel<Option> m = (OptionListModel<Option>)this.selectModel;
                   m.addElement(HTMLReader.this.option);
                   if (HTMLReader.this.option.isSelected()) {
                      m.addSelectionInterval(this.optionCount, this.optionCount);
                      m.setInitialSelection(this.optionCount);
                   }
                } else if (this.selectModel instanceof OptionComboBoxModel) {
-                  OptionComboBoxModel<Option> m = (OptionComboBoxModel)this.selectModel;
+                  OptionComboBoxModel<Option> m = (OptionComboBoxModel<Option>)this.selectModel;
                   m.addElement(HTMLReader.this.option);
                   if (HTMLReader.this.option.isSelected()) {
                      m.setSelectedItem(HTMLReader.this.option);
@@ -114,7 +114,7 @@ public class HTMLDocument extends javax.swing.text.html.HTMLDocument {
                   }
                }
 
-               ++this.optionCount;
+               this.optionCount++;
             } else {
                super.start(t, attr);
             }

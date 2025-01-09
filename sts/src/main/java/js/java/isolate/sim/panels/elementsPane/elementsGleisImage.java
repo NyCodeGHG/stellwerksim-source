@@ -14,17 +14,13 @@ public class elementsGleisImage implements Icon {
    private static final Color schiene = new Color(85, 85, 85);
    private static final Color schwelle = new Color(68, 0, 0);
 
-   public elementsGleisImage() {
-      super();
-   }
-
    public void paintIcon(Component c, Graphics g, int x, int y) {
       Graphics2D g2 = (Graphics2D)g;
       GraphicTools.enableGfxAA(g2);
       g2.draw3DRect(x, y, 12, 12, false);
       g2.setColor(schwelle);
 
-      for(int i = 2; i < 10; i += 3) {
+      for (int i = 2; i < 10; i += 3) {
          g2.fillRect(2, i, 10, 1);
       }
 

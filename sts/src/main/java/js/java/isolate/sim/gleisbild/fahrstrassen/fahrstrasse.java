@@ -76,20 +76,19 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    }
 
    public fahrstrasse(String n, gleis start, gleis stop, LinkedList<gleis> weg) {
-      super();
       this.name = n;
       this.startSignal = start;
       this.startSignalEnr = start.getENR();
       this.stopSignal = stop;
       this.stopSignalEnr = stop.getENR();
-      this.gleisweg = (LinkedList)weg.clone();
+      this.gleisweg = (LinkedList<gleis>)weg.clone();
       this.weichen = new HashMap();
       this.flankenweichen = new HashMap();
       this.zwerge = new LinkedList();
       this.zdeckungssignale = new HashSet();
       this.vorsignale = new HashSet();
 
-      for(gleis g : this.gleisweg) {
+      for (gleis g : this.gleisweg) {
          if (g.getElement() == gleis.ELEMENT_WEICHEOBEN || g.getElement() == gleis.ELEMENT_WEICHEUNTEN) {
             this.weichen.put(g, g.getFluentData().getStellung());
             this.createSchutz_Weiche(g);
@@ -105,7 +104,6 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    }
 
    public fahrstrasse(Attributes attrs, String line, gleisbildModelFahrweg glb) throws Exception {
-      super();
       this.gleisweg = new LinkedList();
       this.weichen = new HashMap();
       this.flankenweichen = new HashMap();
@@ -125,7 +123,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
          } else {
             StringTokenizer fst = new StringTokenizer(line + " ", ",");
             if (fst.countTokens() > 0) {
-               while(fst.hasMoreTokens()) {
+               while (fst.hasMoreTokens()) {
                   String e = fst.nextToken().trim();
                   if (e.startsWith("(") && e.endsWith(")")) {
                      e = e.substring(1, e.length() - 1);
@@ -178,7 +176,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
             this.sortGleise(glb);
             this.findEmbeddedSignals();
 
-            for(gleis g : this.gleisweg) {
+            for (gleis g : this.gleisweg) {
                if (g.getElement() == gleis.ELEMENT_KREUZUNG) {
                   this.createSchutz_Kreuzung(g);
                }
@@ -208,7 +206,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    public String toSaveString() {
       StringBuilder str = new StringBuilder(this.name + "," + this.startSignalEnr + "," + this.stopSignalEnr + ",");
 
-      for(gleis g : this.gleisweg) {
+      for (gleis g : this.gleisweg) {
          if (this.weichen.containsKey(g)) {
             str.append("(")
                .append(g.getRow())
@@ -240,7 +238,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
       data.append(this.stopSignalEnr);
       data.append("&");
       if (compactSave) {
-         for(gleis g : this.gleisweg) {
+         for (gleis g : this.gleisweg) {
             if (this.weichen.containsKey(g)) {
                data.append(TextHelper.urlEncode(prefix + "[gleise]"));
                data.append("=");
@@ -249,13 +247,13 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
             }
          }
       } else {
-         for(gleis g : this.gleisweg) {
+         for (gleis gx : this.gleisweg) {
             data.append(TextHelper.urlEncode(prefix + "[gleise]"));
             data.append("=");
-            if (this.weichen.containsKey(g)) {
-               data.append(TextHelper.urlEncode("(" + g.getRow() + ";" + g.getCol() + ";" + this.weichen.get(g) + "),"));
+            if (this.weichen.containsKey(gx)) {
+               data.append(TextHelper.urlEncode("(" + gx.getRow() + ";" + gx.getCol() + ";" + this.weichen.get(gx) + "),"));
             } else {
-               data.append(TextHelper.urlEncode("(" + g.getRow() + ";" + g.getCol() + "),"));
+               data.append(TextHelper.urlEncode("(" + gx.getRow() + ";" + gx.getCol() + "),"));
             }
 
             data.append("&");
@@ -279,7 +277,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    private void findEmbeddedSignals() {
       gleis before_gl = this.startSignal;
 
-      for(gleis g : this.gleisweg) {
+      for (gleis g : this.gleisweg) {
          if (g.getElement() == gleis.ELEMENT_ZWERGSIGNAL) {
             if (g.forUs(before_gl)) {
                this.zwerge.add(g);
@@ -404,7 +402,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
 
                before_gl = pos_gl;
                pos_gl = next_gl;
-            } while(next_gl != null);
+            } while (next_gl != null);
          } catch (Exception var11) {
             System.out.println("Caught exception " + var11.getMessage());
             var11.printStackTrace();
@@ -432,7 +430,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    private void createSchutz_Kreuzung(gleis g) {
       Iterator<gleis> n = g.getNachbarn();
 
-      while(n.hasNext()) {
+      while (n.hasNext()) {
          gleis gl = (gleis)n.next();
          if (!this.gleisweg.contains(gl)) {
             this.createSchutz(g, gl);
@@ -448,8 +446,9 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
       gleis next_gl = null;
       gleis before_gl = before_g;
       gleis gl = g;
+      HashSet<gleis> seenGleis = new HashSet();
 
-      for(HashSet<gleis> seenGleis = new HashSet(); gl != null; gl = next_gl) {
+      while (gl != null) {
          if (gl.getElement() == gleis.ELEMENT_WEICHEOBEN || gl.getElement() == gleis.ELEMENT_WEICHEUNTEN) {
             boolean spitz = gl.weicheSpitz(before_gl);
             if (!spitz) {
@@ -497,6 +496,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
          }
 
          before_gl = gl;
+         gl = next_gl;
       }
    }
 
@@ -505,11 +505,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    }
 
    public boolean checkThis(gleis start, gleis stop) {
-      if (this.fahrstrasseExtend.isDeleted()) {
-         return false;
-      } else {
-         return this.startSignalEnr == start.getENR() && this.stopSignalEnr == stop.getENR();
-      }
+      return this.fahrstrasseExtend.isDeleted() ? false : this.startSignalEnr == start.getENR() && this.stopSignalEnr == stop.getENR();
    }
 
    public int getStartEnr() {
@@ -539,7 +535,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    private int calcAhash(element[] elm) {
       int hash = elm.length;
 
-      for(element v : elm) {
+      for (element v : elm) {
          hash += v.hashCode();
       }
 
@@ -549,9 +545,9 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    public List<gleis> getElements(element[] elm) {
       LinkedList<gleis> ret = new LinkedList();
 
-      for(gleis g : this.gleisweg) {
+      for (gleis g : this.gleisweg) {
          if (g != this.startSignal && g != this.stopSignal) {
-            for(element e : elm) {
+            for (element e : elm) {
                if (g.getElement().matches(e)) {
                   ret.add(g);
                }
@@ -565,15 +561,15 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    public int countElements(element[] elm) {
       int hash = this.calcAhash(elm);
       if (this.count_special.containsKey(hash)) {
-         return this.count_special.get(hash);
+         return (Integer)this.count_special.get(hash);
       } else {
          int cnt = 0;
 
-         for(gleis g : this.gleisweg) {
+         for (gleis g : this.gleisweg) {
             if (g != this.startSignal && g != this.stopSignal) {
-               for(element e : elm) {
+               for (element e : elm) {
                   if (g.getElement().matches(e)) {
-                     ++cnt;
+                     cnt++;
                   }
                }
             }
@@ -630,7 +626,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
             if (this.lastGleis.getFluentData().getStatus() != 1) {
                this.startSignal.getFluentData().setStellung(gleisElements.ST_SIGNAL_ROT, this);
 
-               for(gleis g : this.gleisweg) {
+               for (gleis g : this.gleisweg) {
                   if (g.getFluentData().getStatus() != 2) {
                      g.getFluentData().setStatusByFs(0, this);
                   }
@@ -656,7 +652,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    }
 
    public void buildWeg(boolean setSignale) {
-      for(gleis g : this.gleisweg) {
+      for (gleis g : this.gleisweg) {
          if (this.weichen.get(g) != null) {
             g.getFluentData().setStellung((gleisElements.Stellungen)this.weichen.get(g));
          }
@@ -665,7 +661,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
       }
 
       if (setSignale) {
-         for(gleis g : this.zwerge) {
+         for (gleis g : this.zwerge) {
             g.getFluentData().setStellung(gleis.ST_SIGNAL_GRÜN, this);
          }
 
@@ -674,7 +670,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    }
 
    public void paintWeg() {
-      for(gleis g : this.gleisweg) {
+      for (gleis g : this.gleisweg) {
          g.getFluentData().setStatusByFs(1, this);
       }
    }
@@ -688,12 +684,12 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
          this.startSignal.getFluentData().setStellung(gleisElements.ST_SIGNAL_ROT);
       }
 
-      for(gleis g : this.gleisweg) {
+      for (gleis g : this.gleisweg) {
          g.getFluentData().setStatusByFs(0, this);
       }
 
       if (setSignale) {
-         for(gleis g : this.zwerge) {
+         for (gleis g : this.zwerge) {
             g.getFluentData().setStellung(gleis.ST_SIGNAL_ROT, this);
          }
       }
@@ -708,7 +704,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
             Iterator<gleis> it = this.gleisweg.iterator();
             Iterator<gleis> it2 = f.gleisweg.iterator();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleis g = (gleis)it.next();
                gleis g2 = (gleis)it2.next();
                if (!g.sameGleis(g2)) {
@@ -738,12 +734,12 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    public int compareWay(fahrstrasse f) {
       int ret = 0;
 
-      for(gleis w1 : this.weichen.keySet()) {
+      for (gleis w1 : this.weichen.keySet()) {
          gleisElements.Stellungen st1 = (gleisElements.Stellungen)this.weichen.get(w1);
          if (f.weichen.containsKey(w1)) {
             gleisElements.Stellungen st2 = (gleisElements.Stellungen)f.weichen.get(w1);
             if (st1 != st2) {
-               ++ret;
+               ret++;
             }
          } else {
             ret += 2;
@@ -828,9 +824,9 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
             LinkedList<gleis> gls = new LinkedList();
             gls.add(gl);
             gleis bgl = gl.nextByRichtung(false);
+            gleis before = gl;
 
-            gleis next;
-            for(gleis before = gl; bgl != null && bgl != before && bgl.getFluentData().getStatus() != 2; bgl = next) {
+            while (bgl != null && bgl != before && bgl.getFluentData().getStatus() != 2) {
                if (bgl == this.stopSignal || bgl.getElement() == gleis.ELEMENT_ZDECKUNGSSIGNAL && this.zdeckungssignale.contains(bgl)) {
                   if (bgl.getElement() == gleis.ELEMENT_ZDECKUNGSSIGNAL) {
                      this.lastZD = bgl;
@@ -842,7 +838,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
                      this.lastZD = null;
                   }
 
-                  for(gleis gg : gls) {
+                  for (gleis gg : gls) {
                      gg.getFluentData().setStatusByFs(1, this);
                      if (gg.getFluentData().getStatus() == 1 || gg.getFluentData().getStatus() == 3) {
                         this.lastGleis = gg;
@@ -855,8 +851,9 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
                }
 
                gls.add(bgl);
-               next = bgl.next(before);
+               gleis next = bgl.next(before);
                before = bgl;
+               bgl = next;
             }
 
             this.connectVSigs();
@@ -872,7 +869,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
          sig = this.lastZD;
       }
 
-      for(gleis gl : this.vorsignale) {
+      for (gleis gl : this.vorsignale) {
          if (gl.getFluentData().getStatus() == 1) {
             gl.getFluentData().setConnectedSignal(sig);
          }
@@ -946,7 +943,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
       v.addElement("lastGl");
       v.addElement(this.elementString(this.lastGleis));
 
-      for(gleis gl : this.gleisweg) {
+      for (gleis gl : this.gleisweg) {
          v.addElement(this.elementString(gl));
          String s = "";
          s = s + "S:" + gl.getFluentData().getStatus();
@@ -972,7 +969,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    }
 
    public boolean intersects(fahrstrasse fs1) {
-      for(gleis gl : this.gleisweg) {
+      for (gleis gl : this.gleisweg) {
          if (fs1.gleisweg.contains(gl)) {
             return true;
          }
@@ -984,7 +981,7 @@ public class fahrstrasse extends trigger implements Comparable, Iterable<gleis>,
    public boolean intersects(fahrstrasse fs1, element... ignoreElements) {
       element_list elist = new element_list(ignoreElements);
 
-      for(gleis gl : this.gleisweg) {
+      for (gleis gl : this.gleisweg) {
          if (!elist.matches(gl.getElement()) && fs1.gleisweg.contains(gl)) {
             return true;
          }

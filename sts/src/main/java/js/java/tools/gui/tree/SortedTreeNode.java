@@ -72,11 +72,11 @@ public class SortedTreeNode extends ChangableTreeNode {
    protected void sortChildren(Object[] changedChildren) {
       int cCount = changedChildren.length;
       if (cCount > 0) {
-         for(int counter = 0; counter < cCount; ++counter) {
+         for (int counter = 0; counter < cCount; counter++) {
             this.remove((MutableTreeNode)changedChildren[counter]);
          }
 
-         for(int var4 = 0; var4 < cCount; ++var4) {
+         for (int var4 = 0; var4 < cCount; var4++) {
             this.add((MutableTreeNode)changedChildren[var4]);
          }
       }

@@ -10,7 +10,6 @@ public class CheckThreadViolationRepaintManager extends RepaintManager {
    private WeakReference<JComponent> lastComponent;
 
    public CheckThreadViolationRepaintManager(boolean completeCheck) {
-      super();
       this.completeCheck = completeCheck;
    }
 
@@ -43,7 +42,7 @@ public class CheckThreadViolationRepaintManager extends RepaintManager {
          boolean imageUpdate = false;
          StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 
-         for(StackTraceElement st : stackTrace) {
+         for (StackTraceElement st : stackTrace) {
             if (repaint && st.getClassName().startsWith("javax.swing.") && !st.getClassName().startsWith("javax.swing.SwingWorker")) {
                fromSwing = true;
             }
@@ -80,7 +79,7 @@ public class CheckThreadViolationRepaintManager extends RepaintManager {
       System.out.println("EDT violation detected");
       System.out.println(c);
 
-      for(StackTraceElement st : stackTrace) {
+      for (StackTraceElement st : stackTrace) {
          System.out.println("\tat " + st);
       }
    }

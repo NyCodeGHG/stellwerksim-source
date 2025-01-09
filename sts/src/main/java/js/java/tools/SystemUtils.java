@@ -203,11 +203,7 @@ public class SystemUtils {
    }
 
    static boolean isOSMatch(String osName, String osVersion, String osNamePrefix, String osVersionPrefix) {
-      if (osName != null && osVersion != null) {
-         return isOSNameMatch(osName, osNamePrefix) && isOSVersionMatch(osVersion, osVersionPrefix);
-      } else {
-         return false;
-      }
+      return osName != null && osVersion != null ? isOSNameMatch(osName, osNamePrefix) && isOSVersionMatch(osVersion, osVersionPrefix) : false;
    }
 
    static boolean isOSNameMatch(String osName, String osNamePrefix) {
@@ -219,7 +215,7 @@ public class SystemUtils {
          String[] versionPrefixParts = osVersionPrefix.split("\\.");
          String[] versionParts = osVersion.split("\\.");
 
-         for(int i = 0; i < Math.min(versionPrefixParts.length, versionParts.length); ++i) {
+         for (int i = 0; i < Math.min(versionPrefixParts.length, versionParts.length); i++) {
             if (!versionPrefixParts[i].equals(versionParts[i])) {
                return false;
             }
@@ -229,9 +225,5 @@ public class SystemUtils {
       } else {
          return false;
       }
-   }
-
-   public SystemUtils() {
-      super();
    }
 }

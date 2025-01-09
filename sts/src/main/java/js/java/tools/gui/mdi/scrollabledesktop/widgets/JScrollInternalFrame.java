@@ -37,7 +37,6 @@ public class JScrollInternalFrame extends JInternalFrame {
    }
 
    public JScrollInternalFrame() {
-      super();
       this.saveSize();
    }
 

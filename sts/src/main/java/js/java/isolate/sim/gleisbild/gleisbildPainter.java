@@ -34,10 +34,6 @@ public class gleisbildPainter implements SessionClose {
    private static final Color shadowColor = new Color(0, 0, 0, 51);
    private gleis lastFocus = null;
 
-   public gleisbildPainter() {
-      super();
-   }
-
    @Override
    public void close() {
       if (this.ctimer != null) {
@@ -67,7 +63,7 @@ public class gleisbildPainter implements SessionClose {
       gleisbildModel model = panel.getModel();
       Graphics2D g = scaler.createScaledGraphics(_g);
       if (panel.isEditorView()) {
-         for(gleis gl : model.getMarkedGleis()) {
+         for (gleis gl : model.getMarkedGleis()) {
             Graphics2D g2 = this.createXYGfx(g, gl, scaler);
             gl.aktiv3(panel, g2, scaler.getPaintingScale(), scaler.getPaintingScale(), this.hcnt);
             needTimer = true;
@@ -80,7 +76,7 @@ public class gleisbildPainter implements SessionClose {
             needTimer = true;
             g2.dispose();
          } else {
-            for(gleis gl : model.getHighlightedGleis()) {
+            for (gleis gl : model.getHighlightedGleis()) {
                Graphics2D g2 = this.createXYGfx(g, gl, scaler);
                gl.aktiv2(panel, g2, scaler.getPaintingScale(), scaler.getPaintingScale(), this.hcnt);
                needTimer = true;
@@ -89,7 +85,7 @@ public class gleisbildPainter implements SessionClose {
          }
       }
 
-      for(gleis gl : model.getRolloverGleis()) {
+      for (gleis gl : model.getRolloverGleis()) {
          Graphics2D g2 = this.createXYGfx(g, gl, scaler);
          gl.highlight(panel, g2, scaler.getPaintingScale(), scaler.getPaintingScale(), this.hcnt);
          needTimer = true;
@@ -125,14 +121,14 @@ public class gleisbildPainter implements SessionClose {
          g.setColor(gleis.colors.col_stellwerk_back);
          g.fillRect(0, 0, model.getGleisWidth() * scaler.getPaintingScale(), model.getGleisHeight() * scaler.getPaintingScale());
          HashMap<gleis, Graphics2D> gfxCache = new HashMap();
-         synchronized(this) {
+         synchronized (this) {
             if (this.inPaintComponent) {
                System.out.println("paintComponent race condition!");
             }
 
             this.inPaintComponent = true;
 
-            for(gleis gl : model) {
+            for (gleis gl : model) {
                Graphics2D g2 = this.createXYGfx(g, gl, scaler);
                gfxCache.put(gl, g2);
                gl.setMasstabModus(masstabMode);
@@ -146,29 +142,29 @@ public class gleisbildPainter implements SessionClose {
                   model.getSelectedGleis()
                      .aktiv(panel, (Graphics2D)gfxCache.get(model.getSelectedGleis()), scaler.getPaintingScale(), scaler.getPaintingScale());
                } else {
-                  for(gleis gl : model.getHighlightedGleis()) {
+                  for (gleis gl : model.getHighlightedGleis()) {
                      gl.aktiv(panel, (Graphics2D)gfxCache.get(gl), scaler.getPaintingScale(), scaler.getPaintingScale());
                   }
                }
             }
 
-            for(gleis gl : model) {
+            for (gleis gl : model) {
                gl.paint1(panel, (Graphics2D)gfxCache.get(gl), scaler.getPaintingScale(), scaler.getPaintingScale(), scaler.getFontScale());
             }
 
             gleis.switchNachbar();
          }
 
-         for(gleis gl : model) {
+         for (gleis gl : model) {
             gl.paint1b(panel, (Graphics2D)gfxCache.get(gl), scaler.getPaintingScale(), scaler.getPaintingScale(), scaler.getFontScale());
          }
 
-         for(gleis gl : model) {
+         for (gleis gl : model) {
             Graphics2D g2 = (Graphics2D)gfxCache.get(gl);
             gl.paint2(panel, g2, scaler.getPaintingScale(), scaler.getPaintingScale(), scaler.getFontScale());
          }
 
-         for(gleis gl : model) {
+         for (gleis gl : model) {
             Graphics2D g2 = (Graphics2D)gfxCache.get(gl);
             gl.paint3(panel, g2, scaler.getPaintingScale(), scaler.getPaintingScale(), scaler.getFontScale());
             g2.dispose();
@@ -176,7 +172,7 @@ public class gleisbildPainter implements SessionClose {
 
          long runtime = System.currentTimeMillis() - starttime;
          if (runtime > 450L) {
-            ++this.overtimecnt;
+            this.overtimecnt++;
             if (this.overtimecnt > 6) {
                System.out
                   .println(
@@ -263,7 +259,6 @@ public class gleisbildPainter implements SessionClose {
       private final PaintSaveInterface panel;
 
       cntTask(PaintSaveInterface panel) {
-         super();
          this.panel = panel;
       }
 

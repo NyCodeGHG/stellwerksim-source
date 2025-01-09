@@ -22,11 +22,9 @@ class element_typElement extends element_typ implements storableElement {
 
    @Override
    public boolean matches(element other) {
-      if (!(other instanceof element_typElement)) {
-         return super.matches(other);
-      } else {
-         return this.typ == ((element_typElement)other).typ && this.element == ((element_typElement)other).element;
-      }
+      return !(other instanceof element_typElement)
+         ? super.matches(other)
+         : this.typ == ((element_typElement)other).typ && this.element == ((element_typElement)other).element;
    }
 
    public boolean equals(Object o) {

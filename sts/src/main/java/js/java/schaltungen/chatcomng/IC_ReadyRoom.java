@@ -105,12 +105,12 @@ public class IC_ReadyRoom extends IrcChannel {
             return (int)d;
          });
 
-         for(String unick : this.userNicks.keySet()) {
+         for (String unick : this.userNicks.keySet()) {
             ChatUser cu = this.chat.getKnownUser(unick);
             s.add(cu);
          }
 
-         for(ChatUser cu : s) {
+         for (ChatUser cu : s) {
             String retmsg = cu.nick + "=" + cu.getName() + "/" + cu.getEntrytime() + "/D=" + cu.getDistance();
             this.chat.bus.publish(new DelayEvent(new ChatMessageEvent(replyTo, retmsg), r, TimeUnit.MILLISECONDS));
             r += 100;
@@ -194,7 +194,7 @@ public class IC_ReadyRoom extends IrcChannel {
          this.chat
             .bus
             .publish(new UniqueDelayEvent(new ChatMessageEvent(channel, "IAM " + this.chat.uc.getUsername()), r, TimeUnit.MILLISECONDS, "IAM" + channel));
-         synchronized(this) {
+         synchronized (this) {
             if (this.currentGame != null) {
                r += (int)(Math.random() * 15000.0) + 10000;
                this.chat.bus.publish(new UniqueDelayEvent(new IPlayEvent(channel), r, TimeUnit.MILLISECONDS, "IPLAY" + channel));
@@ -216,7 +216,7 @@ public class IC_ReadyRoom extends IrcChannel {
 
    @EventHandler
    public void sendIPlay(IPlayEvent event) {
-      synchronized(this) {
+      synchronized (this) {
          if (this.currentGame != null) {
             this.chat.bus.publish(new ChatMessageEvent(event.channel, "IPLAY " + this.currentGame));
          }
@@ -225,7 +225,7 @@ public class IC_ReadyRoom extends IrcChannel {
 
    @EventHandler
    public void gameMessage(GameInfoEvent event) {
-      synchronized(this) {
+      synchronized (this) {
          this.currentGame = event.currentGame;
          this.currentGameTime = System.currentTimeMillis();
       }
@@ -264,11 +264,11 @@ public class IC_ReadyRoom extends IrcChannel {
       StringBuilder out = new StringBuilder(xml);
       int i = 1;
 
-      while(i < out.length()) {
+      while (i < out.length()) {
          if (out.charAt(i - 1) == '<' && out.charAt(i) == '/') {
             int start = i;
 
-            while(i < out.length()) {
+            while (i < out.length()) {
                if (out.charAt(++i) == '>') {
                   out.delete(start, i + 1);
                   out.insert(start, '|');
@@ -278,7 +278,7 @@ public class IC_ReadyRoom extends IrcChannel {
 
             i = start;
          } else {
-            ++i;
+            i++;
          }
       }
 
@@ -289,7 +289,7 @@ public class IC_ReadyRoom extends IrcChannel {
       StringBuilder out = new StringBuilder(xml);
       LinkedList<String> openTags = new LinkedList();
 
-      for(int i = 1; i < out.length(); ++i) {
+      for (int i = 1; i < out.length(); i++) {
          if (out.charAt(i - 1) == '<') {
             if (out.charAt(i) == '|') {
                out.deleteCharAt(i);
@@ -298,7 +298,7 @@ public class IC_ReadyRoom extends IrcChannel {
             } else {
                int start = i;
 
-               while(i < out.length()) {
+               while (i < out.length()) {
                   if (out.charAt(++i) == '>') {
                      openTags.addLast(out.substring(start, i));
                      break;
@@ -352,7 +352,7 @@ public class IC_ReadyRoom extends IrcChannel {
       CurrentUserList cul = new CurrentUserList(0);
       cul.users.add(new CurrentUserListUserEntry(this.chat.mySelf(), this.chat.uc.getUsername(), this.currentGame, this.entrytime, this.currentGameTime));
 
-      for(Entry<String, ChatUser> e : this.chat.getKnownUsers2().entrySet()) {
+      for (Entry<String, ChatUser> e : this.chat.getKnownUsers2().entrySet()) {
          if (!((String)e.getKey()).equals(this.chat.mySelf())
             && ((ChatUser)e.getValue()).knowsName()
             && this.userNicks.containsKey(e.getKey())
@@ -404,9 +404,9 @@ public class IC_ReadyRoom extends IrcChannel {
             return;
          }
 
-         Set<String> received = (Set)this.userListReceived.get(event.getSender());
+         Set<String> received = (Set<String>)this.userListReceived.get(event.getSender());
 
-         for(CurrentUserListUserEntry u : event.users) {
+         for (CurrentUserListUserEntry u : event.users) {
             received.add(u.nick);
             ChatUser cu = this.chat.getKnownUser(u.nick);
             if (!u.nick.equals(this.chat.mySelf())) {
@@ -460,7 +460,7 @@ public class IC_ReadyRoom extends IrcChannel {
 
          if (event.finalList) {
             if (!this.amIMaster()) {
-               MASTERSERVER |= event.masterMode;
+               MASTERSERVER = MASTERSERVER | event.masterMode;
                if (MASTERSERVER) {
                   MASTERSERVER_IAM = false;
                }
@@ -468,7 +468,7 @@ public class IC_ReadyRoom extends IrcChannel {
 
             boolean knowsMore = !received.contains(this.chat.mySelf());
             if (!knowsMore) {
-               for(ChatUser nick : this.chat.getKnownUsers2().values()) {
+               for (ChatUser nick : this.chat.getKnownUsers2().values()) {
                   if (nick.knowsName() && this.userNicks.containsKey(nick.nick) && !received.contains(nick.nick) && nick.getDistance() >= 0) {
                      knowsMore = true;
                      this.tracelog.append("KM: " + nick.nick + "\n");
@@ -511,7 +511,7 @@ public class IC_ReadyRoom extends IrcChannel {
       String master = this.chat.mySelf();
       long minEntryTime = this.entrytime;
 
-      for(String nick : this.userNicks.keySet()) {
+      for (String nick : this.userNicks.keySet()) {
          ChatUser cu = this.chat.getKnownUser(nick);
          if (cu.nick.startsWith("U") && cu.getEntrytime() < minEntryTime) {
             minEntryTime = cu.getEntrytime();
@@ -523,7 +523,7 @@ public class IC_ReadyRoom extends IrcChannel {
    }
 
    private boolean amIMaster() {
-      for(String nick : this.userNicks.keySet()) {
+      for (String nick : this.userNicks.keySet()) {
          ChatUser cu = this.chat.getKnownUser(nick);
          if (!cu.nick.equals(this.chat.mySelf()) && cu.nick.startsWith("U") && cu.getEntrytime() < this.entrytime) {
             return false;

@@ -15,10 +15,6 @@ public class SimpleOneRowLayout implements LayoutManager {
    private int fixedElementWidth = 0;
    private boolean bottomUp = false;
 
-   public SimpleOneRowLayout() {
-      super();
-   }
-
    public void addLayoutComponent(String name, Component comp) {
       this.needRecalc = true;
    }
@@ -33,15 +29,15 @@ public class SimpleOneRowLayout implements LayoutManager {
       this.preferredWidth = this.minWidth = 0;
       this.preferredHeight = this.minHeight = 0;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
          if (c.isVisible()) {
             d = c.getPreferredSize();
             this.minHeight = this.preferredHeight = Math.max(d.height, this.preferredHeight);
             if (this.fixedElementWidth > 0) {
-               this.preferredWidth += this.fixedElementWidth;
+               this.preferredWidth = this.preferredWidth + this.fixedElementWidth;
             } else {
-               this.preferredWidth += d.width;
+               this.preferredWidth = this.preferredWidth + d.width;
             }
          }
       }
@@ -78,7 +74,7 @@ public class SimpleOneRowLayout implements LayoutManager {
       int x = insets.left;
       int y = insets.top;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c;
          if (this.bottomUp) {
             c = parent.getComponent(nComps - i - 1);

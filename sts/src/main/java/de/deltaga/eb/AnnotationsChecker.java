@@ -25,10 +25,6 @@ public class AnnotationsChecker extends AbstractProcessor {
    private Filer filer;
    private Messager messager;
 
-   public AnnotationsChecker() {
-      super();
-   }
-
    public synchronized void init(ProcessingEnvironment processingEnv) {
       super.init(processingEnv);
       this.typeUtils = processingEnv.getTypeUtils();
@@ -38,7 +34,7 @@ public class AnnotationsChecker extends AbstractProcessor {
    }
 
    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-      for(Element annotatedElement : roundEnv.getElementsAnnotatedWith(EventHandler.class)) {
+      for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(EventHandler.class)) {
          if (annotatedElement.getKind() != ElementKind.METHOD) {
             this.error(annotatedElement, "Only methods can be annotated with @%s", EventHandler.class.getSimpleName());
          } else {

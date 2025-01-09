@@ -17,7 +17,6 @@ public class rendererBase extends JComponent {
    private static final Timer scheduler = new Timer();
 
    protected rendererBase(zugRenderer zr) {
-      super();
       this.zr = zr;
       this.setOpaque(true);
       Font f = UIManager.getDefaults().getFont("defaultFont");

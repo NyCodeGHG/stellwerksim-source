@@ -17,8 +17,4 @@ public class DataSwitch {
    public boolean multisplit = true;
    @SwitchOption("ui.zugplan")
    public boolean zugplan = true;
-
-   public DataSwitch() {
-      super();
-   }
 }

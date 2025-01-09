@@ -20,7 +20,6 @@ public class GleisAdapterRouter implements GleisAdapter, SessionClose {
    }
 
    public GleisAdapterRouter(GleisAdapter first) {
-      super();
       this.adapters.add(first);
    }
 

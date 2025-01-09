@@ -12,7 +12,6 @@ class TreeDataTipCell implements DataTipCell {
    private final int rowIndex;
 
    TreeDataTipCell(JTree tree, int rowIndex) {
-      super();
       this.tree = tree;
       this.rowIndex = rowIndex;
    }

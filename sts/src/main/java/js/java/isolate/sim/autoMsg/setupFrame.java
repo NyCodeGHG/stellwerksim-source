@@ -63,14 +63,14 @@ public class setupFrame extends JDialog {
       this.initComponents();
       this.mzielCB.removeAllItems();
 
-      for(ChannelsNameParser.ChannelName s : this.msgControl.getNachbarn()) {
+      for (ChannelsNameParser.ChannelName s : this.msgControl.getNachbarn()) {
          this.mzielCB.addItem(s.title);
       }
 
       this.zrichtungCB.removeAllItems();
       this.zrichtungCB.addItem("");
 
-      for(String s : this.msgControl.getNach()) {
+      for (String s : this.msgControl.getNach()) {
          this.zrichtungCB.addItem(s);
       }
 
@@ -83,7 +83,7 @@ public class setupFrame extends JDialog {
    private void initValues() {
       this.msgModel.clear();
 
-      for(msgItem mi : this.msgControl.msgitems) {
+      for (msgItem mi : this.msgControl.msgitems) {
          this.msgModel.addElement(new msgItem(mi));
       }
 
@@ -335,7 +335,7 @@ public class setupFrame extends JDialog {
          this.msgListValueChanged(null);
          this.msgList.repaint();
          if (signals.length > 1) {
-            for(int i = 1; i < signals.length; ++i) {
+            for (int i = 1; i < signals.length; i++) {
                msgItem n = new msgItem();
                n.ziel = mi.ziel;
                n.zielnachbar = mi.zielnachbar;
@@ -355,7 +355,7 @@ public class setupFrame extends JDialog {
    private void delButtonActionPerformed(ActionEvent evt) {
       int[] index = this.msgList.getSelectedIndices();
 
-      for(int i = index.length - 1; i >= 0; --i) {
+      for (int i = index.length - 1; i >= 0; i--) {
          this.msgModel.removeElementAt(index[i]);
       }
    }
@@ -365,7 +365,7 @@ public class setupFrame extends JDialog {
       LinkedList<msgItem> newlist = new LinkedList();
       Enumeration<msgItem> e = this.msgModel.elements();
 
-      while(e.hasMoreElements()) {
+      while (e.hasMoreElements()) {
          msgItem mi = (msgItem)e.nextElement();
          newlist.add(mi);
       }
@@ -397,7 +397,7 @@ public class setupFrame extends JDialog {
       LinkedList<msgItem> newlist = new LinkedList();
       Enumeration<msgItem> e = this.msgModel.elements();
 
-      while(e.hasMoreElements()) {
+      while (e.hasMoreElements()) {
          msgItem mi = (msgItem)e.nextElement();
          newlist.add(mi);
       }

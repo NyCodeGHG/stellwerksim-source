@@ -7,11 +7,10 @@ class nachtColor extends colorStruct {
    private final colorStruct baseColor;
 
    nachtColor(colorStruct base) {
-      super();
       this.baseColor = base;
       base.cloneTo(this);
 
-      for(Entry<String, Color> e : this.col_stellwerk_backmulti.entrySet()) {
+      for (Entry<String, Color> e : this.col_stellwerk_backmulti.entrySet()) {
          String s = (String)e.getKey();
          Color c = (Color)e.getValue();
          if (s.compareTo("normal") == 0) {

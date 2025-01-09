@@ -15,8 +15,4 @@ public class szug_plan_base {
    public int ein_enr = 0;
    public int aus_enr = 0;
    public LinkedList<Integer> flagdatazid = new LinkedList();
-
-   public szug_plan_base() {
-      super();
-   }
 }

@@ -40,7 +40,7 @@ public class randombuestoerung extends gleisevent {
                eret = ret.init(gl.getENR(), this.dauer);
                break;
             }
-         } while(gl != null);
+         } while (gl != null);
 
          this.eventDone();
          return eret;

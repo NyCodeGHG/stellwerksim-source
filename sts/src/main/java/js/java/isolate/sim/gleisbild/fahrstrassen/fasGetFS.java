@@ -11,7 +11,7 @@ class fasGetFS extends fahrstrassenState {
    public void check() {
       boolean allesok = true;
 
-      for(gleis g : this.getFS().gleisweg) {
+      for (gleis g : this.getFS().gleisweg) {
          if (this.getFS().lastZD != null && this.getFS().lastZD.sameGleis(g)) {
             break;
          }
@@ -50,7 +50,7 @@ class fasGetFS extends fahrstrassenState {
          }
       }
 
-      for(gleis g : this.getFS().flankenweichen.keySet()) {
+      for (gleis g : this.getFS().flankenweichen.keySet()) {
          if (g.getFluentData().getStellung() != this.getFS().flankenweichen.get(g)) {
             boolean b = g.getFluentData().setStellung((gleisElements.Stellungen)this.getFS().flankenweichen.get(g), this.getFS());
             if (b) {
@@ -76,11 +76,11 @@ class fasGetFS extends fahrstrassenState {
       }
 
       if (!allesok) {
-         for(gleis g : this.getFS().gleisweg) {
-            if (g.getElement() == gleis.ELEMENT_WEICHEUNTEN && g.getElement() == gleis.ELEMENT_WEICHEOBEN && g.getFluentData().getStatus() == 3) {
-               g.getFluentData().setStatusByFs(4, this.getFS());
+         for (gleis gx : this.getFS().gleisweg) {
+            if (gx.getElement() == gleis.ELEMENT_WEICHEUNTEN && gx.getElement() == gleis.ELEMENT_WEICHEOBEN && gx.getFluentData().getStatus() == 3) {
+               gx.getFluentData().setStatusByFs(4, this.getFS());
             } else {
-               g.getFluentData().setStatusByFs(0, this.getFS());
+               gx.getFluentData().setStatusByFs(0, this.getFS());
             }
          }
 

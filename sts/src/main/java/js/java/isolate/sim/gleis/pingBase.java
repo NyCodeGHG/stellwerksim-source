@@ -4,7 +4,6 @@ class pingBase extends gleisDecorBase {
    protected pingBase parent = null;
 
    pingBase(pingBase p) {
-      super();
       this.parent = p;
    }
 

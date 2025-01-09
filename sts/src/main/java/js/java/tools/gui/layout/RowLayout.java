@@ -17,7 +17,6 @@ public class RowLayout implements LayoutManager {
    private int maxRows;
 
    public RowLayout(int r) {
-      super();
       this.maxRows = r;
       if (r < 1) {
          throw new IllegalArgumentException("max rows <1");
@@ -44,7 +43,7 @@ public class RowLayout implements LayoutManager {
          Insets insets = parent.getInsets();
          int nComps = parent.getComponentCount();
 
-         for(int i = 0; i < nComps; ++i) {
+         for (int i = 0; i < nComps; i++) {
             Component c = parent.getComponent(i);
             Dimension d = c.getPreferredSize();
             maxHeight = Math.max(maxHeight, d.height);
@@ -87,14 +86,14 @@ public class RowLayout implements LayoutManager {
       int column = 0;
       int row = 0;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
-         int w = this.columnSizes.get(column);
+         int w = (Integer)this.columnSizes.get(column);
          c.setSize(w, h);
          c.setLocation(insets.left + x, insets.top + row * h);
          if (++row >= this.maxRows) {
             row = 0;
-            ++column;
+            column++;
             x += w;
          }
       }

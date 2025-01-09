@@ -153,7 +153,6 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    }
 
    public zugUndPlanPanel(stellwerksim_main m, gleisbildModelFahrweg glb, JPanel chatPanel, prefs prefs) {
-      super();
       this.my_main = m;
       this.my_gleisbild = glb;
       m.uc.addCloseObject(this);
@@ -211,7 +210,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    public void close() {
       if (SwingUtilities.isEventDispatchThread()) {
          if (this.alleZuege != null) {
-            for(zug z : this.alleZuege.values()) {
+            for (zug z : this.alleZuege.values()) {
                z.close();
             }
 
@@ -243,7 +242,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    }
 
    private void initZugOnBahnsteig() {
-      for(String bstg : this.alleBahnsteige.getAlleBahnsteig()) {
+      for (String bstg : this.alleBahnsteige.getAlleBahnsteig()) {
          NumString b = new NumString(bstg);
          this.gleisModel.addBahnsteig(b);
       }
@@ -286,7 +285,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    public zug findZugByShortName(String name) {
       zug ret = null;
 
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          try {
             if (z.getSpezialName().compareToIgnoreCase(name) == 0) {
                ret = z;
@@ -303,7 +302,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    public zug findZugByFullName(String name) {
       zug ret = null;
 
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          if (z.getName().compareToIgnoreCase(name) == 0) {
             ret = z;
             break;
@@ -318,7 +317,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       if (name != null && name.length() > 1) {
          name = name.toLowerCase();
 
-         for(zug z : this.alleZuege.values()) {
+         for (zug z : this.alleZuege.values()) {
             if (z.getName().toLowerCase().indexOf(name) >= 0) {
                ret = z;
                break;
@@ -332,10 +331,10 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    public Collection<zug> findZugPointingMe(int zid) {
       LinkedList<zug> ret = new LinkedList();
 
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          Iterator<zug> stops = z.getAllUnseenFahrplanzeilen();
 
-         while(stops.hasNext()) {
+         while (stops.hasNext()) {
             zug uz = (zug)stops.next();
             flagdata fd = uz.getFlags();
             if ((fd.hasFlag('K') || fd.hasFlag('F') || fd.hasFlag('E')) && Integer.parseInt(fd.getFlagdata()) == zid) {
@@ -355,7 +354,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
          row = 0;
       }
 
-      for(int i = 0; i < this.fahrplanMdl.getRowCount(); ++i) {
+      for (int i = 0; i < this.fahrplanMdl.getRowCount(); i++) {
          int ci = (i + row + (running ? 0 : 1)) % this.fahrplanMdl.getRowCount();
          int mi = Fsorter.convertRowIndexToModel(ci);
          zug z = this.fahrplanMdl.getZug(mi);
@@ -513,7 +512,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    }
 
    public void takeAll() {
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          z.setMyTrain(true);
       }
 
@@ -523,7 +522,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    void autoMsgAction(ActionEvent evt) {
       String chn = ((JMenuItem)evt.getSource()).getActionCommand();
 
-      for(int row : this.fahrplanTable.getSelectedRows()) {
+      for (int row : this.fahrplanTable.getSelectedRows()) {
          int selectedRow = this.fahrplanTable.convertRowIndexToModel(row);
          zug z = this.fahrplanMdl.getZug(selectedRow);
          if (z != null) {
@@ -536,7 +535,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       Set<ChannelsNameParser.ChannelName> s = new TreeSet(this.my_main.getChat().channelsSet());
       this.autoMsgMenu.removeAll();
 
-      for(ChannelsNameParser.ChannelName n : s) {
+      for (ChannelsNameParser.ChannelName n : s) {
          JMenuItem mi = new JMenuItem(n.toString());
          mi.setActionCommand(n.name);
          mi.addActionListener(evt -> this.autoMsgAction(evt));
@@ -557,13 +556,13 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       int stehtDummRum = 0;
       int sichtbar = 0;
 
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          if (z.isVisible()) {
-            ++sichtbar;
+            sichtbar++;
          }
 
          if (z.stehtDummRum()) {
-            ++stehtDummRum;
+            stehtDummRum++;
          }
       }
 
@@ -577,7 +576,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
             zug z = this.findZug(r);
             Vector st = z.getStructure();
 
-            for(int i = 0; i < st.size() - 1; i += 2) {
+            for (int i = 0; i < st.size() - 1; i += 2) {
                v.append(st.get(i)).append(':').append(st.get(i + 1)).append('\n');
             }
          } catch (Exception var7) {
@@ -586,7 +585,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
          boolean visonly = r.equalsIgnoreCase("visible");
          boolean mytrain = r.equalsIgnoreCase("mytrain");
 
-         for(zug z : this.alleZuege.values()) {
+         for (zug z : this.alleZuege.values()) {
             if (!visonly && !mytrain || visonly && z.isVisible() || mytrain && z.isMytrain()) {
                v.append(z.getReport()).append('\n');
             }
@@ -605,7 +604,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    private void colorMarkerStateChanged(ItemEvent evt) {
       String cmd = ((JRadioButtonMenuItem)evt.getSource()).getActionCommand();
 
-      for(int selectedRow : this.fahrplanTable.getSelectedRows()) {
+      for (int selectedRow : this.fahrplanTable.getSelectedRows()) {
          int i2 = this.fahrplanTable.convertRowIndexToModel(selectedRow);
          zug z = this.fahrplanMdl.getZug(i2);
          if (z != null) {
@@ -618,7 +617,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    private void numMarkerStateChanged(ItemEvent evt) {
       String cmd = ((JRadioButtonMenuItem)evt.getSource()).getActionCommand();
 
-      for(int selectedRow : this.fahrplanTable.getSelectedRows()) {
+      for (int selectedRow : this.fahrplanTable.getSelectedRows()) {
          int i2 = this.fahrplanTable.convertRowIndexToModel(selectedRow);
          zug z = this.fahrplanMdl.getZug(i2);
          if (z != null) {
@@ -681,7 +680,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       this.addColMenu("türkis", 8, 6);
       this.addColMenu("hellgelb", 9, 7);
 
-      for(int i = 0; i < 10; ++i) {
+      for (int i = 0; i < 10; i++) {
          this.addNumMenu(i, i);
       }
 
@@ -696,7 +695,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    private void bind(JRootPane rp) {
       int i = 0;
 
-      for(final JRadioButtonMenuItem c : this.colMenuItems) {
+      for (final JRadioButtonMenuItem c : this.colMenuItems) {
          rp.getInputMap(2).put(c.getAccelerator(), "colZug" + i);
          rp.getActionMap().put("colZug" + i, new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -705,12 +704,12 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
                }
             }
          });
-         ++i;
+         i++;
       }
 
       i = 0;
 
-      for(final JRadioButtonMenuItem c : this.numMenuItems) {
+      for (final JRadioButtonMenuItem c : this.numMenuItems) {
          rp.getInputMap(2).put(c.getAccelerator(), "numZug" + i);
          rp.getActionMap().put("numZug" + i, new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -719,7 +718,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
                }
             }
          });
-         ++i;
+         i++;
       }
    }
 
@@ -795,16 +794,16 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
                   this.colMenu.setEnabled(true);
                   this.numMenu.setEnabled(true);
 
-                  for(JRadioButtonMenuItem ri : this.colMenuItems) {
+                  for (JRadioButtonMenuItem ri : this.colMenuItems) {
                      if (ri.getActionCommand().equals(z.getMarkColor())) {
                         ri.setSelected(true);
                         break;
                      }
                   }
 
-                  for(JRadioButtonMenuItem ri : this.numMenuItems) {
-                     if (ri.getActionCommand().equals(z.getMarkNum())) {
-                        ri.setSelected(true);
+                  for (JRadioButtonMenuItem rix : this.numMenuItems) {
+                     if (rix.getActionCommand().equals(z.getMarkNum())) {
+                        rix.setSelected(true);
                         break;
                      }
                   }
@@ -840,7 +839,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    public void syncData(StringBuffer senddata) {
       this.zuegePane.setBackground(UIManager.getDefaults().getColor("Panel.background"));
 
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          if (!z.isFertig()) {
             senddata.append(TextHelper.urlEncode("zid[]"));
             senddata.append('=');
@@ -885,7 +884,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       long mintime = currenttime - (long)fromMins * 60000L;
       LinkedList<zugUndPlanPanel.gleisPlan> ret = new LinkedList();
 
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          if (!z.isFertig()) {
             zug.gleisData gd = z.getGleisDataOfGleis(bstg);
             if (gd != null) {
@@ -1001,7 +1000,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    }
 
    public void restoreSplit(List<externalPanel> windows) {
-      for(externalPanel ep : windows) {
+      for (externalPanel ep : windows) {
          ep.rmPanel();
       }
 
@@ -1031,7 +1030,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
          }
       });
 
-      for(int i = 0; i < this.fahrplanTable.getColumnCount(); ++i) {
+      for (int i = 0; i < this.fahrplanTable.getColumnCount(); i++) {
          Fsorter.setComparator(i, ((fahrplanModel)Fsorter.getModel()).getComparator(i));
       }
 
@@ -1046,7 +1045,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
          TableRowSorter<gleisSortModel> Gsorter = new TableRowSorter(new gleisSortModel(this.gleisModel));
          Gsorter.setSortsOnUpdates(true);
 
-         for(int i = 0; i < this.gleisTable.getColumnCount(); ++i) {
+         for (int i = 0; i < this.gleisTable.getColumnCount(); i++) {
             Gsorter.setComparator(i, ((gleisSortModel)Gsorter.getModel()).getComparator(i));
          }
 
@@ -1077,7 +1076,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       int w = 0;
       FontMetrics fm = tab.getFontMetrics(tab.getFont());
 
-      for(String t : text) {
+      for (String t : text) {
          w = Math.max(fm.stringWidth(t) + 12, w);
       }
 
@@ -1302,7 +1301,7 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
    public Vector getStructInfo() {
       Vector ret = new Vector();
 
-      for(zug z : this.alleZuege.values()) {
+      for (zug z : this.alleZuege.values()) {
          try {
             Vector v = z.getStructInfo();
             ret.addElement(v);
@@ -1316,7 +1315,6 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
 
    private class dpainter extends DividerPainter {
       private dpainter() {
-         super();
       }
 
       public void paint(Graphics g, Divider divider) {
@@ -1348,7 +1346,6 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       private stellwerksim_main my_main;
 
       funkAdapter(stellwerksim_main m) {
-         super();
          this.my_main = m;
       }
 
@@ -1440,7 +1437,6 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       public String additionalText = "";
 
       private gleisPlan(zug z, zug.gleisData gd) {
-         super();
          this.z = z;
          this.gd = gd;
       }
@@ -1463,12 +1459,10 @@ public class zugUndPlanPanel extends JPanel implements ButtonPressedListener, ti
       zug ret = null;
 
       zugRunnable(zug _z) {
-         super();
          this.z = _z;
       }
 
       zugRunnable(zug _z, String _bname) {
-         super();
          this.z = _z;
          this.bname = _bname;
       }

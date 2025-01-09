@@ -38,7 +38,6 @@ public abstract class gleisbildControl<T extends gleisbildModel> implements Sess
    };
 
    protected gleisbildControl(UserContext uc) {
-      super();
       this.uc = uc;
       uc.addCloseObject(this);
    }
@@ -82,7 +81,7 @@ public abstract class gleisbildControl<T extends gleisbildModel> implements Sess
    }
 
    private void registerModel(gleisbildModel m) {
-      this.model = m;
+      this.model = (T)m;
 
       try {
          m.addStructureChangeListener(this.sce);

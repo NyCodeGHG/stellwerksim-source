@@ -5,10 +5,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildEditorControl;
 
 public class gecGSet extends gecSelect {
-   public gecGSet() {
-      super();
-   }
-
    @Override
    public void init(gleisbildEditorControl gec, gecBase lastMode) {
       super.init(gec, lastMode);

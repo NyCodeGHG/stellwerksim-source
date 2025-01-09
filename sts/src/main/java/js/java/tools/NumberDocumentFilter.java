@@ -6,14 +6,10 @@ import javax.swing.text.DocumentFilter;
 import javax.swing.text.DocumentFilter.FilterBypass;
 
 public class NumberDocumentFilter extends DocumentFilter {
-   public NumberDocumentFilter() {
-      super();
-   }
-
    private String filter(String string) {
       StringBuilder s = new StringBuilder();
 
-      for(int i = 0; i < string.length(); ++i) {
+      for (int i = 0; i < string.length(); i++) {
          char c = string.charAt(i);
          if (Character.isDigit(c)) {
             s.append(c);

@@ -4,10 +4,6 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 public class RealisticSure {
-   public RealisticSure() {
-      super();
-   }
-
    public static boolean question(Component parent) {
       int j = JOptionPane.showConfirmDialog(
          parent,

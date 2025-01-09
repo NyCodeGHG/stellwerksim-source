@@ -17,10 +17,6 @@ import net.miginfocom.swing.MigLayout;
 public class DefaultContentDesign implements IContentDesign {
    private ICommandLinkPainter commandButtonPainter;
 
-   public DefaultContentDesign() {
-      super();
-   }
-
    @Override
    public void updateUIDefaults() {
       UIManager.put("TaskDialog.moreDetailsIcon", createResourceIcon("moreDetails.png"));

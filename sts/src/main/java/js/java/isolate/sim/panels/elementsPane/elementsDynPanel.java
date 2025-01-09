@@ -25,7 +25,6 @@ public class elementsDynPanel extends ThinkingPanel implements ActionListener, S
    private static long lastScroller = 0L;
 
    public elementsDynPanel(String titel) {
-      super();
       this.titel = titel;
       this.setBorder(new menuBorderBoxed(titel));
       this.setLayout(new AutoMultiColumnLayout());
@@ -67,7 +66,7 @@ public class elementsDynPanel extends ThinkingPanel implements ActionListener, S
    }
 
    public void actionPerformed(ActionEvent e) {
-      --this.focusLevel;
+      this.focusLevel--;
       if (this.focusLevel <= 0) {
          this.focusLevel = 0;
       }
@@ -76,7 +75,7 @@ public class elementsDynPanel extends ThinkingPanel implements ActionListener, S
          this.focusTimer.stop();
       }
 
-      --this.focusRotate;
+      this.focusRotate--;
       if (this.focusRotate < 0) {
          this.focusRotate = this.DASHSIZE - 1;
       }

@@ -8,7 +8,6 @@ public class IrcLine {
    public final boolean statusMessage;
 
    public IrcLine(String channel, String channeltitel, String line, Object clickEvent, boolean statusMessage) {
-      super();
       this.channel = channel;
       this.channeltitel = channeltitel;
       this.line = line;

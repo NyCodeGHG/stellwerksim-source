@@ -23,7 +23,6 @@ public class fahrstrasseListRenderer extends JPanel implements ListCellRenderer 
    private JLabel icon;
 
    protected fahrstrasseListRenderer(boolean withSep) {
-      super();
       this.setOpaque(true);
       this.setLayout(new BorderLayout());
       this.label = new JLabel();
@@ -69,7 +68,7 @@ public class fahrstrasseListRenderer extends JPanel implements ListCellRenderer 
          String n = null;
          fahrstrasse f = (fahrstrasse)value;
          String v = " " + f.getName();
-         switch(f.getExtend().getFSType()) {
+         switch (f.getExtend().getFSType()) {
             case 0:
                n = FSTYPE_DEFAULT;
                break;

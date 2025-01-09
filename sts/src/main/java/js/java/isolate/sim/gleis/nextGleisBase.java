@@ -4,7 +4,6 @@ class nextGleisBase extends gleisDecorBase {
    protected nextGleisBase parent = null;
 
    nextGleisBase(nextGleisBase p) {
-      super();
       this.parent = p;
    }
 

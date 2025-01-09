@@ -23,7 +23,6 @@ public class BinaryStore {
    protected static final int TYPE_BOOLEAN = 3;
 
    protected BinaryStore(long version) {
-      super();
       this.version = version;
    }
 
@@ -53,7 +52,7 @@ public class BinaryStore {
    private String readName(DataInputStream in) throws IOException {
       boolean inName = false;
 
-      while(!inName) {
+      while (!inName) {
          int b = in.readUnsignedByte();
          if (b == 255) {
             inName = true;
@@ -70,7 +69,7 @@ public class BinaryStore {
    protected final String readValueString(DataInputStream in) throws IOException {
       boolean inName = false;
 
-      while(!inName) {
+      while (!inName) {
          int b = in.readUnsignedByte();
          if (b == 254) {
             inName = true;
@@ -87,7 +86,7 @@ public class BinaryStore {
    protected final long readValueLong(DataInputStream in) throws IOException {
       boolean inName = false;
 
-      while(!inName) {
+      while (!inName) {
          int b = in.readUnsignedByte();
          if (b == 254) {
             inName = true;
@@ -104,7 +103,7 @@ public class BinaryStore {
    protected final boolean readValueBoolean(DataInputStream in) throws IOException {
       boolean inName = false;
 
-      while(!inName) {
+      while (!inName) {
          int b = in.readUnsignedByte();
          if (b == 254) {
             inName = true;
@@ -147,22 +146,22 @@ public class BinaryStore {
    }
 
    protected void handleReadValue(DataInputStream in, String name) throws IOException {
-      for(Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
+      for (Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
          Field[] fs = obj.getDeclaredFields();
 
-         for(Field f : fs) {
+         for (Field f : fs) {
             try {
                BinaryStore.StoreElement se = (BinaryStore.StoreElement)f.getAnnotation(BinaryStore.StoreElement.class);
                if (se != null && se.storeName().equals(name)) {
-                  if (f.getType() == Boolean.TYPE) {
+                  if (f.getType() == boolean.class) {
                      if (this.readType(in) == 3) {
                         f.setBoolean(this, this.readValueBoolean(in));
                      }
-                  } else if (f.getType() == Long.TYPE) {
+                  } else if (f.getType() == long.class) {
                      if (this.readType(in) == 2) {
                         f.setLong(this, this.readValueLong(in));
                      }
-                  } else if (f.getType() == Integer.TYPE) {
+                  } else if (f.getType() == int.class) {
                      if (this.readType(in) == 2) {
                         f.setInt(this, (int)this.readValueLong(in));
                      }
@@ -179,7 +178,7 @@ public class BinaryStore {
 
    private void readExternal(DataInputStream in) {
       try {
-         while(true) {
+         while (true) {
             String name = this.readName(in);
             this.handleReadValue(in, name);
          }
@@ -189,20 +188,20 @@ public class BinaryStore {
 
    protected void writeExternal(DataOutputStream out) {
       try {
-         for(Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
+         for (Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
             Field[] fs = obj.getDeclaredFields();
 
-            for(Field f : fs) {
+            for (Field f : fs) {
                try {
                   BinaryStore.StoreElement se = (BinaryStore.StoreElement)f.getAnnotation(BinaryStore.StoreElement.class);
                   if (se != null) {
                      BinaryStore.DeprecatedElement de = (BinaryStore.DeprecatedElement)f.getAnnotation(BinaryStore.DeprecatedElement.class);
                      if (de == null) {
-                        if (f.getType() == Boolean.TYPE) {
+                        if (f.getType() == boolean.class) {
                            this.writeData(out, se.storeName(), f.getBoolean(this));
-                        } else if (f.getType() == Long.TYPE) {
+                        } else if (f.getType() == long.class) {
                            this.writeData(out, se.storeName(), f.getLong(this));
-                        } else if (f.getType() == Integer.TYPE) {
+                        } else if (f.getType() == int.class) {
                            this.writeData(out, se.storeName(), (long)f.getInt(this));
                         } else if (f.getType() == String.class) {
                            this.writeData(out, se.storeName(), (String)f.get(this));
@@ -224,10 +223,10 @@ public class BinaryStore {
    public String toString() {
       StringBuilder ret = new StringBuilder();
 
-      for(Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
+      for (Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
          Field[] fs = obj.getDeclaredFields();
 
-         for(Field f : fs) {
+         for (Field f : fs) {
             try {
                BinaryStore.StoreElement se = (BinaryStore.StoreElement)f.getAnnotation(BinaryStore.StoreElement.class);
                if (se != null) {
@@ -235,11 +234,11 @@ public class BinaryStore {
                   if (de == null) {
                      f.setAccessible(true);
                      ret.append(f.getName()).append("(").append(se.storeName()).append(")=");
-                     if (f.getType() == Boolean.TYPE) {
+                     if (f.getType() == boolean.class) {
                         ret.append(f.getBoolean(this));
-                     } else if (f.getType() == Long.TYPE) {
+                     } else if (f.getType() == long.class) {
                         ret.append(f.getLong(this));
-                     } else if (f.getType() == Integer.TYPE) {
+                     } else if (f.getType() == int.class) {
                         ret.append(f.getInt(this));
                      } else if (f.getType() == String.class) {
                         ret.append(f.get(this));

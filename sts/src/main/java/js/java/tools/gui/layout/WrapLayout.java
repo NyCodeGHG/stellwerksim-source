@@ -12,7 +12,6 @@ public class WrapLayout extends FlowLayout {
    private Dimension preferredLayoutSize;
 
    public WrapLayout() {
-      super();
    }
 
    public WrapLayout(int align) {
@@ -29,12 +28,12 @@ public class WrapLayout extends FlowLayout {
 
    public Dimension minimumLayoutSize(Container target) {
       Dimension minimum = this.layoutSize(target, false);
-      minimum.width -= this.getHgap() + 1;
+      minimum.width = minimum.width - (this.getHgap() + 1);
       return minimum;
    }
 
    private Dimension layoutSize(Container target, boolean preferred) {
-      synchronized(target.getTreeLock()) {
+      synchronized (target.getTreeLock()) {
          int targetWidth = target.getSize().width;
          if (targetWidth == 0) {
             targetWidth = Integer.MAX_VALUE;
@@ -50,7 +49,7 @@ public class WrapLayout extends FlowLayout {
          int rowHeight = 0;
          int nmembers = target.getComponentCount();
 
-         for(int i = 0; i < nmembers; ++i) {
+         for (int i = 0; i < nmembers; i++) {
             Component m = target.getComponent(i);
             if (m.isVisible()) {
                Dimension d = preferred ? m.getPreferredSize() : m.getMinimumSize();
@@ -71,7 +70,7 @@ public class WrapLayout extends FlowLayout {
 
          this.addRow(dim, rowWidth, rowHeight);
          dim.width += horizontalInsetsAndGap;
-         dim.height += insets.top + insets.bottom + vgap * 2;
+         dim.height = dim.height + insets.top + insets.bottom + vgap * 2;
          Container scrollPane = SwingUtilities.getAncestorOfClass(JScrollPane.class, target);
          if (scrollPane != null) {
             dim.width -= hgap + 1;
@@ -84,7 +83,7 @@ public class WrapLayout extends FlowLayout {
    private void addRow(Dimension dim, int rowWidth, int rowHeight) {
       dim.width = Math.max(dim.width, rowWidth);
       if (dim.height > 0) {
-         dim.height += this.getVgap();
+         dim.height = dim.height + this.getVgap();
       }
 
       dim.height += rowHeight;

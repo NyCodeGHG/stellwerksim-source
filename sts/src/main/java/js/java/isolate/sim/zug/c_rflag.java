@@ -20,7 +20,7 @@ class c_rflag extends baseChain1Chain {
             LinkedList newzugbelegt = new LinkedList();
 
             try {
-               while(z.zugbelegt.size() > 0) {
+               while (z.zugbelegt.size() > 0) {
                   newzugbelegt.addFirst(z.zugbelegt.removeFirst());
                }
             } catch (NoSuchElementException var4) {

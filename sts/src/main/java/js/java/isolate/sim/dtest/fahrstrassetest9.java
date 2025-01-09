@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class fahrstrassetest9 implements dtest {
-   public fahrstrassetest9() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Fahrstrassen 9";
@@ -26,7 +22,7 @@ public class fahrstrassetest9 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<fahrstrasse> it = glb.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse f = (fahrstrasse)it.next();
          if (f.getExtend().fstype == 8
             && (f.getStart().getElement().matches(gleis.ELEMENT_ZWERGSIGNAL) || f.getStop().getElement().matches(gleis.ELEMENT_ZWERGSIGNAL))) {

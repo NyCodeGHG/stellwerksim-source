@@ -11,10 +11,6 @@ import js.java.schaltungen.UserContextMini;
 public class v_http extends InitTestBase {
    private String error = "";
 
-   public v_http() {
-      super();
-   }
-
    @Override
    public int test(UserContextMini uc) {
       int ret = 0;
@@ -27,7 +23,7 @@ public class v_http extends InitTestBase {
          Throwable var7 = null;
 
          try {
-            while(in.readLine() != null) {
+            while (in.readLine() != null) {
             }
          } catch (Throwable var17) {
             var7 = var17;

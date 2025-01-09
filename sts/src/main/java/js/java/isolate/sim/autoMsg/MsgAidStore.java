@@ -9,14 +9,10 @@ class MsgAidStore {
    public LinkedList<StoredItem> items = new LinkedList();
    public long checksum;
 
-   MsgAidStore() {
-      super();
-   }
-
    long calcChecksum() {
       long ch = (long)(this.aid * this.items.size());
 
-      for(StoredItem si : this.items) {
+      for (StoredItem si : this.items) {
          ch += (long)si.signal;
       }
 

@@ -16,7 +16,7 @@ class paint_vorsignaltrenner extends paint2Base {
       int y0 = yscal;
       int x1 = xscal;
       int y1 = yscal;
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             x0 = xscal - 1;
             x1 = xscal - 1;

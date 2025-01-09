@@ -12,7 +12,6 @@ class gleisnamepane extends JComponent {
    private gleislist parent;
 
    gleisnamepane(gleislist g) {
-      super();
       this.parent = g;
       this.setBackground(timeline.bgcol);
       this.setToolTipText(this.parent.getGleis());

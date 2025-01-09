@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class ausfahrtueptest1 implements dtest {
-   public ausfahrtueptest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "1x ÜP Ausfahrt";
@@ -25,12 +21,12 @@ public class ausfahrtueptest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_AUSFAHRT});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          int cc = 0;
          Iterator<gleis> it2 = glb.findIterator(new Object[]{gl.getENR(), gleis.ELEMENT_ÜBERGABEPUNKT});
 
-         while(it2.hasNext()) {
+         while (it2.hasNext()) {
             gleis gl2 = (gleis)it2.next();
             if (gl2 != gl) {
                if (++cc > 1) {

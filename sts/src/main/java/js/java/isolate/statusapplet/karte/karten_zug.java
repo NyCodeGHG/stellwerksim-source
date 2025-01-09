@@ -25,7 +25,6 @@ class karten_zug extends status_zug_base implements Comparable {
    private final connectColor cc;
 
    karten_zug(kartePanel _zp) {
-      super();
       this.zp = _zp;
       this.sdf = DateFormat.getTimeInstance(3, Locale.GERMAN);
       this.lastChange = System.currentTimeMillis();
@@ -115,7 +114,7 @@ class karten_zug extends status_zug_base implements Comparable {
       szp.gleis = attrs.getValue("gleis");
       szp.flags = new flagdata(attrs.getValue("flags"), attrs.getValue("flagdata"), attrs.getValue("flagparam"));
 
-      for(int z : szp.flags) {
+      for (int z : szp.flags) {
          if (z > 0) {
             szp.flagdatazid.add(z);
             this.refs.add(z);
@@ -237,7 +236,7 @@ class karten_zug extends status_zug_base implements Comparable {
       int lastAid = 0;
       String flagstring = "";
 
-      for(szug_plan_base pos : this.nextStops) {
+      for (szug_plan_base pos : this.nextStops) {
          karten_container k = (karten_container)this.zp.aids.get(pos.aid);
          if (k != null && k.namen != null) {
             if (pos.aid != lastAid) {
@@ -293,7 +292,7 @@ class karten_zug extends status_zug_base implements Comparable {
          ret = ret + "<tr><td colspan=2>Umleitung über:<br>";
          String sep = "";
 
-         for(int raid : this.redirectAids) {
+         for (int raid : this.redirectAids) {
             karten_container k = (karten_container)this.zp.aids.get(raid);
             if (k != null) {
                ret = ret + sep + k.namen;
@@ -320,7 +319,7 @@ class karten_zug extends status_zug_base implements Comparable {
       this.nextStops.clear();
       boolean addMode = false;
 
-      for(szug_plan_base pos : this.plan) {
+      for (szug_plan_base pos : this.plan) {
          if (pos.aid == this.aid) {
             addMode = true;
             if (this.an == null) {
@@ -350,7 +349,7 @@ class karten_zug extends status_zug_base implements Comparable {
          }
 
          try {
-            for(int i = 0; i < tokens.length - 1; ++i) {
+            for (int i = 0; i < tokens.length - 1; i++) {
                if (tokens[i].trim().equals("AID")) {
                   i += 2;
                   this.redirectAids.add(Integer.parseInt(tokens[i].trim()));
@@ -358,7 +357,7 @@ class karten_zug extends status_zug_base implements Comparable {
                   i += 2;
                   this.skipAids.add(Integer.parseInt(tokens[i].trim()));
                } else if (tokens[i].trim().equals("CUR")) {
-                  ++i;
+                  i++;
 
                   try {
                      caid = Integer.parseInt(tokens[i].trim());
@@ -370,7 +369,7 @@ class karten_zug extends status_zug_base implements Comparable {
          }
 
          if (caid > 0 && this.redirectAids.contains(caid)) {
-            while(!this.redirectAids.isEmpty() && this.redirectAids.peekFirst() != caid) {
+            while (!this.redirectAids.isEmpty() && this.redirectAids.peekFirst() != caid) {
                this.redirectAids.pollFirst();
             }
 
@@ -390,7 +389,7 @@ class karten_zug extends status_zug_base implements Comparable {
          this.cc.resetMark();
          int aid2 = 0;
 
-         for(int aid1 : this.redirectAids) {
+         for (int aid1 : this.redirectAids) {
             if (aid2 > 0) {
                this.cc.addMarkAid(aid1, aid2);
             }

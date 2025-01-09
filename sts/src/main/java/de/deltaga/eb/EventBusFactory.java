@@ -4,10 +4,6 @@ package de.deltaga.eb;
 public class EventBusFactory {
    private static EventBus instance;
 
-   public EventBusFactory() {
-      super();
-   }
-
    public static EventBus newEventBus(Class<? extends EventBus> eventBusClass) throws InstantiationException, IllegalAccessException {
       return (EventBus)eventBusClass.newInstance();
    }

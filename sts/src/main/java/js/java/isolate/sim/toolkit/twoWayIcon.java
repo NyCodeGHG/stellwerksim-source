@@ -20,10 +20,6 @@ public class twoWayIcon implements Icon {
    protected Color line2col = new Color(0, 190, 0);
    protected boolean blinkOn = false;
 
-   public twoWayIcon() {
-      super();
-   }
-
    public void blinkSwitch() {
       this.blinkOn = !this.blinkOn;
    }

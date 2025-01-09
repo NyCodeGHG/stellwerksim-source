@@ -37,7 +37,7 @@ public class WswWindow extends JDialog implements zugPositionListener {
       this.jTable1.setRowHeight(this.jTable1.getRowHeight() * 2);
       ViewTooltips.register(this.jTable1);
 
-      for(zug z : this.zuege.getZugList()) {
+      for (zug z : this.zuege.getZugList()) {
          if (z.isVisible()) {
             WswWindow.zugEntry ze = new WswWindow.zugEntry(z);
             Object[] rowData = new Object[]{ze, "Anfrage läuft"};
@@ -54,7 +54,7 @@ public class WswWindow extends JDialog implements zugPositionListener {
    public void melde(final zug z, final String text) {
       SwingUtilities.invokeLater(new Runnable() {
          public void run() {
-            for(int i = 0; i < WswWindow.this.model.getRowCount(); ++i) {
+            for (int i = 0; i < WswWindow.this.model.getRowCount(); i++) {
                WswWindow.zugEntry ze = (WswWindow.zugEntry)WswWindow.this.model.getValueAt(i, 0);
                if (ze.z.getZID_num() == z.getZID_num()) {
                   WswWindow.this.model.setValueAt("<html>" + text + "</html>", i, 1);
@@ -90,7 +90,6 @@ public class WswWindow extends JDialog implements zugPositionListener {
       final zug z;
 
       private zugEntry(zug z) {
-         super();
          this.z = z;
       }
 

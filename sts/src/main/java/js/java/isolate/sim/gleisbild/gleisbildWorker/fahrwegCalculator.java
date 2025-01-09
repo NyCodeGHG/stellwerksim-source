@@ -50,7 +50,7 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
       DecimalFormat df = new DecimalFormat("000");
       this.repaint();
 
-      while(!this.stopCalc) {
+      while (!this.stopCalc) {
          gl.getFluentData().setStatus(2);
          if (this.isSignal(gl)) {
             gl.getFluentData().setStellung(gleisElements.ST_SIGNAL_GRÜN);
@@ -62,8 +62,8 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
                break;
             }
 
-            stellungen = (HashMap)stack.removeLast();
-            gleisweg = (LinkedList)stack.removeLast();
+            stellungen = (HashMap<gleis, gleisElements.Stellungen>)stack.removeLast();
+            gleisweg = (LinkedList<gleis>)stack.removeLast();
             before_gl = (gleis)stack.removeLast();
             gl = (gleis)stack.removeLast();
             gl.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
@@ -125,10 +125,10 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
                gl = next_gl;
             } else {
                gleisweg.addLast(gl);
-               ++this.fahrstrassennummer;
+               this.fahrstrassennummer++;
                String name = "f" + df.format((long)this.fahrstrassennummer) + "/" + start.getENR() + "-" + next_gl.getENR();
 
-               for(gleis g : stellungen.keySet()) {
+               for (gleis g : stellungen.keySet()) {
                   g.getFluentData().setStellung((gleisElements.Stellungen)stellungen.get(g));
                }
 
@@ -165,8 +165,8 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
                   break;
                }
 
-               stellungen = (HashMap)stack.removeLast();
-               gleisweg = (LinkedList)stack.removeLast();
+               stellungen = (HashMap<gleis, gleisElements.Stellungen>)stack.removeLast();
+               gleisweg = (LinkedList<gleis>)stack.removeLast();
                before_gl = (gleis)stack.removeLast();
                gl = (gleis)stack.removeLast();
                gl.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
@@ -188,7 +188,7 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
       this.glbModel.smallClearStatus();
       this.seenSignals = new HashMap();
       this.showStatus("Startpunkt: " + gl.getCol() + "/" + gl.getRow() + " Enr: " + gl.getENR(), 3);
-      synchronized(this) {
+      synchronized (this) {
          gleis next_gl;
          do {
             next_gl = gl.next(before_gl);
@@ -234,7 +234,7 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
             } else {
                next_gl = null;
             }
-         } while(next_gl != null);
+         } while (next_gl != null);
       }
    }
 
@@ -256,7 +256,7 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
       LinkedList eingang_stack = new LinkedList();
       this.fahrstrassennummer = 0;
 
-      for(gleis gls : this.glbModel) {
+      for (gleis gls : this.glbModel) {
          gls.getFluentData().setStatus(0);
 
          try {
@@ -285,11 +285,11 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
          Iterator<gleis> eit = eingang_stack.iterator();
          int cc = 0;
 
-         while(eit.hasNext() && !this.stopCalc) {
+         while (eit.hasNext() && !this.stopCalc) {
             gleis gl = (gleis)eit.next();
             this.showPanel(2, cc);
             this.loopPerEingang(gl);
-            ++cc;
+            cc++;
             this.showStatus("Fahrstraßen: " + this.glbModel.countFahrwege(), 3);
          }
 
@@ -298,11 +298,11 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
          this.signalElements.add(gleis.ELEMENT_ZWERGSIGNAL);
          eit = eingang_stack.iterator();
 
-         while(eit.hasNext() && !this.stopCalc) {
+         while (eit.hasNext() && !this.stopCalc) {
             gleis gl = (gleis)eit.next();
             this.showPanel(2, cc);
             this.loopPerEingang(gl);
-            ++cc;
+            cc++;
             this.showStatus("Fahrstraßen: " + this.glbModel.countFahrwege(), 3);
          }
 
@@ -320,7 +320,7 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
             int pCnt = 0;
             Iterator<fahrstrasse> it = this.glbModel.iteratorFahrwege();
 
-            while(!removed && it.hasNext()) {
+            while (!removed && it.hasNext()) {
                if (++pCnt > pMax) {
                   int p = 100 * pCnt / this.glbModel.countFahrwege();
                   pMax = pCnt;
@@ -332,13 +332,13 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
                fahrstrasse f = (fahrstrasse)it.next();
                Iterator<fahrstrasse> it2 = this.glbModel.iteratorFahrwege();
 
-               while(!removed && it2.hasNext()) {
+               while (!removed && it2.hasNext()) {
                   fahrstrasse f2 = (fahrstrasse)it2.next();
                   if (f2.getExtend().isDeleted()) {
                      oneDeleted = true;
                   }
 
-                  switch(f2.compare(f)) {
+                  switch (f2.compare(f)) {
                      case 1:
                         if (dia == null) {
                            if (!doubleMode) {
@@ -363,12 +363,12 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
                      break;
                   }
 
-                  for(fahrstrasse f2 : dia.getDelList()) {
+                  for (fahrstrasse f2 : dia.getDelList()) {
                      this.glbModel.removeFahrweg(f2);
                   }
                }
             }
-         } while(removed);
+         } while (removed);
 
          this.setProgress(100);
          this.writeOldFlags(oldfahrwege);
@@ -387,11 +387,11 @@ public class fahrwegCalculator extends gleisbildWorkerBase<gleisbildModelFahrweg
       if (oldfahrwege != null) {
          Iterator<fahrstrasse> it = this.glbModel.iteratorFahrwege();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             fahrstrasse f1 = (fahrstrasse)it.next();
             fahrstrasse_extend f1e = f1.getExtend();
             if (f1e.getFSType() != 4) {
-               for(fahrstrasse f2 : oldfahrwege) {
+               for (fahrstrasse f2 : oldfahrwege) {
                   if (f2.checkThisClever(f1.getStart(), f1.getStop())) {
                      fahrstrasse_extend f2e = f2.getExtend();
                      f1e.setFSType(f2e.getFSType());

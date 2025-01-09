@@ -10,7 +10,6 @@ public abstract class fahrstrassenState {
    protected fahrstrasseSelection myfs;
 
    protected fahrstrassenState(fahrstrasseSelection f) {
-      super();
       this.myfs = f;
    }
 
@@ -50,8 +49,8 @@ public abstract class fahrstrassenState {
 
          return false;
       } else {
-         for(Entry<fahrstrasseSelection.ChangeHook, EnumSet<fahrstrasseSelection.StateChangeTypes>> m : this.myfs.hooks.entrySet()) {
-            for(fahrstrasseSelection.StateChangeTypes t : (EnumSet)m.getValue()) {
+         for (Entry<fahrstrasseSelection.ChangeHook, EnumSet<fahrstrasseSelection.StateChangeTypes>> m : this.myfs.hooks.entrySet()) {
+            for (fahrstrasseSelection.StateChangeTypes t : (EnumSet)m.getValue()) {
                if (t.match(this.myfs.getFahrstrasse().allocState, s)) {
                   this.myfs.callHook((fahrstrasseSelection.ChangeHook)m.getKey());
                   break;

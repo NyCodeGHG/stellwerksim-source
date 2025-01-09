@@ -10,7 +10,6 @@ public class players_zug extends status_zug_base implements Comparable {
    int verspaetungCounter = 0;
 
    public players_zug(playersPanel _zp, int _zid) {
-      super();
       this.zp = _zp;
       this.zid = _zid;
    }

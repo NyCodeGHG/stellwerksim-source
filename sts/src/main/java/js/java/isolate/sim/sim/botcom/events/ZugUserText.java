@@ -9,20 +9,17 @@ public class ZugUserText {
    public String sender;
 
    public ZugUserText(int zid, String t, String sender) {
-      super();
       this.zid = zid;
       this.text = t;
       this.sender = sender;
    }
 
    public ZugUserText(int zid) {
-      super();
       this.zid = zid;
       this.text = "";
       this.sender = "";
    }
 
    public ZugUserText() {
-      super();
    }
 }

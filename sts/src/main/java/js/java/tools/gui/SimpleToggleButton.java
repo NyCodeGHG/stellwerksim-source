@@ -37,7 +37,6 @@ public class SimpleToggleButton extends JToggleButton {
    }
 
    public SimpleToggleButton() {
-      super();
       this.setMargin(new Insets(1, 1, 1, 1));
       this.setBorder(new EmptyBorder(5, 5, 5, 5));
    }
@@ -235,7 +234,6 @@ public class SimpleToggleButton extends JToggleButton {
       private Color destinationColor = Color.RED;
 
       public FlashingSimpleButton() {
-         super();
          this.prepareFlashColors();
       }
 
@@ -265,11 +263,11 @@ public class SimpleToggleButton extends JToggleButton {
       }
 
       public void actionPerformed(ActionEvent e) {
-         ++this.flashingPos;
+         this.flashingPos++;
          if (this.flashingPos >= 20) {
             this.flashingPos = 0;
             if (this.heavyFlashCount > 0) {
-               --this.heavyFlashCount;
+               this.heavyFlashCount--;
             }
          }
 
@@ -307,14 +305,14 @@ public class SimpleToggleButton extends JToggleButton {
          int g1 = destColor.getGreen();
          int b1 = destColor.getBlue();
 
-         for(int i = 0; i < 10; ++i) {
+         for (int i = 0; i < 10; i++) {
             ret[j] = new Color(this.mixColor(i, 10, r0, r1), this.mixColor(i, 10, g0, g1), this.mixColor(i, 10, b0, b1));
-            ++j;
+            j++;
          }
 
-         for(int i = 10; i > 0; --i) {
+         for (int i = 10; i > 0; i--) {
             ret[j] = new Color(this.mixColor(i, 10, r0, r1), this.mixColor(i, 10, g0, g1), this.mixColor(i, 10, b0, b1));
-            ++j;
+            j++;
          }
 
          return ret;
@@ -325,11 +323,10 @@ public class SimpleToggleButton extends JToggleButton {
          Color[] r = super.getColors();
          if (!this.flashing) {
             return r;
-         } else if (this.heavyFlashCount > 0) {
-            Color[] ret = new Color[]{r[0], this.heavyFlashColors[this.flashingPos]};
-            return ret;
          } else {
-            return new Color[]{r[0], this.lightFlashColors[this.flashingPos]};
+            return this.heavyFlashCount > 0
+               ? new Color[]{r[0], this.heavyFlashColors[this.flashingPos]}
+               : new Color[]{r[0], this.lightFlashColors[this.flashingPos]};
          }
       }
    }

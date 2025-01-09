@@ -6,10 +6,6 @@ import javax.swing.text.PlainDocument;
 class TextAreaDocument extends PlainDocument {
    String initialText;
 
-   TextAreaDocument() {
-      super();
-   }
-
    void reset() {
       try {
          this.remove(0, this.getLength());

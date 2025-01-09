@@ -5,10 +5,6 @@ import js.java.isolate.sim.eventsys.zugmsg;
 import js.java.isolate.sim.gleis.gleis;
 
 class c_isuep extends baseChain {
-   c_isuep() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);

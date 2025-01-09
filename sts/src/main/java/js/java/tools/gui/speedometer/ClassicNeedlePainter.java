@@ -8,12 +8,10 @@ public class ClassicNeedlePainter extends NeedlePainterBase {
    final double radius;
 
    public ClassicNeedlePainter() {
-      super();
       this.radius = 5.0;
    }
 
    public ClassicNeedlePainter(double size) {
-      super();
       this.radius = size;
    }
 

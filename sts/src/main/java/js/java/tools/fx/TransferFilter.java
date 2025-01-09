@@ -9,7 +9,6 @@ public abstract class TransferFilter extends PointFilter {
    protected boolean initialized = false;
 
    public TransferFilter() {
-      super();
       this.canFilterIndexColorModel = true;
    }
 
@@ -42,7 +41,7 @@ public abstract class TransferFilter extends PointFilter {
    protected int[] makeTable() {
       int[] table = new int[256];
 
-      for(int i = 0; i < 256; ++i) {
+      for (int i = 0; i < 256; i++) {
          table[i] = PixelUtils.clamp((int)(255.0F * this.transferFunction((float)i / 255.0F)));
       }
 
@@ -60,7 +59,7 @@ public abstract class TransferFilter extends PointFilter {
 
       int[] lut = new int[256];
 
-      for(int i = 0; i < 256; ++i) {
+      for (int i = 0; i < 256; i++) {
          lut[i] = this.filterRGB(0, 0, i << 24 | i << 16 | i << 8 | i);
       }
 

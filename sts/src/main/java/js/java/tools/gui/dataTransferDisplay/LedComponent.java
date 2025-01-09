@@ -16,7 +16,6 @@ public class LedComponent extends JComponent {
    private LedComponent.LedPainter painter = new LedComponent.ThreeDPainter();
 
    public LedComponent() {
-      super();
       Dimension dim = new Dimension(19, 19);
       this.setMinimumSize(new Dimension(15, 15));
       this.setPreferredSize(dim);
@@ -83,10 +82,6 @@ public class LedComponent extends JComponent {
    }
 
    public static class SimplePainter implements LedComponent.LedPainter {
-      public SimplePainter() {
-         super();
-      }
-
       @Override
       public void paintComponent(Graphics g, LedComponent p) {
          Graphics2D g2 = (Graphics2D)g;
@@ -111,10 +106,6 @@ public class LedComponent extends JComponent {
    }
 
    public static class ThreeDPainter implements LedComponent.LedPainter {
-      public ThreeDPainter() {
-         super();
-      }
-
       @Override
       public void paintComponent(Graphics g, LedComponent p) {
          Graphics2D g2 = (Graphics2D)g;

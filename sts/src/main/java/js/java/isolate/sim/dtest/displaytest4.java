@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleis.displayBar.displayBar;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class displaytest4 implements dtest {
-   public displaytest4() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Display Verbindungszahl";
@@ -26,7 +22,7 @@ public class displaytest4 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ALLE_ZUGDISPLAYS});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          int cnt;
          if (glb.getDisplayBar().isLegacy()) {
@@ -49,7 +45,7 @@ public class displaytest4 implements dtest {
       String sw = gl.getSWWert();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ALLE_GLEISE, sw});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl2 = (gleis)it.next();
          m.add(gl2);
       }

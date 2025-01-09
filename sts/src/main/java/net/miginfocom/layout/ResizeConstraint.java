@@ -14,11 +14,9 @@ final class ResizeConstraint implements Externalizable {
    int shrinkPrio = 100;
 
    ResizeConstraint() {
-      super();
    }
 
    ResizeConstraint(int shrinkPrio, Float shrinkWeight, int growPrio, Float growWeight) {
-      super();
       this.shrinkPrio = shrinkPrio;
       this.shrink = shrinkWeight;
       this.growPrio = growPrio;

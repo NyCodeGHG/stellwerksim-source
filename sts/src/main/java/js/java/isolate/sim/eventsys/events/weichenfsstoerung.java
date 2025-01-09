@@ -34,7 +34,7 @@ public class weichenfsstoerung extends event {
       this.dauer = e.getIntValue("dauer") + (this.my_main.isRealistic() ? random(5, 15) : 0);
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_WEICHEN});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          gl.registerHook(eventGenerator.T_GLEIS_STELLUNG, this);
       }
@@ -66,13 +66,13 @@ public class weichenfsstoerung extends event {
             return this.hookStellung(ge.g, ge.st, ge.f);
          }
       } else if (e != null && e instanceof fahrstrassemsg) {
-         fahrstrassemsg ge = (fahrstrassemsg)e;
+         fahrstrassemsg gex = (fahrstrassemsg)e;
          if (typ == eventGenerator.T_FS_SETZEN) {
-            return this.hookSet(ge.f);
+            return this.hookSet(gex.f);
          }
 
          if (typ == eventGenerator.T_FS_LOESCHEN) {
-            return this.hookClear(ge.f);
+            return this.hookClear(gex.f);
          }
       }
 
@@ -80,11 +80,7 @@ public class weichenfsstoerung extends event {
    }
 
    public boolean hookStellung(gleis g, gleisElements.Stellungen st, fahrstrasse f) {
-      if (f == null) {
-         return true;
-      } else {
-         return g.getFluentData().getStellung() == st;
-      }
+      return f == null ? true : g.getFluentData().getStellung() == st;
    }
 
    public boolean hookStatus(gleis g, int s, zug z) {
@@ -108,7 +104,7 @@ public class weichenfsstoerung extends event {
    public boolean pong() {
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_WEICHEN});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          gl.unregisterHook(eventGenerator.T_GLEIS_STELLUNG, this);
       }

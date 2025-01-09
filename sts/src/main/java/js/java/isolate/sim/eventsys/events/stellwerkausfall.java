@@ -63,7 +63,7 @@ public class stellwerkausfall extends event {
          this.current = new stellwerkausfall.stwsStart();
          this.levelD = new levelDisplay(this.my_main.getFrame(), this);
 
-         for(gleis gl : this.glbModel) {
+         for (gleis gl : this.glbModel) {
             if (gl.getElement() == gleis.ELEMENT_SIGNAL
                || gl.getElement() == gleis.ELEMENT_ZWERGSIGNAL
                || gl.getElement() == gleis.ELEMENT_WEICHEOBEN
@@ -79,7 +79,7 @@ public class stellwerkausfall extends event {
          this.glbModel.disableAllAutoFS();
          int f = this.glbModel.countFahrwege();
 
-         for(int i = 0; i < f; ++i) {
+         for (int i = 0; i < f; i++) {
             fahrstrasse fs = this.glbModel.getFahrweg(i);
             fs.registerHook(eventGenerator.T_FS_SETZEN, this);
          }
@@ -99,7 +99,7 @@ public class stellwerkausfall extends event {
    }
 
    private void unregister() {
-      for(gleis gl : this.glbModel) {
+      for (gleis gl : this.glbModel) {
          if (gl.getElement() == gleis.ELEMENT_SIGNAL
             || gl.getElement() == gleis.ELEMENT_ZWERGSIGNAL
             || gl.getElement() == gleis.ELEMENT_WEICHEOBEN
@@ -110,14 +110,14 @@ public class stellwerkausfall extends event {
 
       int f = this.glbModel.countFahrwege();
 
-      for(int i = 0; i < f; ++i) {
+      for (int i = 0; i < f; i++) {
          fahrstrasse fs = this.glbModel.getFahrweg(i);
          fs.unregisterHook(eventGenerator.T_FS_SETZEN, this);
       }
    }
 
    private void powerOff(boolean off) {
-      for(gleis gl : this.glbModel) {
+      for (gleis gl : this.glbModel) {
          gl.getFluentData().setPowerOff(off);
          if (off && gl.getElement() == gleis.ELEMENT_SIGNAL) {
             gl.getFluentData().clear_FW_speicher();
@@ -135,7 +135,7 @@ public class stellwerkausfall extends event {
    private void redAll() {
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_STARTSIGNALE});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
 
          try {
@@ -168,13 +168,13 @@ public class stellwerkausfall extends event {
             return this.current.hookStellung(ge.g, ge.st, ge.f);
          }
       } else if (e != null && e instanceof fahrstrassemsg) {
-         fahrstrassemsg ge = (fahrstrassemsg)e;
+         fahrstrassemsg gex = (fahrstrassemsg)e;
          if (typ == eventGenerator.T_FS_SETZEN) {
-            return this.current.hookSet(ge.f);
+            return this.current.hookSet(gex.f);
          }
 
          if (typ == eventGenerator.T_FS_LOESCHEN) {
-            return this.current.hookClear(ge.f);
+            return this.current.hookClear(gex.f);
          }
       }
 
@@ -209,7 +209,7 @@ public class stellwerkausfall extends event {
    private void folgeFehler() {
       eventHaeufigkeiten eh = eventHaeufigkeiten.create(this.glbModel);
 
-      for(int i = 0; i < 4; ++i) {
+      for (int i = 0; i < 4; i++) {
          eventContainer ev = new eventContainer(this.glbModel, randomsignalstoerung.class);
          ev.setIntValue("dauer", 7 + i * 2);
          ev.setValue("stark", true);
@@ -217,7 +217,7 @@ public class stellwerkausfall extends event {
       }
 
       if (Math.random() < 0.5) {
-         for(int i = 0; i < 3; ++i) {
+         for (int i = 0; i < 3; i++) {
             eventContainer ev = new eventContainer(this.glbModel, randomweichestoerung.class);
             ev.setIntValue("dauer", 6 + i * 2);
             ev.setValue("stark", true);
@@ -247,7 +247,7 @@ public class stellwerkausfall extends event {
          eh.add(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, ev);
       }
 
-      for(int i = 0; i < 2; ++i) {
+      for (int i = 0; i < 2; i++) {
          eventContainer ev = new eventContainer(this.glbModel, relaisgruppestoerung.class);
          ev.setIntValue("dauer", 11 + i * 2);
          ev.setValue("stark", true);
@@ -259,7 +259,6 @@ public class stellwerkausfall extends event {
       private int callcount = 10;
 
       stwsAbfrage() {
-         super();
          this.setFunk(
             "Stellwerk ausgefallen",
             "Bitte die Frage beantworten.<ul><li><a href='yes'>JA, testen</a></li><li><a href='no'>NEIN, das wird schon alles ohne gehen</a></li></ul>"
@@ -285,7 +284,7 @@ public class stellwerkausfall extends event {
 
       @Override
       public void pong() {
-         --this.callcount;
+         this.callcount--;
          if (this.callcount <= 0) {
             this.showAndSetText("Alles klar, wir deuten das Nicht-Beantworten mal als nein. Ist aber nicht die feinste Art zu antworten!");
             stellwerkausfall.this.folgeFehler();
@@ -299,7 +298,6 @@ public class stellwerkausfall extends event {
 
    private class stwsAbgeschlossen extends stellwerkausfall.stwsBase {
       stwsAbgeschlossen() {
-         super();
          this.showAndSetText("Die Notstromversorgung ist angelaufen, alle Umformer laufen. Der Stellbezirk ist wieder betriebsbereit.");
          stellwerkausfall.this.my_main.reportOccurance(stellwerkausfall.this.getCode(), OCCU_KIND.NORMAL, "stellwerkausfall", stellwerkausfall.this.code);
          stellwerkausfall.this.eventFinished();
@@ -314,7 +312,6 @@ public class stellwerkausfall extends event {
       private Iterator<gleis> it = stellwerkausfall.this.glbModel.iterator();
 
       stwsAnlaufen() {
-         super();
          this.setFunk("Stellwerk ausgefallen", "Alle Systeme gehen langsam wieder in Betrieb.");
          stellwerkausfall.this.callMe();
       }
@@ -325,17 +322,13 @@ public class stellwerkausfall extends event {
             g.decrementBlinkcc(20);
          }
 
-         if (gleis.ALLE_STARTSIGNALE.matches(g.getElement())) {
-            return stellungen == gleis.ST_SIGNAL_ROT;
-         } else {
-            return false;
-         }
+         return gleis.ALLE_STARTSIGNALE.matches(g.getElement()) ? stellungen == gleis.ST_SIGNAL_ROT : false;
       }
 
       @Override
       public void pong() {
          boolean next;
-         for(int i = 0; (next = this.it.hasNext()) && i < 80; ++i) {
+         for (int i = 0; (next = this.it.hasNext()) && i < 80; i++) {
             ((gleis)this.it.next()).getFluentData().setPowerOff(false);
          }
 
@@ -350,7 +343,6 @@ public class stellwerkausfall extends event {
 
    private abstract class stwsBase {
       private stwsBase() {
-         super();
       }
 
       boolean hookStatus(gleis g, int s, zug z) {
@@ -400,13 +392,10 @@ public class stellwerkausfall extends event {
       private boolean lastMinLevel;
 
       stwsBattBetrieb(boolean f) {
-         super();
          this.lastMinLevel = f;
       }
 
       stwsBattBetrieb(stellwerkausfall.stwsBattBetrieb f) {
-         super();
-
          try {
             this.lastMinLevel = f.lastMinLevel;
          } catch (NullPointerException var4) {
@@ -484,7 +473,6 @@ public class stellwerkausfall extends event {
 
    private class stwsBattBetrieb_aus extends stellwerkausfall.stwsBase {
       stwsBattBetrieb_aus() {
-         super();
          stellwerkausfall.this.my_main.playAlarm(4);
          stellwerkausfall.this.callMeIn(stellwerkausfall.this.wascalled ? 1 : 4);
          stellwerkausfall.this.powerOff(true);
@@ -512,11 +500,7 @@ public class stellwerkausfall extends event {
 
       @Override
       boolean hookStellung(gleis g, gleisElements.Stellungen stellungen, fahrstrasse st) {
-         if (gleis.ALLE_STARTSIGNALE.matches(g.getElement())) {
-            return stellungen == gleis.ST_SIGNAL_ROT;
-         } else {
-            return false;
-         }
+         return gleis.ALLE_STARTSIGNALE.matches(g.getElement()) ? stellungen == gleis.ST_SIGNAL_ROT : false;
       }
 
       @Override
@@ -552,17 +536,16 @@ public class stellwerkausfall extends event {
       private final int vorlauf_levelcc = 12;
 
       stwsBattBetrieb_zs1() {
-         super();
          stellwerkausfall.this.callMe();
       }
 
       @Override
       public void pong() {
-         ++this.levelcc;
+         this.levelcc++;
          if (this.levelcc > this.vorlauf_levelcc) {
             this.levelcc = 0;
             if (this.level < 20) {
-               ++this.level;
+               this.level++;
                gleisColor.getInstance().dimmLight(this.level);
                stellwerkausfall.this.levelD.setLevel(40 - this.level);
             } else {
@@ -651,7 +634,7 @@ public class stellwerkausfall extends event {
 
       @Override
       public void pong() {
-         --this.levelcc;
+         this.levelcc--;
          if (this.levelcc <= 7) {
             this.gotoNextState = true;
          }
@@ -671,7 +654,6 @@ public class stellwerkausfall extends event {
       private int waitC = 3;
 
       stwsStart() {
-         super();
          this.showAndSetText(
             "Externe Stromversorgung unterbrochen, Hilfsstromversorgung aufgeschaltet. Eingeschränker Fahrbetrieb möglich. Jede Schaltung belastet Hilfsstrom sehr stark! Den Versorgungszeiger im Auge behalten! Speichersysteme wie FS-Speicher und AutoFS belasten sehr stark!"
          );
@@ -692,7 +674,7 @@ public class stellwerkausfall extends event {
 
       @Override
       public void pong() {
-         --this.waitC;
+         this.waitC--;
          if (this.waitC <= 0) {
             stellwerkausfall.this.powerOff(false);
             stellwerkausfall.this.resetTimer();
@@ -703,7 +685,6 @@ public class stellwerkausfall extends event {
 
    private class stwsSystemtest extends stellwerkausfall.stwsBase implements eventParent {
       stwsSystemtest() {
-         super();
          String t = "Es werden folgende Systeme nacheinander abgeschaltet:<ul><li>der automatischen Weichenlauf für 10 Minuten</li><li>der Fahrstraßenspeicher für 4 Minuten</li><li>die Displays für 1 Minute</li></ul>";
          this.setFunk("Stellwerk ausgefallen", t);
          this.showAndSetText(t);

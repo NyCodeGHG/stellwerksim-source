@@ -8,10 +8,6 @@ import js.java.isolate.sim.eventsys.eventContainer;
 import js.java.isolate.sim.sim.stellwerksim_main;
 
 class cmdStartevent implements simCmd {
-   cmdStartevent() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "startevent";
@@ -23,7 +19,7 @@ class cmdStartevent implements simCmd {
          Vector v = my_main.getStructInfo();
          Enumeration e = v.elements();
 
-         while(e.hasMoreElements()) {
+         while (e.hasMoreElements()) {
             Vector vv = (Vector)e.nextElement();
             if ("eventcontainer".equalsIgnoreCase((String)vv.get(0)) && opts[1].equalsIgnoreCase((String)vv.get(1)) && vv.get(2) instanceof eventContainer) {
                event.createEvent((eventContainer)vv.get(2), my_main.getGleisbild(), my_main);

@@ -22,10 +22,6 @@ public class ImageMath {
    private static final float m32 = 0.0F;
    private static final float m33 = 0.0F;
 
-   public ImageMath() {
-      super();
-   }
-
    public static float bias(float a, float b) {
       return a / ((1.0F / b - 2.0F) * (1.0F - a) + 1.0F);
    }
@@ -204,8 +200,8 @@ public class ImageMath {
       } else {
          int span = 0;
 
-         while(span < numSpans && !((float)xknots[span + 1] > x)) {
-            ++span;
+         while (span < numSpans && !((float)xknots[span + 1] > x)) {
+            span++;
          }
 
          if (span > numKnots - 3) {
@@ -244,7 +240,7 @@ public class ImageMath {
          x -= (float)span;
          int v = 0;
 
-         for(int i = 0; i < 4; ++i) {
+         for (int i = 0; i < 4; i++) {
             int shift = i * 8;
             float k0 = (float)(knots[span] >> shift & 0xFF);
             float k1 = (float)(knots[span + 1] >> shift & 0xFF);
@@ -275,8 +271,8 @@ public class ImageMath {
       } else {
          int span = 0;
 
-         while(span < numSpans && xknots[span + 1] <= x) {
-            ++span;
+         while (span < numSpans && xknots[span + 1] <= x) {
+            span++;
          }
 
          if (span > numKnots - 3) {
@@ -291,7 +287,7 @@ public class ImageMath {
 
          int v = 0;
 
-         for(int i = 0; i < 4; ++i) {
+         for (int i = 0; i < 4; i++) {
             int shift = i * 8;
             float k0 = (float)(yknots[span] >> shift & 0xFF);
             float k1 = (float)(yknots[span + 1] >> shift & 0xFF);
@@ -321,9 +317,9 @@ public class ImageMath {
       float[] in = new float[length + 2];
       int i = 0;
 
-      for(int j = 0; j < length; ++j) {
-         while(out[i + 1] < (float)j) {
-            ++i;
+      for (int j = 0; j < length; j++) {
+         while (out[i + 1] < (float)j) {
+            i++;
          }
 
          in[j] = (float)i + ((float)j - out[i]) / (out[i + 1] - out[i]);
@@ -352,7 +348,7 @@ public class ImageMath {
       srcIndex += stride;
       i = 1;
 
-      while(i <= length) {
+      while (i <= length) {
          float aIntensity = inSegment * (float)a + (1.0F - inSegment) * (float)nextA;
          float rIntensity = inSegment * (float)r + (1.0F - inSegment) * (float)nextR;
          float gIntensity = inSegment * (float)g + (1.0F - inSegment) * (float)nextG;
@@ -394,7 +390,7 @@ public class ImageMath {
             inSegment -= outSegment;
             outSegment = in[i + 1] - in[i];
             sizfac = outSegment;
-            ++i;
+            i++;
          }
       }
    }
@@ -402,7 +398,7 @@ public class ImageMath {
    public static void premultiply(int[] p, int offset, int length) {
       length += offset;
 
-      for(int i = offset; i < length; ++i) {
+      for (int i = offset; i < length; i++) {
          int rgb = p[i];
          int a = rgb >> 24 & 0xFF;
          int r = rgb >> 16 & 0xFF;
@@ -419,7 +415,7 @@ public class ImageMath {
    public static void unpremultiply(int[] p, int offset, int length) {
       length += offset;
 
-      for(int i = offset; i < length; ++i) {
+      for (int i = offset; i < length; i++) {
          int rgb = p[i];
          int a = rgb >> 24 & 0xFF;
          int r = rgb >> 16 & 0xFF;

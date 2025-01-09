@@ -23,7 +23,6 @@ public class RowNumberTable extends JTable implements ChangeListener, PropertyCh
    }
 
    public RowNumberTable(JTable table) {
-      super();
       this.main = table;
       this.main.addPropertyChangeListener(this);
       this.setFocusable(false);
@@ -81,7 +80,6 @@ public class RowNumberTable extends JTable implements ChangeListener, PropertyCh
 
    private static class RowNumberRenderer extends DefaultTableCellRenderer {
       RowNumberRenderer() {
-         super();
          this.setHorizontalAlignment(0);
       }
 

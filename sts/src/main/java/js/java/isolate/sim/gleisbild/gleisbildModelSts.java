@@ -57,7 +57,7 @@ public class gleisbildModelSts extends gleisbildModelPhone implements structinfo
       v.addElement(this.getHaeufigkeiten());
       ret.add(v);
 
-      for(eventContainer e : this.events) {
+      for (eventContainer e : this.events) {
          try {
             Vector vx = e.getStructInfo();
             ret.addElement(vx);
@@ -66,7 +66,7 @@ public class gleisbildModelSts extends gleisbildModelPhone implements structinfo
          }
       }
 
-      for(event e : event.events) {
+      for (event e : event.events) {
          try {
             Vector vx = e.getStructInfo();
             ret.addElement(vx);
@@ -75,7 +75,7 @@ public class gleisbildModelSts extends gleisbildModelPhone implements structinfo
          }
       }
 
-      for(fahrstrasse e : this.fahrwege) {
+      for (fahrstrasse e : this.fahrwege) {
          try {
             Vector vx = e.getStructInfo();
             ret.addElement(vx);
@@ -95,7 +95,7 @@ public class gleisbildModelSts extends gleisbildModelPhone implements structinfo
       v.addElement("Einfahrten");
       v.addElement("waytime");
 
-      for(Entry<String, Integer> e : this.allWayTimeTable.entrySet()) {
+      for (Entry<String, Integer> e : this.allWayTimeTable.entrySet()) {
          v.addElement(e.getKey());
          v.addElement(e.getValue() + "");
       }
@@ -103,7 +103,7 @@ public class gleisbildModelSts extends gleisbildModelPhone implements structinfo
       v.addElement("Ausfahrten");
       v.addElement("waytime");
 
-      for(Entry<String, Integer> e : this.allWayTimeTableA.entrySet()) {
+      for (Entry<String, Integer> e : this.allWayTimeTableA.entrySet()) {
          v.addElement(e.getKey());
          v.addElement(e.getValue() + "");
       }
@@ -111,7 +111,7 @@ public class gleisbildModelSts extends gleisbildModelPhone implements structinfo
       v.addElement("Einfahrten");
       v.addElement("Verspätung");
 
-      for(Entry<String, Integer> e : this.allVerspaetungTable.entrySet()) {
+      for (Entry<String, Integer> e : this.allVerspaetungTable.entrySet()) {
          v.addElement(e.getKey());
          v.addElement(e.getValue() + "");
       }

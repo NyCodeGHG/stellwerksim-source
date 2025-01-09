@@ -34,15 +34,11 @@ public final class CC implements Externalizable {
    private static final String[] EMPTY_ARR = new String[0];
    private transient String[] linkTargets = null;
 
-   public CC() {
-      super();
-   }
-
    String[] getLinkTargets() {
       if (this.linkTargets == null) {
          ArrayList<String> targets = new ArrayList(2);
          if (this.pos != null) {
-            for(int i = 0; i < this.pos.length; ++i) {
+            for (int i = 0; i < this.pos.length; i++) {
                this.addLinkTargetIDs(targets, this.pos[i]);
             }
          }
@@ -59,7 +55,7 @@ public final class CC implements Externalizable {
          if (linkId != null) {
             targets.add(linkId);
          } else {
-            for(int i = uv.getSubUnitCount() - 1; i >= 0; --i) {
+            for (int i = uv.getSubUnitCount() - 1; i >= 0; i--) {
                UnitValue subUv = uv.getSubUnitValue(i);
                if (subUv.isLinkedDeep()) {
                   this.addLinkTargetIDs(targets, subUv);
@@ -117,7 +113,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC growPrio(int... widthHeight) {
-      switch(widthHeight.length) {
+      switch (widthHeight.length) {
          case 2:
             this.growPrioY(widthHeight[1]);
          case 1:
@@ -139,7 +135,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC grow(float... widthHeight) {
-      switch(widthHeight.length) {
+      switch (widthHeight.length) {
          case 2:
             this.growY(widthHeight[1]);
          case 1:
@@ -156,7 +152,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC shrinkPrio(int... widthHeight) {
-      switch(widthHeight.length) {
+      switch (widthHeight.length) {
          case 2:
             this.shrinkPrioY(widthHeight[1]);
          case 1:
@@ -173,7 +169,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC shrink(float... widthHeight) {
-      switch(widthHeight.length) {
+      switch (widthHeight.length) {
          case 2:
             this.shrinkY(widthHeight[1]);
          case 1:
@@ -190,7 +186,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC endGroup(String... xy) {
-      switch(xy.length) {
+      switch (xy.length) {
          case 2:
             this.endGroupY(xy[1]);
          case 1:
@@ -207,7 +203,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC sizeGroup(String... xy) {
-      switch(xy.length) {
+      switch (xy.length) {
          case 2:
             this.sizeGroupY(xy[1]);
          case 1:
@@ -291,7 +287,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC cell(int... colRowWidthHeight) {
-      switch(colRowWidthHeight.length) {
+      switch (colRowWidthHeight.length) {
          case 4:
             this.setSpanY(colRowWidthHeight[3]);
          case 3:
@@ -324,7 +320,7 @@ public final class CC implements Externalizable {
    }
 
    public final CC gap(String... args) {
-      switch(args.length) {
+      switch (args.length) {
          case 4:
             this.gapBottom(args[3]);
          case 3:

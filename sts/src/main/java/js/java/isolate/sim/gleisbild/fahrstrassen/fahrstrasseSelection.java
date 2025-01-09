@@ -15,7 +15,6 @@ public class fahrstrasseSelection {
    final GleisAdapter my_main;
 
    public fahrstrasseSelection(fahrstrasse fs, boolean rangierModus, GleisAdapter my_main) {
-      super();
       this.fs = fs;
       this.rangierModus = rangierModus;
       this.my_main = my_main;
@@ -115,7 +114,7 @@ public class fahrstrasseSelection {
    }
 
    private void fireHook(fahrstrasseSelection.StateChangeTypes sct) {
-      for(Entry<fahrstrasseSelection.ChangeHook, EnumSet<fahrstrasseSelection.StateChangeTypes>> m : this.hooks.entrySet()) {
+      for (Entry<fahrstrasseSelection.ChangeHook, EnumSet<fahrstrasseSelection.StateChangeTypes>> m : this.hooks.entrySet()) {
          if (((EnumSet)m.getValue()).contains(sct)) {
             this.callHook((fahrstrasseSelection.ChangeHook)m.getKey());
          }

@@ -9,18 +9,17 @@ public class ChannelsNameParser implements Iterable<ChannelsNameParser.ChannelNa
    private final ChannelsNameParser.ChannelName[] channels;
 
    public ChannelsNameParser(String channelsStr, int defaultPrio) {
-      super();
       String[] splitted = channelsStr.split(";");
       this.channels = new ChannelsNameParser.ChannelName[splitted.length];
       int i = 0;
 
-      for(String cc : splitted) {
+      for (String cc : splitted) {
          String[] s = cc.split(":");
          String n = extractChannelName(s);
          String t = extractChannelTitle(s);
          int prio = extractChannelPrio(s, defaultPrio);
          this.channels[i] = new ChannelsNameParser.ChannelName(n, t, prio);
-         ++i;
+         i++;
       }
    }
 
@@ -39,7 +38,7 @@ public class ChannelsNameParser implements Iterable<ChannelsNameParser.ChannelNa
    public Set<ChannelsNameParser.ChannelName> asSet() {
       TreeSet<ChannelsNameParser.ChannelName> ret = new TreeSet();
 
-      for(ChannelsNameParser.ChannelName c : this.channels) {
+      for (ChannelsNameParser.ChannelName c : this.channels) {
          ret.add(c);
       }
 
@@ -67,7 +66,6 @@ public class ChannelsNameParser implements Iterable<ChannelsNameParser.ChannelNa
       public String customdata = "";
 
       ChannelName(String name, String title, int prio) {
-         super();
          this.name = name.toLowerCase();
          this.title = title;
          this.prio = prio;
@@ -89,11 +87,10 @@ public class ChannelsNameParser implements Iterable<ChannelsNameParser.ChannelNa
       public boolean equals(Object o) {
          if (o instanceof String) {
             return this.name.equalsIgnoreCase((String)o);
-         } else if (!(o instanceof ChannelsNameParser.ChannelName)) {
-            return false;
          } else {
-            return this.name.equalsIgnoreCase(((ChannelsNameParser.ChannelName)o).name)
-               && this.title.equalsIgnoreCase(((ChannelsNameParser.ChannelName)o).title);
+            return !(o instanceof ChannelsNameParser.ChannelName)
+               ? false
+               : this.name.equalsIgnoreCase(((ChannelsNameParser.ChannelName)o).name) && this.title.equalsIgnoreCase(((ChannelsNameParser.ChannelName)o).title);
          }
       }
 

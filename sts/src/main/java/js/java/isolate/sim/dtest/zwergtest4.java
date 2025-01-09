@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class zwergtest4 implements dtest {
-   public zwergtest4() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Schutzsignal in der Einfahrt";
@@ -25,7 +21,7 @@ public class zwergtest4 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_ZWERGSIGNAL});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gls = (gleis)it1.next();
          boolean ok = true;
          gleis before_gl = gls;
@@ -50,7 +46,7 @@ public class zwergtest4 implements dtest {
                      break;
                   }
                }
-            } while(next_gl != null);
+            } while (next_gl != null);
          }
 
          if (!ok) {

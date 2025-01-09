@@ -16,7 +16,7 @@ class c_prerunner extends baseChain2Chain {
       gleis s_next_gl = null;
       gleis s_before_gl = z.before_gl;
 
-      for(int i = 0; i < 8; ++i) {
+      for (int i = 0; i < 8; i++) {
          s_next_gl = s_pos_gl.next(s_before_gl);
          if (s_pos_gl.getFluentData().getStellung().getZugStellung() == gleisElements.ZugStellungen.stop && s_pos_gl.forUs(s_before_gl)) {
             z.haltabstand = i;

@@ -59,7 +59,7 @@ public class gtWeiche extends gtBase {
       TasterButton.LIGHTMODE l = TasterButton.LIGHTMODE.OFF;
       Iterator<gleis> it = this.weichen.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis g = (gleis)it.next();
          if (g.getFluentData().getStatus() == 4) {
             l = TasterButton.LIGHTMODE.ON;

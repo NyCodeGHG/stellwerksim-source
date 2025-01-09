@@ -69,7 +69,7 @@ public class colorStruct {
    }
 
    void backupColors() {
-      this.col_stellwerk_backmulti_backup = (TreeMap)this.col_stellwerk_backmulti.clone();
+      this.col_stellwerk_backmulti_backup = (TreeMap<String, Color>)this.col_stellwerk_backmulti.clone();
       this.col_stellwerk_belegt_backup = this.col_stellwerk_belegt;
       this.col_stellwerk_defekt_backup = this.col_stellwerk_defekt;
       this.col_stellwerk_gelbein_backup = this.col_stellwerk_gelbein;
@@ -82,10 +82,10 @@ public class colorStruct {
    }
 
    void cloneTo(colorStruct other) {
-      for(Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
+      for (Class obj = this.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
          Field[] fs = obj.getDeclaredFields();
 
-         for(Field f : fs) {
+         for (Field f : fs) {
             try {
                if (!f.getType().isArray()) {
                   Object o = f.get(this);
@@ -99,7 +99,7 @@ public class colorStruct {
                   int length = Array.getLength(o);
                   Object newArray = Array.newInstance(Color.class, length);
 
-                  for(int i = 0; i < length; ++i) {
+                  for (int i = 0; i < length; i++) {
                      Object element = Array.get(o, i);
                      Array.set(newArray, i, element);
                   }
@@ -115,11 +115,9 @@ public class colorStruct {
    }
 
    colorStruct() {
-      super();
    }
 
    colorStruct(colorStruct other) {
-      super();
       other.cloneTo(this);
    }
 }

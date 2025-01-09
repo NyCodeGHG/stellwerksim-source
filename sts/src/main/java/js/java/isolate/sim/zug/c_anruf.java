@@ -3,16 +3,12 @@ package js.java.isolate.sim.zug;
 import js.java.isolate.sim.sim.TEXTTYPE;
 
 class c_anruf extends baseChain {
-   c_anruf() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);
       if ((z.mytime - z.anruftime) / 60000L > (long)z.variables.var_anrufwartezeit(z.zielgleis) && !z.flags.hasFlag('K')) {
          if (!z.wartenOK) {
-            ++z.anrufzaehler;
+            z.anrufzaehler++;
             String text;
             if (z.anrufzaehler > 1) {
                text = z.anrufzaehler

@@ -39,7 +39,6 @@ public class IRCConnection implements Runnable, IRCConstants {
    private final IRCConnection._IRCConnectionMux _mux = new IRCConnection._IRCConnectionMux();
 
    public IRCConnection(String server, int port, String nick, String altNick, String userName, String fullName) {
-      super();
       this._server = server;
       this._port = port;
       this._nick = nick;
@@ -150,7 +149,7 @@ public class IRCConnection implements Runnable, IRCConstants {
       byte[] btmp = m2.getBytes();
 
       try {
-         synchronized(this) {
+         synchronized (this) {
             this._outputStream.write(btmp);
          }
       } catch (SocketException var7) {
@@ -192,7 +191,7 @@ public class IRCConnection implements Runnable, IRCConstants {
          this._socket = null;
          InetAddress[] addresses = InetAddress.getAllByName(this._server);
 
-         for(InetAddress inet : addresses) {
+         for (InetAddress inet : addresses) {
             if (inet instanceof Inet6Address) {
                try {
                   this._socket = new Socket(inet, this._port);
@@ -252,9 +251,9 @@ public class IRCConnection implements Runnable, IRCConstants {
       this._mux.onStatus("Waiting for response from server [" + this._server + ":" + this._port + "]");
 
       try {
-         while(true) {
+         while (true) {
             String message;
-            while(true) {
+            while (true) {
                try {
                   message = this._inputStream.readLine();
                   break;
@@ -428,13 +427,13 @@ public class IRCConnection implements Runnable, IRCConstants {
       try {
          cmdid = Integer.parseInt(command);
       } catch (Exception var24) {
-         cmdid = -1;
+         int var25 = -1;
          this._mux.onParsingError(message);
          return true;
       }
 
       boolean handled = false;
-      switch(cmdid) {
+      switch (cmdid) {
          case 1:
          case 2:
          case 3:
@@ -626,7 +625,6 @@ public class IRCConnection implements Runnable, IRCConstants {
 
    private class _IRCConnectionMux extends IRCConnectionAdapter {
       private _IRCConnectionMux() {
-         super();
       }
 
       @Override

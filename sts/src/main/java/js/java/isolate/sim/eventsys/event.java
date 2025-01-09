@@ -188,7 +188,6 @@ public abstract class event extends trigger implements structinfo, Comparable, H
    }
 
    protected event(Simulator m) {
-      super();
       this.my_main = m;
       String c = String.format("%1d%02d%1d", (int)(Math.random() * 8.0), ++codeCounter * 5 % 100, codeCounter % 10);
       this.code = c;
@@ -196,7 +195,6 @@ public abstract class event extends trigger implements structinfo, Comparable, H
    }
 
    protected event(Simulator m, String code) {
-      super();
       this.my_main = m;
       this.code = code;
       events.add(this);
@@ -214,7 +212,7 @@ public abstract class event extends trigger implements structinfo, Comparable, H
          if ((this.my_main.getTimeSystem().getSimutime() - this.now) / 60000L >= (long)this.min) {
             this.now = 0L;
             this.min = 0;
-            switch(this.pingmode) {
+            switch (this.pingmode) {
                case 1:
                   this.eventDone();
                   return false;
@@ -384,7 +382,7 @@ public abstract class event extends trigger implements structinfo, Comparable, H
    }
 
    public static void startActivityCall(String code, String token) {
-      for(event e : callWaits) {
+      for (event e : callWaits) {
          if (code.equals(e.code)) {
             startActivityCall(e, token);
          }
@@ -392,7 +390,7 @@ public abstract class event extends trigger implements structinfo, Comparable, H
    }
 
    protected static void callUncalled() {
-      for(event e : callWaits) {
+      for (event e : callWaits) {
          if (!e.called) {
             startActivityCall(e, "");
          }

@@ -11,7 +11,6 @@ public class gleisbildWorkerBase<T extends gleisbildModel> {
    protected final GleisAdapter my_main;
 
    public gleisbildWorkerBase(T gl, GleisAdapter main) {
-      super();
       this.glbModel = gl;
       this.my_main = main;
    }
@@ -29,7 +28,7 @@ public class gleisbildWorkerBase<T extends gleisbildModel> {
    }
 
    public final void markHLine(gleis gl, int w, LinkedList<gleis> m) {
-      for(int i = 0; i <= w; ++i) {
+      for (int i = 0; i <= w; i++) {
          try {
             m.add(this.glbModel.getXY_null(gl.getCol() + i, gl.getRow()));
          } catch (NullPointerException var6) {
@@ -38,7 +37,7 @@ public class gleisbildWorkerBase<T extends gleisbildModel> {
    }
 
    public final void markVLine(gleis gl, int h, LinkedList<gleis> m) {
-      for(int i = 0; i <= h; ++i) {
+      for (int i = 0; i <= h; i++) {
          try {
             m.add(this.glbModel.getXY_null(gl.getCol(), gl.getRow() + i));
          } catch (NullPointerException var6) {
@@ -57,7 +56,7 @@ public class gleisbildWorkerBase<T extends gleisbildModel> {
    }
 
    public final void markLines(LinkedList<Rectangle> areas, LinkedList<gleis> m) {
-      for(Rectangle r : areas) {
+      for (Rectangle r : areas) {
          this.markLines(r, m);
       }
    }
@@ -67,7 +66,7 @@ public class gleisbildWorkerBase<T extends gleisbildModel> {
       this.glbModel.clearMarkedGleis();
       this.markLines(r, m);
 
-      for(gleis gl : m) {
+      for (gleis gl : m) {
          this.glbModel.addMarkedGleis(gl);
       }
    }
@@ -76,11 +75,11 @@ public class gleisbildWorkerBase<T extends gleisbildModel> {
       LinkedList<gleis> m = new LinkedList();
       this.glbModel.clearMarkedGleis();
 
-      for(Rectangle r : areas) {
+      for (Rectangle r : areas) {
          this.markLines(r, m);
       }
 
-      for(gleis gl : m) {
+      for (gleis gl : m) {
          this.glbModel.addMarkedGleis(gl);
       }
    }

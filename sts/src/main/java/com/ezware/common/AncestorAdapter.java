@@ -4,10 +4,6 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
 public class AncestorAdapter implements AncestorListener {
-   public AncestorAdapter() {
-      super();
-   }
-
    public void ancestorAdded(AncestorEvent event) {
    }
 

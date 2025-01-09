@@ -7,7 +7,6 @@ public class BotMessageEvent {
    public int instanz;
 
    BotMessageEvent(String sender, String text, boolean ispublic) {
-      super();
       this.sender = sender;
       this.text = text;
       this.ispublic = ispublic;
@@ -15,7 +14,6 @@ public class BotMessageEvent {
    }
 
    BotMessageEvent(String sender, String text, boolean ispublic, int instanz) {
-      super();
       this.sender = sender;
       this.text = text;
       this.ispublic = ispublic;

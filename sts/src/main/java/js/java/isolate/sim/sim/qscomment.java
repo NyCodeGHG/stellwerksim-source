@@ -64,7 +64,7 @@ public class qscomment extends JDialog {
          StringTokenizer pst = new StringTokenizer(l, ",");
          boolean firstItem = true;
 
-         while(pst.hasMoreTokens()) {
+         while (pst.hasMoreTokens()) {
             String tk1 = pst.nextToken();
             rb = new JRadioButton();
             rb.setText(tk1);
@@ -87,7 +87,7 @@ public class qscomment extends JDialog {
          l = this.my_main.getParameter("qstextblocks");
          int n = Integer.parseInt(l);
 
-         for(int i = 0; i < n; ++i) {
+         for (int i = 0; i < n; i++) {
             l = this.my_main.getParameter("qstextblock[" + i + "]");
             this.textblockCB.addItem(l);
          }

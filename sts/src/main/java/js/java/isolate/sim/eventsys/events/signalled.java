@@ -68,7 +68,7 @@ public class signalled extends signalstoerung {
             this.acceptingCall();
          }
 
-         --this.brokeCnt;
+         this.brokeCnt--;
       } else if (!this.finishWait && this.brokeCnt <= 0) {
          this.unregisterForStellung(this.signal);
          this.my_main.reportElementOccurance(this.signal, OCCU_KIND.NORMAL, "signalled", this.code);

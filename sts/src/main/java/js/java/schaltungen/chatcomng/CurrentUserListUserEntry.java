@@ -34,7 +34,6 @@ public class CurrentUserListUserEntry {
    public int distance;
 
    public CurrentUserListUserEntry(ChatUser user) {
-      super();
       this.nick = user.nick;
       this.name = user.getName();
       this.playing = user.getPlay();
@@ -44,7 +43,6 @@ public class CurrentUserListUserEntry {
    }
 
    public CurrentUserListUserEntry(String nick, String name, String playing, long entrytime, long playentrytime) {
-      super();
       this.nick = nick;
       this.name = name;
       this.playing = playing;
@@ -54,6 +52,5 @@ public class CurrentUserListUserEntry {
    }
 
    public CurrentUserListUserEntry() {
-      super();
    }
 }

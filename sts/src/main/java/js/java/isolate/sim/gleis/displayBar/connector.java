@@ -26,18 +26,15 @@ public class connector {
    }
 
    connector(gleisbildModel glbModel, gleis g) {
-      super();
       this.sourceElement = g;
    }
 
    connector(gleisbildModel glbModel, gleis g, String swwert) {
-      super();
       this.destinationDisplay = g;
       this.swwert = swwert;
    }
 
    connector(gleisbildModel glbModel, Attributes attrs) throws UnknownDisplayException, UndefinedSWWertException {
-      super();
       String dest = attrs.getValue("destination");
       String ssw = attrs.getValue("source");
       String fsc = attrs.getValue("fsconnector");

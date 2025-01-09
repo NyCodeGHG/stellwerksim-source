@@ -11,12 +11,12 @@ public class timedeliveryLoaded extends timedeliveryBase implements timedelivery
    public void setPause(boolean on) {
       if (on) {
          this.pausetime = this.getSimutime();
-         synchronized(this.pauseWaiter) {
+         synchronized (this.pauseWaiter) {
             this.pauseon = on;
          }
       } else {
          this.setTime(this.pausetime);
-         synchronized(this.pauseWaiter) {
+         synchronized (this.pauseWaiter) {
             this.pauseon = on;
             this.pauseWaiter.notifyAll();
          }
@@ -40,7 +40,6 @@ public class timedeliveryLoaded extends timedeliveryBase implements timedelivery
    }
 
    public timedeliveryLoaded() {
-      super();
       this.simusynctime = System.currentTimeMillis();
    }
 }

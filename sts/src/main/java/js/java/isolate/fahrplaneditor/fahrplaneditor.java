@@ -121,7 +121,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       this.zScrollPane.setViewportView(new SmoothViewport(this.zPanel));
       ((planPanel)this.zPanel).addFilterListener(this);
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          planLine p = (planLine)it.next();
          if (!bhfmap.containsKey(p.aaid)) {
             bahnhof lastB = this.addBhf(p.aaid);
@@ -135,7 +135,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
          }
       }
 
-      for(bahnhof lastB : bhfmap.values()) {
+      for (bahnhof lastB : bhfmap.values()) {
          if (lastB.getAidData().isErlaubt()) {
             lastB.addBhf(true);
          }
@@ -152,7 +152,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       this.checker_stop = true;
       TreeSet<bahnhof> sort = new TreeSet();
 
-      for(bahnhof b : this.bhfs) {
+      for (bahnhof b : this.bhfs) {
          sort.add(b);
          b.sort();
       }
@@ -161,7 +161,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       this.zPanel.removeAll();
       this.jumpMenu.removeAll();
 
-      for(bahnhof b : sort) {
+      for (bahnhof b : sort) {
          this.bhfs.add(b);
          this.zPanel.add(b);
 
@@ -233,7 +233,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
 
       int l = Integer.parseInt(this.getParameter(prefix + "plines"));
 
-      for(int i = 0; i < l; ++i) {
+      for (int i = 0; i < l; i++) {
          planLine p = new planLine(this, i);
          this.fahrplan.add(p);
       }
@@ -252,7 +252,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       jm.setSelected(true);
       this.markerMenu.add(jm);
 
-      for(char c = 'A'; c <= 'Z'; ++c) {
+      for (char c = 'A'; c <= 'Z'; c++) {
          jm = new JRadioButtonMenuItem(c + "");
          jm.addActionListener(mac);
          jm.setActionCommand(c + "");
@@ -264,7 +264,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       int[] shifts = new int[]{-30, -10, -5, -1, 0, 1, 5, 10, 30};
       char c = '1';
 
-      for(int s : shifts) {
+      for (int s : shifts) {
          if (s == 0) {
             shiftMenu.add(new JSeparator());
          } else {
@@ -273,7 +273,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
             shiftMenu.add(mi);
             fahrplaneditor.ShiftListener smac = new fahrplaneditor.ShiftListener(s);
             mi.addActionListener(smac);
-            ++c;
+            c++;
          }
       }
 
@@ -364,7 +364,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
             this.adding = true;
             FPEaidData a = null;
 
-            for(FPEaidData d : this.aids) {
+            for (FPEaidData d : this.aids) {
                if (d.getAid() == aid) {
                   a = d;
                   d.makeValid();
@@ -445,7 +445,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
    private void jumpMenuSelected(JMenuItem m) {
       System.out.println(m.getText());
 
-      for(bahnhof b : this.bhfs) {
+      for (bahnhof b : this.bhfs) {
          if (b.getMenu() == m) {
             this.scrollZPanel(b.getBounds());
             b.jump();
@@ -517,7 +517,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       if (a != null) {
          StringTokenizer st = new StringTokenizer(a, ",");
 
-         while(st.hasMoreTokens()) {
+         while (st.hasMoreTokens()) {
             String t = st.nextToken();
             int aid = Integer.parseInt(t);
             FPEaidData d = new FPEaidData(aid, this);
@@ -559,8 +559,8 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
 
    private void saveData(StringBuffer data) {
       int counter = 0;
-      synchronized(this.bhfs) {
-         for(bahnhof b : this.bhfs) {
+      synchronized (this.bhfs) {
+         for (bahnhof b : this.bhfs) {
             counter = b.saveData(data, counter);
          }
       }
@@ -579,7 +579,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
    private void shiftBy(int minutes) {
       List<bahnhof> filtered = ((planPanel)this.zPanel).getSelected();
 
-      for(bahnhof b : this.bhfs) {
+      for (bahnhof b : this.bhfs) {
          if ((filtered.isEmpty() || filtered.contains(b)) && b.isErlaubt()) {
             b.shiftMinutes(minutes);
          }
@@ -595,7 +595,7 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       } else {
          List<bahnhof> filtered = ((planPanel)this.zPanel).getSelected();
 
-         for(bahnhof b : this.bhfs) {
+         for (bahnhof b : this.bhfs) {
             if (filtered.isEmpty()) {
                b.fadeOff(false);
             } else if (filtered.contains(b)) {
@@ -744,7 +744,6 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
       int shift;
 
       ShiftListener(int shift) {
-         super();
          this.shift = shift;
       }
 
@@ -772,10 +771,6 @@ public class fahrplaneditor extends AbstractTopFrame implements planPanel.filter
    }
 
    class checker implements Runnable {
-      checker() {
-         super();
-      }
-
       public void run() {
          fahrplaneditor.this.entriesChanged();
          fahrplaneditor.this.runChecker();

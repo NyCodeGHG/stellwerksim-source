@@ -16,11 +16,9 @@ public class SmoothViewport extends JViewport implements ActionListener {
    private static boolean enableScrollAnimation = true;
 
    public SmoothViewport() {
-      super();
    }
 
    public SmoothViewport(JComponent p) {
-      super();
       this.add(p);
    }
 
@@ -47,9 +45,9 @@ public class SmoothViewport extends JViewport implements ActionListener {
    }
 
    public void scrollRectToVisible(Rectangle contentRect) {
-      ++this.ownPosition;
+      this.ownPosition++;
       super.scrollRectToVisible(contentRect);
-      --this.ownPosition;
+      this.ownPosition--;
    }
 
    public void actionPerformed(ActionEvent e) {
@@ -65,8 +63,8 @@ public class SmoothViewport extends JViewport implements ActionListener {
             this.gotoPoint = null;
             this.scrollTimer.stop();
          } else {
-            c.x += (this.gotoPoint.x - c.x) / 2;
-            c.y += (this.gotoPoint.y - c.y) / 2;
+            c.x = c.x + (this.gotoPoint.x - c.x) / 2;
+            c.y = c.y + (this.gotoPoint.y - c.y) / 2;
             super.setViewPosition(c);
          }
       } finally {

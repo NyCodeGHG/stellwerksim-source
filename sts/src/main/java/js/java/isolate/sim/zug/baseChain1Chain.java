@@ -5,7 +5,6 @@ abstract class baseChain1Chain extends baseChain {
    private final baseChain trueChain;
 
    baseChain1Chain(baseChain _trueChain) {
-      super();
       this.trueChain = (baseChain)(_trueChain == null ? falseReturnNullPattern : _trueChain);
    }
 
@@ -20,10 +19,6 @@ abstract class baseChain1Chain extends baseChain {
    }
 
    protected static final class FalseReturn extends baseChain {
-      protected FalseReturn() {
-         super();
-      }
-
       @Override
       boolean run(zug z) {
          return false;

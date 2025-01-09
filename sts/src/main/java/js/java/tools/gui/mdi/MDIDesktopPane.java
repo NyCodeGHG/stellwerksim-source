@@ -12,7 +12,6 @@ public class MDIDesktopPane extends JDesktopPane {
    private MDIDesktopManager manager = new MDIDesktopManager(this);
 
    public MDIDesktopPane() {
-      super();
       this.setDesktopManager(this.manager);
       this.setDragMode(1);
    }
@@ -29,8 +28,8 @@ public class MDIDesktopPane extends JDesktopPane {
       Point p;
       if (array.length > 0) {
          p = array[0].getLocation();
-         p.x += FRAME_OFFSET;
-         p.y += FRAME_OFFSET;
+         p.x = p.x + FRAME_OFFSET;
+         p.y = p.y + FRAME_OFFSET;
       } else {
          p = new Point(0, 0);
       }
@@ -75,7 +74,7 @@ public class MDIDesktopPane extends JDesktopPane {
       int frameHeight = this.getBounds().height - 5 - allFrames.length * FRAME_OFFSET;
       int frameWidth = this.getBounds().width - 5 - allFrames.length * FRAME_OFFSET;
 
-      for(int i = allFrames.length - 1; i >= 0; --i) {
+      for (int i = allFrames.length - 1; i >= 0; i--) {
          allFrames[i].setSize(frameWidth, frameHeight);
          allFrames[i].setLocation(x, y);
          x += FRAME_OFFSET;
@@ -89,7 +88,7 @@ public class MDIDesktopPane extends JDesktopPane {
       int frameHeight = this.getBounds().height / allFrames.length;
       int y = 0;
 
-      for(int i = 0; i < allFrames.length; ++i) {
+      for (int i = 0; i < allFrames.length; i++) {
          allFrames[i].setSize(this.getBounds().width, frameHeight);
          allFrames[i].setLocation(0, y);
          y += frameHeight;

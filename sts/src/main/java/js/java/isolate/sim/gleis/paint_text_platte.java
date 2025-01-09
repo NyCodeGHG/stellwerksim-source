@@ -31,11 +31,11 @@ class paint_text_platte extends paint_text_base {
 
       g2.fill3DRect(0, 0, textr.width, textr.height, false);
 
-      for(int ix = -1; ix <= 1; ++ix) {
+      for (int ix = -1; ix <= 1; ix++) {
          gl.printtext(g2, t1, gleis.colors.col_stellwerk_back, xscal + ix, yscal / 3 + 1, yscal);
       }
 
-      for(int iy = -1; iy <= 1; ++iy) {
+      for (int iy = -1; iy <= 1; iy++) {
          gl.printtext(g2, t1, gleis.colors.col_stellwerk_back, xscal + 1, yscal / 3 + iy, yscal);
       }
 

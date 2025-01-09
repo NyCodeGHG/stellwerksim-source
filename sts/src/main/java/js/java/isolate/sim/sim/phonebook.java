@@ -32,7 +32,6 @@ public class phonebook extends currentPlayers implements Iterable<phonebookentry
    private boolean canCall = false;
 
    public phonebook(gleisbildModelPhone gb, GleisAdapter sim) {
-      super();
       this.glbModel = gb;
       this.sim = sim;
       this.canCall = sim.getParameter("callurl") != null;
@@ -48,7 +47,7 @@ public class phonebook extends currentPlayers implements Iterable<phonebookentry
       this.setStellwerk(Integer.parseInt(aid), stw, user);
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_AIDDISPLAY, aid});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          if (user != null) {
             boolean wasEmpty = gl.getFluentData().displayGetValue().isEmpty();
@@ -94,7 +93,7 @@ public class phonebook extends currentPlayers implements Iterable<phonebookentry
       this.regionname = name;
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_AIDDISPLAY});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
 
          try {
@@ -199,7 +198,6 @@ public class phonebook extends currentPlayers implements Iterable<phonebookentry
       private final phonebook pb;
 
       dialRunner(phonebook p, String tel) {
-         super();
          this.tel = tel;
          this.pb = p;
       }

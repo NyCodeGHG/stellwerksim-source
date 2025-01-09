@@ -12,7 +12,6 @@ public class ChannelSearch {
    private Vector _listeners = new Vector();
 
    public ChannelSearch(Server server) {
-      super();
       this._server = server;
    }
 
@@ -73,20 +72,20 @@ public class ChannelSearch {
       if (chan.getUserCount() > this._minUsers && chan.getUserCount() < this._maxUsers) {
          this._results.addElement(chan);
 
-         for(int i = 0; i < this._listeners.size(); ++i) {
+         for (int i = 0; i < this._listeners.size(); i++) {
             ((ChannelSearchListener)this._listeners.elementAt(i)).searchFound(chan);
          }
       }
    }
 
    void searchStarted(int channels) {
-      for(int i = 0; i < this._listeners.size(); ++i) {
+      for (int i = 0; i < this._listeners.size(); i++) {
          ((ChannelSearchListener)this._listeners.elementAt(i)).searchStarted(channels);
       }
    }
 
    void searchEnded() {
-      for(int i = 0; i < this._listeners.size(); ++i) {
+      for (int i = 0; i < this._listeners.size(); i++) {
          ((ChannelSearchListener)this._listeners.elementAt(i)).searchEnded();
       }
    }

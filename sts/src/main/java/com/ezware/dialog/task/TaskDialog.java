@@ -81,12 +81,11 @@ public class TaskDialog extends SwingBean {
    }
 
    public TaskDialog(Window parent, String title) {
-      super();
       Window pWnd = parent;
       if (parent == null) {
          pWnd = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
 
-         while(pWnd != null && !pWnd.isVisible() && pWnd.getParent() != null) {
+         while (pWnd != null && !pWnd.isVisible() && pWnd.getParent() != null) {
             pWnd = (Window)pWnd.getParent();
          }
       }
@@ -138,7 +137,7 @@ public class TaskDialog extends SwingBean {
    public final void fireValidationFinished(boolean validationResult) {
       ListIterator<TaskDialog.ValidationListener> iter = this.validationListeners.listIterator();
 
-      while(iter.hasPrevious()) {
+      while (iter.hasPrevious()) {
          ((TaskDialog.ValidationListener)iter.previous()).validationFinished(validationResult);
       }
    }
@@ -382,7 +381,6 @@ public class TaskDialog extends SwingBean {
       private final TaskDialog.StandardCommand command;
 
       public CustomCommand(TaskDialog.StandardCommand command) {
-         super();
          if (command == null) {
             throw new IllegalArgumentException("Command should not be null");
          } else {

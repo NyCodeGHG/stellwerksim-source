@@ -7,11 +7,9 @@ public class XPosChange {
    public int zid;
 
    public XPosChange() {
-      super();
    }
 
    public XPosChange(int zid) {
-      super();
       this.zid = zid;
    }
 }

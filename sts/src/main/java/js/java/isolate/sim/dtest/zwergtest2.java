@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class zwergtest2 implements dtest {
-   public zwergtest2() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Schutzsignalknopf neben Signal";
@@ -25,15 +21,15 @@ public class zwergtest2 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_SIGNALKNOPF});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          int signalOk = 0;
          Iterator<gleis> it2 = gl.getNachbarn();
 
-         while(it2.hasNext()) {
+         while (it2.hasNext()) {
             gleis gl2 = (gleis)it2.next();
             if (gl2.getElement() == gleis.ELEMENT_SIGNAL && gl2.getENR() == gl.getENR()) {
-               ++signalOk;
+               signalOk++;
             }
          }
 

@@ -26,7 +26,6 @@ class gleislist extends JComponent implements Comparable, Iterable {
    static Color bgcol2 = new Color(221, 221, 221);
 
    gleislist(String g) {
-      super();
       this.gleis = g;
       this.setOpaque(true);
       this.setComponentPopupMenu(this.buildMenu());
@@ -85,7 +84,7 @@ class gleislist extends JComponent implements Comparable, Iterable {
       g2.setColor(timeline.bgcol.brighter());
       g2.drawLine(0, 0, w, 0);
 
-      for(int s = timeline.VON; s < timeline.BIS; ++s) {
+      for (int s = timeline.VON; s < timeline.BIS; s++) {
          g2.drawLine((s - timeline.VON) * timeline.MINUTEWIDTH * 60, 0, (s - timeline.VON) * timeline.MINUTEWIDTH * 60, this.getHeight());
       }
    }
@@ -109,7 +108,7 @@ class gleislist extends JComponent implements Comparable, Iterable {
    public zuggleis getZug(int zid) {
       zuggleis ret = null;
 
-      for(zuggleis zg : this.zuege) {
+      for (zuggleis zg : this.zuege) {
          if (zid == zg.getZid()) {
             ret = zg;
             break;
@@ -122,7 +121,7 @@ class gleislist extends JComponent implements Comparable, Iterable {
    public zuggleis findParentZug(int zid) {
       zuggleis ret = null;
 
-      for(zuggleis zg : this.zuege) {
+      for (zuggleis zg : this.zuege) {
          if (zg.isParentOf(zid)) {
             ret = zg;
             break;
@@ -147,11 +146,11 @@ class gleislist extends JComponent implements Comparable, Iterable {
    public void render() {
       int maxy = timeline.fontheight + 10;
 
-      for(zuggleis zg : this.zuege) {
+      for (zuggleis zg : this.zuege) {
          zg.recalc();
       }
 
-      for(zuggleis zg : this.zuege) {
+      for (zuggleis zg : this.zuege) {
          boolean repeat = false;
          zg.flagrender();
 
@@ -159,7 +158,7 @@ class gleislist extends JComponent implements Comparable, Iterable {
             repeat = false;
             Rectangle r = zg.getObject();
 
-            for(zuggleis zg2 : this.zuege) {
+            for (zuggleis zg2 : this.zuege) {
                if (zg2 == zg) {
                   break;
                }
@@ -174,7 +173,7 @@ class gleislist extends JComponent implements Comparable, Iterable {
             }
 
             maxy = (int)Math.max(r.getY() + r.getHeight(), (double)maxy);
-         } while(repeat);
+         } while (repeat);
 
          this.add(zg);
          zg.render();

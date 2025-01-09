@@ -11,7 +11,6 @@ import javax.swing.JComponent;
 
 public class ArrowBox extends JComponent {
    public ArrowBox() {
-      super();
       this.setMinimumSize(new Dimension(30, 50));
       this.setPreferredSize(new Dimension(30, 50));
       this.setMaximumSize(new Dimension(30, Integer.MAX_VALUE));

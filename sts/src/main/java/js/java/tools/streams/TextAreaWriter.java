@@ -14,7 +14,6 @@ public class TextAreaWriter extends StringWriter implements ActionListener {
    private int oldLen = 0;
 
    private TextAreaWriter(JTextArea textArea) {
-      super();
       this.outWriter = textArea;
       DefaultCaret caret = (DefaultCaret)this.outWriter.getCaret();
       caret.setUpdatePolicy(2);

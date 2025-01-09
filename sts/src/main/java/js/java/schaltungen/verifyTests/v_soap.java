@@ -12,10 +12,6 @@ public class v_soap extends InitTestBase {
    private IsLoginAllowedAnswer response = null;
    private int waitCount = 10;
 
-   public v_soap() {
-      super();
-   }
-
    @Override
    public int test(UserContextMini uc) {
       if (!this.subscribed) {
@@ -23,7 +19,7 @@ public class v_soap extends InitTestBase {
          EventBusService.getInstance().publish(new GetIsLoginAllowed());
          this.subscribed = true;
       } else {
-         --this.waitCount;
+         this.waitCount--;
          if (this.waitCount < 0) {
             this.error = ": Keine Antwort vom Server";
             return -1;

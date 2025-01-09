@@ -95,13 +95,11 @@ class planLayoutManager implements LayoutManager {
    private boolean lastHiddenMode = false;
 
    planLayoutManager(boolean headingmode, int xoffset) {
-      super();
       this.headingMode = headingmode;
       this.xoffset = xoffset;
    }
 
    planLayoutManager() {
-      super();
    }
 
    public static void setHiddenMode(boolean m) {
@@ -125,7 +123,7 @@ class planLayoutManager implements LayoutManager {
       this.minWidth = x;
       this.minHeight = 0;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
          if (c.isVisible() && (!this.lastHiddenMode || !elemwidth[i].hideable)) {
             d = c.getPreferredSize();
@@ -134,9 +132,9 @@ class planLayoutManager implements LayoutManager {
                c.setBackground(elemwidth[i].col);
             }
 
-            this.preferredWidth += d.width;
+            this.preferredWidth = this.preferredWidth + d.width;
             this.preferredHeight = Math.max(d.height, this.preferredHeight);
-            this.minWidth += d.width;
+            this.minWidth = this.minWidth + d.width;
             this.minHeight = this.preferredHeight;
          }
       }
@@ -172,7 +170,7 @@ class planLayoutManager implements LayoutManager {
          this.setSizes(parent);
       }
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
          if (c.isVisible()) {
             if (this.lastHiddenMode && elemwidth[i].hideable) {
@@ -202,31 +200,26 @@ class planLayoutManager implements LayoutManager {
       public boolean hideable = false;
 
       element(int w) {
-         super();
          this.width = w;
       }
 
       element(int w, int p) {
-         super();
          this.width = w;
          this.PAD = p;
       }
 
       element(int w, int p, boolean hideable) {
-         super();
          this.width = w;
          this.PAD = p;
          this.hideable = hideable;
       }
 
       element(int w, Color c) {
-         super();
          this.width = w;
          this.col = c;
       }
 
       element(int w, Color c, boolean hideable) {
-         super();
          this.width = w;
          this.col = c;
          this.hideable = hideable;

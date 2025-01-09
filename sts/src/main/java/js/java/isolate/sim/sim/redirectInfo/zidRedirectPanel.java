@@ -46,7 +46,6 @@ public class zidRedirectPanel extends JPanel {
    private JLabel toLabel;
 
    public zidRedirectPanel(UserContext uc, JFrame parent, RedirectStellwerkInfo m, zug z) {
-      super();
       this.uc = uc;
       this.parent = parent;
       this.my_main = m;
@@ -81,7 +80,7 @@ public class zidRedirectPanel extends JPanel {
    }
 
    private void fillModel(LinkedList<zidRedirectPanel.routeItem> model, int size) {
-      while(model.size() < size) {
+      while (model.size() < size) {
          model.add(new zidRedirectPanel.routeItem(0, "-"));
       }
    }
@@ -98,7 +97,7 @@ public class zidRedirectPanel extends JPanel {
             this.skipPanel.removeAll();
             this.routeLeds.clear();
 
-            for(int i = 0; i < tokens.length; ++i) {
+            for (int i = 0; i < tokens.length; i++) {
                if (tokens[i].equals("AID")) {
                   int pos = Integer.parseInt(tokens[++i].trim());
                   int aid = Integer.parseInt(tokens[++i].trim());
@@ -122,7 +121,7 @@ public class zidRedirectPanel extends JPanel {
                this.toLabel.setText("");
             }
 
-            for(zidRedirectPanel.routeItem s : this.routeModel) {
+            for (zidRedirectPanel.routeItem s : this.routeModel) {
                aidRedirectLabel l = new aidRedirectLabel(s.aid, s.s);
                if (s.aid > 0) {
                   this.routeLeds.add(l);
@@ -131,7 +130,7 @@ public class zidRedirectPanel extends JPanel {
                this.routePanel.add(l);
             }
 
-            for(zidRedirectPanel.routeItem s : this.skipModel) {
+            for (zidRedirectPanel.routeItem s : this.skipModel) {
                aidRedirectLabel l = new aidRedirectLabel(s.aid, s.s);
                this.skipLeds.add(l);
                this.skipPanel.add(l);
@@ -139,7 +138,7 @@ public class zidRedirectPanel extends JPanel {
             }
 
             if (res == 300) {
-               for(aidRedirectLabel l : this.routeLeds) {
+               for (aidRedirectLabel l : this.routeLeds) {
                   l.setLedOn(true);
                }
 
@@ -158,14 +157,14 @@ public class zidRedirectPanel extends JPanel {
          if (res != 300) {
             int caid = 0;
 
-            for(int i = 0; i < tokens.length; ++i) {
-               if (tokens[i].equals("CUR")) {
-                  ++i;
+            for (int ix = 0; ix < tokens.length; ix++) {
+               if (tokens[ix].equals("CUR")) {
+                  ix++;
 
                   try {
-                     caid = Integer.parseInt(tokens[i].trim());
+                     caid = Integer.parseInt(tokens[ix].trim());
                   } catch (NumberFormatException var7) {
-                     System.out.println("T:" + tokens[i].trim());
+                     System.out.println("T:" + tokens[ix].trim());
                      var7.printStackTrace();
                   }
                }
@@ -174,7 +173,7 @@ public class zidRedirectPanel extends JPanel {
             boolean found = false;
             Iterator<aidRedirectLabel> it = this.routeLeds.descendingIterator();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                aidRedirectLabel l = (aidRedirectLabel)it.next();
                l.setLedOn(found);
                l.setBlinkOn(l.getAid() == caid);
@@ -255,7 +254,6 @@ public class zidRedirectPanel extends JPanel {
       final int aid;
 
       routeItem(int aid, String s) {
-         super();
          this.aid = aid;
          this.s = s;
       }
@@ -263,7 +261,6 @@ public class zidRedirectPanel extends JPanel {
 
    private class zrLayout implements LayoutManager {
       private zrLayout() {
-         super();
       }
 
       public void addLayoutComponent(String name, Component comp) {
@@ -288,7 +285,7 @@ public class zidRedirectPanel extends JPanel {
          int h = parent.getHeight() - insets.top - insets.bottom;
          int w = (parent.getWidth() - zidRedirectPanel.this.middlePanel.getMinimumSize().width - insets.left - insets.right) / 2;
 
-         for(int i = 0; i < nComps; ++i) {
+         for (int i = 0; i < nComps; i++) {
             Component c = parent.getComponent(i);
             if (c == zidRedirectPanel.this.middlePanel) {
                c.setBounds(x, y, zidRedirectPanel.this.middlePanel.getMinimumSize().width, h);
@@ -306,7 +303,6 @@ public class zidRedirectPanel extends JPanel {
       private final String[] tokens;
 
       private zrRunnable(int res, String[] tokens) {
-         super();
          this.res = res;
          this.tokens = tokens;
       }

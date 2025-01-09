@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class fahrstrassetest8 implements dtest {
-   public fahrstrassetest8() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Fahrstrassen 8";
@@ -25,7 +21,7 @@ public class fahrstrassetest8 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<fahrstrasse> it = glb.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse f = (fahrstrasse)it.next();
          if (f.getExtend().fstype == 8 && !f.allowsRf()) {
             dtestresult d = new dtestresult(2, "Fahrstraße " + f.getName() + " als reine Rangierfahrstraße, aber keine passenden Signale.", f);

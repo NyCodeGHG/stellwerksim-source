@@ -95,7 +95,7 @@ class paint_signal extends paint2Base {
 
       invers = !invers;
       Graphics2D pg = this.shiftGraphicsTo(g, gl, this.paintgleis, xscal, yscal);
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             if (sim) {
                gl.elementlabel(pg, gl.getShortElementName(), xscal, yscal, invers ? 180 : 0);

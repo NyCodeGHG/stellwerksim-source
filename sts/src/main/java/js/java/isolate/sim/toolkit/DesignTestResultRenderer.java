@@ -17,7 +17,6 @@ public class DesignTestResultRenderer extends DefaultListCellRenderer {
    private JSeparator sep = new JSeparator();
 
    public DesignTestResultRenderer() {
-      super();
       this.txtfield.setOpaque(true);
       this.panel.setOpaque(true);
       this.panel.setLayout(new BorderLayout());
@@ -46,7 +45,7 @@ public class DesignTestResultRenderer extends DefaultListCellRenderer {
       if (value instanceof dtestresult) {
          dtestresult d = (dtestresult)value;
          String n;
-         switch(d.getRank()) {
+         switch (d.getRank()) {
             case 0:
             default:
                n = "info32.png";

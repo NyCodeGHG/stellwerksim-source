@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleisbild.gleisbildSimControl;
 public abstract class trigger extends eventGenerator {
    public static triggerjobmanager tjm = null;
 
-   public trigger() {
-      super();
-   }
-
    protected final void tjm_add(trigger t) {
       if (tjm != null) {
          tjm.add(t);

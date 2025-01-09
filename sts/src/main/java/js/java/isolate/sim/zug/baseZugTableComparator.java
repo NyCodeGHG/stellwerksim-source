@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 public class baseZugTableComparator implements ZugTableComparator {
-   public baseZugTableComparator() {
-      super();
-   }
-
    public int compare(Object o1, Object o2) {
       if (o1 == null && o2 == null) {
          return 0;

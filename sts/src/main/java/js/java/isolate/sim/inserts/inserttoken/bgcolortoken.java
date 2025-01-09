@@ -8,7 +8,6 @@ public class bgcolortoken extends inserttoken {
    public String bgcolor = "normal";
 
    public bgcolortoken(String c) {
-      super();
       this.bgcolor = c;
    }
 

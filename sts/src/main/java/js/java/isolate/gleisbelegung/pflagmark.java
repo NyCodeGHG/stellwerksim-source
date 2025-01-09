@@ -11,7 +11,6 @@ public class pflagmark extends JComponent {
    private Dimension myd;
 
    public pflagmark(zuggleis parent) {
-      super();
       this.parent = parent;
       this.setOpaque(true);
    }

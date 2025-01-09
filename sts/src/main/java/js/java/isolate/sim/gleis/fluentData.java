@@ -41,7 +41,6 @@ public class fluentData implements gleisElements {
    gleis connectedSignal = null;
 
    public fluentData(gleis gl) {
-      super();
       this.my_gleis = gl;
       if (gleis.ALLE_GLEISE.matches(this.my_gleis.telement)) {
          this.initFDschiene();
@@ -114,8 +113,8 @@ public class fluentData implements gleisElements {
                public void statusChangeTrigger(fluentData parent, gleis my_gleis) {
                   if (parent.status == 2 || parent.status == 0) {
                      Iterator<gleis> it = my_gleis.glbModel.findIterator(my_gleis.enr, gleis.ELEMENT_ÜBERGABEAKZEPTOR);
-   
-                     while(it.hasNext()) {
+
+                     while (it.hasNext()) {
                         gleis gl = (gleis)it.next();
                         if (gl.fdata.stellung == gleisElements.ST_ÜBERGABEAKZEPTOR_OK) {
                            gl.fdata.setStellung(gleisElements.ST_ÜBERGABEAKZEPTOR_UNDEF);
@@ -128,7 +127,7 @@ public class fluentData implements gleisElements {
                      }
                   }
                }
-   
+
                @Override
                public void statusChangeTrigger(fluentData parent, gleis my_gleis, gleis before_gl) {
                   if ((parent.status == 2 || parent.status == 0) && (before_gl == null || my_gleis.forUs(before_gl))) {
@@ -223,15 +222,15 @@ public class fluentData implements gleisElements {
                      && my_gleis.hasHook(eventGenerator.T_GLEIS_STELLUNG)) {
                      ret = my_gleis.call(newSt, fs);
                   }
-   
+
                   if (newSt != gleisElements.ST_ZDSIGNAL_FESTGELEGT) {
                      my_gleis.tjmAdd();
                   }
-   
+
                   if (ret) {
                      super.set(parent, newSt, fs, my_gleis);
                   }
-   
+
                   return ret;
                }
             }
@@ -408,7 +407,7 @@ public class fluentData implements gleisElements {
 
          if (ret && s == 2) {
             if (this.zugamgleis != z) {
-               ++this.cnt_zug;
+               this.cnt_zug++;
             }
 
             this.zugamgleis = z;
@@ -435,7 +434,7 @@ public class fluentData implements gleisElements {
    public void setZugAmGleis(zug z) {
       if (this.status == 2) {
          if (this.zugamgleis != z) {
-            ++this.cnt_zug;
+            this.cnt_zug++;
          }
 
          this.zugamgleis = z;
@@ -489,7 +488,7 @@ public class fluentData implements gleisElements {
       } else {
          boolean ret = true;
          if (!this.possibleStellung.isEmpty()) {
-            for(gleisElements.Stellungen st : this.possibleStellung) {
+            for (gleisElements.Stellungen st : this.possibleStellung) {
                if (s == st) {
                   ret = this.setStellungTo(st, f);
                   break;
@@ -510,7 +509,7 @@ public class fluentData implements gleisElements {
       if (oldst != s) {
          this.stellung = s;
          this.stellungChangeTime = System.currentTimeMillis();
-         ++this.cnt_stellung;
+         this.cnt_stellung++;
       }
    }
 
@@ -577,7 +576,7 @@ public class fluentData implements gleisElements {
    public boolean set_FW_speicher(fahrstrasse f) {
       if (this.my_gleis.telement == gleis.ELEMENT_SIGNAL && f != null && f.getStop().fdata.fsspeicherend == 0) {
          this.fsspeicher = f;
-         ++this.fsspeicher.getStop().fdata.fsspeicherend;
+         this.fsspeicher.getStop().fdata.fsspeicherend++;
          this.my_gleis.tjmAdd();
       }
 
@@ -590,7 +589,7 @@ public class fluentData implements gleisElements {
 
    public synchronized boolean clear_FW_speicher() {
       if (this.my_gleis.telement == gleis.ELEMENT_SIGNAL && this.fsspeicher != null) {
-         --this.fsspeicher.getStop().fdata.fsspeicherend;
+         this.fsspeicher.getStop().fdata.fsspeicherend--;
          if (this.fsspeicher.getStop().fdata.fsspeicherend < 0) {
             this.fsspeicher.getStop().fdata.fsspeicherend = 0;
          }
@@ -655,7 +654,7 @@ public class fluentData implements gleisElements {
       if (swap.length % 2 != 0) {
          throw new IllegalArgumentException("Gerade Anzahl Parameter erwartet");
       } else {
-         for(int i = 0; i < swap.length; i += 2) {
+         for (int i = 0; i < swap.length; i += 2) {
             if (this.my_gleis.richtung == swap[i]) {
                this.my_gleis.richtung = swap[i + 1];
                break;
@@ -673,26 +672,24 @@ public class fluentData implements gleisElements {
    }
 
    static class bueStellungsHandling extends fluentData.setStellungHandling {
-      bueStellungsHandling() {
-         super();
-      }
-
       @Override
       boolean set(fluentData parent, gleisElements.Stellungen newSt, fahrstrasse fs, gleis my_gleis) {
          LinkedList<gleis> ll = gleisbildModel.iterator2list(my_gleis.glbModel.findIterator(my_gleis.enr, my_gleis.telement));
          boolean rr = true;
-         gleis gl;
          if (newSt == gleisElements.ST_BAHNÜBERGANG_OFFEN) {
-            for(Iterator<gleis> it2 = ll.iterator(); rr && it2.hasNext(); rr &= gl.fdata.isFrei()) {
-               gl = (gleis)it2.next();
+            Iterator<gleis> it2 = ll.iterator();
+
+            while (rr && it2.hasNext()) {
+               gleis gl = (gleis)it2.next();
+               rr &= gl.fdata.isFrei();
             }
          }
 
          if (newSt != gleisElements.ST_BAHNÜBERGANG_AUS) {
             Iterator<gleis> it2 = ll.iterator();
 
-            while(rr && it2.hasNext()) {
-               gl = (gleis)it2.next();
+            while (rr && it2.hasNext()) {
+               gleis gl = (gleis)it2.next();
                if (gl.hasHook(eventGenerator.HOOKKIND.WORKER, eventGenerator.T_GLEIS_STELLUNG)) {
                   rr &= gl.call(newSt, fs);
                }
@@ -700,13 +697,13 @@ public class fluentData implements gleisElements {
          }
 
          if (rr) {
-            for(gleis gl : ll) {
+            for (gleis gl : ll) {
                gl.fdata.setStellungTo(newSt);
             }
 
             Iterator<gleis> it = my_gleis.glbModel.findIterator(my_gleis.enr, gleis.ELEMENT_BÜDISPLAY);
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                ((gleis)it.next()).tjmAdd();
             }
          }
@@ -717,10 +714,6 @@ public class fluentData implements gleisElements {
    }
 
    static class directionCallChecker extends fluentData.hookCallChecker {
-      directionCallChecker() {
-         super();
-      }
-
       @Override
       boolean allowsCall(int newstatus, gleis my_gleis, gleis before_gl) {
          return before_gl == null || my_gleis.forUs(before_gl);
@@ -729,7 +722,6 @@ public class fluentData implements gleisElements {
 
    private static class emptyStatusTrigger extends fluentData.statusChangeTrigger {
       private emptyStatusTrigger() {
-         super();
       }
 
       @Override
@@ -738,20 +730,12 @@ public class fluentData implements gleisElements {
    }
 
    static class hookCallChecker {
-      hookCallChecker() {
-         super();
-      }
-
       boolean allowsCall(int newstatus, gleis my_gleis, gleis before_gl) {
          return true;
       }
    }
 
    static class setStellungHandling {
-      setStellungHandling() {
-         super();
-      }
-
       boolean set(fluentData parent, gleisElements.Stellungen newSt, fahrstrasse fs, gleis my_gleis) {
          parent.setStellungTo(newSt);
          my_gleis.tjmAdd();
@@ -760,10 +744,6 @@ public class fluentData implements gleisElements {
    }
 
    abstract static class statusChangeTrigger {
-      statusChangeTrigger() {
-         super();
-      }
-
       abstract void statusChangeTrigger(fluentData var1, gleis var2);
 
       void statusChangeTrigger(fluentData parent, gleis my_gleis, gleis before_gl) {

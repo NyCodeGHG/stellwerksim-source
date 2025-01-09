@@ -28,7 +28,6 @@ public class CurvesPanel extends JPanel {
    });
 
    public CurvesPanel() {
-      super();
       this.hints = new RenderingHints(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
       this.hints.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
       this.hints.put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
@@ -46,7 +45,7 @@ public class CurvesPanel extends JPanel {
    }
 
    public void paintComponent(Graphics g) {
-      ++this.counter;
+      this.counter++;
       Graphics2D g2 = (Graphics2D)g;
       g2.setRenderingHints(this.hints);
       super.paintComponent(g2);

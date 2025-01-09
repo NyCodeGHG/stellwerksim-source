@@ -12,7 +12,6 @@ class MDIDesktopManager extends DefaultDesktopManager {
    private MDIDesktopPane desktop;
 
    MDIDesktopManager(MDIDesktopPane desktop) {
-      super();
       this.desktop = desktop;
    }
 
@@ -70,7 +69,7 @@ class MDIDesktopManager extends DefaultDesktopManager {
       if (scrollPane != null) {
          JInternalFrame[] allFrames = this.desktop.getAllFrames();
 
-         for(int i = 0; i < allFrames.length; ++i) {
+         for (int i = 0; i < allFrames.length; i++) {
             if (allFrames[i].getX() + allFrames[i].getWidth() > x) {
                x = allFrames[i].getX() + allFrames[i].getWidth();
             }

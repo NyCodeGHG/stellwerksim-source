@@ -28,7 +28,7 @@ public class c_signalEntscheider extends baseChain2Chain {
                gleis s_before_gl = s_pos_gl.nextByRichtung(true);
                boolean shiftNext = true;
 
-               while(s_pos_gl != null) {
+               while (s_pos_gl != null) {
                   if (shiftNext) {
                      s_next_gl = s_pos_gl.next(s_before_gl);
                   }
@@ -75,7 +75,7 @@ public class c_signalEntscheider extends baseChain2Chain {
                LinkedList<gleis> weg = fs.getGleisweg();
                gleis wbefore_gl = z.pos_gl;
 
-               for(gleis wgl : weg) {
+               for (gleis wgl : weg) {
                   if (gleis.ALLE_BAHNSTEIGE.matches(wgl.getElement()) && wgl.forUs(wbefore_gl) && z.my_main.getBahnsteige().isNeighborBahnsteigOf(_gleis, wgl)) {
                      wrongDirection = true;
                      break;

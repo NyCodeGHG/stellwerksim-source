@@ -4,10 +4,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.sim.TEXTTYPE;
 
 class c_ende extends baseChain {
-   c_ende() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);
@@ -23,7 +19,7 @@ class c_ende extends baseChain {
          z.ist_tempo = 1.0;
          z.namefarbe = 1;
          z.sichtstopp = true;
-         ++z.anrufzaehler;
+         z.anrufzaehler++;
          if (z.anrufzaehler == 1) {
             String text = "Anruf von Triebfahrzeugführer "
                + z.getSpezialName()

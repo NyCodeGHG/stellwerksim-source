@@ -22,7 +22,7 @@ public class redirect extends event {
          String aids = "";
          String sep = "";
 
-         for(int i = 1; i < ids.length; ++i) {
+         for (int i = 1; i < ids.length; i++) {
             aids = aids + sep + ids[i];
             sep = " ";
          }

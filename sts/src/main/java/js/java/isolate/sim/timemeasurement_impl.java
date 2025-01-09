@@ -15,11 +15,10 @@ class timemeasurement_impl extends timemeasurement {
    private stellwerksim_main mainprg = null;
 
    protected timemeasurement_impl(stellwerksim_main m) {
-      super();
       myself = this;
       this.mainprg = m;
 
-      for(int i = 0; i < 7; ++i) {
+      for (int i = 0; i < 7; i++) {
          this.mintime[i] = Integer.MAX_VALUE;
          this.maxtime[i] = 0;
          this.avgtime[i] = 0;
@@ -49,7 +48,7 @@ class timemeasurement_impl extends timemeasurement {
 
    @Override
    protected void C_incEvent() {
-      ++this.eventcounter;
+      this.eventcounter++;
    }
 
    @Override
@@ -58,7 +57,7 @@ class timemeasurement_impl extends timemeasurement {
       int processorsNum = Runtime.getRuntime().availableProcessors();
       String r = "&d=" + d + "&cn=" + processorsNum;
 
-      for(int i = 0; i < 7; ++i) {
+      for (int i = 0; i < 7; i++) {
          r = r + "&min[" + i + "]=" + this.mintime[i];
          r = r + "&max[" + i + "]=" + this.maxtime[i];
          r = r + "&avg[" + i + "]=" + this.avgtime[i];

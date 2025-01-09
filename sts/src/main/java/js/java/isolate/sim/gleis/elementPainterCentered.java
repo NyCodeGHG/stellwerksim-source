@@ -38,10 +38,6 @@ public class elementPainterCentered extends elementPainterBase {
    protected gleis w2 = null;
    protected gleis w3 = null;
 
-   public elementPainterCentered() {
-      super();
-   }
-
    protected boolean direkt11(int sdp, int ddp) {
       int k = sdp * 10 + ddp;
       return k == 12 || k == 24 || k == 21 || k == 42 || k == 13 || k == 31 || k == 34 || k == 43;
@@ -71,56 +67,56 @@ public class elementPainterCentered extends elementPainterBase {
    }
 
    protected void vbPoly(int sdp, int ddp) {
-      switch(sdp) {
+      switch (sdp) {
          case 1:
-            ++this.scy2;
+            this.scy2++;
             break;
          case 2:
-            ++this.scx2;
+            this.scx2++;
             break;
          case 3:
-            ++this.scx1;
-            ++this.scx2;
-            ++this.scy2;
+            this.scx1++;
+            this.scx2++;
+            this.scy2++;
             break;
          case 4:
-            ++this.scx2;
-            ++this.scy1;
-            ++this.scy2;
+            this.scx2++;
+            this.scy1++;
+            this.scy2++;
       }
 
-      switch(ddp) {
+      switch (ddp) {
          case 1:
-            ++this.dcy2;
+            this.dcy2++;
             break;
          case 2:
-            ++this.dcx2;
+            this.dcx2++;
             break;
          case 3:
-            ++this.dcx2;
-            ++this.dcx1;
-            ++this.dcy2;
+            this.dcx2++;
+            this.dcx1++;
+            this.dcy2++;
             break;
          case 4:
-            ++this.dcx2;
-            ++this.dcy1;
-            ++this.dcy2;
+            this.dcx2++;
+            this.dcy1++;
+            this.dcy2++;
       }
    }
 
    protected void vbPoly2(int sdp, int ddp) {
-      switch(sdp * 10 + ddp) {
+      switch (sdp * 10 + ddp) {
          case 12:
-            ++this.scx1;
-            ++this.scx2;
-            ++this.scy2;
+            this.scx1++;
+            this.scx2++;
+            this.scy2++;
             this.dcx1 += 2;
             this.dcx2 += 3;
             break;
          case 13:
-            ++this.scy2;
-            ++this.scx1;
-            ++this.dcy2;
+            this.scy2++;
+            this.scx1++;
+            this.dcy2++;
          case 14:
          case 15:
          case 16:
@@ -148,34 +144,34 @@ public class elementPainterCentered extends elementPainterBase {
          default:
             break;
          case 21:
-            ++this.scx2;
-            ++this.scy1;
-            ++this.scy2;
+            this.scx2++;
+            this.scy1++;
+            this.scy2++;
             this.dcx1 += 2;
             this.dcx2 += 3;
             break;
          case 23:
-            --this.scx1;
-            ++this.dcy1;
+            this.scx1--;
+            this.dcy1++;
             break;
          case 24:
-            ++this.scx2;
-            ++this.dcx2;
-            ++this.scy1;
-            ++this.scy2;
+            this.scx2++;
+            this.dcx2++;
+            this.scy1++;
+            this.scy2++;
             break;
          case 31:
-            ++this.scy2;
-            ++this.dcy2;
+            this.scy2++;
+            this.dcy2++;
             break;
          case 32:
-            ++this.scy2;
-            ++this.dcy2;
-            --this.dcx2;
+            this.scy2++;
+            this.dcy2++;
+            this.dcx2--;
             break;
          case 42:
-            ++this.scx2;
-            ++this.dcx2;
+            this.scx2++;
+            this.dcx2++;
       }
    }
 
@@ -227,34 +223,34 @@ public class elementPainterCentered extends elementPainterBase {
    }
 
    protected void mkL(int sdp, int ddp) {
-      switch(sdp) {
+      switch (sdp) {
          case 1:
-            ++this.scy1;
-            --this.scy2;
+            this.scy1++;
+            this.scy2--;
             this.dcx1 = this.scx1 - 3;
             this.dcx2 = this.scx2 - 3;
             this.dcy1 = this.scy1;
             this.dcy2 = this.scy2;
             break;
          case 2:
-            ++this.scx1;
-            --this.scx2;
+            this.scx1++;
+            this.scx2--;
             this.dcy1 = this.scy1 - 3;
             this.dcy2 = this.scy2 - 3;
             this.dcx1 = this.scx1;
             this.dcx2 = this.scx2;
             break;
          case 3:
-            ++this.scy1;
-            --this.scy2;
+            this.scy1++;
+            this.scy2--;
             this.dcx1 = this.scx1 + 3;
             this.dcx2 = this.scx2 + 3;
             this.dcy1 = this.scy1;
             this.dcy2 = this.scy2;
             break;
          case 4:
-            ++this.scx1;
-            --this.scx2;
+            this.scx1++;
+            this.scx2--;
             this.dcy1 = this.scy1 + 3;
             this.dcy2 = this.scy2 + 3;
             this.dcx1 = this.scx1;
@@ -264,56 +260,56 @@ public class elementPainterCentered extends elementPainterBase {
 
    protected void calcS(int sdp, int ddp, boolean inner) {
       int p = inner ? 0 : 1;
-      switch(sdp) {
+      switch (sdp) {
          case 1:
-            this.scx1 += this.sx2 + p;
-            this.scy1 += this.sy1;
-            this.scx2 += this.sx2 + p;
-            this.scy2 += this.sy2;
+            this.scx1 = this.scx1 + this.sx2 + p;
+            this.scy1 = this.scy1 + this.sy1;
+            this.scx2 = this.scx2 + this.sx2 + p;
+            this.scy2 = this.scy2 + this.sy2;
             break;
          case 2:
-            this.scx1 += this.sx1;
-            this.scy1 += this.sy2 + p;
-            this.scx2 += this.sx2;
-            this.scy2 += this.sy2 + p;
+            this.scx1 = this.scx1 + this.sx1;
+            this.scy1 = this.scy1 + this.sy2 + p;
+            this.scx2 = this.scx2 + this.sx2;
+            this.scy2 = this.scy2 + this.sy2 + p;
             break;
          case 3:
-            this.scx1 += this.sx1 - p;
-            this.scy1 += this.sy1;
-            this.scx2 += this.sx1 - p;
-            this.scy2 += this.sy2;
+            this.scx1 = this.scx1 + (this.sx1 - p);
+            this.scy1 = this.scy1 + this.sy1;
+            this.scx2 = this.scx2 + (this.sx1 - p);
+            this.scy2 = this.scy2 + this.sy2;
             break;
          case 4:
-            this.scx1 += this.sx1;
-            this.scy1 += this.sy1 - p;
-            this.scx2 += this.sx2;
-            this.scy2 += this.sy1 - p;
+            this.scx1 = this.scx1 + this.sx1;
+            this.scy1 = this.scy1 + (this.sy1 - p);
+            this.scx2 = this.scx2 + this.sx2;
+            this.scy2 = this.scy2 + (this.sy1 - p);
       }
 
-      switch(ddp) {
+      switch (ddp) {
          case 1:
-            this.dcx1 += this.dx2 + p;
-            this.dcy1 += this.dy1;
-            this.dcx2 += this.dx2 + p;
-            this.dcy2 += this.dy2;
+            this.dcx1 = this.dcx1 + this.dx2 + p;
+            this.dcy1 = this.dcy1 + this.dy1;
+            this.dcx2 = this.dcx2 + this.dx2 + p;
+            this.dcy2 = this.dcy2 + this.dy2;
             break;
          case 2:
-            this.dcx1 += this.dx1;
-            this.dcy1 += this.dy2 + p;
-            this.dcx2 += this.dx2;
-            this.dcy2 += this.dy2 + p;
+            this.dcx1 = this.dcx1 + this.dx1;
+            this.dcy1 = this.dcy1 + this.dy2 + p;
+            this.dcx2 = this.dcx2 + this.dx2;
+            this.dcy2 = this.dcy2 + this.dy2 + p;
             break;
          case 3:
-            this.dcx1 += this.dx1 - p;
-            this.dcy1 += this.dy1;
-            this.dcx2 += this.dx1 - p;
-            this.dcy2 += this.dy2;
+            this.dcx1 = this.dcx1 + (this.dx1 - p);
+            this.dcy1 = this.dcy1 + this.dy1;
+            this.dcx2 = this.dcx2 + (this.dx1 - p);
+            this.dcy2 = this.dcy2 + this.dy2;
             break;
          case 4:
-            this.dcx1 += this.dx1;
-            this.dcy1 += this.dy1 - p;
-            this.dcx2 += this.dx2;
-            this.dcy2 += this.dy1 - p;
+            this.dcx1 = this.dcx1 + this.dx1;
+            this.dcy1 = this.dcy1 + (this.dy1 - p);
+            this.dcx2 = this.dcx2 + this.dx2;
+            this.dcy2 = this.dcy2 + (this.dy1 - p);
       }
    }
 
@@ -329,7 +325,7 @@ public class elementPainterCentered extends elementPainterBase {
       gleis gl, Graphics2D g2, int col, int row, int x, int y, int xscal, int yscal, int fscal, int cc, boolean geradeok, Color colr, int sdp, int ddp
    ) {
       if (g2 != null) {
-         synchronized(gl) {
+         synchronized (gl) {
             this.scx1 = this.scx2 = col * xscal;
             this.scy1 = this.scy2 = row * yscal;
             this.dcx1 = this.dcx2 = x * xscal;
@@ -360,7 +356,7 @@ public class elementPainterCentered extends elementPainterBase {
 
    @Override
    public synchronized void paintelementL(gleis gl, Graphics2D g2, int col, int row, int xscal, int yscal, int fscal, Color colr) {
-      synchronized(gl) {
+      synchronized (gl) {
          this.initD(xscal, yscal);
          g2.setColor(colr);
          this.w1 = null;
@@ -372,7 +368,7 @@ public class elementPainterCentered extends elementPainterBase {
          boolean swaped = false;
          Iterator<gleis.nachbarGleis> it = gl.p_getNachbarn();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis.nachbarGleis gl2 = (gleis.nachbarGleis)it.next();
             gleis dgl = gl2.gl;
             if (this.w1 == null) {
@@ -390,7 +386,7 @@ public class elementPainterCentered extends elementPainterBase {
             this.calcS(gl2.sdp, gl2.ddp, true);
             boolean contains = false;
 
-            for(int i = 0; i < Math.min(this.connectorCnt, this.connector.length); ++i) {
+            for (int i = 0; i < Math.min(this.connectorCnt, this.connector.length); i++) {
                if (this.connector[i].x == this.scx1 && this.connector[i].y == this.scy1) {
                   contains = true;
                   break;
@@ -400,7 +396,7 @@ public class elementPainterCentered extends elementPainterBase {
             if (!contains && this.connectorCnt < this.connector.length) {
                try {
                   this.connector[this.connectorCnt] = new Point(this.scx1, this.scy1);
-                  ++this.connectorCnt;
+                  this.connectorCnt++;
                } catch (ArrayIndexOutOfBoundsException var23) {
                   Logger.getLogger("stslogger").log(Level.SEVERE, "Catch:" + var23.toString() + ":" + this.connectorCnt + "/" + gl.toString(), var23);
                }
@@ -408,8 +404,8 @@ public class elementPainterCentered extends elementPainterBase {
 
             contains = false;
 
-            for(int i = 0; i < Math.min(this.connectorCnt, this.connector.length); ++i) {
-               if (this.connector[i].x == this.scx2 && this.connector[i].y == this.scy2) {
+            for (int ix = 0; ix < Math.min(this.connectorCnt, this.connector.length); ix++) {
+               if (this.connector[ix].x == this.scx2 && this.connector[ix].y == this.scy2) {
                   contains = true;
                   break;
                }
@@ -418,7 +414,7 @@ public class elementPainterCentered extends elementPainterBase {
             if (!contains && this.connectorCnt < this.connector.length) {
                try {
                   this.connector[this.connectorCnt] = new Point(this.scx2, this.scy2);
-                  ++this.connectorCnt;
+                  this.connectorCnt++;
                } catch (ArrayIndexOutOfBoundsException var22) {
                   Logger.getLogger("stslogger").log(Level.SEVERE, "Catch:" + var22.toString() + ":" + this.connectorCnt + "/" + gl.toString(), var22);
                }
@@ -430,8 +426,8 @@ public class elementPainterCentered extends elementPainterBase {
             contains = false;
             boolean changed = false;
 
-            for(int i = 0; i < Math.min(this.connectorLCnt, this.connectorL.length); ++i) {
-               if (this.connectorL[i].x == this.scx1 && this.connectorL[i].y == this.scy1) {
+            for (int ixx = 0; ixx < Math.min(this.connectorLCnt, this.connectorL.length); ixx++) {
+               if (this.connectorL[ixx].x == this.scx1 && this.connectorL[ixx].y == this.scy1) {
                   contains = true;
                   break;
                }
@@ -440,7 +436,7 @@ public class elementPainterCentered extends elementPainterBase {
             if (!contains) {
                try {
                   this.connectorL[this.connectorLCnt] = new Point(this.scx1, this.scy1);
-                  ++this.connectorLCnt;
+                  this.connectorLCnt++;
                   changed = true;
                } catch (ArrayIndexOutOfBoundsException var21) {
                   Logger.getLogger("stslogger").log(Level.SEVERE, "Catch:" + var21.toString() + ":" + this.connectorCnt + "/" + gl.toString(), var21);
@@ -449,8 +445,8 @@ public class elementPainterCentered extends elementPainterBase {
 
             contains = false;
 
-            for(int i = 0; i < Math.min(this.connectorLCnt, this.connectorL.length); ++i) {
-               if (this.connectorL[i].x == this.scx2 && this.connectorL[i].y == this.scy2) {
+            for (int ixxx = 0; ixxx < Math.min(this.connectorLCnt, this.connectorL.length); ixxx++) {
+               if (this.connectorL[ixxx].x == this.scx2 && this.connectorL[ixxx].y == this.scy2) {
                   contains = true;
                   break;
                }
@@ -459,7 +455,7 @@ public class elementPainterCentered extends elementPainterBase {
             if (!contains) {
                try {
                   this.connectorL[this.connectorLCnt] = new Point(this.scx2, this.scy2);
-                  ++this.connectorLCnt;
+                  this.connectorLCnt++;
                   changed = true;
                } catch (ArrayIndexOutOfBoundsException var20) {
                   Logger.getLogger("stslogger").log(Level.SEVERE, "Catch:" + var20.toString() + ":" + this.connectorCnt + "/" + gl.toString(), var20);
@@ -497,22 +493,22 @@ public class elementPainterCentered extends elementPainterBase {
             int maxx = 0;
             int maxy = 0;
 
-            for(int i = 0; i < this.connectorCnt; ++i) {
-               maxx = Math.max(maxx, this.connector[i].x);
-               maxy = Math.max(maxy, this.connector[i].y);
+            for (int ixxxx = 0; ixxxx < this.connectorCnt; ixxxx++) {
+               maxx = Math.max(maxx, this.connector[ixxxx].x);
+               maxy = Math.max(maxy, this.connector[ixxxx].y);
             }
 
             Polygon pgn = new Polygon();
 
-            for(int i = 0; i < Math.min(this.connectorCnt, this.connector.length); ++i) {
-               int x = this.connector[i].x;
-               int y = this.connector[i].y;
+            for (int ixxxx = 0; ixxxx < Math.min(this.connectorCnt, this.connector.length); ixxxx++) {
+               int x = this.connector[ixxxx].x;
+               int y = this.connector[ixxxx].y;
                if (x == maxx) {
-                  ++x;
+                  x++;
                }
 
                if (y == maxy) {
-                  ++y;
+                  y++;
                }
 
                pgn.addPoint(x, y);

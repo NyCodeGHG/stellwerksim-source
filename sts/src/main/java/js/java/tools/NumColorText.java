@@ -4,7 +4,6 @@ public class NumColorText extends ColorText implements Comparable {
    private NumString n;
 
    public NumColorText(NumString _n) {
-      super();
       this.n = _n;
    }
 

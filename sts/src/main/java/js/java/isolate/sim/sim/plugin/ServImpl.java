@@ -27,8 +27,6 @@ public abstract class ServImpl extends ServBase implements Runnable, xmllistener
    protected ServImpl.OutputWriter currentBuffer = null;
 
    protected ServImpl(int servport) {
-      super();
-
       try {
          this.workerThread = new Thread(this);
          this.workerThread.setName("plugin-workerThread");
@@ -49,7 +47,6 @@ public abstract class ServImpl extends ServBase implements Runnable, xmllistener
    }
 
    protected ServImpl() {
-      super();
       this.tcp = null;
 
       try {
@@ -92,7 +89,7 @@ public abstract class ServImpl extends ServBase implements Runnable, xmllistener
    }
 
    public void run() {
-      while(this.running) {
+      while (this.running) {
          try {
             ServImpl.commandSpool c = (ServImpl.commandSpool)this.cmdQueue.take();
             if (c.cmd != null) {
@@ -155,7 +152,6 @@ public abstract class ServImpl extends ServBase implements Runnable, xmllistener
       private TeeInputStream intee;
 
       public clientRunner(Socket t, OutputStream inputStreamTee, OutputStream outputStreamTee) {
-         super();
          this.tcp = t;
 
          try {
@@ -222,7 +218,6 @@ public abstract class ServImpl extends ServBase implements Runnable, xmllistener
       final ServImpl.OutputWriter output;
 
       commandSpool(String cmd, ServImpl.OutputWriter output) {
-         super();
          this.cmd = cmd;
          this.output = output;
       }
@@ -230,7 +225,6 @@ public abstract class ServImpl extends ServBase implements Runnable, xmllistener
 
    private class listenRunner extends ServImpl.runner {
       private listenRunner() {
-         super();
       }
 
       @Override
@@ -252,12 +246,8 @@ public abstract class ServImpl extends ServBase implements Runnable, xmllistener
    protected abstract class runner implements Runnable {
       protected boolean stopped = false;
 
-      protected runner() {
-         super();
-      }
-
       public void run() {
-         while(ServImpl.this.running && !this.stopped) {
+         while (ServImpl.this.running && !this.stopped) {
             try {
                this.run_impl();
             } catch (Exception var2) {

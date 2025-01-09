@@ -6,10 +6,6 @@ import js.java.tools.JavaKind;
 public class v_openjdk extends InitTestBase {
    private String error = "JVM";
 
-   public v_openjdk() {
-      super();
-   }
-
    @Override
    public int test(UserContextMini uc) {
       if (JavaKind.isOpenJdk()) {

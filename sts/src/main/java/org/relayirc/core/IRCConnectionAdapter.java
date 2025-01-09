@@ -3,10 +3,6 @@ package org.relayirc.core;
 import java.util.Date;
 
 public class IRCConnectionAdapter implements IRCConnectionListener {
-   public IRCConnectionAdapter() {
-      super();
-   }
-
    @Override
    public void onAction(String user, String chan, String txt) {
    }

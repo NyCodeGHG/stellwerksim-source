@@ -23,7 +23,7 @@ class players_paint_zwergsignal extends paint2Base {
          col_gruen = gleis.colors.col_stellwerk_zs1;
       }
 
-      switch(gl.getRichtung()) {
+      switch (gl.getRichtung()) {
          case right:
             gl.paintZwergSignal(g, 0, yscal * 3 / 4, fscal, col_rot, col_gruen, Math.PI * 3.0 / 2.0);
             break;

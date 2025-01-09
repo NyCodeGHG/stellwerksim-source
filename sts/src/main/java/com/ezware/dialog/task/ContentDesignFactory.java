@@ -7,11 +7,10 @@ import com.ezware.dialog.task.design.MacOsContentDesign;
 
 public class ContentDesignFactory {
    private ContentDesignFactory() {
-      super();
    }
 
    public static final IContentDesign getDesignByOperatingSystem() {
-      switch(OperatingSystem.getCurrent()) {
+      switch (OperatingSystem.getCurrent()) {
          case MACOS:
             return new MacOsContentDesign();
          case LINUX:

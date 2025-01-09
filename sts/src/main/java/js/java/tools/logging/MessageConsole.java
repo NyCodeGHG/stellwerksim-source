@@ -31,7 +31,6 @@ public class MessageConsole {
    }
 
    public MessageConsole(JTextComponent textComponent, boolean isAppend) {
-      super();
       this.textComponent = textComponent;
       this.document = textComponent.getDocument();
       this.isAppend = isAppend;
@@ -96,7 +95,6 @@ public class MessageConsole {
       private boolean isFirstLine;
 
       public ConsoleOutputStream(Color textColor, PrintStream printStream) {
-         super();
          if (textColor != null) {
             this.attributes = new SimpleAttributeSet();
             StyleConstants.setForeground(this.attributes, textColor);

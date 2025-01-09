@@ -22,10 +22,10 @@ class next_weiche extends nextGleisBase {
       gleis g2b = null;
       int c = 0;
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis nextGl = (gleis)it.next();
          if (nextGl.mycol == before.mycol) {
-            ++c;
+            c++;
             if (g1a == null) {
                g1a = nextGl;
             } else if (g2a == null) {

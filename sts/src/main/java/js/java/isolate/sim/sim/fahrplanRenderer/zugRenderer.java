@@ -20,7 +20,6 @@ public class zugRenderer extends JPanel implements Scrollable {
    private final zugUndPlanPanel my_main;
 
    public zugRenderer(zugUndPlanPanel my_main) {
-      super();
       this.my_main = my_main;
       this.setDoubleBuffered(true);
       this.setLayout(new SimpleOneColumnLayout());
@@ -46,7 +45,7 @@ public class zugRenderer extends JPanel implements Scrollable {
       int i = 0;
       boolean gMode = false;
 
-      for(zugPlanLine zpl : zp.plan) {
+      for (zugPlanLine zpl : zp.plan) {
          zpl.gMode = gMode;
          this.add(new lineRenderer(this, zpl, col0, true, i));
          gMode = zpl.flagG;
@@ -55,19 +54,19 @@ public class zugRenderer extends JPanel implements Scrollable {
          }
 
          col0 = !col0;
-         ++i;
+         i++;
       }
 
       if (zp.umleitungText != null) {
          this.add(new umleitungsRenderer(this, zp));
       }
 
-      while(zp.follower != null) {
+      while (zp.follower != null) {
          zp = zp.follower;
          this.add(new headerRenderer(this, zp, true));
          col0 = false;
 
-         for(zugPlanLine zpl : zp.plan) {
+         for (zugPlanLine zpl : zp.plan) {
             this.add(new lineRenderer(this, zpl, col0, false, -1));
             col0 = !col0;
          }
@@ -95,7 +94,7 @@ public class zugRenderer extends JPanel implements Scrollable {
       this.zugLine = u;
       this.zugAZid = azid;
 
-      for(int i = 0; i < this.getComponentCount(); ++i) {
+      for (int i = 0; i < this.getComponentCount(); i++) {
          this.getComponent(i).repaint();
       }
    }
@@ -145,6 +144,6 @@ public class zugRenderer extends JPanel implements Scrollable {
    }
 
    int getXvalue(int key) {
-      return this.xCache.containsKey(key) ? this.xCache.get(key) : 0;
+      return this.xCache.containsKey(key) ? (Integer)this.xCache.get(key) : 0;
    }
 }

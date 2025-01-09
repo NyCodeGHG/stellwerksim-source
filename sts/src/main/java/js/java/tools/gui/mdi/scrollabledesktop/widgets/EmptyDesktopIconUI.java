@@ -8,10 +8,6 @@ import javax.swing.plaf.DesktopIconUI;
 public class EmptyDesktopIconUI extends DesktopIconUI {
    protected static EmptyDesktopIconUI desktopIconUI;
 
-   public EmptyDesktopIconUI() {
-      super();
-   }
-
    public static ComponentUI createUI(JComponent c) {
       if (desktopIconUI == null) {
          desktopIconUI = new EmptyDesktopIconUI();

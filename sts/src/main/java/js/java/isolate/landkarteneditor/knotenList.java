@@ -19,7 +19,6 @@ class knotenList implements ListModel, SessionClose {
    private knotenList.baseModel currentModel = null;
 
    knotenList(control main) {
-      super();
       this.my_main = main;
       this.currentModel = this.kModel;
    }
@@ -32,11 +31,11 @@ class knotenList implements ListModel, SessionClose {
    }
 
    public void generateSaveString(StringBuffer data) {
-      for(knoten k : this.knotenList) {
+      for (knoten k : this.knotenList) {
          k.generateSaveString(data);
       }
 
-      for(verbindung v : this.verbindungen) {
+      for (verbindung v : this.verbindungen) {
          v.generateSaveString(data);
       }
    }
@@ -45,12 +44,12 @@ class knotenList implements ListModel, SessionClose {
       int minx = Integer.MAX_VALUE;
       int miny = Integer.MAX_VALUE;
 
-      for(knoten k : this.knotenList) {
+      for (knoten k : this.knotenList) {
          minx = Math.min(minx, k.getKX());
          miny = Math.min(miny, k.getKY());
       }
 
-      for(knoten k : this.knotenList) {
+      for (knoten k : this.knotenList) {
          k.moveLocationBy(-minx, -miny);
       }
    }
@@ -58,7 +57,7 @@ class knotenList implements ListModel, SessionClose {
    private int generateKid() {
       int cc = 1;
 
-      for(int m : this.knoten.keySet()) {
+      for (int m : this.knoten.keySet()) {
          if (m != cc) {
             if (!this.knoten.containsKey(cc)) {
                break;
@@ -67,7 +66,7 @@ class knotenList implements ListModel, SessionClose {
             cc = m;
          }
 
-         ++cc;
+         cc++;
       }
 
       return cc;
@@ -117,13 +116,13 @@ class knotenList implements ListModel, SessionClose {
       int i = 0;
       Iterator<verbindung> it = this.verbindungen.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          verbindung v = (verbindung)it.next();
          if (v.hasKid(kid)) {
             it.remove();
             this.vModel.removed(i);
          } else {
-            ++i;
+            i++;
          }
       }
    }
@@ -163,7 +162,7 @@ class knotenList implements ListModel, SessionClose {
       int minx = Integer.MAX_VALUE;
       int miny = Integer.MAX_VALUE;
 
-      for(knoten k : this.knotenList) {
+      for (knoten k : this.knotenList) {
          minx = Math.min(minx, k.getKX());
          miny = Math.min(miny, k.getKY());
       }
@@ -215,7 +214,6 @@ class knotenList implements ListModel, SessionClose {
 
    private abstract class baseModel extends AbstractListModel {
       private baseModel() {
-         super();
       }
 
       void updateAdd() {
@@ -239,7 +237,6 @@ class knotenList implements ListModel, SessionClose {
 
    private class knotenModel extends knotenList.baseModel {
       private knotenModel() {
-         super();
       }
 
       public int getSize() {
@@ -258,7 +255,6 @@ class knotenList implements ListModel, SessionClose {
 
    private class verbindungModel extends knotenList.baseModel {
       private verbindungModel() {
-         super();
       }
 
       public int getSize() {

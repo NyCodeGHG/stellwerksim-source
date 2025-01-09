@@ -3,10 +3,6 @@ package js.java.schaltungen.chatcomng;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class BooleanAdapter extends XmlAdapter<String, Boolean> {
-   public BooleanAdapter() {
-      super();
-   }
-
    public Boolean unmarshal(String v) throws Exception {
       return "T".equals(v) ? Boolean.TRUE : Boolean.FALSE;
    }

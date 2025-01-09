@@ -38,7 +38,6 @@ public class Server implements IChatObject, Serializable {
    private transient PropertyChangeSupport _propChangeSupport = null;
 
    public Server(String name, int port, String network, String title) {
-      super();
       this._name = name;
       this._network = network;
       this._title = title;
@@ -83,19 +82,11 @@ public class Server implements IChatObject, Serializable {
    }
 
    public boolean isConnected() {
-      if (this._connection == null) {
-         return false;
-      } else {
-         return this._connection.getState() == 0;
-      }
+      return this._connection == null ? false : this._connection.getState() == 0;
    }
 
    public boolean isDisconnecting() {
-      if (this._connection == null) {
-         return false;
-      } else {
-         return this._connection.getState() == 3;
-      }
+      return this._connection == null ? false : this._connection.getState() == 3;
    }
 
    public boolean isV6() {
@@ -103,11 +94,7 @@ public class Server implements IChatObject, Serializable {
    }
 
    public boolean isConnecting() {
-      if (this._connection == null) {
-         return false;
-      } else {
-         return this._connection.getState() == 1;
-      }
+      return this._connection == null ? false : this._connection.getState() == 1;
    }
 
    @Override
@@ -404,7 +391,7 @@ public class Server implements IChatObject, Serializable {
    private void removeAllChannels() {
       Enumeration keys = this.getChannels().keys();
 
-      while(keys.hasMoreElements()) {
+      while (keys.hasMoreElements()) {
          String key = (String)keys.nextElement();
          Channel chan = (Channel)this.getChannels().get(key);
          this.removeChannel(chan);
@@ -445,7 +432,7 @@ public class Server implements IChatObject, Serializable {
       int count = this.getListeners().size();
       Debug.println("Server.notifyListeners " + count + " listeners");
 
-      for(int i = 0; i < this.getListeners().size(); ++i) {
+      for (int i = 0; i < this.getListeners().size(); i++) {
          ServerListener listener = (ServerListener)this.getListeners().elementAt(i);
          notifier.notify(listener);
       }
@@ -453,7 +440,6 @@ public class Server implements IChatObject, Serializable {
 
    private class _ChannelMux extends ChannelAdapter {
       private _ChannelMux() {
-         super();
       }
 
       @Override
@@ -486,7 +472,6 @@ public class Server implements IChatObject, Serializable {
 
    private class _ServerMux implements IRCConnectionListener {
       private _ServerMux() {
-         super();
       }
 
       @Override
@@ -586,7 +571,7 @@ public class Server implements IChatObject, Serializable {
          Server.this.fireStatusEvent(oldnick + " now known as " + newnick);
          Enumeration e = Server.this.getChannels().elements();
 
-         while(e.hasMoreElements()) {
+         while (e.hasMoreElements()) {
             Channel chan = (Channel)e.nextElement();
             chan.getChannelMux().onNick(user, oldnick, newnick);
          }
@@ -644,7 +629,7 @@ public class Server implements IChatObject, Serializable {
          Server.this.fireStatusEvent(nick + " (" + user + ") has QUIT: " + txt + "\n");
          Enumeration e = Server.this.getChannels().elements();
 
-         while(e.hasMoreElements()) {
+         while (e.hasMoreElements()) {
             Channel chan = (Channel)e.nextElement();
             chan.getChannelMux().onQuit(user, nick, txt);
          }

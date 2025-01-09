@@ -269,7 +269,6 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
    }
 
    public stellwerksim_main(UserContext uc, gleisbildModelSts gbd, String uurl, boolean forceNorealistic) {
-      super();
       this.uc = uc;
       this.glbModel = gbd;
       this.updateurl = uurl;
@@ -326,7 +325,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
       } else if (!this.emitterMode) {
          Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_AIDDISPLAY});
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis gl = (gleis)it.next();
             gl.hideDisplay();
          }
@@ -549,7 +548,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
    }
 
    private void initMyMenus() {
-      for(String scale : scaleHolder.publicScales) {
+      for (String scale : scaleHolder.publicScales) {
          JMenu sMenu = this.scaleFixedMenu;
          if (scale.contains(":")) {
             sMenu = this.scaleDifferentMenu;
@@ -580,7 +579,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
 
       int cnt = this.menuBar.getMenuCount();
 
-      for(int i = 0; i < cnt; ++i) {
+      for (int i = 0; i < cnt; i++) {
          JMenu m = this.menuBar.getMenu(i);
          if (m != null) {
             m.setMargin(new Insets(2, 4, 2, 4));
@@ -590,7 +589,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
    }
 
    private void setMenuMargins(JMenu menu) {
-      for(Component m : menu.getMenuComponents()) {
+      for (Component m : menu.getMenuComponents()) {
          if (m instanceof JMenuItem) {
             JMenuItem mi = (JMenuItem)m;
             mi.setMargin(new Insets(2, 0, 2, 0));
@@ -1558,7 +1557,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
             byte[] result = md5.digest();
             StringBuilder hexString = new StringBuilder();
 
-            for(int i = 0; i < result.length; ++i) {
+            for (int i = 0; i < result.length; i++) {
                hexString.append(Integer.toHexString(255 & result[i]));
             }
 
@@ -1677,7 +1676,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
       if (this.botMode) {
          String r = "";
 
-         for(gleis gl : elist) {
+         for (gleis gl : elist) {
             r = r + " " + gl.getEinfahrtEnr() + " " + gl.getFluentData().getStellung().getSaveText();
          }
 
@@ -1888,7 +1887,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
    }
 
    public void message(String s, stellwerksim_main.MSGLEVELS level) {
-      switch(level) {
+      switch (level) {
          case IMPORTANT:
             this.game_time.addImportantText(s);
             break;
@@ -2064,12 +2063,13 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
                         z2.setUpdate(v, l, t);
                         z2.setMyTrain(a > 0);
 
-                        String p;
-                        for(; zst.hasMoreTokens(); z2.setParam(p)) {
-                           p = zst.nextToken();
+                        while (zst.hasMoreTokens()) {
+                           String p = zst.nextToken();
                            if (debugMode != null) {
                               debugMode.writeln("main/zug", "simparam: " + p);
                            }
+
+                           z2.setParam(p);
                         }
                      } else if (a > 0) {
                         this.my_chat.sendStatus(BOTCOMMAND.NORUPDATE, zid);
@@ -2120,7 +2120,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
                   );
                   this.playChatAnruf();
 
-                  for(int i = 0; i < 2; ++i) {
+                  for (int i = 0; i < 2; i++) {
                      this.message(
                         "Systemwartung, Verbindung zum Server wird getrennt. Alle Züge wurden übergeben. Es erfolgt keine Aktualisierung mehr!",
                         stellwerksim_main.MSGLEVELS.IMPORTANT
@@ -2304,7 +2304,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
                   String[] tokens = TextHelper.tokenizerToArray(new StringTokenizer(r + " ", ":"));
                   zug z = null;
 
-                  for(int i = 0; i < tokens.length; ++i) {
+                  for (int i = 0; i < tokens.length; i++) {
                      if (tokens[i].equals("ZID")) {
                         int zid = Integer.parseInt(tokens[i + 1].trim());
                         z = this.findZug(zid);
@@ -2362,7 +2362,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
 
                         ed.ein_stw = zst.nextToken().trim();
 
-                        for(ed.aus_stw = zst.nextToken().trim(); zst.hasMoreTokens(); ed.name = zst.nextToken()) {
+                        for (ed.aus_stw = zst.nextToken().trim(); zst.hasMoreTokens(); ed.name = zst.nextToken()) {
                            if (ed.name == null) {
                               ed.name = "";
                            } else {
@@ -2393,10 +2393,8 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
                if (this.botMode && this.cheatMgr != null) {
                   this.cheatMgr.result(res, r);
                }
-            } else if (cmd.compareTo("REPORT") != 0 || res != 200) {
-               if (cmd.compareTo("REPORT") == 0 && res == 210) {
-                  ;
-               }
+            } else if ((cmd.compareTo("REPORT") != 0 || res != 200) && cmd.compareTo("REPORT") == 0 && res == 210) {
+               ;
             }
          }
       } catch (NumberFormatException var20) {
@@ -2431,16 +2429,18 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
 
             StringBuffer v = this.fahrplanPanel.zugReport(r.trim());
 
-            String t;
             try {
-               for(int i = 0; i < v.length(); i += t.length() + 1) {
+               int i = 0;
+
+               while (i < v.length()) {
                   int l = Math.min(i + 150, v.length());
-                  t = v.substring(i, l);
+                  String t = v.substring(i, l);
                   if (t.contains("\n")) {
                      t = t.substring(0, t.indexOf("\n"));
                   }
 
                   this.my_chat.sendStatusToUser(sender, t);
+                  i += t.length() + 1;
                }
             } catch (Exception var10) {
                Logger.getLogger("stslogger").log(Level.SEVERE, "caught EX", var10);
@@ -2450,7 +2450,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
             String v = "Properties: ";
             this.my_chat.sendStatusToUser(sender, v);
 
-            for(String p : System.getProperties().stringPropertyNames()) {
+            for (String p : System.getProperties().stringPropertyNames()) {
                try {
                   v = p + ":" + System.getProperty(p);
                } catch (Exception var8) {
@@ -2563,7 +2563,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
 
       try {
          label118:
-         while(this.running) {
+         while (this.running) {
             if (this.emitterMode) {
                Thread.sleep((long)(1000 * this.syncdelay));
             } else {
@@ -2579,7 +2579,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
                }
 
                try {
-                  while(true) {
+                  while (true) {
                      this.message((String)this.mitteilungen.removeFirst(), stellwerksim_main.MSGLEVELS.NORMAL);
                   }
                } catch (NoSuchElementException var17) {
@@ -2593,7 +2593,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
                   localTimeCheck = localTimeCheck2;
                   int sd = this.syncdelay;
 
-                  while(sd > 0) {
+                  while (sd > 0) {
                      int p = 60;
                      if (sd < p) {
                         p = sd;
@@ -2653,7 +2653,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
                                  m.show();
                               }
 
-                              ++inaktivität;
+                              inaktivität++;
                            } else {
                               inaktivität = 0;
                            }
@@ -2811,7 +2811,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
 
    @Override
    public void incZählwert() {
-      ++this.zählwerk;
+      this.zählwerk++;
       this.extrasPanel.setZählwert(this.zählwerk);
       this.playCounter();
    }
@@ -2911,7 +2911,7 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
       this.dumperMode = w;
       this.fahrplanPanel.setDumperP(w);
       if (this.dumperMode == null) {
-         for(JMenuItem m : this.dumperMenu) {
+         for (JMenuItem m : this.dumperMenu) {
             try {
                m.getParent().remove(m);
             } catch (Exception var5) {
@@ -2954,7 +2954,6 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
       private boolean modal;
 
       msgRunnable(String _msg, boolean modal) {
-         super();
          this.msg = _msg;
          this.modal = modal;
       }
@@ -2975,7 +2974,6 @@ public class stellwerksim_main extends JFrame implements BotCalling, Runnable, x
       String absender = "";
 
       zugMsg(String m) {
-         super();
          this.msg = m;
          this.timestamp = stellwerksim_main.this.getSimutime();
       }

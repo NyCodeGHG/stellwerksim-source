@@ -29,10 +29,6 @@ public class PixelUtils {
    private static final float[] hsb1 = new float[3];
    private static final float[] hsb2 = new float[3];
 
-   public PixelUtils() {
-      super();
-   }
-
    public static int clamp(int c) {
       if (c < 0) {
          return 0;
@@ -82,7 +78,7 @@ public class PixelUtils {
          int r2 = rgb2 >> 16 & 0xFF;
          int g2 = rgb2 >> 8 & 0xFF;
          int b2 = rgb2 & 0xFF;
-         switch(op) {
+         switch (op) {
             case 1:
             case 16:
             default:
@@ -123,7 +119,7 @@ public class PixelUtils {
             case 11:
                Color.RGBtoHSB(r1, g1, b1, hsb1);
                Color.RGBtoHSB(r2, g2, b2, hsb2);
-               switch(op) {
+               switch (op) {
                   case 8:
                      hsb2[0] = hsb1[0];
                      break;

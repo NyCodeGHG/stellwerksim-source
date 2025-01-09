@@ -33,11 +33,9 @@ public class CurrentUserList implements IncludeSender {
    private String sender = null;
 
    public CurrentUserList() {
-      super();
    }
 
    public CurrentUserList(int listNum) {
-      super();
       this.listNum = listNum;
    }
 

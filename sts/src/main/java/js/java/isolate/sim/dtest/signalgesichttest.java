@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class signalgesichttest implements dtest {
-   public signalgesichttest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Signal Gesicht-Gesicht";
@@ -25,7 +21,7 @@ public class signalgesichttest implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ALLE_SIGNALE});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          gleis gl2 = gl.nextByRichtung(true);
          if (gl2 != null && gleis.ALLE_SIGNALE.matches(gl2.getElement())) {

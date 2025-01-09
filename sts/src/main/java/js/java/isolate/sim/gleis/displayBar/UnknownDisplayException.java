@@ -4,7 +4,6 @@ class UnknownDisplayException extends ConnectorException {
    private final String dest;
 
    UnknownDisplayException(String dest) {
-      super();
       this.dest = dest;
    }
 

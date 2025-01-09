@@ -12,7 +12,7 @@ public class funk_zugGleisaenderung extends funk_zugBase {
          TreeSet<String> bstgs = this.my_main.alleBahnsteige().getAlternativebahnsteigeOf(z.getZielgleisByAZid(unterzugAZid));
          Iterator<String> it = bstgs.iterator();
 
-         for(int i = 0; it.hasNext(); ++i) {
+         for (int i = 0; it.hasNext(); i++) {
             String b = (String)it.next();
             this.addValueItem(new funkAuftragBase.funkValueItem(b, i));
          }

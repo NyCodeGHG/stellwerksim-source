@@ -47,7 +47,7 @@ public enum JavaVersion {
       if (versionStr == null) {
          return null;
       } else {
-         switch(versionStr) {
+         switch (versionStr) {
             case "0.9":
                return JAVA_0_9;
             case "1.1":

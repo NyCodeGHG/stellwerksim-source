@@ -30,7 +30,6 @@ public class extendedClip {
    }
 
    public extendedClip(Clip c) {
-      super();
       this.clip = c;
       this.addListener();
    }

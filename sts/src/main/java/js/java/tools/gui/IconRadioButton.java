@@ -16,7 +16,6 @@ public class IconRadioButton extends JRadioButton {
    private int iconWidth;
 
    public IconRadioButton(int iconwidth) {
-      super();
       this.iconWidth = iconwidth;
       this.configureObject();
    }

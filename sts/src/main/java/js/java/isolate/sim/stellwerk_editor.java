@@ -350,12 +350,12 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
          this.listeners.put(typ, new ListenerList());
       }
 
-      ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(typ);
+      ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(typ);
       ll.removeListener(l);
    }
 
    private void addPanel(JPanel aPanel, HashMap<String, basePanel> mypanels) {
-      for(String n : mypanels.keySet()) {
+      for (String n : mypanels.keySet()) {
          basePanel b = (basePanel)mypanels.get(n);
          aPanel.add(b, n);
       }
@@ -389,7 +389,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
             b2.setMargin(this.BMARGIN);
             b2.setFocusPainted(false);
             this.dropdowns.put(tb[1], b2);
-            ++this.bcnt;
+            this.bcnt++;
          } else {
             b2.setToolTipText("<html>Über Mausklick auf den Pfeil können<br>weitere Funktionen erreicht werden.</html>");
             addme = false;
@@ -410,7 +410,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
             this.debugOutput.writeln("addPanelButton", "added '" + button + "' " + comboName + "'");
          }
 
-         ++this.bcnt;
+         this.bcnt++;
          this.allbuttons.put(name, b);
       }
 
@@ -808,7 +808,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
    @IsAwt
    private void showStatusAWT(String s, int type) {
       if (s != null) {
-         ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(6);
+         ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(6);
          if (ll != null) {
             ll.fireEvent(new statusEvent(s, type));
          }
@@ -838,7 +838,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
 
    @IsAwt
    private void showCoords(int x, int y) {
-      ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(1);
+      ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(1);
       if (ll != null) {
          ll.fireEvent(new coordsEvent(x, y));
       }
@@ -860,7 +860,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
 
    @IsAwt
    private void setProgressAWT(int pp) {
-      ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(4);
+      ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(4);
       if (ll != null) {
          ll.fireEvent(new progressEvent(pp));
       }
@@ -868,7 +868,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
 
    @IsAwt
    public void showFS(fahrstrasse fs) {
-      ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(5);
+      ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(5);
       if (ll != null) {
          ll.fireEvent(new fahrstrasseEvent(fs, 0));
       }
@@ -876,7 +876,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
 
    @IsAwt
    public void FSchanged(fahrstrasse fs) {
-      ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(8);
+      ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(8);
       if (ll != null) {
          ll.fireEvent(new fahrstrasseEvent(fs, 2));
       }
@@ -885,7 +885,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
    @IsAwt
    @Override
    public void interPanelCom(AbstractEvent e) {
-      ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(10);
+      ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(10);
       if (ll != null) {
          ll.fireEvent(e);
       }
@@ -949,7 +949,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
    @IsAwt
    private void showPanelAWT(int p, int v) {
       fwrunPanel pn = (fwrunPanel)this.allmypanels.get("fwrun");
-      switch(p) {
+      switch (p) {
          case 0:
             this.setPanelInvisible(true);
             this.alterDisabled = false;
@@ -1011,7 +1011,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
    @Override
    public void setUI(final gleis.gleisUIcom gl) {
       if (SwingUtilities.isEventDispatchThread()) {
-         ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(12);
+         ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(12);
          if (ll != null) {
             ll.fireEvent(new setUIEvent(gl));
          }
@@ -1030,7 +1030,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
 
    @Override
    public void readUI(gleis.gleisUIcom gl) {
-      ListenerList<AbstractEvent> ll = (ListenerList)this.listeners.get(13);
+      ListenerList<AbstractEvent> ll = (ListenerList<AbstractEvent>)this.listeners.get(13);
       if (ll != null) {
          ll.fireEvent(new readUIEvent(gl));
       }
@@ -1043,7 +1043,7 @@ public class stellwerk_editor extends AbstractTopFrame implements GleisAdapter, 
             this.pingTimer = null;
          }
 
-         for(ListenerList<AbstractEvent> l : this.listeners.values()) {
+         for (ListenerList<AbstractEvent> l : this.listeners.values()) {
             l.clear();
          }
 

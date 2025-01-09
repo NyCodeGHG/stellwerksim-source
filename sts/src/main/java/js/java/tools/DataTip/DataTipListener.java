@@ -23,10 +23,6 @@ abstract class DataTipListener extends MouseInputAdapter implements ComponentLis
    private static Class pointerInfoClass;
    private static Method getLocationMethod;
 
-   DataTipListener() {
-      super();
-   }
-
    abstract DataTipCell getCell(JComponent var1, Point var2);
 
    public void mousePressed(MouseEvent e) {

@@ -20,10 +20,6 @@ public class TipAnswer {
    )
    protected String text;
 
-   public TipAnswer() {
-      super();
-   }
-
    public String getTitle() {
       return this.title;
    }

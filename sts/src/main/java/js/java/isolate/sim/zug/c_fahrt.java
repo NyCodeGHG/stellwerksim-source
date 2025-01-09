@@ -11,10 +11,6 @@ class c_fahrt extends baseChain {
    private final baseChain zugC = new c_kflag();
    private final baseChain freiefahrtC = new c_verifyFlag();
 
-   c_fahrt() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);
@@ -31,20 +27,20 @@ class c_fahrt extends baseChain {
          }
       }
 
-      z.tempo_pos += z.ist_tempo;
+      z.tempo_pos = z.tempo_pos + z.ist_tempo;
       if (z.ist_tempo < 0.1) {
          z.ist_tempo = 0.1;
       }
 
       if (z.tempo_pos > (double)z.calcMaxSpeed(z.lastmasstab)) {
          z.vorsignal = null;
-         z.tempo_pos %= (double)z.calcMaxSpeed(z.lastmasstab);
+         z.tempo_pos = z.tempo_pos % (double)z.calcMaxSpeed(z.lastmasstab);
          if (z.startCnt > 0) {
-            --z.startCnt;
+            z.startCnt--;
             if (z.startCnt <= 0) {
-               z.outputValueChanged |= z.von.setBGColor(0);
+               z.outputValueChanged = z.von.setBGColor(0) | z.outputValueChanged;
             } else {
-               z.outputValueChanged |= z.von.setBGColor(2);
+               z.outputValueChanged = z.von.setBGColor(2) | z.outputValueChanged;
             }
          }
 

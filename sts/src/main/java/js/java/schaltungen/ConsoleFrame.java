@@ -77,7 +77,6 @@ public class ConsoleFrame extends JFrame {
    private JCheckBox writeToFile;
 
    public ConsoleFrame(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       this.setIconImage(uc.getWindowIcon());

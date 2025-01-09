@@ -13,7 +13,6 @@ class bahnhofList implements SessionClose {
    private final TreeMap<String, bahnhofList.bahnhofData> bhfsort = new TreeMap();
 
    bahnhofList(control main) {
-      super();
       this.my_main = main;
    }
 
@@ -63,13 +62,12 @@ class bahnhofList implements SessionClose {
       private String netzname;
 
       private aidIterator(String netzname) {
-         super();
          this.netzname = netzname;
          this.it = bahnhofList.this.bhfsort.values().iterator();
       }
 
       public boolean hasNext() {
-         while(this.it.hasNext()) {
+         while (this.it.hasNext()) {
             this.nextElement = (bahnhofList.bahnhofData)this.it.next();
             if (this.nextElement.netzname.equals(this.netzname)) {
                return true;
@@ -109,7 +107,6 @@ class bahnhofList implements SessionClose {
       public final String name;
 
       protected bahnhofListData(String name) {
-         super();
          this.name = name;
       }
 

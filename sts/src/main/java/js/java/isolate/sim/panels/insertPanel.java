@@ -46,7 +46,7 @@ public class insertPanel extends basePanel implements SessionClose {
       String p = e.getParameter("insertpanels");
       StringTokenizer pst = new StringTokenizer(p, ",");
 
-      while(pst.hasMoreTokens()) {
+      while (pst.hasMoreTokens()) {
          String tk1 = pst.nextToken();
          if (tk1.equalsIgnoreCase("singleeinaus")) {
             this.add(new singleeinaus(this.my_main, this.glbControl.getModel()));

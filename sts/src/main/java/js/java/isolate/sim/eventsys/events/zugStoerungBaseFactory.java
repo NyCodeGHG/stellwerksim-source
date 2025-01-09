@@ -20,7 +20,6 @@ public abstract class zugStoerungBaseFactory extends eventFactory {
    private EnumSet<zugStoerungBaseFactory.USEDFIELDS> usedFields;
 
    protected zugStoerungBaseFactory(EnumSet<zugStoerungBaseFactory.USEDFIELDS> a) {
-      super();
       this.usedFields = a;
    }
 
@@ -107,13 +106,13 @@ public abstract class zugStoerungBaseFactory extends eventFactory {
    public void readContainer(eventContainer ev) {
       super.readContainer(ev);
       if (this.anteil != null) {
-         ev.setIntValue("anteil", Math.max(this.anteil.getValue(), 1));
+         ev.setIntValue("anteil", Math.max((Integer)this.anteil.getValue(), 1));
       } else {
          ev.rmValue("anteil");
       }
 
       if (this.num != null) {
-         ev.setIntValue("dauer", Math.max(this.num.getValue(), 1));
+         ev.setIntValue("dauer", Math.max((Integer)this.num.getValue(), 1));
       } else {
          ev.rmValue("dauer");
       }

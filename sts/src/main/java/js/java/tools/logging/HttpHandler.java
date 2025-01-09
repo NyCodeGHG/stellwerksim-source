@@ -10,7 +10,6 @@ public class HttpHandler extends Handler {
    private final int build;
 
    public HttpHandler(String url, int build) {
-      super();
       this.build = build;
       this.setLevel(Level.ALL);
       this.queue = new HttpQueueWriter(url);

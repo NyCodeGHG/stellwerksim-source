@@ -44,7 +44,6 @@ public class JSuggestField extends JTextField {
    private boolean caseSensitive = false;
 
    public JSuggestField(Frame owner) {
-      super();
       this.data = new Vector();
       this.suggestions = new Vector();
       this.listeners = new LinkedList();
@@ -201,7 +200,7 @@ public class JSuggestField extends JTextField {
    private void fireActionEvent() {
       ActionEvent event = new ActionEvent(this, 0, this.getText());
 
-      for(ActionListener listener : this.listeners) {
+      for (ActionListener listener : this.listeners) {
          listener.actionPerformed(event);
       }
    }
@@ -233,7 +232,7 @@ public class JSuggestField extends JTextField {
    private void relocate() {
       try {
          this.location = this.getLocationOnScreen();
-         this.location.y += this.getHeight();
+         this.location.y = this.location.y + this.getHeight();
          this.d.setLocation(this.location);
       } catch (IllegalComponentStateException var2) {
       }
@@ -300,7 +299,6 @@ public class JSuggestField extends JTextField {
       private volatile boolean stop;
 
       private InterruptableMatcher() {
-         super();
       }
 
       public void run() {
@@ -309,7 +307,7 @@ public class JSuggestField extends JTextField {
             Iterator<String> it = JSuggestField.this.suggestions.iterator();
             String word = JSuggestField.this.getText();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                if (this.stop) {
                   return;
                }

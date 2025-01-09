@@ -6,7 +6,6 @@ class element_typ implements element {
    protected final int typ;
 
    element_typ(int typ) {
-      super();
       this.typ = typ;
    }
 
@@ -21,11 +20,7 @@ class element_typ implements element {
 
    @Override
    public boolean matchesTyp(element other) {
-      if (other instanceof element_typ) {
-         return this.typ == ((element_typ)other).typ;
-      } else {
-         return false;
-      }
+      return other instanceof element_typ ? this.typ == ((element_typ)other).typ : false;
    }
 
    @Override

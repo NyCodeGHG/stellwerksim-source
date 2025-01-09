@@ -211,11 +211,9 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    public zug() {
-      super();
    }
 
    public zug(String z, gleisbildModelFahrweg glb, zugModelInterface m) throws Exception {
-      super();
       this.glbModel = glb;
       this.my_main = m;
       this.mdf = TimeFormat.getInstance(TimeFormat.STYLE.HMS);
@@ -225,7 +223,6 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    public zug(Attributes attrs, String freetext, gleisbildModelEventsys glb, zugModelInterface m) throws Exception {
-      super();
       this.glbModel = glb;
       this.my_main = m;
       this.mdf = TimeFormat.getInstance(TimeFormat.STYLE.HMS);
@@ -235,7 +232,6 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    public zug(gleisbildModelFahrweg glb, zugModelInterface m, int gzid, zug.emitData ed) {
-      super();
       this.glbModel = glb;
       this.my_main = m;
       this.mdf = TimeFormat.getInstance(TimeFormat.STYLE.HMS);
@@ -280,13 +276,12 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    public zug(zug referenz, boolean kuppeln, boolean einfahren, String bahnsteig, int enr) {
-      super();
       this.glbModel = referenz.glbModel;
       this.my_main = referenz.my_main;
       this.mdf = TimeFormat.getInstance(TimeFormat.STYLE.HMS);
       this.sdf = TimeFormat.getInstance(TimeFormat.STYLE.HM);
       this.parken = 0;
-      ++internalZid;
+      internalZid++;
       this.zid = -internalZid;
       if (einfahren) {
          this.name = "Ersatzlok " + referenz.name;
@@ -347,7 +342,7 @@ public class zug extends trigger implements structinfo, Comparable {
          this.lastmasstab = this.pos_gl.getMasstab();
          this.zugbelegt = new LinkedList();
 
-         for(int i = 0; it.hasNext() && i < 4; ++i) {
+         for (int i = 0; it.hasNext() && i < 4; i++) {
             gleis ig = (gleis)it.next();
             this.zugbelegt.addFirst(ig);
             ig.getFluentData().setZugAmGleis(null);
@@ -503,7 +498,7 @@ public class zug extends trigger implements structinfo, Comparable {
                String r = attrs.getValue("setparam").trim();
                StringTokenizer zst = new StringTokenizer(r + " ", ":");
 
-               while(zst.hasMoreTokens()) {
+               while (zst.hasMoreTokens()) {
                   String p = zst.nextToken();
                   this.setParam(p);
                }
@@ -570,7 +565,7 @@ public class zug extends trigger implements structinfo, Comparable {
                if (fb_gl.size() > 0) {
                   this.pos_gl = (gleis)fb_gl.getFirst();
                   gleisElements.RICHTUNG sricht = null;
-                  switch(this.parkenRichtung) {
+                  switch (this.parkenRichtung) {
                      case 'd':
                         sricht = gleisElements.RICHTUNG.down;
                         break;
@@ -585,7 +580,7 @@ public class zug extends trigger implements structinfo, Comparable {
                   }
 
                   if (sricht != null) {
-                     for(gleis pgl : fb_gl) {
+                     for (gleis pgl : fb_gl) {
                         if (pgl.getRichtung() == sricht) {
                            this.pos_gl = pgl;
                            break;
@@ -618,7 +613,7 @@ public class zug extends trigger implements structinfo, Comparable {
                   try {
                      this.pos_gl.getFluentData().setStatusByZug(2, this);
 
-                     for(int i = 2; i < this.calcLaenge(this.lastmasstab); ++i) {
+                     for (int i = 2; i < this.calcLaenge(this.lastmasstab); i++) {
                         gleis next_gl = this.pos_gl.next(this.before_gl);
                         if (next_gl == null) {
                            break;
@@ -711,7 +706,7 @@ public class zug extends trigger implements structinfo, Comparable {
    public void lifeRemove() {
       if (!this.fertig) {
          if (this.mytrain && this.visible) {
-            while(this.zugbelegt.size() > 0) {
+            while (this.zugbelegt.size() > 0) {
                gleis gl = (gleis)this.zugbelegt.removeFirst();
                gl.getFluentData().setStatusByZug(0, this);
                this.setRot(gl, true);
@@ -739,8 +734,8 @@ public class zug extends trigger implements structinfo, Comparable {
    public void remove() {
       try {
          if (flagZug.containsValue(this.zid)) {
-            for(Entry<String, Integer> k : flagZug.entrySet()) {
-               if (k.getValue() == this.zid) {
+            for (Entry<String, Integer> k : flagZug.entrySet()) {
+               if ((Integer)k.getValue() == this.zid) {
                   flagZug.remove(k.getKey());
                }
             }
@@ -753,7 +748,7 @@ public class zug extends trigger implements structinfo, Comparable {
    public void successorRemove() {
       Iterator<zug> it = this.getAllUnseenFahrplanzeilen();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          zug zz = (zug)it.next();
          if (zz.flags.hasFlag('E') || zz.flags.hasFlag('F')) {
             zug dstz = this.my_main.findZug(zz.flags.getFlagdata());
@@ -828,7 +823,7 @@ public class zug extends trigger implements structinfo, Comparable {
                || this.sync_lastVisible != this.visible
                || this.lastLine.compareTo(this.toString()) != 0
          )) {
-         ++this.synccc;
+         this.synccc++;
          if (this.synccc > (5 + this.zid % 5) * 60 || this.sync_lastVisible != this.visible || this.sync_rottime < this.rottime) {
             this.sync_lastVerspaetung = this.verspaetung;
             this.sync_lastVisible = this.visible;
@@ -852,7 +847,7 @@ public class zug extends trigger implements structinfo, Comparable {
       double v;
       do {
          v = rnd.nextGaussian();
-      } while(v < -1.0 || v > 1.0);
+      } while (v < -1.0 || v > 1.0);
 
       if (v > 0.0) {
          ret = Math.round((double)n + v * (double)(max - n));
@@ -872,7 +867,7 @@ public class zug extends trigger implements structinfo, Comparable {
       double v;
       do {
          v = rnd.nextGaussian();
-      } while(v < -1.0 || v > 1.0);
+      } while (v < -1.0 || v > 1.0);
 
       if (v > 0.0) {
          ret = v * (max - n) + n;
@@ -901,25 +896,25 @@ public class zug extends trigger implements structinfo, Comparable {
 
    void decHeat() {
       if (this.zid > 0) {
-         totalHeat -= (long)this.heat;
-         this.heat -= this.irrelevantHeat;
-         this.heat -= this.irrelevantInc;
+         totalHeat = totalHeat - (long)this.heat;
+         this.heat = this.heat - this.irrelevantHeat;
+         this.heat = this.heat - this.irrelevantInc;
          this.irrelevantHeat = 0;
          this.irrelevantInc = 0;
          this.heat -= 5;
-         totalHeat += (long)this.heat;
+         totalHeat = totalHeat + (long)this.heat;
          this.my_main.updateHeat(totalHeat);
       }
    }
 
    void updateHeat(boolean relevant, int istVerspaetung, int lastVerspaetung) {
       if (this.zid > 0) {
-         totalHeat -= (long)this.heat;
+         totalHeat = totalHeat - (long)this.heat;
          int uheat = Math.max(istVerspaetung, 0) - Math.max(lastVerspaetung, 0);
-         this.heat -= this.irrelevantHeat;
+         this.heat = this.heat - this.irrelevantHeat;
          this.irrelevantHeat = 0;
          if (relevant) {
-            this.heat -= this.irrelevantInc;
+            this.heat = this.heat - this.irrelevantInc;
             this.irrelevantInc = 0;
          }
 
@@ -927,12 +922,12 @@ public class zug extends trigger implements structinfo, Comparable {
             this.heat += uheat * 10;
             if (!relevant) {
                this.irrelevantHeat += uheat * 10;
-               ++this.heat;
-               ++this.irrelevantInc;
+               this.heat++;
+               this.irrelevantInc++;
             }
          }
 
-         totalHeat += (long)this.heat;
+         totalHeat = totalHeat + (long)this.heat;
          if (uheat > 0) {
             this.my_main.updateHeat(totalHeat);
          }
@@ -1003,7 +998,7 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    void removeLimit(Class<? extends tl_base> c) {
-      for(tl_base t : this.baseFilter) {
+      for (tl_base t : this.baseFilter) {
          if (t.getClass() == c) {
             this.baseFilter.remove(t);
             break;
@@ -1012,7 +1007,7 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    tl_base getLimit(Class<? extends tl_base> c) {
-      for(tl_base t : this.baseFilter) {
+      for (tl_base t : this.baseFilter) {
          if (t.getClass() == c) {
             return t;
          }
@@ -1024,7 +1019,7 @@ public class zug extends trigger implements structinfo, Comparable {
    double calc_tempo() {
       double mx = this.baseTempo.calc_tempo(this, 0.0);
 
-      for(tl_base l : this.baseFilter) {
+      for (tl_base l : this.baseFilter) {
          mx = l.calc_tempo(this, mx);
       }
 
@@ -1054,9 +1049,9 @@ public class zug extends trigger implements structinfo, Comparable {
    int unterzugOffen() {
       int cc = 0;
       if (this.unterzuege != null) {
-         for(zug z : this.unterzuege.values()) {
+         for (zug z : this.unterzuege.values()) {
             if (!z.azid_besucht) {
-               ++cc;
+               cc++;
             }
          }
       }
@@ -1068,7 +1063,7 @@ public class zug extends trigger implements structinfo, Comparable {
       LinkedList<zug> l = new LinkedList();
       l.add(this);
       if (this.unterzuege != null) {
-         for(zug zz : this.unterzuege.values()) {
+         for (zug zz : this.unterzuege.values()) {
             if (!zz.azid_besucht) {
                l.add(zz);
             }
@@ -1082,7 +1077,7 @@ public class zug extends trigger implements structinfo, Comparable {
       if (i != 0 && this.unterzuege != null) {
          int cc = i;
 
-         for(zug zz : this.unterzuege.values()) {
+         for (zug zz : this.unterzuege.values()) {
             if (!zz.azid_besucht) {
                if (--cc == 0) {
                   return zz;
@@ -1098,7 +1093,7 @@ public class zug extends trigger implements structinfo, Comparable {
 
    zug unterzugByAZid(int azid) {
       if (azid != this.cur_azid && this.unterzuege != null) {
-         for(zug zz : this.unterzuege.values()) {
+         for (zug zz : this.unterzuege.values()) {
             if (!zz.azid_besucht && zz.azid == azid) {
                return zz;
             }
@@ -1114,7 +1109,7 @@ public class zug extends trigger implements structinfo, Comparable {
       if (u == null) {
          return null;
       } else {
-         for(zug l : u.values()) {
+         for (zug l : u.values()) {
             l.parentZug = this;
          }
 
@@ -1127,7 +1122,7 @@ public class zug extends trigger implements structinfo, Comparable {
          zug minzz = null;
          long minz = 216000000L;
 
-         for(zug zz : this.unterzuege.values()) {
+         for (zug zz : this.unterzuege.values()) {
             if (!zz.azid_besucht && zz.azid != this.cur_azid && zz.an - this.ab < minz && zz.an > this.ab) {
                minz = zz.an - this.ab;
                minzz = zz;
@@ -1157,7 +1152,7 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    void refreshZugAmGleis() {
-      for(gleis gl : this.zugbelegt) {
+      for (gleis gl : this.zugbelegt) {
          gl.getFluentData().setZugAmGleis(this);
       }
    }
@@ -1182,7 +1177,7 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    void shortenZug() {
-      for(int i = 0; this.zugbelegt.size() > this.calcLaenge(this.lastmasstab) && i < 2; ++i) {
+      for (int i = 0; this.zugbelegt.size() > this.calcLaenge(this.lastmasstab) && i < 2; i++) {
          gleis gl = (gleis)this.zugbelegt.removeFirst();
          gl.getFluentData().setStatusByZug(0, this);
          this.setRot(gl, true);
@@ -1218,7 +1213,7 @@ public class zug extends trigger implements structinfo, Comparable {
             this.chainVisits = new LinkedList();
          }
 
-         this.outputValueChanged |= this.namect.setBGColor(this.namefarbe);
+         this.outputValueChanged = this.namect.setBGColor(this.namefarbe) | this.outputValueChanged;
          if (!this.fertig) {
             if (this.outputValueChanged) {
                this.updateData();
@@ -1505,7 +1500,7 @@ public class zug extends trigger implements structinfo, Comparable {
             if (this.flags.hadFlag('E')) {
                ret = (this.hideGleis ? "" : "Gleis ") + this.getGleis();
             } else if (this.unterzuege != null) {
-               for(zug zz : this.unterzuege.values()) {
+               for (zug zz : this.unterzuege.values()) {
                   if (!zz.azid_besucht && zz.azid != this.cur_azid && zz.flags.hadFlag('E')) {
                      ret = (this.hideGleis ? "" : "Gleis ") + zz.getGleis();
                      break;
@@ -1649,7 +1644,7 @@ public class zug extends trigger implements structinfo, Comparable {
 
       String k = this.zielgleis + "/" + this.zid + "/" + this.ab;
       if (flagZug.containsKey(k)) {
-         int kzug = flagZug.get(k);
+         int kzug = (Integer)flagZug.get(k);
          if (kzug > 0) {
             zug neuzug = this.my_main.findZug(kzug);
             if (neuzug != null) {
@@ -1696,10 +1691,10 @@ public class zug extends trigger implements structinfo, Comparable {
          }
       } else if (this.ein_stw == null && this.aus_stw == null) {
          label111:
-         for(zug z : this.my_main.getZugList()) {
+         for (zug z : this.my_main.getZugList()) {
             Iterator<zug> it = z.getAllUnseenFahrplanzeilen();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                zug z2 = (zug)it.next();
                int z2Zid = 0;
                if (z2.flags.hasFlag('F')) {
@@ -1742,7 +1737,7 @@ public class zug extends trigger implements structinfo, Comparable {
          ret.plan.add(line.s);
          zug additionalPlan = line.additionalPlan;
          if (this.unterzuege != null) {
-            for(zug zz : this.unterzuege.values()) {
+            for (zug zz : this.unterzuege.values()) {
                if (!zz.azid_besucht && zz.azid != this.cur_azid) {
                   line = zz.getZugPlanDetails();
                   ret.plan.add(line.s);
@@ -1847,7 +1842,7 @@ public class zug extends trigger implements structinfo, Comparable {
 
       String k = this.zielgleis + "/" + this.zid + "/" + this.ab;
       if (flagZug.containsKey(k)) {
-         int kzug = flagZug.get(k);
+         int kzug = (Integer)flagZug.get(k);
          if (kzug > 0) {
             zug neuzug = this.my_main.findZug(kzug);
             if (neuzug != null) {
@@ -1931,7 +1926,7 @@ public class zug extends trigger implements structinfo, Comparable {
          if (this.unterzuege != null) {
             int c = 0;
 
-            for(zug zz : this.unterzuege.values()) {
+            for (zug zz : this.unterzuege.values()) {
                if (!zz.azid_besucht && zz.azid != this.cur_azid) {
                   if (!s.endsWith("<br>")) {
                      s = s + "<br>";
@@ -2086,7 +2081,7 @@ public class zug extends trigger implements structinfo, Comparable {
          LinkedList newzugbelegt = new LinkedList();
 
          try {
-            while(this.zugbelegt.size() > 0) {
+            while (this.zugbelegt.size() > 0) {
                newzugbelegt.addFirst(this.zugbelegt.removeFirst());
             }
          } catch (NoSuchElementException var3) {
@@ -2136,7 +2131,7 @@ public class zug extends trigger implements structinfo, Comparable {
       if (!this.visible && !this.fertig) {
          int nenr = ein_gleis.getENR();
          if (this.ein_stw == null) {
-            this.ein_enr_changed |= nenr != this.ein_enr;
+            this.ein_enr_changed = this.ein_enr_changed | nenr != this.ein_enr;
          }
 
          this.ein_enr = nenr;
@@ -2144,7 +2139,7 @@ public class zug extends trigger implements structinfo, Comparable {
          if (!this.gotüp || this.mytrain) {
             this.mytrainÜPcount = 0;
          } else if (this.mytrain) {
-            ++this.mytrainÜPcount;
+            this.mytrainÜPcount++;
          }
 
          if (this.mytrainÜPcount > 10) {
@@ -2186,7 +2181,7 @@ public class zug extends trigger implements structinfo, Comparable {
    }
 
    public zug.gleisData getGleisDataOfGleis(String bstg) {
-      for(int i = 0; i <= (this.unterzuege == null ? 0 : this.unterzuege.size()); ++i) {
+      for (int i = 0; i <= (this.unterzuege == null ? 0 : this.unterzuege.size()); i++) {
          zug z = this.unterzug(i);
          if (z != null) {
             String g = z.befehl_zielgleis;
@@ -2324,7 +2319,7 @@ public class zug extends trigger implements structinfo, Comparable {
       if (!this.lastChainVisits.isEmpty()) {
          String vs = "";
 
-         for(String c : this.lastChainVisits) {
+         for (String c : this.lastChainVisits) {
             vs = vs + ">" + c;
          }
 
@@ -2420,7 +2415,7 @@ public class zug extends trigger implements structinfo, Comparable {
       int i = 0;
       TimeFormat tf = TimeFormat.getInstance(TimeFormat.STYLE.HMS);
 
-      for(zug.wflagData wd : this.wflagList) {
+      for (zug.wflagData wd : this.wflagList) {
          v.addElement("wflagData " + ++i + " flags");
          v.addElement(wd.flags.toString());
          v.addElement("wflagData " + i + " zielgleis");
@@ -2434,8 +2429,8 @@ public class zug extends trigger implements structinfo, Comparable {
          Iterator<zug> it = this.unterzuege.values().iterator();
          i = 0;
 
-         while(it.hasNext()) {
-            ++i;
+         while (it.hasNext()) {
+            i++;
             zug zz = (zug)it.next();
             v.addElement("");
             v.addElement("");
@@ -2526,10 +2521,6 @@ public class zug extends trigger implements structinfo, Comparable {
       public int verspaetung = 0;
       public boolean mytrain = true;
       public boolean lastStopDone = false;
-
-      public emitData() {
-         super();
-      }
    }
 
    public class gleisData {
@@ -2540,10 +2531,6 @@ public class zug extends trigger implements structinfo, Comparable {
       public flagdata flags;
       public boolean befehlgleisNeu = false;
       public boolean befehlgleisAlt = false;
-
-      public gleisData() {
-         super();
-      }
    }
 
    private class planLineReturn {
@@ -2551,7 +2538,6 @@ public class zug extends trigger implements structinfo, Comparable {
       zug additionalPlan;
 
       planLineReturn(zugPlanLine s, zug additionalPlan) {
-         super();
          this.s = s;
          this.additionalPlan = additionalPlan;
       }
@@ -2563,7 +2549,6 @@ public class zug extends trigger implements structinfo, Comparable {
       zug additionalPlan;
 
       planReturn(String s, zug additionalPlan) {
-         super();
          this.s = s;
          this.additionalPlan = additionalPlan;
       }
@@ -2575,7 +2560,6 @@ public class zug extends trigger implements structinfo, Comparable {
       flagdata flags;
 
       wflagData(long an, String zielgleis, flagdata flags) {
-         super();
          this.zielgleis = zielgleis;
          this.an = an - 900000L;
          this.flags = flags;

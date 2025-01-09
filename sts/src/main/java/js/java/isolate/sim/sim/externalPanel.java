@@ -34,7 +34,6 @@ public class externalPanel extends JPanel {
    private JSeparator jSeparator1;
 
    public externalPanel(stellwerksim_main m, ActionListener closeAction, String title, boolean dialog) {
-      super();
       this.my_main = m;
       this.closeAction = closeAction;
       if (dialog) {
@@ -129,7 +128,6 @@ public class externalPanel extends JPanel {
 
    private static class EP_Frame extends JFrame implements externalPanel.EP_Interface {
       EP_Frame(JFrame parent) {
-         super();
          this.setDefaultCloseOperation(0);
       }
    }

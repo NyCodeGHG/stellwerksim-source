@@ -9,10 +9,6 @@ import javax.swing.JPanel;
 public class fadeablePanel extends JPanel {
    private int alpha = 100;
 
-   public fadeablePanel() {
-      super();
-   }
-
    public void fadeTo(int f) {
       if (f != this.alpha) {
          this.alpha = f;

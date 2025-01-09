@@ -160,10 +160,10 @@ public class gleisbildSimControl extends gleisbildControl<gleisbildModelSts> imp
    }
 
    private void painterThread_run() {
-      while(this.running) {
+      while (this.running) {
          try {
             gleisbildSimControl.PAINTCOMMAND cmd = (gleisbildSimControl.PAINTCOMMAND)this.threadCommands.take();
-            switch(cmd) {
+            switch (cmd) {
                case PAINTBUFFER:
                   if (this.uc.getDataSwitch().paintbuffer) {
                      this.panel.paintBuffer();
@@ -204,7 +204,7 @@ public class gleisbildSimControl extends gleisbildControl<gleisbildModelSts> imp
    protected void firePainter() {
       Object[] listeners = this.painterListener.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == gleisbildSimControl.paintEventListener.class) {
             ((gleisbildSimControl.paintEventListener)listeners[i + 1]).paintEvent();
          }
@@ -226,14 +226,14 @@ public class gleisbildSimControl extends gleisbildControl<gleisbildModelSts> imp
    }
 
    public void initEventTJM() {
-      for(eventContainer ec : this.model.events) {
+      for (eventContainer ec : this.model.events) {
          if (eventContainer.isDebug()) {
             eventContainer.getDebug().writeln("ev: " + ec.getName());
          }
 
          boolean addevent = true;
 
-         for(String t : ec.getThemeList(true)) {
+         for (String t : ec.getThemeList(true)) {
             if (thema.isThema(t)) {
                addevent = false;
                if (eventContainer.isDebug()) {
@@ -248,8 +248,8 @@ public class gleisbildSimControl extends gleisbildControl<gleisbildModelSts> imp
             if (!in.isEmpty()) {
                addevent = false;
 
-               for(String t : in) {
-                  if (thema.isThema(t)) {
+               for (String tx : in) {
+                  if (thema.isThema(tx)) {
                      addevent = true;
                      if (eventContainer.isDebug()) {
                         eventContainer.getDebug().writeln("ev added by add list: " + ec.getName());
@@ -454,7 +454,7 @@ public class gleisbildSimControl extends gleisbildControl<gleisbildModelSts> imp
             int x = gl.getCol();
             int y = gl.getRow();
 
-            for(int i = 0; i < 5; ++i) {
+            for (int i = 0; i < 5; i++) {
                gleis g2 = this.model.getXY_null(x - i, y);
                if (g2 == null) {
                   break;
@@ -530,10 +530,6 @@ public class gleisbildSimControl extends gleisbildControl<gleisbildModelSts> imp
       public gleis signal1 = null;
       public gleis signal2 = null;
       public gleis gl_object1 = null;
-
-      public gleisSelection() {
-         super();
-      }
    }
 
    public interface paintEventListener extends EventListener {
@@ -542,7 +538,6 @@ public class gleisbildSimControl extends gleisbildControl<gleisbildModelSts> imp
 
    private class repaintTrigger extends trigger {
       private repaintTrigger() {
-         super();
       }
 
       @Override

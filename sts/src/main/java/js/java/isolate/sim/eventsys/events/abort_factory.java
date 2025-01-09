@@ -8,10 +8,6 @@ import js.java.isolate.sim.eventsys.eventFactory;
 import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 
 public class abort_factory extends eventFactory {
-   public abort_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Störungen abbrechen";
@@ -38,22 +34,22 @@ public class abort_factory extends eventFactory {
             if (parameter.startsWith("0x")) {
                int hash = Integer.parseInt(parameter.substring(2), 16);
 
-               for(event e : event.events) {
+               for (event e : event.events) {
                   if (e.getHash() == hash) {
                      e.abort();
                      break;
                   }
                }
             } else {
-               for(event e : event.events) {
-                  if (parameter.equalsIgnoreCase(e.getClass().getSimpleName())) {
-                     e.abort();
+               for (event ex : event.events) {
+                  if (parameter.equalsIgnoreCase(ex.getClass().getSimpleName())) {
+                     ex.abort();
                   }
                }
             }
          } else {
-            for(event e : event.events) {
-               e.abort();
+            for (event exx : event.events) {
+               exx.abort();
             }
          }
       } catch (Exception var7) {

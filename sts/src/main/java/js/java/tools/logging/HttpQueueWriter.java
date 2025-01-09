@@ -10,7 +10,6 @@ public class HttpQueueWriter extends WriterQueue {
    private final String url;
 
    public HttpQueueWriter(String url) {
-      super();
       this.url = url;
    }
 
@@ -31,7 +30,7 @@ public class HttpQueueWriter extends WriterQueue {
          Throwable var7 = null;
 
          try {
-            while(null != input.readLine()) {
+            while (null != input.readLine()) {
             }
          } catch (Throwable var17) {
             var7 = var17;

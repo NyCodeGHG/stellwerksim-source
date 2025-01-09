@@ -45,7 +45,6 @@ public class gleisbildViewPanel extends JComponent implements PaintSaveInterface
    }
 
    public gleisbildViewPanel(UserContext uc) {
-      super();
       this.uc = uc;
       this.setDoubleBuffered(false);
       this.setOpaque(true);
@@ -53,7 +52,6 @@ public class gleisbildViewPanel extends JComponent implements PaintSaveInterface
    }
 
    public gleisbildViewPanel(UserContext uc, gleisbildControl control) {
-      super();
       this.uc = uc;
       this.setDoubleBuffered(false);
       this.setOpaque(true);
@@ -63,7 +61,6 @@ public class gleisbildViewPanel extends JComponent implements PaintSaveInterface
    }
 
    public gleisbildViewPanel(UserContext uc, gleisbildModel model) {
-      super();
       this.uc = uc;
       this.setDoubleBuffered(false);
       this.setOpaque(true);
@@ -73,7 +70,6 @@ public class gleisbildViewPanel extends JComponent implements PaintSaveInterface
    }
 
    public gleisbildViewPanel(UserContext uc, gleisbildModel model, gleisbildControl control) {
-      super();
       this.uc = uc;
       this.setDoubleBuffered(false);
       this.setOpaque(true);
@@ -84,7 +80,6 @@ public class gleisbildViewPanel extends JComponent implements PaintSaveInterface
    }
 
    public gleisbildViewPanel(UserContext uc, gleisbildControl control, gleisbildModel model) {
-      super();
       this.uc = uc;
       this.setDoubleBuffered(false);
       this.setOpaque(true);
@@ -195,7 +190,7 @@ public class gleisbildViewPanel extends JComponent implements PaintSaveInterface
             float[] brightKernel = new float[100];
             float v = 0.01F;
 
-            for(int i = 0; i < brightKernel.length; ++i) {
+            for (int i = 0; i < brightKernel.length; i++) {
                brightKernel[i] = 0.01F;
             }
 
@@ -228,7 +223,7 @@ public class gleisbildViewPanel extends JComponent implements PaintSaveInterface
          this.paintImage(g2);
          if (!this.lockOut) {
             if (this.overlayPainter != null) {
-               for(gleisbildViewPanel.glbOverlayPainter p : this.overlayPainter) {
+               for (gleisbildViewPanel.glbOverlayPainter p : this.overlayPainter) {
                   p.paint(this, g2, this.control.getScaler());
                }
             }

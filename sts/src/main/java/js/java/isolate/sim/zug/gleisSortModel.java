@@ -6,7 +6,6 @@ public class gleisSortModel extends AbstractTableModel {
    private final gleisModel model;
 
    public gleisSortModel(gleisModel parent) {
-      super();
       this.model = parent;
    }
 
@@ -35,7 +34,6 @@ public class gleisSortModel extends AbstractTableModel {
       final boolean lower;
 
       extendedRow(Object data, boolean lower) {
-         super();
          this.data = data;
          this.lower = lower;
       }
@@ -60,7 +58,6 @@ public class gleisSortModel extends AbstractTableModel {
       private final ZugTableComparator child;
 
       extendedRowExtractor(ZugTableComparator child) {
-         super();
          this.child = child;
       }
 

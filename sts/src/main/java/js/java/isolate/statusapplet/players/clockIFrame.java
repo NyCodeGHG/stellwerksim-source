@@ -20,7 +20,6 @@ public class clockIFrame extends JFrame implements timeDeliverer, timerecipient,
    private long timeOffset = 0L;
 
    public clockIFrame(oneInstance cls, UserContext uc) {
-      super();
       this.instance = cls;
       this.uc = uc;
 

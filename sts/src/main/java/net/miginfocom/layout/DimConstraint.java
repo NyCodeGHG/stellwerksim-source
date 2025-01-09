@@ -17,10 +17,6 @@ public final class DimConstraint implements Externalizable {
    private boolean fill = false;
    private boolean noGrid = false;
 
-   public DimConstraint() {
-      super();
-   }
-
    public int getGrowPriority() {
       return this.resize.growPrio;
    }
@@ -156,7 +152,7 @@ public final class DimConstraint implements Externalizable {
       if (gap != null && !gap.isUnset()) {
          int[] ret = new int[3];
 
-         for(int i = 0; i <= 2; ++i) {
+         for (int i = 0; i <= 2; i++) {
             UnitValue uv = gap.getSize(i);
             ret[i] = uv != null ? uv.getPixels((float)refSize, parent, null) : -2147471302;
          }
@@ -181,7 +177,7 @@ public final class DimConstraint implements Externalizable {
       } else {
          int[] ret = new int[3];
 
-         for(int i = 0; i <= 2; ++i) {
+         for (int i = 0; i <= 2; i++) {
             UnitValue uv = gap.getSize(i);
             ret[i] = uv != null ? uv.getPixels((float)refSize, parent, null) : -2147471302;
          }

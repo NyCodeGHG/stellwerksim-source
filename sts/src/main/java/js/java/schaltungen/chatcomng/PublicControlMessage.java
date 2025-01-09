@@ -7,7 +7,6 @@ public class PublicControlMessage {
    public int instanz;
 
    PublicControlMessage(String sender, String text, boolean ispublic, int instanz) {
-      super();
       this.sender = sender;
       this.text = text;
       this.ispublic = ispublic;

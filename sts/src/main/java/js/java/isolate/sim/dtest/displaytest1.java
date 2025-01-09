@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleis.gleisElements.gleisHelper;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class displaytest1 implements dtest {
-   public displaytest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Displaybreite";
@@ -26,11 +22,11 @@ public class displaytest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ALLE_DISPLAYS});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          int l = gleisHelper.calcDisplaySize(gl.getElement());
 
-         for(int x = 1; x < l; ++x) {
+         for (int x = 1; x < l; x++) {
             gleis gl2 = glb.getXY_null(gl.getCol() + x, gl.getRow());
             if (gl2 != null) {
                if (gleis.ALLE_GLEISE.matches(gl2.getElement())) {

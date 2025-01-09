@@ -8,10 +8,6 @@ import js.java.tools.ColorText;
 class verspaetungHandler extends zugHandler {
    static ArrayList<verspaetungHandler.COMPARETYPES> compareOrder = new ArrayList();
 
-   verspaetungHandler() {
-      super();
-   }
-
    static void reset() {
       compareOrder.clear();
       compareOrder.add(verspaetungHandler.COMPARETYPES.fertig);
@@ -107,8 +103,8 @@ class verspaetungHandler extends zugHandler {
       int r = 0;
 
       try {
-         for(verspaetungHandler.COMPARETYPES p : compareOrder) {
-            switch(p) {
+         for (verspaetungHandler.COMPARETYPES p : compareOrder) {
+            switch (p) {
                case mytrain:
                   r = this.c_mytrain(z, otherz);
                   break;

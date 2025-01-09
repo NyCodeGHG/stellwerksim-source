@@ -20,7 +20,6 @@ public class ChatUser implements Comparable<ChatUser> {
    }
 
    public ChatUser(ChatNG chat, String nick) {
-      super();
       this.bus = chat.bus;
       this.nick = nick;
       this.uuid = generateNickUUID(nick);

@@ -11,7 +11,6 @@ public class ComboColorRenderer extends JLabel implements ListCellRenderer {
    ColorTextIcon cti = new ColorTextIcon();
 
    public ComboColorRenderer() {
-      super();
       this.setOpaque(true);
       this.setHorizontalAlignment(2);
       this.setVerticalAlignment(0);

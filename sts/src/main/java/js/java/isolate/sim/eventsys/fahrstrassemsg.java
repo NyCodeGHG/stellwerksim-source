@@ -6,7 +6,6 @@ public class fahrstrassemsg extends eventmsg {
    public fahrstrasse f;
 
    public fahrstrassemsg(fahrstrasse _f) {
-      super();
       this.f = _f;
    }
 }

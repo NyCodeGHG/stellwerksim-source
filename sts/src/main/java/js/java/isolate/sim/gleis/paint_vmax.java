@@ -21,7 +21,7 @@ class paint_vmax extends paint2Base {
    public void paint3Editor(gleis gl, Graphics2D g, int xscal, int yscal, int fscal) {
       int x0 = 0;
       int y0 = 0;
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             x0 = xscal - 9;
             y0 = yscal - 8;
@@ -64,7 +64,7 @@ class paint_vmax extends paint2Base {
       g.fillPolygon(pgn);
       g.drawPolygon(pgn);
       g.setColor(gleis.colors.col_stellwerk_rot);
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             g.drawLine(x0 + 9, y0, x0 + 9, y0 + 8 - 1);
             break;

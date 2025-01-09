@@ -7,7 +7,6 @@ public class AbstractTopFrame extends JFrame {
    protected final UserContext uc;
 
    protected AbstractTopFrame(UserContext uc) {
-      super();
       this.uc = uc;
       this.setIconImage(uc.getWindowIcon());
    }

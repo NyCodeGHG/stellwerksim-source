@@ -44,7 +44,6 @@ public class SimDefaults extends JPanel {
    private JRadioButton realisticRB;
 
    public SimDefaults(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       this.prefs = new simPrefs();
@@ -65,7 +64,7 @@ public class SimDefaults extends JPanel {
 
    private void readDauer() {
       int idx = this.prefs.getInt("plannedtime", 1);
-      switch(idx) {
+      switch (idx) {
          case 0:
             this.dauer1.setSelected(true);
             break;

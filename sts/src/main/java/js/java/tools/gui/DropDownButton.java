@@ -41,7 +41,6 @@ public class DropDownButton extends JButton {
    private Dimension minsize = null;
 
    public DropDownButton() {
-      super();
       BasicButtonUI bbui = (BasicButtonUI)this.getUI();
       this.buttonListener = (BasicButtonListener)this.getClientProperty(bbui);
       this.removeMouseListener(this.buttonListener);
@@ -112,7 +111,7 @@ public class DropDownButton extends JButton {
       this.items.put(title, action);
       this.popup.removeAll();
 
-      for(String a : this.items.keySet()) {
+      for (String a : this.items.keySet()) {
          this.add(a, (String)this.items.get(a));
       }
 
@@ -123,7 +122,7 @@ public class DropDownButton extends JButton {
       this.items = items;
       this.popup.removeAll();
 
-      for(String a : this.items.keySet()) {
+      for (String a : this.items.keySet()) {
          this.add(a, (String)this.items.get(a));
       }
 
@@ -133,7 +132,7 @@ public class DropDownButton extends JButton {
    public void setItems(String[] items) {
       this.items.clear();
 
-      for(int i = 0; i < items.length; ++i) {
+      for (int i = 0; i < items.length; i++) {
          try {
             String[] k = items[i].split(":");
             this.items.put(k[0], k[1]);
@@ -143,7 +142,7 @@ public class DropDownButton extends JButton {
 
       this.popup.removeAll();
 
-      for(String a : this.items.keySet()) {
+      for (String a : this.items.keySet()) {
          this.add(a, (String)this.items.get(a));
       }
 
@@ -157,7 +156,7 @@ public class DropDownButton extends JButton {
          nd.height = Math.max(this.minsize.height, nd.height);
       }
 
-      for(String t : this.items.keySet()) {
+      for (String t : this.items.keySet()) {
          this.textLabel.setText(" " + t + "  ");
          this.repaint();
          Dimension d = super.getMinimumSize();
@@ -179,7 +178,6 @@ public class DropDownButton extends JButton {
 
    private class DropDownButtonMouseListener implements MouseListener {
       private DropDownButtonMouseListener() {
-         super();
       }
 
       public void mouseClicked(MouseEvent e) {

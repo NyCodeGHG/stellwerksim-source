@@ -12,10 +12,6 @@ public class jsonResponse implements responseSender {
    private int inSend = 0;
    private boolean firstSend = true;
 
-   public jsonResponse() {
-      super();
-   }
-
    @Override
    public void sendPcData(BufferedWriter output, String tag, Map<String, String> attr, String pcdata) throws IOException {
       StringBuilder b = new StringBuilder();
@@ -31,7 +27,7 @@ public class jsonResponse implements responseSender {
       b.append(tag);
       b.append("\",\n");
 
-      for(Entry<String, String> e : attr.entrySet()) {
+      for (Entry<String, String> e : attr.entrySet()) {
          b.append("\"");
          b.append((String)e.getKey());
          b.append("\": \"");
@@ -61,7 +57,7 @@ public class jsonResponse implements responseSender {
       b.append(cmd);
       b.append("\"");
 
-      for(Entry<String, String> e : attr.entrySet()) {
+      for (Entry<String, String> e : attr.entrySet()) {
          b.append(",\n");
          b.append("\"");
          b.append((String)e.getKey());
@@ -90,7 +86,7 @@ public class jsonResponse implements responseSender {
       b.append(cmd);
       b.append("\"");
 
-      for(Entry<String, String> e : attr.entrySet()) {
+      for (Entry<String, String> e : attr.entrySet()) {
          b.append(",\n");
          b.append("\"");
          b.append((String)e.getKey());
@@ -100,7 +96,7 @@ public class jsonResponse implements responseSender {
       }
 
       b.append(",\n\"sub\": [\n");
-      ++this.inSend;
+      this.inSend++;
       this.firstSend = true;
       output.append(b.toString());
       output.flush();
@@ -110,7 +106,7 @@ public class jsonResponse implements responseSender {
    public void sendClosingLine(BufferedWriter output, String cmd) throws IOException {
       StringBuilder b = new StringBuilder();
       b.append("]}\n");
-      --this.inSend;
+      this.inSend--;
       this.firstSend = false;
       output.append(b.toString());
       output.flush();
@@ -121,7 +117,7 @@ public class jsonResponse implements responseSender {
       if ((v.length & 1) == 0) {
          HashMap<String, String> m = new HashMap();
 
-         for(int i = 0; i < v.length; i += 2) {
+         for (int i = 0; i < v.length; i += 2) {
             m.put(v[i], v[i + 1]);
          }
 
@@ -136,7 +132,7 @@ public class jsonResponse implements responseSender {
       if ((v.length & 1) == 0) {
          HashMap<String, String> m = new HashMap();
 
-         for(int i = 0; i < v.length; i += 2) {
+         for (int i = 0; i < v.length; i += 2) {
             m.put(v[i], v[i + 1]);
          }
 

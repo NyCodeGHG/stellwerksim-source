@@ -105,7 +105,7 @@ public class designtestCtrlPanel extends basePanel implements ActionListener, Se
 
          protected void done() {
             try {
-               TreeSet<dtestresult> res = (TreeSet)this.get();
+               TreeSet<dtestresult> res = (TreeSet<dtestresult>)this.get();
                dtestresultEvent e = new dtestresultEvent(res);
                designtestCtrlPanel.this.my_main.interPanelCom(e);
                designtestCtrlPanel.this.freetext
@@ -113,7 +113,7 @@ public class designtestCtrlPanel extends basePanel implements ActionListener, Se
                String warning = null;
                int rank = 0;
 
-               for(dtestresult d : e.getResults()) {
+               for (dtestresult d : e.getResults()) {
                   if (d.getRank() == 2) {
                      warning = "Es gibt mindestens eine Fehlermeldung in den Designtests.";
                      rank = 2;

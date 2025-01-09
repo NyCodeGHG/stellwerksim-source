@@ -8,10 +8,6 @@ import js.java.isolate.sim.gleisbild.gleisbildEditorControl;
 public abstract class gecLineSelect extends gecSelect {
    protected int line;
 
-   public gecLineSelect() {
-      super();
-   }
-
    @Override
    public void init(gleisbildEditorControl gec, gecBase lastMode) {
       super.init(gec, lastMode);

@@ -8,7 +8,6 @@ public class CommandLink {
    private final Icon icon;
 
    public CommandLink(Icon icon, String instruction, String text) {
-      super();
       this.instruction = instruction;
       this.text = text;
       this.icon = icon;

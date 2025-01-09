@@ -12,7 +12,6 @@ public class DelayEventBase {
    }
 
    protected DelayEventBase(Object event, int delay, TimeUnit unit) {
-      super();
       this.event = event;
       this.delay = delay;
       this.unit = unit;

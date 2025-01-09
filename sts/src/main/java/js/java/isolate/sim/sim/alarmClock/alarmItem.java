@@ -12,7 +12,6 @@ public class alarmItem extends trigger {
    private boolean removeMe = false;
 
    alarmItem(alarmClock my_main, int h, int m, String text) {
-      super();
       this.my_main = my_main;
       this.text = text;
       this.tf = TimeFormat.getInstance(TimeFormat.STYLE.HM);
@@ -57,7 +56,7 @@ public class alarmItem extends trigger {
          return false;
       } else {
          if (this.changeDownCount > 0) {
-            --this.changeDownCount;
+            this.changeDownCount--;
             this.tjm_add();
          } else {
             long t = this.my_main.getSimutime();

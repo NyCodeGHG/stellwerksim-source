@@ -29,10 +29,6 @@ import js.java.schaltungen.adapter.plafPrefs.Parts;
 import js.java.tools.logging.ExceptionDialog;
 
 public class SwingTools {
-   public SwingTools() {
-      super();
-   }
-
    public static void setPLAF() {
       setPLAF(true);
    }
@@ -118,7 +114,7 @@ public class SwingTools {
       });
       popupMenu.add(selectAllMenuItem);
 
-      for(final JTextComponent f : fields) {
+      for (final JTextComponent f : fields) {
          f.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                this.processMouseEvent(e);
@@ -149,7 +145,7 @@ public class SwingTools {
       GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
       GraphicsDevice[] gd = ge.getScreenDevices();
 
-      for(int i = 0; i < gd.length; ++i) {
+      for (int i = 0; i < gd.length; i++) {
          if (gd[i].getType() == 0) {
             GraphicsConfiguration dgc = gd[i].getDefaultConfiguration();
             if (dgc.getBounds().contains(location)) {

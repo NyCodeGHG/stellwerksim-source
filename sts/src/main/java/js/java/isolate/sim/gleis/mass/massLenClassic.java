@@ -13,10 +13,6 @@ public class massLenClassic extends massSpeed05 {
    };
    private static final int[] masstabValues = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
 
-   public massLenClassic() {
-      super();
-   }
-
    @Override
    protected int calcLaengeImpl(int masstab, int laenge) {
       return laenge * 2 - laenge * masstab / 2;

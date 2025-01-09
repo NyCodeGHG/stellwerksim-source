@@ -79,7 +79,7 @@ public class MultiSplitPane extends JPanel {
          try {
             MultiSplitLayout msl = this.getMultiSplitLayout();
 
-            for(MultiSplitLayout.Divider divider : msl.dividersThatOverlap(clipR)) {
+            for (MultiSplitLayout.Divider divider : msl.dividersThatOverlap(clipR)) {
                dp.paint(dpg, divider);
             }
          } finally {
@@ -105,11 +105,11 @@ public class MultiSplitPane extends JPanel {
             if (this.dragDivider.isVertical()) {
                this.dragMin = prevNodeBounds.x;
                this.dragMax = nextNodeBounds.x + nextNodeBounds.width;
-               this.dragMax -= this.dragDivider.getBounds().width;
+               this.dragMax = this.dragMax - this.dragDivider.getBounds().width;
             } else {
                this.dragMin = prevNodeBounds.y;
                this.dragMax = nextNodeBounds.y + nextNodeBounds.height;
-               this.dragMax -= this.dragDivider.getBounds().height;
+               this.dragMax = this.dragMax - this.dragDivider.getBounds().height;
             }
 
             this.oldFloatingDividers = this.getMultiSplitLayout().getFloatingDividers();
@@ -224,7 +224,6 @@ public class MultiSplitPane extends JPanel {
 
    private class DefaultDividerPainter extends MultiSplitPane.DividerPainter {
       private DefaultDividerPainter() {
-         super();
       }
 
       @Override
@@ -238,16 +237,11 @@ public class MultiSplitPane extends JPanel {
    }
 
    public abstract static class DividerPainter {
-      public DividerPainter() {
-         super();
-      }
-
       public abstract void paint(Graphics var1, MultiSplitLayout.Divider var2);
    }
 
    private class InputHandler extends MouseInputAdapter implements KeyListener {
       private InputHandler() {
-         super();
       }
 
       public void mouseEntered(MouseEvent e) {

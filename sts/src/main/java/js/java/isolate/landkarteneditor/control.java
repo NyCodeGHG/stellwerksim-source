@@ -36,7 +36,6 @@ class control extends AbstractListModel implements xmllistener, ListDataListener
    private verbindung selectedVerbindung = null;
 
    control(landkarte lk, landkarteneditor editor) {
-      super();
       this.lk = lk;
       this.editorui = editor;
       this.edrid = Integer.parseInt(editor.getParameter("rid"));
@@ -181,7 +180,7 @@ class control extends AbstractListModel implements xmllistener, ListDataListener
       JPopupMenu popup = new JPopupMenu();
       JMenu[] letter = new JMenu[7];
 
-      for(int i = 0; i < letter.length; ++i) {
+      for (int i = 0; i < letter.length; i++) {
          int c1 = i * 4;
          int c2 = Math.min((i + 1) * 4, 26);
          char s1 = (char)(65 + c1);
@@ -195,7 +194,7 @@ class control extends AbstractListModel implements xmllistener, ListDataListener
       char prevc = 'A';
       Iterator<bahnhofList.regionData> it = this.bhflist.ridIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          bahnhofList.regionData rid = (bahnhofList.regionData)it.next();
          String region = rid.name;
          String region7 = TextHelper.deAccent(region);
@@ -213,8 +212,9 @@ class control extends AbstractListModel implements xmllistener, ListDataListener
          menu.add(item);
          menu.add(new JSeparator());
          Iterator<bahnhofList.bahnhofData> aidit = this.bhflist.aidIterator(rid.rid);
+         int cnt = 0;
 
-         for(int cnt = 0; aidit.hasNext(); menu.add(item)) {
+         while (aidit.hasNext()) {
             bahnhofList.bahnhofData aid = (bahnhofList.bahnhofData)aidit.next();
             String bname = aid.name;
             item = new aidMenuItem(bname, aid);
@@ -223,6 +223,8 @@ class control extends AbstractListModel implements xmllistener, ListDataListener
                menu.add(new JSeparator());
                cnt = 5;
             }
+
+            menu.add(item);
          }
       }
 
@@ -363,7 +365,6 @@ class control extends AbstractListModel implements xmllistener, ListDataListener
 
    private class loadThread implements Runnable {
       private loadThread() {
-         super();
       }
 
       public void run() {
@@ -389,7 +390,6 @@ class control extends AbstractListModel implements xmllistener, ListDataListener
 
    private class saveThread implements Runnable {
       private saveThread() {
-         super();
       }
 
       public void run() {

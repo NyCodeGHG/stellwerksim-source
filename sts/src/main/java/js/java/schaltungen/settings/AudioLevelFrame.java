@@ -20,7 +20,6 @@ public class AudioLevelFrame extends JPanel {
    private JPanel contentPanel;
 
    AudioLevelFrame(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       this.asettings = uc.getAudioSettings();
@@ -43,7 +42,7 @@ public class AudioLevelFrame extends JPanel {
       weak = true
    )
    public void checkAudio(AudioSettingsChangedEvent event) {
-      for(AudioLevelPanel alp : this.items) {
+      for (AudioLevelPanel alp : this.items) {
          alp.update();
       }
    }

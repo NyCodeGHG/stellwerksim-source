@@ -75,7 +75,7 @@ public class players_gleisbildPanel extends gleisbildViewPanel implements Action
       GraphicTools.enableTextAA(g);
       this.needZugRepaint = false;
 
-      for(players_gleisbildModel.zugdata zd : this.pmodel.zuege.values()) {
+      for (players_gleisbildModel.zugdata zd : this.pmodel.zuege.values()) {
          this.paintZug(g, zd);
       }
 
@@ -92,7 +92,7 @@ public class players_gleisbildPanel extends gleisbildViewPanel implements Action
       int x = zd.x;
       int y = zd.y;
       int rot = 0;
-      switch(zd.richtung) {
+      switch (zd.richtung) {
          case right:
             if (!zd.passed) {
                x -= w;

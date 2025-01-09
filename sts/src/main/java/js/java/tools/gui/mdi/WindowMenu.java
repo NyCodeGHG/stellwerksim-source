@@ -16,7 +16,6 @@ class WindowMenu extends JMenu {
    private JMenuItem tile = new JMenuItem("Tile");
 
    WindowMenu(MDIDesktopPane desktop) {
-      super();
       this.desktop = desktop;
       this.setText("Window");
       this.cascade.addActionListener(new ActionListener() {
@@ -54,7 +53,7 @@ class WindowMenu extends JMenu {
       this.cascade.setEnabled(array.length > 0);
       this.tile.setEnabled(array.length > 0);
 
-      for(int i = 0; i < array.length; ++i) {
+      for (int i = 0; i < array.length; i++) {
          WindowMenu.ChildMenuItem menu = new WindowMenu.ChildMenuItem(array[i]);
          menu.setState(i == 0);
          menu.addActionListener(new ActionListener() {

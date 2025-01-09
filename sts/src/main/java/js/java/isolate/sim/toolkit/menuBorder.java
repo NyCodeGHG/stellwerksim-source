@@ -27,7 +27,6 @@ public class menuBorder extends AbstractBorder {
    private boolean fillHgr = true;
 
    public menuBorder(String _title) {
-      super();
       this.title = _title;
    }
 
@@ -99,7 +98,7 @@ public class menuBorder extends AbstractBorder {
       Insets insets = this.getBorderInsets(c);
       Rectangle grooveRect = new Rectangle(x + 0, y + 0, width - 0, height - 0);
       this.textLoc.y = grooveRect.y - descent + (insets.top + ascent + descent) / 2;
-      switch(this.justification) {
+      switch (this.justification) {
          case 1:
             this.textLoc.x = grooveRect.x + 5 + insets.left;
             break;

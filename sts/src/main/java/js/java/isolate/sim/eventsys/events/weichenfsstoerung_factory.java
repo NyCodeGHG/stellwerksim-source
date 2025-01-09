@@ -10,10 +10,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 public class weichenfsstoerung_factory extends eventFactory {
    private JSpinner num;
 
-   public weichenfsstoerung_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Weichen-FS-Störung";
@@ -40,7 +36,7 @@ public class weichenfsstoerung_factory extends eventFactory {
    @Override
    public void readContainer(eventContainer ev) {
       super.readContainer(ev);
-      ev.setIntValue("dauer", Math.max(this.num.getValue(), 1));
+      ev.setIntValue("dauer", Math.max((Integer)this.num.getValue(), 1));
    }
 
    @Override

@@ -173,7 +173,7 @@ public class stoerungMessDialog extends JDialog {
    private void startButtonActionPerformed(ActionEvent evt) {
       this.startButton.setEnabled(false);
       this.my_main.interPanelCom(new stoerungMessureEvent());
-      int n = this.numSpinner.getValue() * 60;
+      int n = (Integer)this.numSpinner.getValue() * 60;
       stoerungMessDialog.mworker w = new stoerungMessDialog.mworker(n);
       this.jobProgress.setMinimum(0);
       this.jobProgress.setMaximum(n);
@@ -192,7 +192,6 @@ public class stoerungMessDialog extends JDialog {
       };
 
       mworker(int c) {
-         super();
          this.cnt = c;
       }
 
@@ -201,7 +200,7 @@ public class stoerungMessDialog extends JDialog {
       }
 
       protected void process(List<Integer> chunks) {
-         for(int number : chunks) {
+         for (int number : chunks) {
             stoerungMessDialog.this.jobProgress.setValue(number);
          }
       }
@@ -210,15 +209,15 @@ public class stoerungMessDialog extends JDialog {
          try {
             eventHaeufigkeiten eh = eventHaeufigkeiten.create(stoerungMessDialog.this.glbModel);
             DefaultTableModel m = (DefaultTableModel)stoerungMessDialog.this.resultTable.getModel();
-            HashMap<eventContainer, eventHaeufigkeiten.messureResult> res = (HashMap)this.get();
+            HashMap<eventContainer, eventHaeufigkeiten.messureResult> res = (HashMap<eventContainer, eventHaeufigkeiten.messureResult>)this.get();
 
-            for(eventContainer ev : res.keySet()) {
+            for (eventContainer ev : res.keySet()) {
                if (ev.getFactory().isRandom()) {
                   eventHaeufigkeiten.HAEUFIGKEITEN h = ev.getFactory().getOccurrence(ev);
                   eventHaeufigkeiten.messureResult v = (eventHaeufigkeiten.messureResult)res.get(ev);
                   String tt = "";
 
-                  for(Long l : v.time) {
+                  for (Long l : v.time) {
                      tt = tt + " " + l;
                   }
 

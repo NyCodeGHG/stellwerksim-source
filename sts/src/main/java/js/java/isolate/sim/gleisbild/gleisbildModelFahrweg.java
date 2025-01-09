@@ -39,8 +39,8 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public boolean checkIfExists(fahrstrasse f2) {
       boolean ret = false;
 
-      for(fahrstrasse f : this.fahrwege) {
-         switch(f2.compare(f)) {
+      for (fahrstrasse f : this.fahrwege) {
+         switch (f2.compare(f)) {
             case 2:
                ret = true;
          }
@@ -50,7 +50,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    }
 
    public void resetGleisGroup() {
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          new gleisGroupNull().add(gl);
       }
    }
@@ -72,13 +72,13 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public void buildGleisGroup() {
       gleisGroup gg = null;
 
-      for(fahrstrasse fs : this.fahrwege) {
+      for (fahrstrasse fs : this.fahrwege) {
          new gleisGroupImpl().add(fs.getStart());
          new gleisGroupImpl().add(fs.getStop());
          gleisGroup var7 = new gleisGroupImpl();
          int gcc = 0;
 
-         for(gleis gl : fs) {
+         for (gleis gl : fs) {
             if (this.isGroupSeperator(gl)) {
                new gleisGroupImpl().add(gl);
                var7 = null;
@@ -102,7 +102,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public void buildWayTimeTable() {
       LinkedList ea_stack = new LinkedList();
 
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          gl.getFluentData().setStatus(0);
          if (gl.getElement() == gleis.ELEMENT_EINFAHRT) {
             gl.getFluentData().setStatus(2);
@@ -118,35 +118,35 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
       this.allWayTimeTable = new HashMap();
       this.allWayTimeTableA = new HashMap();
       gleis.createName = true;
-      gleis gl = null;
+      gleis glx = null;
       gleis before_gl = null;
       gleis next_gl = null;
 
-      while(!ea_stack.isEmpty()) {
+      while (!ea_stack.isEmpty()) {
          HashSet<gleis> besuchteGleise = new HashSet();
-         gl = (gleis)ea_stack.removeFirst();
-         gleis eingangGleis = gl;
-         String eingang = gl.getSWWert();
+         glx = (gleis)ea_stack.removeFirst();
+         gleis eingangGleis = glx;
+         String eingang = glx.getSWWert();
          this.theapplet.showStatus("-Rest-Startpunkte: " + ea_stack.size(), 0);
          before_gl = null;
          int t = 0;
          LinkedList weichenstack = new LinkedList();
          boolean findSignal = true;
 
-         while(true) {
+         while (true) {
             int loopc = 0;
 
             do {
-               t += zug.calcMaxSpeed(this, gl.getMasstab());
-               besuchteGleise.add(gl);
-               next_gl = gl.next(before_gl);
+               t += zug.calcMaxSpeed(this, glx.getMasstab());
+               besuchteGleise.add(glx);
+               next_gl = glx.next(before_gl);
                if (next_gl != null) {
-                  if (gl.sameGleis(next_gl)) {
-                     ++loopc;
-                     if (gl.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
-                        gl.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
+                  if (glx.sameGleis(next_gl)) {
+                     loopc++;
+                     if (glx.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
+                        glx.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
                      } else {
-                        gl.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
+                        glx.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
                      }
 
                      if (loopc > 2) {
@@ -158,8 +158,8 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                         break;
                      }
 
-                     before_gl = gl;
-                     gl = next_gl;
+                     before_gl = glx;
+                     glx = next_gl;
                      if (findSignal && next_gl.getElement() == gleis.ELEMENT_SIGNAL && next_gl.forUs(before_gl)) {
                         findSignal = false;
                         next_gl.setEinfahrt(eingangGleis);
@@ -175,7 +175,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                      }
                   }
                }
-            } while(next_gl != null);
+            } while (next_gl != null);
 
             if (weichenstack.size() <= 0) {
                break;
@@ -184,8 +184,8 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
             this.theapplet.showStatus("-Rest-Startpunkte: " + ea_stack.size() + " /Zusatz: " + weichenstack.size(), 0);
 
             try {
-               t = weichenstack.removeLast();
-               gl = (gleis)weichenstack.removeLast();
+               t = (Integer)weichenstack.removeLast();
+               glx = (gleis)weichenstack.removeLast();
                before_gl = (gleis)weichenstack.removeLast();
             } catch (NoSuchElementException var15) {
                break;
@@ -194,55 +194,55 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                break;
             }
 
-            if (gl.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
-               gl.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
+            if (glx.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
+               glx.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
             } else {
-               gl.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
+               glx.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
             }
          }
       }
 
       ea_stack = new LinkedList();
 
-      for(gleis gl : this) {
-         gl.getFluentData().setStatus(0);
-         if (gl.getElement() == gleis.ELEMENT_AUSFAHRT) {
-            gl.getFluentData().setStatus(2);
-            ea_stack.addLast(gl);
-         } else if (gleis.ALLE_SIGNALE.matches(gl.getElement())) {
-            gl.getFluentData().setStellung(gleisElements.ST_SIGNAL_GRÜN);
-         } else if (gleis.ALLE_WEICHEN.matches(gl.getElement())) {
-            gl.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
+      for (gleis glxx : this) {
+         glxx.getFluentData().setStatus(0);
+         if (glxx.getElement() == gleis.ELEMENT_AUSFAHRT) {
+            glxx.getFluentData().setStatus(2);
+            ea_stack.addLast(glxx);
+         } else if (gleis.ALLE_SIGNALE.matches(glxx.getElement())) {
+            glxx.getFluentData().setStellung(gleisElements.ST_SIGNAL_GRÜN);
+         } else if (gleis.ALLE_WEICHEN.matches(glxx.getElement())) {
+            glxx.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
          }
       }
 
-      gl = null;
+      glx = null;
       before_gl = null;
       next_gl = null;
 
-      while(!ea_stack.isEmpty()) {
+      while (!ea_stack.isEmpty()) {
          HashSet<gleis> besuchteGleise = new HashSet();
-         gl = (gleis)ea_stack.removeFirst();
-         String ausgang = gl.getSWWert();
+         glx = (gleis)ea_stack.removeFirst();
+         String ausgang = glx.getSWWert();
          this.theapplet.showStatus("-Rest-Endpunkte: " + ea_stack.size(), 0);
          before_gl = null;
          int t = 0;
          LinkedList weichenstack = new LinkedList();
 
-         while(true) {
+         while (true) {
             int loopc = 0;
 
             do {
-               t += zug.calcMaxSpeed(this, gl.getMasstab());
-               besuchteGleise.add(gl);
-               next_gl = gl.next(before_gl);
+               t += zug.calcMaxSpeed(this, glx.getMasstab());
+               besuchteGleise.add(glx);
+               next_gl = glx.next(before_gl);
                if (next_gl != null) {
-                  if (gl.sameGleis(next_gl)) {
-                     ++loopc;
-                     if (gl.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
-                        gl.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
+                  if (glx.sameGleis(next_gl)) {
+                     loopc++;
+                     if (glx.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
+                        glx.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
                      } else {
-                        gl.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
+                        glx.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
                      }
 
                      if (loopc > 2) {
@@ -254,8 +254,8 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                         break;
                      }
 
-                     before_gl = gl;
-                     gl = next_gl;
+                     before_gl = glx;
+                     glx = next_gl;
                      if (next_gl.getElement() == gleis.ELEMENT_WEICHEOBEN || next_gl.getElement() == gleis.ELEMENT_WEICHEUNTEN) {
                         weichenstack.add(before_gl);
                         weichenstack.add(next_gl);
@@ -267,7 +267,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                      }
                   }
                }
-            } while(next_gl != null);
+            } while (next_gl != null);
 
             if (weichenstack.size() <= 0) {
                break;
@@ -276,8 +276,8 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
             this.theapplet.showStatus("-Rest-Endpunkte: " + ea_stack.size() + " /Zusatz: " + weichenstack.size(), 0);
 
             try {
-               t = weichenstack.removeLast();
-               gl = (gleis)weichenstack.removeLast();
+               t = (Integer)weichenstack.removeLast();
+               glx = (gleis)weichenstack.removeLast();
                before_gl = (gleis)weichenstack.removeLast();
             } catch (NoSuchElementException var13) {
                break;
@@ -286,10 +286,10 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                break;
             }
 
-            if (gl.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
-               gl.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
+            if (glx.getFluentData().getStellung() == gleisElements.ST_WEICHE_GERADE) {
+               glx.getFluentData().setStellung(gleisElements.ST_WEICHE_ABZWEIG);
             } else {
-               gl.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
+               glx.getFluentData().setStellung(gleisElements.ST_WEICHE_GERADE);
             }
          }
       }
@@ -309,7 +309,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    }
 
    public int getVerspaetung(String eingang) {
-      synchronized(this.allVerspaetungTable) {
+      synchronized (this.allVerspaetungTable) {
          Integer i = (Integer)this.allVerspaetungTable.get(eingang);
          return i != null ? i : 0;
       }
@@ -322,7 +322,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
 
    public void setVerspaetung(String eingang) {
       int v = (int)zug.randomTimeShift(-2L, 0L, 3L);
-      synchronized(this.allVerspaetungTable) {
+      synchronized (this.allVerspaetungTable) {
          this.allVerspaetungTable.put(eingang, new Integer(v));
       }
    }
@@ -336,7 +336,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
 
    public void setVerspaetungen() {
       if (this.wayTimeTable != null) {
-         for(String b : this.wayTimeTable.keySet()) {
+         for (String b : this.wayTimeTable.keySet()) {
             this.setVerspaetung(b);
          }
       }
@@ -347,7 +347,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
       gleis gl = null;
       Iterator<gleis> it = this.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gl = (gleis)it.next();
          int enr = gl.getEinfahrtEnr();
          if (enr > 0) {
@@ -373,7 +373,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
       if (gl != null && !gl.getFluentData().isGesperrt()) {
          before_gl = null;
 
-         while(gl.getFluentData().isFrei() || byüp && gl.getFluentData().getStatus() == 1) {
+         while (gl.getFluentData().isFrei() || byüp && gl.getFluentData().getStatus() == 1) {
             gleis next_gl = gl.next(before_gl);
             if (next_gl == null || gl.sameGleis(next_gl)) {
                break;
@@ -404,7 +404,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
       if (gl != null) {
          before_gl = null;
 
-         while((gl.getElement() == gleis.ELEMENT_KREUZUNGBRUECKE || gl.getFluentData().getStatus() == 1) && !gl.getFluentData().hasCurrentFS()) {
+         while ((gl.getElement() == gleis.ELEMENT_KREUZUNGBRUECKE || gl.getFluentData().getStatus() == 1) && !gl.getFluentData().hasCurrentFS()) {
             gleis next_gl = gl.next(before_gl);
             if (next_gl == null || gl.sameGleis(next_gl)) {
                break;
@@ -430,17 +430,17 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
          if (gl != null) {
             before_gl = null;
 
-            gleis next_gl;
+            gleis next_glx;
             do {
                gl.getFluentData().setStatus(0);
-               next_gl = gl.next(before_gl);
-               if (next_gl == null || gl.sameGleis(next_gl)) {
+               next_glx = gl.next(before_gl);
+               if (next_glx == null || gl.sameGleis(next_glx)) {
                   break;
                }
 
                before_gl = gl;
-               gl = next_gl;
-            } while((next_gl.getElement() != gleis.ELEMENT_SIGNAL || !next_gl.forUs(before_gl)) && next_gl != null);
+               gl = next_glx;
+            } while ((next_glx.getElement() != gleis.ELEMENT_SIGNAL || !next_glx.forUs(before_gl)) && next_glx != null);
          }
       }
 
@@ -477,10 +477,10 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
             if (next_gl.getElement() == gleis.ELEMENT_VORSIGNAL && next_gl.forUs(before_gl)) {
                vorsignale.add(next_gl);
             }
-         } while(next_gl != null);
+         } while (next_gl != null);
 
          if (sig != null) {
-            for(gleis vgl : vorsignale) {
+            for (gleis vgl : vorsignale) {
                vgl.getFluentData().setConnectedSignal(sig);
             }
          }
@@ -505,7 +505,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
             if (next_gl.getElement() == gleis.ELEMENT_SIGNAL && next_gl.forUs(before_gl)) {
                return next_gl;
             }
-         } while(next_gl != null);
+         } while (next_gl != null);
       }
 
       return null;
@@ -541,7 +541,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                break;
             }
          }
-      } while(next_gl != null);
+      } while (next_gl != null);
 
       return ret;
    }
@@ -576,7 +576,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                break;
             }
          }
-      } while(next_gl != null);
+      } while (next_gl != null);
 
       return ret;
    }
@@ -622,7 +622,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
                next_gl.getFluentData().setStatus(0);
             }
          }
-      } while(next_gl != null);
+      } while (next_gl != null);
    }
 
    public void statusÜPAusfahrt(gleis pos_gl, int v) {
@@ -633,7 +633,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
          gleis before_gl = pos_gl;
          pos_gl = next_gl;
          next_gl = next_gl.next(before_gl);
-      } while(next_gl != null && pos_gl != next_gl);
+      } while (next_gl != null && pos_gl != next_gl);
    }
 
    public int countFahrwege() {
@@ -650,7 +650,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public void close() {
       super.close();
 
-      for(fahrstrasse fs : this.fahrwege) {
+      for (fahrstrasse fs : this.fahrwege) {
          fs.close();
       }
 
@@ -766,7 +766,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    }
 
    public fahrstrasse findFahrwegByName(String name) {
-      for(fahrstrasse fs : this.fahrwege) {
+      for (fahrstrasse fs : this.fahrwege) {
          if (fs.getName().equals(name)) {
             return fs;
          }
@@ -786,7 +786,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
       fahrstrasse fs = null;
       if (allowUfgt) {
          try {
-            for(fahrstrasse var15 : this.fahrwege) {
+            for (fahrstrasse var15 : this.fahrwege) {
                if (var15.checkThis(signal1, signal2)) {
                   return this.findUFahrweg(signal1, signal2, wantRf, var15.getExtend().fstype);
                }
@@ -799,7 +799,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
          }
       } else {
          try {
-            for(fahrstrasse var16 : this.fahrwege) {
+            for (fahrstrasse var16 : this.fahrwege) {
                if (var16.checkThis(signal1, signal2)) {
                   return this.buildFSEL(var16, wantRf);
                }
@@ -823,7 +823,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
       if (gl != null) {
          weg.add(signal1);
 
-         for(int maxCount = 100; maxCount > 0; --maxCount) {
+         for (int maxCount = 100; maxCount > 0; maxCount--) {
             boolean stopSignal = false;
             stopSignal |= gl.getElement() == gleis.ELEMENT_SIGNAL;
             stopSignal |= wantRf && gl.getElement() == gleis.ELEMENT_ZWERGSIGNAL;
@@ -865,13 +865,13 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    }
 
    public void clearStatus() {
-      for(gleis gl : this) {
+      for (gleis gl : this) {
          gl.clear();
          gl.getFluentData().setStatus(0);
          gl.unregisterAllHooks();
       }
 
-      for(fahrstrasse fs : this.fahrwege) {
+      for (fahrstrasse fs : this.fahrwege) {
          if (!fs.getExtend().isDeleted()) {
             fs.init();
             fs.purgeCache();
@@ -886,7 +886,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public void purgeFahrwege() {
       Iterator<fahrstrasse> it = this.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse fs = (fahrstrasse)it.next();
          fs.purgeCache();
       }
@@ -899,9 +899,9 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public int getNumberOfStartingFahrwege(gleis signal, boolean includeDeleted) {
       int cnt = 0;
 
-      for(fahrstrasse fs : this.fahrwege) {
+      for (fahrstrasse fs : this.fahrwege) {
          if ((includeDeleted || !fs.getExtend().isDeleted()) && fs.getStart() == signal) {
-            ++cnt;
+            cnt++;
          }
       }
 
@@ -911,7 +911,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public void enableAllAutoFS(boolean triggered) {
       Iterator<gleis> it = this.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          ((gleis)it.next()).enableAutoFW(triggered);
       }
 
@@ -921,7 +921,7 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
    public void disableAllAutoFS() {
       Iterator<gleis> it = this.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          ((gleis)it.next()).disableAutoFW();
       }
 
@@ -996,12 +996,12 @@ public class gleisbildModelFahrweg extends gleisbildModelStore {
          int i = 0;
          data.append("fahrwege=").append(this.fahrwege.size()).append("&");
 
-         for(fahrstrasse f : this.fahrwege) {
+         for (fahrstrasse f : this.fahrwege) {
             data.append(TextHelper.urlEncode("fahrstrasse[]"));
             data.append('=');
             data.append(TextHelper.urlEncode(f.toSaveString()));
             data.append('&');
-            ++i;
+            i++;
          }
       }
 

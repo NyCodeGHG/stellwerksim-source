@@ -8,10 +8,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class zwergtest5 implements dtest {
-   public zwergtest5() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Schutzsignal in der Ausfahrt";
@@ -29,14 +25,14 @@ public class zwergtest5 implements dtest {
       element[] einfelm = new element[]{gleis.ELEMENT_EINFAHRT};
       Iterator<fahrstrasse> it = glb.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse fs = (fahrstrasse)it.next();
          if (fs.getStop().getElement() == gleis.ELEMENT_AUSFAHRT && !fs.getExtend().isDeleted() && fs.hasElements(elm)) {
             boolean hasein = fs.hasElements(einfelm);
             boolean done = false;
             Iterator<gleis> git = fs.getGleisweg().descendingIterator();
 
-            while(git.hasNext() && !done) {
+            while (git.hasNext() && !done) {
                gleis gl = (gleis)git.next();
                if (gleis.ALLE_WEICHEN.matches(gl.getElement()) || gl.getElement() == gleis.ELEMENT_SIGNAL) {
                   done = true;

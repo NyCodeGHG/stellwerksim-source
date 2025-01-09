@@ -30,7 +30,6 @@ public class User implements IChatObject, Serializable {
    }
 
    public User(String nick, String altNick, String userName, String fullName) {
-      super();
       this._nick = nick;
       this._altNick = altNick;
       this._userName = userName;

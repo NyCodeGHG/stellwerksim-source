@@ -4,7 +4,6 @@ import java.awt.Color;
 
 class dimLightColor extends colorStruct {
    dimLightColor(colorStruct base, int level) {
-      super();
       base.cloneTo(this);
       this.col_stellwerk_belegt = this.dimColor(this.col_stellwerk_belegt_backup, this.col_stellwerk_frei, level);
       this.col_stellwerk_reserviert = this.dimColor(this.col_stellwerk_reserviert_backup, this.col_stellwerk_frei, level);

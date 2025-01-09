@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 class c_notstop extends baseChain {
-   c_notstop() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);

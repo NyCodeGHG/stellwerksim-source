@@ -3,10 +3,6 @@ package js.java.isolate.sim.zug;
 import js.java.isolate.sim.gleis.gleis;
 
 class c_iswiedervmax extends baseChain {
-   c_iswiedervmax() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);

@@ -7,7 +7,6 @@ import javax.swing.GroupLayout.Alignment;
 
 public class playerListFrame extends JFrame {
    playerListFrame(JScrollPane outputscrollpane) {
-      super();
       this.initComponents();
       this.setContentPane(outputscrollpane);
       this.pack();

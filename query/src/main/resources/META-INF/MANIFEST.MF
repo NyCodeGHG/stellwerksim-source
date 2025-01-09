@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.4
+Created-By: 1.8.0_191-b12 (Oracle Corporation)
+Main-Class: js.java.soap.Main
+
+Name: js/java/soap/ServiceAccessor$ServiceRunner.class
+SHA-256-Digest: Zm/aTkSLNugi+zRoBBKy1W0DwX1rA6/4PNXhUHRX5NQ=
+
+Name: js/java/soap/Main$MyAuthenticator.class
+SHA-256-Digest: u78v/NC5i23qtWALluzlIm2kIIyDXYq1ma3KLpB2X+c=
+
+Name: META-INF/jax-ws-catalog.xml
+SHA-256-Digest: N6XPPN9Y9OhrpcThDQUPurROnp3ZUUK2CqhcjVwQ2jY=
+
+Name: js/java/soap/Main.class
+SHA-256-Digest: rtJbLlvyKIHPjw15e31cp2la5TO98XLUvxcRkRHfBT0=
+
+Name: STSWSDL.wsdl
+SHA-256-Digest: lZg/IAL0wSTeR9Rdf5N+n+WGy7X+fJLbLt0urO7ApYk=
+
+Name: js/java/soap/ObjectFactory.class
+SHA-256-Digest: sT5cB9U0ywG/YmVY7zoCDUuMw3cWKsZ7RAbjwZV/cEI=
+
+Name: META-INF/STSWSDL.xml
+SHA-256-Digest: BucUp1rRt1skjCuKchBiyyy2KPPAe7ePOT/3pFWDdi0=
+
+Name: js/java/soap/STSService.class
+SHA-256-Digest: LeTOZ+otynwGWSyZ9aiHy7Ps770zOVlPWcUlYeoMbw4=
+
+Name: js/java/soap/package-info.class
+SHA-256-Digest: p/gbkgFFfP2vRaNnwcjMHra3RQSNm0mjwfiXjMRQj/E=
+
+Name: META-INF/wsdl/STSWSDL.wsdl
+SHA-256-Digest: tqIhLB2SVmiNW9lVfAIocG/XxmQoGAT8pnJzZjApYh8=
+
+Name: js/java/soap/TipAnswer.class
+SHA-256-Digest: iNAYj1l9FgJt4lOsD0lOWaIcQ5FFbBwCNiJ1CYcQVqs=
+
+Name: META-INF/wsit-client.xml
+SHA-256-Digest: aN3ZAYs5itj5IYF0MYJDW6la6ZAN6YE1L0wngQCeqQk=
+
+Name: js/java/soap/STSPort.class
+SHA-256-Digest: v50SjLEjAvFLtzpAU1XLzn/Zl+gy23tPhaT3DJRqshU=
+
+Name: js/java/soap/ServiceAccessor.class
+SHA-256-Digest: 5qgG/EN162gkRxE02zOy113kwWzUdbMS9/w3bgmEifA=
+

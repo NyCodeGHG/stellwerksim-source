@@ -22,13 +22,11 @@ public class ColorTextIcon implements Icon {
    }
 
    public ColorTextIcon(int width, int height) {
-      super();
       this.width = width;
       this.height = height;
    }
 
    public ColorTextIcon(int width, int height, ColorText _t) {
-      super();
       this.width = width;
       this.height = height;
       this.t = _t;

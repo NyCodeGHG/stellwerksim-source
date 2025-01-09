@@ -33,25 +33,25 @@ public abstract class NanoWSD extends NanoHTTPD {
       int size = buf.length;
       char[] ar = new char[(size + 2) / 3 * 4];
       int a = 0;
+      int i = 0;
 
-      byte b2;
-      int mask;
-      for(int i = 0; i < size; ar[a++] = ALPHABET[b2 & mask]) {
+      while (i < size) {
          byte b0 = buf[i++];
          byte b1 = i < size ? buf[i++] : 0;
-         b2 = i < size ? buf[i++] : 0;
-         mask = 63;
+         byte b2 = i < size ? buf[i++] : 0;
+         int mask = 63;
          ar[a++] = ALPHABET[b0 >> 2 & mask];
          ar[a++] = ALPHABET[(b0 << 4 | (b1 & 255) >> 4) & mask];
          ar[a++] = ALPHABET[(b1 << 2 | (b2 & 255) >> 6) & mask];
+         ar[a++] = ALPHABET[b2 & mask];
       }
 
-      switch(size % 3) {
+      switch (size % 3) {
          case 1:
-            --a;
+            a--;
             ar[a] = '=';
          case 2:
-            --a;
+            a--;
             ar[a] = '=';
          default:
             return new String(ar);
@@ -159,7 +159,6 @@ public abstract class NanoWSD extends NanoHTTPD {
       };
 
       public WebSocket(NanoHTTPD.IHTTPSession handshakeRequest) {
-         super();
          this.handshakeRequest = handshakeRequest;
          this.in = handshakeRequest.getInputStream();
          this.handshakeResponse.addHeader("upgrade", "websocket");
@@ -297,7 +296,7 @@ public abstract class NanoWSD extends NanoHTTPD {
 
       private void readWebsocket() {
          try {
-            while(this.state == NanoWSD.State.OPEN) {
+            while (this.state == NanoWSD.State.OPEN) {
                this.handleWebsocketFrame(NanoWSD.WebSocketFrame.read(this.in));
             }
          } catch (CharacterCodingException var6) {
@@ -407,7 +406,6 @@ public abstract class NanoWSD extends NanoHTTPD {
       }
 
       private WebSocketFrame(NanoWSD.WebSocketFrame.OpCode opCode, boolean fin) {
-         super();
          this.setOpCode(opCode);
          this.setFin(fin);
       }
@@ -433,12 +431,11 @@ public abstract class NanoWSD extends NanoHTTPD {
       }
 
       public WebSocketFrame(NanoWSD.WebSocketFrame.OpCode opCode, List<NanoWSD.WebSocketFrame> fragments) throws NanoWSD.WebSocketException {
-         super();
          this.setOpCode(opCode);
          this.setFin(true);
          long _payloadLength = 0L;
 
-         for(NanoWSD.WebSocketFrame inter : fragments) {
+         for (NanoWSD.WebSocketFrame inter : fragments) {
             _payloadLength += (long)inter.getBinaryPayload().length;
          }
 
@@ -447,7 +444,7 @@ public abstract class NanoWSD extends NanoHTTPD {
             byte[] payload = new byte[this._payloadLength];
             int offset = 0;
 
-            for(NanoWSD.WebSocketFrame inter : fragments) {
+            for (NanoWSD.WebSocketFrame inter : fragments) {
                System.arraycopy(inter.getBinaryPayload(), 0, payload, offset, inter.getBinaryPayload().length);
                offset += inter.getBinaryPayload().length;
             }
@@ -459,7 +456,6 @@ public abstract class NanoWSD extends NanoHTTPD {
       }
 
       public WebSocketFrame(NanoWSD.WebSocketFrame clone) {
-         super();
          this.setOpCode(clone.getOpCode());
          this.setFin(clone.isFin());
          this.setBinaryPayload(clone.getBinaryPayload());
@@ -514,7 +510,7 @@ public abstract class NanoWSD extends NanoHTTPD {
             } else {
                sb.append("0x");
 
-               for(int i = 0; i < Math.min(this.payload.length, 50); ++i) {
+               for (int i = 0; i < Math.min(this.payload.length, 50); i++) {
                   sb.append(Integer.toHexString(this.payload[i] & 255));
                }
 
@@ -531,13 +527,13 @@ public abstract class NanoWSD extends NanoHTTPD {
          this.payload = new byte[this._payloadLength];
          int read = 0;
 
-         while(read < this._payloadLength) {
+         while (read < this._payloadLength) {
             read += checkedRead(in.read(this.payload, read, this._payloadLength - read));
          }
 
          if (this.isMasked()) {
-            for(int i = 0; i < this.payload.length; ++i) {
-               this.payload[i] ^= this.maskingKey[i % 4];
+            for (int i = 0; i < this.payload.length; i++) {
+               this.payload[i] = (byte)(this.payload[i] ^ this.maskingKey[i % 4]);
             }
          }
 
@@ -593,7 +589,7 @@ public abstract class NanoWSD extends NanoHTTPD {
             this.maskingKey = new byte[4];
             int read = 0;
 
-            while(read < this.maskingKey.length) {
+            while (read < this.maskingKey.length) {
                read += checkedRead(in.read(this.maskingKey, read, this.maskingKey.length - read));
             }
          }
@@ -671,7 +667,7 @@ public abstract class NanoWSD extends NanoHTTPD {
          if (this.isMasked()) {
             out.write(this.maskingKey);
 
-            for(int i = 0; i < this._payloadLength; ++i) {
+            for (int i = 0; i < this._payloadLength; i++) {
                out.write(this.getBinaryPayload()[i] ^ this.maskingKey[i % 4]);
             }
          } else {
@@ -698,7 +694,7 @@ public abstract class NanoWSD extends NanoHTTPD {
          private final int code;
 
          public static NanoWSD.WebSocketFrame.CloseCode find(int value) {
-            for(NanoWSD.WebSocketFrame.CloseCode code : values()) {
+            for (NanoWSD.WebSocketFrame.CloseCode code : values()) {
                if (code.getValue() == value) {
                   return code;
                }
@@ -768,7 +764,7 @@ public abstract class NanoWSD extends NanoHTTPD {
          private final byte code;
 
          public static NanoWSD.WebSocketFrame.OpCode find(byte value) {
-            for(NanoWSD.WebSocketFrame.OpCode opcode : values()) {
+            for (NanoWSD.WebSocketFrame.OpCode opcode : values()) {
                if (opcode.getValue() == value) {
                   return opcode;
                }

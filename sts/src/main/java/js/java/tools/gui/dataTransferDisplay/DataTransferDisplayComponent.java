@@ -6,7 +6,6 @@ public class DataTransferDisplayComponent extends LedComponent implements DataTr
    private final Timer offTimer = new Timer(150, a -> this.turnOff());
 
    public DataTransferDisplayComponent() {
-      super();
       this.offTimer.setRepeats(false);
    }
 

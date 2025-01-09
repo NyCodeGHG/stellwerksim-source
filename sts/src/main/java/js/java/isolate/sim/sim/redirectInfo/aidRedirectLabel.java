@@ -21,7 +21,6 @@ public class aidRedirectLabel extends JPanel implements ActionListener {
    private JLabel textField;
 
    public aidRedirectLabel(int aid, String test) {
-      super();
       this.aid = aid;
       this.setBackground(UIManager.getDefaults().getColor("List.background"));
       this.setLayout(new SimpleOneRowLayout());

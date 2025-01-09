@@ -5,10 +5,6 @@ public class JarvisMarch {
    private int n;
    private int h;
 
-   public JarvisMarch() {
-      super();
-   }
-
    public int computeHull(JarvisMarch.Point[] p) {
       this.p = p;
       this.n = p.length;
@@ -31,14 +27,14 @@ public class JarvisMarch {
       do {
          this.exchange(this.h, i);
          i = this.indexOfRightmostPointFrom(this.p[this.h]);
-         ++this.h;
-      } while(i > 0);
+         this.h++;
+      } while (i > 0);
    }
 
    private int indexOfLowestPoint() {
       int min = 0;
 
-      for(int i = 1; i < this.n; ++i) {
+      for (int i = 1; i < this.n; i++) {
          if (this.p[i].y < this.p[min].y || this.p[i].y == this.p[min].y && this.p[i].x < this.p[min].x) {
             min = i;
          }
@@ -50,7 +46,7 @@ public class JarvisMarch {
    private int indexOfRightmostPointFrom(JarvisMarch.Point q) {
       int i = 0;
 
-      for(int j = 1; j < this.n; ++j) {
+      for (int j = 1; j < this.n; j++) {
          if (this.p[j].relTo(q).isLess(this.p[i].relTo(q))) {
             i = j;
          }
@@ -70,7 +66,6 @@ public class JarvisMarch {
       public int y;
 
       public Point(int x, int y) {
-         super();
          this.x = x;
          this.y = y;
       }
@@ -84,8 +79,8 @@ public class JarvisMarch {
       }
 
       public void makeRelTo(JarvisMarch.Point p) {
-         this.x -= p.x;
-         this.y -= p.y;
+         this.x = this.x - p.x;
+         this.y = this.y - p.y;
       }
 
       public JarvisMarch.Point moved(int x0, int y0) {

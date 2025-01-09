@@ -10,12 +10,10 @@ public class BoundedPlainDocument extends PlainDocument {
    protected int maxLength;
 
    public BoundedPlainDocument() {
-      super();
       this.maxLength = 0;
    }
 
    public BoundedPlainDocument(int maxLength) {
-      super();
       this.maxLength = maxLength;
    }
 

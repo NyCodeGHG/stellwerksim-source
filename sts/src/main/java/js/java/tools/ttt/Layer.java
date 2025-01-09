@@ -7,18 +7,17 @@ public class Layer {
    int layerNum = 0;
 
    public Layer(int Num) {
-      super();
       this.layerNum = Num;
    }
 
    public void refreshLayer() {
-      for(int i = 0; i < this.nodes.size(); ++i) {
+      for (int i = 0; i < this.nodes.size(); i++) {
          Node temp = (Node)this.nodes.get(i);
          if (temp.nodeType == 0) {
             temp.pref = 0;
 
-            for(int j = 0; j < temp.sub_nodes.size(); ++j) {
-               temp.pref += ((Node)temp.sub_nodes.get(j)).pref / 2;
+            for (int j = 0; j < temp.sub_nodes.size(); j++) {
+               temp.pref = temp.pref + ((Node)temp.sub_nodes.get(j)).pref / 2;
             }
          }
       }
@@ -32,7 +31,7 @@ public class Layer {
    public Node searchById(String id) {
       Node ret = null;
 
-      for(int i = 0; i < this.nodes.size(); ++i) {
+      for (int i = 0; i < this.nodes.size(); i++) {
          if (((Node)this.nodes.get(i)).id.equals(id)) {
             ret = (Node)this.nodes.get(i);
             break;

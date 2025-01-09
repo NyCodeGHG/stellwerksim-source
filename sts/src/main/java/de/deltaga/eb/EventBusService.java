@@ -5,10 +5,6 @@ import java.lang.reflect.Method;
 public final class EventBusService {
    private static final EventBus eventBus = new BasicEventBus();
 
-   public EventBusService() {
-      super();
-   }
-
    public static EventBus getInstance() {
       return eventBus;
    }

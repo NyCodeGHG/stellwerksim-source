@@ -27,7 +27,6 @@ public class GlobalLatency implements timerecipient {
    private int tlatency;
 
    public GlobalLatency(UserContextMini uc) {
-      super();
       this.uc = uc;
 
       try {
@@ -90,7 +89,7 @@ public class GlobalLatency implements timerecipient {
       } else if (msg.startsWith("MESSEN")) {
          EventBusService.getInstance().publish(new ChatMessageEvent(event.sender, "Es wird jetzt 5x in einem Abstand von 10 Sekunden ein Text verschickt!"));
 
-         for(int i = 0; i < 5; ++i) {
+         for (int i = 0; i < 5; i++) {
             EventBusService.getInstance().publish(new DelayEvent(new ChatMessageEvent(event.sender, "Test Text " + (i + 1)), i * 10));
          }
       } else if (msg.startsWith("LATENZ")) {

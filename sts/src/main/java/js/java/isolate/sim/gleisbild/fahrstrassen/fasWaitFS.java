@@ -18,7 +18,7 @@ public class fasWaitFS extends fahrstrassenState {
       boolean cantget = false;
       int üpstate = 0;
       if (this.hasÜP()) {
-         synchronized(this.getFSallocator()) {
+         synchronized (this.getFSallocator()) {
             if (this.getFS().gleisüp.getFluentData().getStatus() == 1) {
                üpstate = 1;
             } else if (this.getFS().gleisüp.getFluentData().isFrei()) {
@@ -30,7 +30,7 @@ public class fasWaitFS extends fahrstrassenState {
 
       Iterator<gleis> it = this.getFS().gleisweg.iterator();
 
-      while(it.hasNext() && !checked) {
+      while (it.hasNext() && !checked) {
          gleis g = (gleis)it.next();
          if (this.getFS().lastZD != null && this.getFS().lastZD.sameGleis(g)) {
             break;
@@ -47,19 +47,18 @@ public class fasWaitFS extends fahrstrassenState {
          }
       }
 
-      gleis g;
-      for(Iterator<gleis> var10 = this.getFS().flankenweichen.keySet().iterator();
-         var10.hasNext() && !checked;
-         checked = checked || g.getFluentData().getStatus() == 4
-      ) {
-         g = (gleis)var10.next();
+      it = this.getFS().flankenweichen.keySet().iterator();
+
+      while (it.hasNext() && !checked) {
+         gleis gx = (gleis)it.next();
+         checked = checked || gx.getFluentData().getStatus() == 4;
       }
 
       if (!checked || cantget) {
          if (cantget) {
-            for(gleis g : this.getFS().gleisweg) {
-               if (g.getFluentData().getStatus() != 2) {
-                  g.getFluentData().setStatusByFs(0, this.getFS());
+            for (gleis gx : this.getFS().gleisweg) {
+               if (gx.getFluentData().getStatus() != 2) {
+                  gx.getFluentData().setStatusByFs(0, this.getFS());
                }
             }
 
@@ -67,29 +66,29 @@ public class fasWaitFS extends fahrstrassenState {
          } else {
             boolean zwergeRot = false;
 
-            for(gleis gl : this.getFS().zwerge) {
+            for (gleis gl : this.getFS().zwerge) {
                zwergeRot |= gl.getFluentData().getStellung() == gleisElements.ST_SIGNAL_ROT;
             }
 
             if (zwergeRot) {
                boolean zwergStörung = false;
 
-               for(gleis gl : this.getFS().zwerge) {
+               for (gleis gl : this.getFS().zwerge) {
                   zwergStörung = zwergStörung || !gl.getFluentData().setStellung(gleisElements.ST_SIGNAL_GRÜN);
                }
 
                if (zwergStörung) {
-                  for(gleis gl : this.getFS().zwerge) {
+                  for (gleis gl : this.getFS().zwerge) {
                      gl.getFluentData().setStellung(gleisElements.ST_SIGNAL_ROT);
                   }
 
-                  for(gleis g : this.getFS().gleisweg) {
-                     if (g.getElement() == gleis.ELEMENT_ÜBERGABEPUNKT) {
-                        this.getFSallocator().unreserveAusfahrt(g.getENR());
+                  for (gleis gxx : this.getFS().gleisweg) {
+                     if (gxx.getElement() == gleis.ELEMENT_ÜBERGABEPUNKT) {
+                        this.getFSallocator().unreserveAusfahrt(gxx.getENR());
                      }
 
-                     if (g.getFluentData().getStatus() != 2) {
-                        g.getFluentData().setStatusByFs(0, this.getFS());
+                     if (gxx.getFluentData().getStatus() != 2) {
+                        gxx.getFluentData().setStatusByFs(0, this.getFS());
                      }
                   }
 
@@ -103,17 +102,17 @@ public class fasWaitFS extends fahrstrassenState {
                   this.getStart().triggerStartingFS();
                }
             } else {
-               for(gleis gl : this.getFS().zwerge) {
+               for (gleis gl : this.getFS().zwerge) {
                   gl.getFluentData().setStellung(gleisElements.ST_SIGNAL_ROT);
                }
 
-               for(gleis g : this.getFS().gleisweg) {
-                  if (g.getElement() == gleis.ELEMENT_ÜBERGABEPUNKT) {
-                     this.getFSallocator().unreserveAusfahrt(g.getENR());
+               for (gleis gxx : this.getFS().gleisweg) {
+                  if (gxx.getElement() == gleis.ELEMENT_ÜBERGABEPUNKT) {
+                     this.getFSallocator().unreserveAusfahrt(gxx.getENR());
                   }
 
-                  if (g.getFluentData().getStatus() != 2) {
-                     g.getFluentData().setStatusByFs(0, this.getFS());
+                  if (gxx.getFluentData().getStatus() != 2) {
+                     gxx.getFluentData().setStatusByFs(0, this.getFS());
                   }
                }
 

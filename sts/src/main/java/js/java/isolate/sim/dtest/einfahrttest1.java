@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class einfahrttest1 implements dtest {
-   public einfahrttest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Einfahrtrichtung";
@@ -25,11 +21,11 @@ public class einfahrttest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_EINFAHRT});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          int x = 0;
          int y = 0;
-         switch(gl.getRichtung()) {
+         switch (gl.getRichtung()) {
             case right:
                x = 1;
                break;
@@ -46,7 +42,7 @@ public class einfahrttest1 implements dtest {
          boolean foundit = false;
          Iterator<gleis> it2 = gl.getNachbarn();
 
-         while(it2.hasNext()) {
+         while (it2.hasNext()) {
             gleis gl2 = (gleis)it2.next();
             if (gl2.getElement() != gleis.ELEMENT_AUSFAHRT) {
                int xx = gl2.getCol();

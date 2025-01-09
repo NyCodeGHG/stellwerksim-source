@@ -24,7 +24,6 @@ import net.miginfocom.swing.MigLayout;
 
 public final class TaskDialogs {
    private TaskDialogs() {
-      super();
    }
 
    public static TaskDialogs.TaskDialogBuilder build() {
@@ -116,7 +115,6 @@ public final class TaskDialogs {
       private Integer inputColumns = null;
 
       private TaskDialogBuilder() {
-         super();
       }
 
       public TaskDialogs.TaskDialogBuilder parent(Window parent) {
@@ -228,7 +226,7 @@ public final class TaskDialogs {
          List<ButtonModel> models = new ArrayList();
          JPanel p = new JPanel(new MigLayout(""));
 
-         for(String c : choices) {
+         for (String c : choices) {
             JRadioButton btn = new JRadioButton(c);
             btn.setOpaque(false);
             models.add(btn.getModel());
@@ -259,7 +257,7 @@ public final class TaskDialogs {
          final List<CommandLinkButton> buttons = new ArrayList();
          JPanel p = new JPanel(new MigLayout(""));
 
-         for(CommandLink link : choices) {
+         for (CommandLink link : choices) {
             CommandLinkButton btn = new CommandLinkButton(link, TaskDialog.getDesign().getCommandLinkPainter());
             models.add(btn.getModel());
             buttons.add(btn);
@@ -310,7 +308,6 @@ public final class TaskDialogs {
       int waitInterval = 0;
 
       TextWithWaitInterval(String text) {
-         super();
          this.text = text;
          int prefixPos = text.indexOf("@@");
          if (prefixPos >= 0) {

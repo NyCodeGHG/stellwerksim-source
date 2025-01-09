@@ -10,10 +10,6 @@ import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 public class fahrstrassetest10 implements dtest {
    private static final element[] ELEMENTS_W = new element[]{gleis.ALLE_WEICHEN};
 
-   public fahrstrassetest10() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Fahrstrassen 10";
@@ -30,7 +26,7 @@ public class fahrstrassetest10 implements dtest {
       gleis s_before_gl = s_pos_gl.nextByRichtung(true);
       boolean shiftNext = true;
 
-      while(s_pos_gl != null) {
+      while (s_pos_gl != null) {
          if (shiftNext) {
             s_next_gl = s_pos_gl.next(s_before_gl);
          }
@@ -68,7 +64,7 @@ public class fahrstrassetest10 implements dtest {
       LinkedList<gleis> weg = fs.getGleisweg();
       gleis wbefore_gl = null;
 
-      for(gleis wgl : weg) {
+      for (gleis wgl : weg) {
          try {
             if (gleis.ALLE_BAHNSTEIGE.matches(wgl.getElement()) && wgl.forUs(wbefore_gl)) {
                return true;
@@ -86,7 +82,7 @@ public class fahrstrassetest10 implements dtest {
       LinkedList<gleis> weg = fs.getGleisweg();
       gleis wbefore_gl = null;
 
-      for(gleis wgl : weg) {
+      for (gleis wgl : weg) {
          try {
             if (gleis.ALLE_WEICHEN.matches(wgl.getElement()) && wgl.weicheSpitz(wbefore_gl)) {
                return true;
@@ -105,7 +101,7 @@ public class fahrstrassetest10 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<fahrstrasse> it = glb.fahrstrassenIterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          fahrstrasse f = (fahrstrasse)it.next();
          if (!f.isDeleted() && !f.isRFonly() && f.getStart().getElement().matches(gleis.ELEMENT_SIGNAL) && f.getStart().getGleisExtend().isEntscheider()) {
             if (f.hasElements(ELEMENTS_W)) {

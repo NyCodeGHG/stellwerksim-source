@@ -9,7 +9,6 @@ public class RootDesktopPane extends JDesktopPane {
    private DesktopScrollPane desktopScrollpane;
 
    public RootDesktopPane(DesktopScrollPane desktopScrollpane) {
-      super();
       this.desktopScrollpane = desktopScrollpane;
       UIDefaults defaults = UIManager.getDefaults();
       defaults.put("DesktopIconUI", this.getClass().getPackage().getName() + ".EmptyDesktopIconUI");

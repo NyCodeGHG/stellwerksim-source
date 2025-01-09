@@ -31,7 +31,6 @@ public class phonebookpanel extends JPanel {
    private JLabel statusLabel;
 
    public phonebookpanel(phonebook p) {
-      super();
       this.my_phone = p;
       this.initComponents();
       this.nsorter = new DefaultTableModel(new Object[0][], new String[]{"Name", "Nummer", "Spieler", ""}) {
@@ -105,7 +104,7 @@ public class phonebookpanel extends JPanel {
       Object[] o = new Object[]{"Störungshotline: ", "7863", "", this.getButton("7863", this.regionPhoneTable)};
       this.rsorter.addRow(o);
 
-      for(Entry<String, String> e : this.my_phone.getAdditionals().entrySet()) {
+      for (Entry<String, String> e : this.my_phone.getAdditionals().entrySet()) {
          Object[] ox = new Object[]{(String)e.getKey() + ": ", e.getValue()};
          this.rsorter.addRow(ox);
       }
@@ -148,7 +147,7 @@ public class phonebookpanel extends JPanel {
    final void updateTel() {
       this.nsorter.setRowCount(0);
 
-      for(phonebookentry e : this.my_phone) {
+      for (phonebookentry e : this.my_phone) {
          Object[] o = new Object[]{new ColorText(e.stw), new ColorText(e.tel), new ColorText(e.user), this.getButton(e.tel, this.nachbarPhoneTable)};
          this.nsorter.addRow(o);
       }
@@ -197,7 +196,6 @@ public class phonebookpanel extends JPanel {
 
    private class regionPhoneTableCmap implements CMap {
       private regionPhoneTableCmap() {
-         super();
       }
 
       public int span(int row, int column) {

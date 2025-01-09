@@ -101,11 +101,12 @@ public abstract class NanoHTTPD {
    }
 
    private static void loadMimeTypes(Map<String, String> result, String resourceName) {
-      Properties properties;
       try {
-         for(Enumeration<URL> resources = NanoHTTPD.class.getClassLoader().getResources(resourceName); resources.hasMoreElements(); result.putAll(properties)) {
+         Enumeration<URL> resources = NanoHTTPD.class.getClassLoader().getResources(resourceName);
+
+         while (resources.hasMoreElements()) {
             URL url = (URL)resources.nextElement();
-            properties = new Properties();
+            Properties properties = new Properties();
             InputStream stream = null;
 
             try {
@@ -116,6 +117,8 @@ public abstract class NanoHTTPD {
             } finally {
                safeClose(stream);
             }
+
+            result.putAll(properties);
          }
       } catch (IOException var13) {
          LOG.log(Level.INFO, "no mime types available at " + resourceName);
@@ -196,7 +199,6 @@ public abstract class NanoHTTPD {
    }
 
    public NanoHTTPD(String hostname, int port) {
-      super();
       this.hostname = hostname;
       this.myPort = port;
       this.setTempFileManagerFactory(new NanoHTTPD.DefaultTempFileManagerFactory());
@@ -224,7 +226,7 @@ public abstract class NanoHTTPD {
       if (queryString != null) {
          StringTokenizer st = new StringTokenizer(queryString, "&");
 
-         while(st.hasMoreTokens()) {
+         while (st.hasMoreTokens()) {
             String e = st.nextToken();
             int sep = e.indexOf(61);
             String propertyName = sep >= 0 ? decodePercent(e.substring(0, sep)).trim() : decodePercent(e).trim();
@@ -362,7 +364,7 @@ public abstract class NanoHTTPD {
       this.myThread.setName("NanoHttpd Main Listener");
       this.myThread.start();
 
-      while(!serverRunnable.hasBinded && serverRunnable.bindException == null) {
+      while (!serverRunnable.hasBinded && serverRunnable.bindException == null) {
          try {
             Thread.sleep(10L);
          } catch (Throwable var5) {
@@ -403,7 +405,6 @@ public abstract class NanoHTTPD {
       private final Socket acceptSocket;
 
       private ClientHandler(InputStream inputStream, Socket acceptSocket) {
-         super();
          this.inputStream = inputStream;
          this.acceptSocket = acceptSocket;
       }
@@ -421,7 +422,7 @@ public abstract class NanoHTTPD {
             NanoHTTPD.TempFileManager tempFileManager = NanoHTTPD.this.tempFileManagerFactory.create();
             NanoHTTPD.HTTPSession session = NanoHTTPD.this.new HTTPSession(tempFileManager, this.inputStream, outputStream, this.acceptSocket.getInetAddress());
 
-            while(!this.acceptSocket.isClosed()) {
+            while (!this.acceptSocket.isClosed()) {
                session.execute();
             }
          } catch (Exception var7) {
@@ -455,14 +456,12 @@ public abstract class NanoHTTPD {
       }
 
       public Cookie(String name, String value, int numDays) {
-         super();
          this.n = name;
          this.v = value;
          this.e = getHTTPTime(numDays);
       }
 
       public Cookie(String name, String value, String expires) {
-         super();
          this.n = name;
          this.v = value;
          this.e = expires;
@@ -479,12 +478,11 @@ public abstract class NanoHTTPD {
       private final ArrayList<NanoHTTPD.Cookie> queue = new ArrayList();
 
       public CookieHandler(Map<String, String> httpHeaders) {
-         super();
          String raw = (String)httpHeaders.get("cookie");
          if (raw != null) {
             String[] tokens = raw.split(";");
 
-            for(String token : tokens) {
+            for (String token : tokens) {
                String[] data = token.trim().split("=");
                if (data.length == 2) {
                   this.cookies.put(data[0], data[1]);
@@ -514,7 +512,7 @@ public abstract class NanoHTTPD {
       }
 
       public void unloadQueue(NanoHTTPD.Response response) {
-         for(NanoHTTPD.Cookie cookie : this.queue) {
+         for (NanoHTTPD.Cookie cookie : this.queue) {
             response.addHeader("Set-Cookie", cookie.getHTTPHeader());
          }
       }
@@ -524,17 +522,13 @@ public abstract class NanoHTTPD {
       private long requestCount;
       private final List<NanoHTTPD.ClientHandler> running = Collections.synchronizedList(new ArrayList());
 
-      public DefaultAsyncRunner() {
-         super();
-      }
-
       public List<NanoHTTPD.ClientHandler> getRunning() {
          return this.running;
       }
 
       @Override
       public void closeAll() {
-         for(NanoHTTPD.ClientHandler clientHandler : new ArrayList(this.running)) {
+         for (NanoHTTPD.ClientHandler clientHandler : new ArrayList(this.running)) {
             clientHandler.close();
          }
       }
@@ -546,7 +540,7 @@ public abstract class NanoHTTPD {
 
       @Override
       public void exec(NanoHTTPD.ClientHandler clientHandler) {
-         ++this.requestCount;
+         this.requestCount++;
          Thread t = new Thread(clientHandler);
          t.setDaemon(true);
          t.setName("NanoHttpd Request Processor (#" + this.requestCount + ")");
@@ -556,10 +550,6 @@ public abstract class NanoHTTPD {
    }
 
    public static class DefaultServerSocketFactory implements NanoHTTPD.ServerSocketFactory {
-      public DefaultServerSocketFactory() {
-         super();
-      }
-
       @Override
       public ServerSocket create() throws IOException {
          return new ServerSocket();
@@ -571,7 +561,6 @@ public abstract class NanoHTTPD {
       private final OutputStream fstream;
 
       public DefaultTempFile(File tempdir) throws IOException {
-         super();
          this.file = File.createTempFile("NanoHTTPD-", "", tempdir);
          this.fstream = new FileOutputStream(this.file);
       }
@@ -600,7 +589,6 @@ public abstract class NanoHTTPD {
       private final List<NanoHTTPD.TempFile> tempFiles;
 
       public DefaultTempFileManager() {
-         super();
          if (!this.tmpdir.exists()) {
             this.tmpdir.mkdirs();
          }
@@ -610,7 +598,7 @@ public abstract class NanoHTTPD {
 
       @Override
       public void clear() {
-         for(NanoHTTPD.TempFile file : this.tempFiles) {
+         for (NanoHTTPD.TempFile file : this.tempFiles) {
             try {
                file.delete();
             } catch (Exception var4) {
@@ -631,7 +619,6 @@ public abstract class NanoHTTPD {
 
    private class DefaultTempFileManagerFactory implements NanoHTTPD.TempFileManagerFactory {
       private DefaultTempFileManagerFactory() {
-         super();
       }
 
       @Override
@@ -661,14 +648,12 @@ public abstract class NanoHTTPD {
       private String protocolVersion;
 
       public HTTPSession(NanoHTTPD.TempFileManager tempFileManager, InputStream inputStream, OutputStream outputStream) {
-         super();
          this.tempFileManager = tempFileManager;
          this.inputStream = new BufferedInputStream(inputStream, 8192);
          this.outputStream = outputStream;
       }
 
       public HTTPSession(NanoHTTPD.TempFileManager tempFileManager, InputStream inputStream, OutputStream outputStream, InetAddress inetAddress) {
-         super();
          this.tempFileManager = tempFileManager;
          this.inputStream = new BufferedInputStream(inputStream, 8192);
          this.outputStream = outputStream;
@@ -705,7 +690,7 @@ public abstract class NanoHTTPD {
                         NanoHTTPD.LOG.log(Level.FINE, "no protocol version specified, strange. Assuming HTTP/1.1.");
                      }
 
-                     for(String line = in.readLine(); line != null && !line.trim().isEmpty(); line = in.readLine()) {
+                     for (String line = in.readLine(); line != null && !line.trim().isEmpty(); line = in.readLine()) {
                         int p = line.indexOf(58);
                         if (p >= 0) {
                            headers.put(line.substring(0, p).trim().toLowerCase(Locale.US), line.substring(p + 1).trim());
@@ -731,7 +716,7 @@ public abstract class NanoHTTPD {
             } else {
                byte[] part_header_buff = new byte[1024];
 
-               for(int bi = 0; bi < boundary_idxs.length - 1; ++bi) {
+               for (int bi = 0; bi < boundary_idxs.length - 1; bi++) {
                   fbuf.position(boundary_idxs[bi]);
                   int len = fbuf.remaining() < 1024 ? fbuf.remaining() : 1024;
                   fbuf.get(part_header_buff, 0, len);
@@ -740,7 +725,7 @@ public abstract class NanoHTTPD {
                   );
                   int headerLines = 0;
                   String mpline = in.readLine();
-                  ++headerLines;
+                  headerLines++;
                   if (mpline == null || !mpline.contains(boundary)) {
                      throw new NanoHTTPD.ResponseException(
                         NanoHTTPD.Response.Status.BAD_REQUEST, "BAD REQUEST: Content type is multipart/form-data but chunk does not start with boundary."
@@ -751,15 +736,15 @@ public abstract class NanoHTTPD {
                   String file_name = null;
                   String content_type = null;
                   mpline = in.readLine();
-                  ++headerLines;
+                  headerLines++;
 
-                  while(mpline != null && mpline.trim().length() > 0) {
+                  while (mpline != null && mpline.trim().length() > 0) {
                      Matcher matcher = NanoHTTPD.CONTENT_DISPOSITION_PATTERN.matcher(mpline);
                      if (matcher.matches()) {
                         String attributeString = matcher.group(2);
                         matcher = NanoHTTPD.CONTENT_DISPOSITION_ATTRIBUTE_PATTERN.matcher(attributeString);
 
-                        while(matcher.find()) {
+                        while (matcher.find()) {
                            String key = matcher.group(1);
                            if ("name".equalsIgnoreCase(key)) {
                               part_name = matcher.group(2);
@@ -775,12 +760,12 @@ public abstract class NanoHTTPD {
                      }
 
                      mpline = in.readLine();
-                     ++headerLines;
+                     headerLines++;
                   }
 
                   int part_header_len = 0;
 
-                  while(headerLines-- > 0) {
+                  while (headerLines-- > 0) {
                      part_header_len = this.scipOverNewLine(part_header_buff, part_header_len);
                   }
 
@@ -802,8 +787,8 @@ public abstract class NanoHTTPD {
                      } else {
                         int count = 2;
 
-                        while(files.containsKey(part_name + count)) {
-                           ++count;
+                        while (files.containsKey(part_name + count)) {
+                           count++;
                         }
 
                         files.put(part_name + count, path);
@@ -821,8 +806,8 @@ public abstract class NanoHTTPD {
       }
 
       private int scipOverNewLine(byte[] part_header_buff, int index) {
-         while(part_header_buff[index] != 10) {
-            ++index;
+         while (part_header_buff[index] != 10) {
+            index++;
          }
 
          return index + 1;
@@ -835,7 +820,7 @@ public abstract class NanoHTTPD {
             this.queryParameterString = parms;
             StringTokenizer st = new StringTokenizer(parms, "&");
 
-            while(st.hasMoreTokens()) {
+            while (st.hasMoreTokens()) {
                String e = st.nextToken();
                int sep = e.indexOf(61);
                if (sep >= 0) {
@@ -874,7 +859,7 @@ public abstract class NanoHTTPD {
                throw new SocketException("NanoHttpd Shutdown");
             }
 
-            while(read > 0) {
+            while (read > 0) {
                this.rlen += read;
                this.splitbyte = this.findHeaderEnd(buf, this.rlen);
                if (this.splitbyte > 0) {
@@ -954,7 +939,7 @@ public abstract class NanoHTTPD {
       }
 
       private int findHeaderEnd(byte[] buf, int rlen) {
-         for(int splitbyte = 0; splitbyte + 1 < rlen; ++splitbyte) {
+         for (int splitbyte = 0; splitbyte + 1 < rlen; splitbyte++) {
             if (buf[splitbyte] == 13 && buf[splitbyte + 1] == 10 && splitbyte + 3 < rlen && buf[splitbyte + 2] == 13 && buf[splitbyte + 3] == 10) {
                return splitbyte + 4;
             }
@@ -979,8 +964,8 @@ public abstract class NanoHTTPD {
             int new_bytes = first_fill - boundary.length;
 
             do {
-               for(int j = 0; j < new_bytes; ++j) {
-                  for(int i = 0; i < boundary.length && search_window[j + i] == boundary[i]; ++i) {
+               for (int j = 0; j < new_bytes; j++) {
+                  for (int i = 0; i < boundary.length && search_window[j + i] == boundary[i]; i++) {
                      if (i == boundary.length - 1) {
                         int[] new_res = new int[res.length + 1];
                         System.arraycopy(res, 0, new_res, 0, res.length);
@@ -995,7 +980,7 @@ public abstract class NanoHTTPD {
                int var11 = search_window.length - boundary.length;
                new_bytes = b.remaining() < var11 ? b.remaining() : var11;
                b.get(search_window, boundary.length, new_bytes);
-            } while(new_bytes > 0);
+            } while (new_bytes > 0);
 
             return res;
          }
@@ -1071,7 +1056,7 @@ public abstract class NanoHTTPD {
 
             byte[] buf = new byte[512];
 
-            while(this.rlen >= 0 && size > 0L) {
+            while (this.rlen >= 0 && size > 0L) {
                this.rlen = this.inputStream.read(buf, 0, (int)Math.min(size, 512L));
                size -= (long)this.rlen;
                if (this.rlen > 0) {
@@ -1199,7 +1184,7 @@ public abstract class NanoHTTPD {
       PATCH;
 
       static NanoHTTPD.Method lookup(String method) {
-         for(NanoHTTPD.Method m : values()) {
+         for (NanoHTTPD.Method m : values()) {
             if (m.toString().equalsIgnoreCase(method)) {
                return m;
             }
@@ -1227,7 +1212,6 @@ public abstract class NanoHTTPD {
       private boolean keepAlive;
 
       protected Response(NanoHTTPD.Response.IStatus status, String mimeType, InputStream data, long totalBytes) {
-         super();
          this.status = status;
          this.mimeType = mimeType;
          if (data == null) {
@@ -1311,7 +1295,7 @@ public abstract class NanoHTTPD {
                this.printHeader(pw, "Date", gmtFrmt.format(new Date()));
             }
 
-            for(Entry<String, String> entry : this.header.entrySet()) {
+            for (Entry<String, String> entry : this.header.entrySet()) {
                this.printHeader(pw, (String)entry.getKey(), (String)entry.getValue());
             }
 
@@ -1389,7 +1373,7 @@ public abstract class NanoHTTPD {
          byte[] buff = new byte[(int)BUFFER_SIZE];
          boolean sendEverything = pending == -1L;
 
-         while(pending > 0L || sendEverything) {
+         while (pending > 0L || sendEverything) {
             long bytesToRead = sendEverything ? BUFFER_SIZE : Math.min(pending, BUFFER_SIZE);
             int read = this.data.read(buff, 0, (int)bytesToRead);
             if (read <= 0) {
@@ -1522,7 +1506,6 @@ public abstract class NanoHTTPD {
       private String[] sslProtocols;
 
       public SecureServerSocketFactory(SSLServerSocketFactory sslServerSocketFactory, String[] sslProtocols) {
-         super();
          this.sslServerSocketFactory = sslServerSocketFactory;
          this.sslProtocols = sslProtocols;
       }
@@ -1550,7 +1533,6 @@ public abstract class NanoHTTPD {
       private boolean hasBinded = false;
 
       private ServerRunnable(int timeout) {
-         super();
          this.timeout = timeout;
       }
 
@@ -1580,7 +1562,7 @@ public abstract class NanoHTTPD {
             } catch (IOException var3) {
                NanoHTTPD.LOG.log(Level.FINE, "Communication with the client broken", var3);
             }
-         } while(!NanoHTTPD.this.myServerSocket.isClosed());
+         } while (!NanoHTTPD.this.myServerSocket.isClosed());
       }
    }
 

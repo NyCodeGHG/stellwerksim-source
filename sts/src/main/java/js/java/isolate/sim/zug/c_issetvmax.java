@@ -3,10 +3,6 @@ package js.java.isolate.sim.zug;
 import js.java.isolate.sim.gleis.gleis;
 
 class c_issetvmax extends baseChain {
-   c_issetvmax() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);
@@ -14,7 +10,7 @@ class c_issetvmax extends baseChain {
          boolean plus = false;
 
          String s;
-         for(s = z.pos_gl.getSWWert(); s.length() > 0 && s.charAt(0) == '+'; plus = true) {
+         for (s = z.pos_gl.getSWWert(); s.length() > 0 && s.charAt(0) == '+'; plus = true) {
             s = s.substring(1);
          }
 

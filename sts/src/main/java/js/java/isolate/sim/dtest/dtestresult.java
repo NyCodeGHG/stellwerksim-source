@@ -16,7 +16,6 @@ public class dtestresult implements Comparable {
    private fahrstrasse fs = null;
 
    public dtestresult(int rank, String text) {
-      super();
       this.text = text;
       this.rank = rank;
    }
@@ -44,13 +43,13 @@ public class dtestresult implements Comparable {
    public dtestresult(int rank, String text, Object... v) {
       this(rank, text);
 
-      for(Object va : v) {
+      for (Object va : v) {
          if (va instanceof gleis) {
             this.gl = (gleis)va;
          } else if (va instanceof fahrstrasse) {
             this.fs = (fahrstrasse)va;
          } else if (va instanceof LinkedList) {
-            this.markedGleis = (LinkedList)va;
+            this.markedGleis = (LinkedList<gleis>)va;
          }
       }
    }
@@ -72,7 +71,7 @@ public class dtestresult implements Comparable {
       glbModel.setSelectedGleis(this.getGleis());
       glbModel.setFocus(this.getGleis());
       if (this.markedGleis != null) {
-         for(gleis mgl : this.markedGleis) {
+         for (gleis mgl : this.markedGleis) {
             glbModel.addMarkedGleis(mgl);
          }
       }

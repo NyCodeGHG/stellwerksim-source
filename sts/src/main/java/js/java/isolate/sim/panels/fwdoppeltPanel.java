@@ -90,7 +90,7 @@ public class fwdoppeltPanel extends basePanel implements fw_doppelt_interface, A
       if (this.oldfahrwege == null) {
          return null;
       } else {
-         for(fahrstrasse fs : this.oldfahrwege) {
+         for (fahrstrasse fs : this.oldfahrwege) {
             if (fs.checkThisClever(f.getStart(), f.getStop())) {
                return fs;
             }
@@ -134,7 +134,7 @@ public class fwdoppeltPanel extends basePanel implements fw_doppelt_interface, A
       } else if (this.autoAcceptCB.isSelected() && this.lastfs != null) {
          this.fw_double_buttonOkActionPerformed(null);
       } else {
-         synchronized(this.fahrstrassen) {
+         synchronized (this.fahrstrassen) {
             try {
                this.fahrstrassen.wait();
             } catch (Exception var5) {
@@ -176,7 +176,7 @@ public class fwdoppeltPanel extends basePanel implements fw_doppelt_interface, A
       this.lastfs = null;
       int minc = Integer.MAX_VALUE;
 
-      for(fahrstrasse f : this.fahrstrassen) {
+      for (fahrstrasse f : this.fahrstrassen) {
          this.fw_imgr.addElement(f);
          fahrstrasse of = this.findFW(f);
          if (of != null) {
@@ -208,7 +208,7 @@ public class fwdoppeltPanel extends basePanel implements fw_doppelt_interface, A
    private void doClose(int retStatus) {
       this.blinkTimer.stop();
       this.returnStatus = retStatus;
-      synchronized(this.fahrstrassen) {
+      synchronized (this.fahrstrassen) {
          this.fahrstrassen.notify();
       }
    }
@@ -387,7 +387,7 @@ public class fwdoppeltPanel extends basePanel implements fw_doppelt_interface, A
    private void fw_double_buttonOkActionPerformed(ActionEvent evt) {
       this.returnDeletes = new LinkedList();
 
-      for(fahrstrasse f : this.fahrstrassen) {
+      for (fahrstrasse f : this.fahrstrassen) {
          if (f != this.fw_double_list.getSelectedValue()) {
             this.returnDeletes.add(f);
          }
@@ -399,7 +399,7 @@ public class fwdoppeltPanel extends basePanel implements fw_doppelt_interface, A
    private void fw_double_buttonNoneActionPerformed(ActionEvent evt) {
       this.returnDeletes = new LinkedList();
 
-      for(fahrstrasse f : this.fahrstrassen) {
+      for (fahrstrasse f : this.fahrstrassen) {
          if (f != this.fw_double_list.getSelectedValue()) {
             this.returnDeletes.add(f);
          }

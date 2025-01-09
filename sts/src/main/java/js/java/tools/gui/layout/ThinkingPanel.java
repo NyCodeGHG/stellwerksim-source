@@ -7,10 +7,6 @@ import javax.swing.SwingUtilities;
 public class ThinkingPanel extends JPanel {
    private Dimension size = new Dimension(1, 1);
 
-   public ThinkingPanel() {
-      super();
-   }
-
    public Dimension getMinimumSize() {
       return this.isMinimumSizeSet() ? super.getMinimumSize() : this.size;
    }
@@ -59,7 +55,6 @@ public class ThinkingPanel extends JPanel {
       private final int height;
 
       Resize(int w, int h) {
-         super();
          this.width = w;
          this.height = h;
       }

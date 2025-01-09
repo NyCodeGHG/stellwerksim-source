@@ -10,17 +10,14 @@ public class BPosChange {
    public String bstg;
 
    public BPosChange() {
-      super();
    }
 
    public BPosChange(int zid, String bstg) {
-      super();
       this.zid = zid;
       this.bstg = bstg;
    }
 
    public BPosChange(int zid, String bstg, int x, int y) {
-      super();
       this.zid = zid;
       this.bstg = bstg;
       this.x = x;

@@ -28,7 +28,6 @@ public class LookAndFeel extends JPanel {
    private JCheckBox titleMenuCB;
 
    LookAndFeel(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       this.prefs = new plafPrefs();

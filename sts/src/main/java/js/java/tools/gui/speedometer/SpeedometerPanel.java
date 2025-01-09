@@ -48,7 +48,6 @@ public class SpeedometerPanel extends JPanel {
    private BufferedImage image = null;
 
    public SpeedometerPanel(int mode, int needlecount) {
-      super();
       this.font = new Font("Sans-Serif", 0, 10);
       this.textfont = new Font("Sans-Serif", 1, 12);
       this.PAD = 5;
@@ -61,13 +60,13 @@ public class SpeedometerPanel extends JPanel {
       this.currentvalue = new double[needlecount];
       this.needlePainter = new NeedlePainterBase[needlecount];
 
-      for(int i = 0; i < this.phi.length; ++i) {
+      for (int i = 0; i < this.phi.length; i++) {
          this.phi[i] = 0.0;
          this.gotophi[i] = 0.0;
          this.speed[i] = 1.0;
          this.currentvalue[i] = 0.0;
          this.needlePainter[i] = new ClassicNeedlePainter();
-         switch(i) {
+         switch (i) {
             case 0:
             default:
                this.needleColor[i] = new Color(0, 0, 221);
@@ -97,7 +96,7 @@ public class SpeedometerPanel extends JPanel {
          this.mode = 0;
       }
 
-      for(int i = 0; i < this.phi.length; ++i) {
+      for (int i = 0; i < this.phi.length; i++) {
          this.setValue(i, 0.0);
          this.phi[i] = this.gotophi[i];
       }
@@ -118,7 +117,7 @@ public class SpeedometerPanel extends JPanel {
       this.maxvalue = (double)m;
       this.setmaxvalue = m;
 
-      for(int i = 0; i < this.phi.length; ++i) {
+      for (int i = 0; i < this.phi.length; i++) {
          this.setValue(i, this.currentvalue[i]);
       }
 
@@ -183,7 +182,7 @@ public class SpeedometerPanel extends JPanel {
       double r = dia / 2.0;
       g2.setColor(Color.BLACK);
 
-      for(int i = 0; i < 11 * (this.mode + 1) - this.mode; ++i) {
+      for (int i = 0; i < 11 * (this.mode + 1) - this.mode; i++) {
          theta = (double)i * (extent / (10.0 * (double)(this.mode + 1))) + 180.0;
          double x1 = x0 + (r - 4.0) * Math.cos(Math.toRadians(theta));
          double y1 = y0 + (r - 4.0) * Math.sin(Math.toRadians(theta));
@@ -197,7 +196,7 @@ public class SpeedometerPanel extends JPanel {
          g2.setFont(this.font);
          FontRenderContext frc = g2.getFontRenderContext();
 
-         for(int i = 0; i < 11 * (this.mode + 1) - this.mode; ++i) {
+         for (int i = 0; i < 11 * (this.mode + 1) - this.mode; i++) {
             int v;
             if (this.mode == 1) {
                v = i - 10;
@@ -237,13 +236,13 @@ public class SpeedometerPanel extends JPanel {
          FontRenderContext frc = g2.getFontRenderContext();
          int ty = 0;
 
-         for(String t : this.text) {
+         for (String t : this.text) {
             float width = (float)this.textfont.getStringBounds(t, frc).getWidth();
             float sx = (float)x0 - width / 2.0F;
             float sy = (float)(h - h / 3 + ty * 14);
             g2.setPaint(this.needleColor[ty].darker());
             g2.drawString(t, sx, sy);
-            ++ty;
+            ty++;
          }
       }
 
@@ -282,7 +281,7 @@ public class SpeedometerPanel extends JPanel {
       g3.setColor(this.shadowColor);
       g3.translate(3, 3);
 
-      for(int i = 0; i < this.phi.length; ++i) {
+      for (int i = 0; i < this.phi.length; i++) {
          if (this.phi[i] > 0.0 && this.phi[i] < 180.0) {
             this.phi[i] = 360.0 - this.phi[i];
          }
@@ -303,7 +302,7 @@ public class SpeedometerPanel extends JPanel {
 
       g3.dispose();
 
-      for(int i = this.phi.length - 1; i >= 0; --i) {
+      for (int i = this.phi.length - 1; i >= 0; i--) {
          try {
             if (this.needlePainter[i].shouldPaintTransparent()) {
                g2.setPaint(this.needleColorTransparent[i]);
@@ -322,18 +321,18 @@ public class SpeedometerPanel extends JPanel {
       boolean shouldRepaint = false;
       boolean anyRunning = false;
 
-      for(int i = 0; i < this.phi.length; ++i) {
+      for (int i = 0; i < this.phi.length; i++) {
          if (this.gotophi[i] > this.phi[i]) {
-            this.phi[i] += this.speed[i];
+            this.phi[i] = this.phi[i] + this.speed[i];
             if (this.speed[i] < 0.8) {
-               this.speed[i] += 0.1;
+               this.speed[i] = this.speed[i] + 0.1;
             }
 
             shouldRepaint = true;
          } else if (this.gotophi[i] < this.phi[i]) {
-            this.phi[i] -= this.speed[i];
+            this.phi[i] = this.phi[i] - this.speed[i];
             if (this.speed[i] < 0.8) {
-               this.speed[i] += 0.1;
+               this.speed[i] = this.speed[i] + 0.1;
             }
 
             shouldRepaint = true;
@@ -346,7 +345,7 @@ public class SpeedometerPanel extends JPanel {
          }
 
          if (Math.abs(this.gotophi[i] - this.phi[i]) < 6.0) {
-            this.speed[i] -= 0.2;
+            this.speed[i] = this.speed[i] - 0.2;
             if (this.speed[i] <= 0.0) {
                this.speed[i] = 0.1;
             }
@@ -442,14 +441,14 @@ public class SpeedometerPanel extends JPanel {
       if (this.autoMax && this.maxvalue > (double)this.setmaxvalue) {
          boolean oneMatch = false;
 
-         for(int i = 0; i < this.phi.length; ++i) {
+         for (int i = 0; i < this.phi.length; i++) {
             if (this.maxvalue / 2.0 < Math.abs(this.currentvalue[i])) {
                oneMatch = true;
             }
          }
 
          if (!oneMatch) {
-            this.maxvalue -= this.maxvalue / 4.0;
+            this.maxvalue = this.maxvalue - this.maxvalue / 4.0;
             needAllRecalc = true;
          }
 
@@ -462,7 +461,7 @@ public class SpeedometerPanel extends JPanel {
    }
 
    private void doRecalc() {
-      for(int i = 0; i < this.phi.length; ++i) {
+      for (int i = 0; i < this.phi.length; i++) {
          if (this.mode == 0) {
             this.gotophi[i] = 180.0 * this.currentvalue[i] / this.maxvalue + 180.0;
          } else {

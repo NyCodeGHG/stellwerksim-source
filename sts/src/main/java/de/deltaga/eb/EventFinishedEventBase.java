@@ -1,10 +1,6 @@
 package de.deltaga.eb;
 
 public abstract class EventFinishedEventBase implements FollowUpEventKeeper {
-   public EventFinishedEventBase() {
-      super();
-   }
-
    @Override
    public Object getFollowUpEvent() {
       return new EventFinishedEventBase.FinishedEventSend(this);
@@ -14,7 +10,7 @@ public abstract class EventFinishedEventBase implements FollowUpEventKeeper {
       bus.subscribe(this);
 
       try {
-         synchronized(this) {
+         synchronized (this) {
             bus.publish(this);
             this.wait();
          }
@@ -26,7 +22,7 @@ public abstract class EventFinishedEventBase implements FollowUpEventKeeper {
    @EventHandler
    public void waitEventReceiver(EventFinishedEventBase.FinishedEventSend event) {
       if (event.id == this) {
-         synchronized(this) {
+         synchronized (this) {
             this.notify();
          }
       }
@@ -36,7 +32,6 @@ public abstract class EventFinishedEventBase implements FollowUpEventKeeper {
       public final EventFinishedEventBase id;
 
       private FinishedEventSend(EventFinishedEventBase id) {
-         super();
          this.id = id;
       }
    }

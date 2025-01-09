@@ -67,7 +67,7 @@ public class gleisdisplay extends insert {
       l.add(var8);
       bgcolortoken bt = new bgcolortoken("schwarz");
 
-      for(int i = 1; i < this.size; ++i) {
+      for (int i = 1; i < this.size; i++) {
          l.add(bt);
       }
 

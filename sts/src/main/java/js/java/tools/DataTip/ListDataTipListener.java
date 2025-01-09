@@ -5,10 +5,6 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 
 class ListDataTipListener extends DataTipListener {
-   ListDataTipListener() {
-      super();
-   }
-
    @Override
    DataTipCell getCell(JComponent component, Point point) {
       JList list = (JList)component;

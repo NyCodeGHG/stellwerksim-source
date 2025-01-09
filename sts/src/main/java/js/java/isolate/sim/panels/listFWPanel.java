@@ -90,7 +90,7 @@ public class listFWPanel extends basePanel {
       this.clearModel(this.start);
       this.clearModel(this.stop);
 
-      for(fahrstrasse f : this.glbControl.getModel().getFahrwegModel()) {
+      for (fahrstrasse f : this.glbControl.getModel().getFahrwegModel()) {
          gleis gl = f.getStart();
          this.checkNode(gl, this.start, f);
          gl = f.getStop();
@@ -180,7 +180,7 @@ public class listFWPanel extends basePanel {
    }
 
    private void closeExpands(listFWPanel.FwSignal signal) {
-      for(int r = 1; r < signal.tree.getRowCount(); ++r) {
+      for (int r = 1; r < signal.tree.getRowCount(); r++) {
          signal.tree.collapseRow(r);
       }
    }
@@ -269,7 +269,6 @@ public class listFWPanel extends basePanel {
       JTree tree;
 
       private FwSignal() {
-         super();
       }
    }
 
@@ -278,7 +277,6 @@ public class listFWPanel extends basePanel {
       private final NumString text;
 
       SignalNode(gleis gl) {
-         super();
          this.gl = gl;
          gleisTypContainer gtc = gleisTypContainer.getInstance();
          this.text = new NumString(gl.getENR() + " (X" + gl.getCol() + "/Y" + gl.getRow() + "): " + gtc.getTypElementName(gl));

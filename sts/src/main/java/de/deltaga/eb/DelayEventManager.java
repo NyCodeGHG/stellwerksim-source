@@ -10,7 +10,6 @@ public class DelayEventManager {
    private final ConcurrentHashMap<String, Object> uniqueEvent = new ConcurrentHashMap();
 
    public DelayEventManager(EventBus bus) {
-      super();
       this.bus = bus;
       this.executor = Executors.newScheduledThreadPool(1);
       bus.subscribe(this);

@@ -11,14 +11,12 @@ public class JoinChannelEvent {
    public final boolean sessionBound;
 
    public JoinChannelEvent(String c) {
-      super();
       this.channel = c;
       this.customHandler = null;
       this.sessionBound = false;
    }
 
    public JoinChannelEvent(String c, ICFactory<?> customHandler, boolean sessionBound) {
-      super();
       this.channel = c;
       this.customHandler = customHandler;
       this.sessionBound = sessionBound;

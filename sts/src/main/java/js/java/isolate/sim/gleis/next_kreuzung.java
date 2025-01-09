@@ -19,7 +19,7 @@ class next_kreuzung extends nextGleisBase {
       } else {
          Iterator<gleis> it = gl.getNachbarn();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis nextGl = (gleis)it.next();
             if (before.myrow == gl.myrow && gl.myrow == nextGl.myrow && !nextGl.sameGleis(before)) {
                ret = nextGl;

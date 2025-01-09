@@ -50,7 +50,6 @@ public class simpleappletmaster extends JApplet {
    }
 
    public simpleappletmaster() {
-      super();
       myself = this;
       System.out.println("*** Build: " + this.getBuild());
    }
@@ -108,7 +107,7 @@ public class simpleappletmaster extends JApplet {
       } else if (cmd.equals("Nimbus")) {
          plaf = UIManager.getSystemLookAndFeelClassName();
 
-         for(LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+         for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                plaf = info.getClassName();
                break;
@@ -197,7 +196,7 @@ public class simpleappletmaster extends JApplet {
       StackTraceElement[] se = Thread.currentThread().getStackTrace();
       String r = "Stack dump:\n";
 
-      for(int i = 0; i < se.length; ++i) {
+      for (int i = 0; i < se.length; i++) {
          r = r + se[i].toString() + "\n";
       }
 
@@ -224,7 +223,6 @@ public class simpleappletmaster extends JApplet {
       final String kpass;
 
       MyAuthenticator(String user, String pass) {
-         super();
          this.kuser = user;
          this.kpass = pass;
       }

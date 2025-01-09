@@ -10,11 +10,9 @@ public class ElementOccurance {
    public OCCU_KIND kind;
 
    public ElementOccurance() {
-      super();
    }
 
    public ElementOccurance(int aid, int hash, OCCU_KIND kind) {
-      super();
       this.aid = aid;
       this.enr = hash;
       this.kind = kind;

@@ -9,7 +9,6 @@ public final class Markup {
    private static final String HTML_BREAK = "<br>";
 
    private Markup() {
-      super();
    }
 
    public static final String toHex(Color color) {
@@ -48,7 +47,7 @@ public final class Markup {
    }
 
    public static final String toStyleCSS(Font font) {
-      switch(font.getStyle()) {
+      switch (font.getStyle()) {
          case 1:
             return "font-weight: bold";
          case 2:

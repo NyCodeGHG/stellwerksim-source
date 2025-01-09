@@ -172,7 +172,7 @@ public class BotChat extends XmlBotChat implements chatInterface, SessionClose {
 
    @Override
    public String findMatchingChannelName(String txt) {
-      for(ChannelsNameParser.ChannelName cn : this.channelsSet()) {
+      for (ChannelsNameParser.ChannelName cn : this.channelsSet()) {
          if (cn.title.equalsIgnoreCase(txt)) {
             return cn.name;
          }

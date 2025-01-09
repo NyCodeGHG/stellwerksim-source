@@ -5,10 +5,6 @@ import java.util.List;
 import js.java.isolate.sim.gleis.gleis;
 
 public class gecVLineSelect extends gecLineSelect {
-   public gecVLineSelect() {
-      super();
-   }
-
    @Override
    public void insert() {
       if (this.line >= 0) {
@@ -36,7 +32,7 @@ public class gecVLineSelect extends gecLineSelect {
    protected List<gleis> getSel(gleis gl) {
       LinkedList<gleis> ret = new LinkedList();
 
-      for(int i = 0; i < this.gec.getModel().getGleisHeight(); ++i) {
+      for (int i = 0; i < this.gec.getModel().getGleisHeight(); i++) {
          ret.add(this.gec.getModel().getXY_null(gl.getCol(), i));
       }
 

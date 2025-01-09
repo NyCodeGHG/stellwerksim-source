@@ -11,7 +11,6 @@ public class Settings extends JFrame {
    private JTabbedPane jTabbedPane1;
 
    public Settings(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       this.setIconImage(uc.getWindowIcon());

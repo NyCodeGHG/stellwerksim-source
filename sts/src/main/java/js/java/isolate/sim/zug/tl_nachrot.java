@@ -8,7 +8,6 @@ class tl_nachrot implements tl_base {
    private int cnt = 2;
 
    tl_nachrot(gleis gl) {
-      super();
       this.signal_gl = this.pos_gl = gl;
    }
 
@@ -18,7 +17,7 @@ class tl_nachrot implements tl_base {
          return 1.0;
       } else {
          if (!this.pos_gl.sameGleis(z.pos_gl)) {
-            --this.cnt;
+            this.cnt--;
          }
 
          if (this.cnt <= 0) {

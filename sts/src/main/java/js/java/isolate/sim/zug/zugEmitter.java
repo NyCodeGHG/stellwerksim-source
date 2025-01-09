@@ -96,7 +96,7 @@ public class zugEmitter extends JDialog implements SessionClose {
       TreeMap<String, Integer> bsttm = this.my_gleisbild.getAlleOfType(gleis.ELEMENT_BAHNSTEIG);
       this.zidLabel.setText(this.nameCounter + 1 + "");
 
-      for(String l : bsttm.keySet()) {
+      for (String l : bsttm.keySet()) {
          this.bahnsteigCombo.addItem(l);
       }
 
@@ -104,30 +104,30 @@ public class zugEmitter extends JDialog implements SessionClose {
       this.aus_array = new int[austm.size() + 1];
       this.ausfahrtCombo.addItem("E/K Flag");
       this.aus_array[i] = 0;
-      ++i;
+      i++;
 
-      for(String l : austm.keySet()) {
+      for (String l : austm.keySet()) {
          this.ausfahrtCombo.addItem(l);
-         this.aus_array[i] = austm.get(l);
-         ++i;
+         this.aus_array[i] = (Integer)austm.get(l);
+         i++;
       }
 
       i = 0;
       this.ein_array = new int[eintm.size() + 1];
       this.einfahrtCombo.addItem("E/K/F Flag");
       this.ein_array[i] = 0;
-      ++i;
+      i++;
 
-      for(String l : eintm.keySet()) {
+      for (String l : eintm.keySet()) {
          this.einfahrtCombo.addItem(l);
-         this.ein_array[i] = eintm.get(l);
-         ++i;
+         this.ein_array[i] = (Integer)eintm.get(l);
+         i++;
       }
 
       this.eventCB.removeAllItems();
       this.eventCB.addItem(null);
 
-      for(eventContainer e : this.my_gleisbild.events) {
+      for (eventContainer e : this.my_gleisbild.events) {
          this.eventCB.addItem(e);
       }
 
@@ -499,7 +499,7 @@ public class zugEmitter extends JDialog implements SessionClose {
    }
 
    private void emitButtonActionPerformed(ActionEvent evt) {
-      ++this.nameCounter;
+      this.nameCounter++;
       int gzid = this.nameCounter;
       int lg = this.längeSlider.getValue();
       int tm = this.tempoSlider.getValue();
@@ -537,7 +537,7 @@ public class zugEmitter extends JDialog implements SessionClose {
    private void formWindowClosing(WindowEvent evt) {
       int j = JOptionPane.showConfirmDialog(this, "Echt jetzt, so willst du den Emitter beenden?", "Ende, oder was?", 0, 3);
       if (j == 0) {
-         for(int i = 0; i < this.zugM_CB.getItemCount(); ++i) {
+         for (int i = 0; i < this.zugM_CB.getItemCount(); i++) {
             zugMeasure zm = (zugMeasure)this.zugM_CB.getItemAt(i);
             zm.close();
          }
@@ -575,7 +575,7 @@ public class zugEmitter extends JDialog implements SessionClose {
    }
 
    private void formWindowClosed(WindowEvent evt) {
-      for(int i = 0; i < this.zugM_CB.getItemCount(); ++i) {
+      for (int i = 0; i < this.zugM_CB.getItemCount(); i++) {
          zugMeasure zm = (zugMeasure)this.zugM_CB.getItemAt(i);
          zm.close();
       }

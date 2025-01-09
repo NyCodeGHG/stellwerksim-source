@@ -13,7 +13,6 @@ public class elementsQuickPanel extends JPanel {
    private int currentKeyPosition = 0;
 
    public elementsQuickPanel() {
-      super();
       this.setLayout(new BoxLayout(this, 0));
    }
 
@@ -28,7 +27,7 @@ public class elementsQuickPanel extends JPanel {
       try {
          b.setMnemonic(keyRow[this.currentKeyPosition]);
          b.setToolTipText("Schnelltaste: " + KeyEvent.getKeyText(keyRow[this.currentKeyPosition]));
-         ++this.currentKeyPosition;
+         this.currentKeyPosition++;
       } catch (ArrayIndexOutOfBoundsException var5) {
       }
 
@@ -39,7 +38,6 @@ public class elementsQuickPanel extends JPanel {
       private final elementsDynPanel p;
 
       quickListener(elementsDynPanel p) {
-         super();
          this.p = p;
       }
 

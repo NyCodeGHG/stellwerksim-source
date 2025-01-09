@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 class tl_vorsignal implements tl_base {
-   tl_vorsignal() {
-      super();
-   }
-
    @Override
    public double calc_tempo(zug z, double omx) {
       return omx < 4.0 ? omx : Math.min(4.0, omx - 1.0);

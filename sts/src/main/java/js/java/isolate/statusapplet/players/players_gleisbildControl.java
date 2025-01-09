@@ -161,12 +161,12 @@ public class players_gleisbildControl extends gleisbildControl implements MouseM
       ((players_gleisbildModel)this.model).zuege.clear();
       Iterator<gleis> it = this.model.findIterator(gleis.ALLE_SIGNALE);
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis signal = (gleis)it.next();
          signal.getFluentData().setStellung(gleis.ST_SIGNAL_ROT);
       }
 
-      for(gleis g : this.model) {
+      for (gleis g : this.model) {
          ((players_fluentData)g.getFluentData()).reset();
       }
 
@@ -177,7 +177,7 @@ public class players_gleisbildControl extends gleisbildControl implements MouseM
    void setSt(int enr, OCCU_KIND kind) {
       Iterator<gleis> it = this.model.findIterator(enr, gleis.ELEMENT_SIGNAL, gleis.ALLE_WEICHEN);
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis g = (gleis)it.next();
          ((players_fluentData)g.getFluentData()).setKind(kind);
       }

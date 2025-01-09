@@ -5,10 +5,6 @@ import javax.swing.JComponent;
 import javax.swing.JTree;
 
 class TreeDataTipListener extends DataTipListener {
-   TreeDataTipListener() {
-      super();
-   }
-
    @Override
    DataTipCell getCell(JComponent component, Point point) {
       JTree tree = (JTree)component;

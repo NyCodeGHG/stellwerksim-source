@@ -4,7 +4,6 @@ public class gleisDefaultComparator extends baseZugTableComparator implements Zu
    private final ZugTableComparator ztc;
 
    gleisDefaultComparator(ZugTableComparator ztc) {
-      super();
       this.ztc = ztc;
    }
 

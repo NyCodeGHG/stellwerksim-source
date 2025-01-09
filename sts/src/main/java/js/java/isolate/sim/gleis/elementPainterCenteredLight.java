@@ -11,10 +11,6 @@ import js.java.isolate.sim.gleis.gleisElements.gleisElements;
 import js.java.tools.JarvisMarch;
 
 class elementPainterCenteredLight extends elementPainterCentered {
-   elementPainterCenteredLight() {
-      super();
-   }
-
    @Override
    public void paintelementL(gleis gl, Graphics2D g2, int col, int row, int xscal, int yscal, int fscal, Color colr) {
       int vstatus = gl.getFluentData().getStatus();
@@ -56,9 +52,9 @@ class elementPainterCenteredLight extends elementPainterCentered {
             Color mcol = gleis.colors.col_stellwerk_frei;
             int mtype = 0;
             this.connectorCnt = 0;
+            Iterator<gleis.nachbarGleis> it = gl.p_getNachbarn();
 
-            int ltype;
-            for(Iterator<gleis.nachbarGleis> it = gl.p_getNachbarn(); it.hasNext(); this.lightCnt[ltype]++) {
+            while (it.hasNext()) {
                gleis.nachbarGleis gl2 = (gleis.nachbarGleis)it.next();
                gleis dgl = gl2.gl;
                int tstatus = vstatus;
@@ -84,7 +80,7 @@ class elementPainterCenteredLight extends elementPainterCentered {
                   }
                }
 
-               ltype = 0;
+               int ltype = 0;
                Color lcol = gleis.colors.col_stellwerk_frei;
                if (gl.fdata.power_off) {
                   lcol = gleis.colors.col_stellwerk_frei;
@@ -131,6 +127,7 @@ class elementPainterCenteredLight extends elementPainterCentered {
                pgn.addPoint(this.dcx1, this.dcy1);
                this.light[ltype][this.lightCnt[ltype]] = pgn;
                this.lightCol[ltype][this.lightCnt[ltype]] = lcol;
+               this.lightCnt[ltype]++;
             }
 
             if (this.connectorLCnt > 0) {
@@ -141,7 +138,7 @@ class elementPainterCenteredLight extends elementPainterCentered {
 
                Polygon pgn = new Polygon();
 
-               for(int i = 0; i < this.connectorLCnt; ++i) {
+               for (int i = 0; i < this.connectorLCnt; i++) {
                   int x = this.connectorL[i].x;
                   int y = this.connectorL[i].y;
                   pgn.addPoint(x, y);
@@ -154,8 +151,8 @@ class elementPainterCenteredLight extends elementPainterCentered {
 
             gl.setSmooth(g2, false, 1);
 
-            for(int t = 0; t < 2; ++t) {
-               for(int c = 0; c < this.lightCnt[t]; ++c) {
+            for (int t = 0; t < 2; t++) {
+               for (int c = 0; c < this.lightCnt[t]; c++) {
                   g2.setColor(this.lightCol[t][c]);
 
                   try {

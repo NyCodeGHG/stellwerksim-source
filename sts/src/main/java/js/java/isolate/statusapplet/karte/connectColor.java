@@ -10,7 +10,6 @@ public class connectColor {
    private final kartePanel zp;
 
    connectColor(kartePanel _zp, Color c) {
-      super();
       this.zp = _zp;
       this.col = c;
    }
@@ -20,8 +19,8 @@ public class connectColor {
    }
 
    void addMarkAid(int aid1, int aid2) {
-      for(Entry<Integer, karten_container> e : this.zp.kids.entrySet()) {
-         int vkid = e.getKey();
+      for (Entry<Integer, karten_container> e : this.zp.kids.entrySet()) {
+         int vkid = (Integer)e.getKey();
          karten_container k = (karten_container)e.getValue();
          karten_container k1 = (karten_container)this.zp.namen.get(k.kid1);
          karten_container k2 = (karten_container)this.zp.namen.get(k.kid2);

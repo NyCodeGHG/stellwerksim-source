@@ -30,7 +30,7 @@ public class thema implements Comparable, structinfo {
    }
 
    public static boolean isThema(String n) {
-      for(thema t : themen) {
+      for (thema t : themen) {
          if (t.name.equalsIgnoreCase(n)) {
             return true;
          }
@@ -40,7 +40,7 @@ public class thema implements Comparable, structinfo {
    }
 
    public static boolean userVotedThema(String n) {
-      for(thema t : themen) {
+      for (thema t : themen) {
          if (t.name.equalsIgnoreCase(n)) {
             return t.voted;
          }
@@ -50,12 +50,10 @@ public class thema implements Comparable, structinfo {
    }
 
    private thema(String n) {
-      super();
       this.name = n;
    }
 
    private thema(Attributes attrs) {
-      super();
       this.name = attrs.getValue("name");
       if (this.name == null) {
          this.name = "";

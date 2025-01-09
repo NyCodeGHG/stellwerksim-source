@@ -12,10 +12,6 @@ public class sperreelemente_factory extends sperrungBaseFactory {
    private SpinnerNumberModel starttime;
    private SpinnerNumberModel stoptime;
 
-   public sperreelemente_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Sperre Elemente permanent";

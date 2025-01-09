@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 class tl_zs1 implements tl_base {
-   tl_zs1() {
-      super();
-   }
-
    @Override
    public double calc_tempo(zug z, double omx) {
       return Math.min(2.0, omx);

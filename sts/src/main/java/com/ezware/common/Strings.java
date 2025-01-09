@@ -5,7 +5,6 @@ import java.io.StringWriter;
 
 public class Strings {
    private Strings() {
-      super();
    }
 
    public static final boolean isEmpty(String s) {
@@ -22,7 +21,7 @@ public class Strings {
       } else {
          StringBuilder sb = new StringBuilder();
 
-         for(String w : s.split(" ")) {
+         for (String w : s.split(" ")) {
             sb.append(capitalizeWord(w));
             sb.append(' ');
          }

@@ -13,10 +13,6 @@ import js.java.tools.gui.GraphicTools;
 class paintUI extends LayerUI<JComponent> {
    private final ArrayList<Shape> shapeList = new ArrayList();
 
-   paintUI() {
-      super();
-   }
-
    public void paint(Graphics g, JComponent l) {
       super.paint(g, l);
       Graphics2D g2 = (Graphics2D)g;
@@ -25,7 +21,7 @@ class paintUI extends LayerUI<JComponent> {
       Color in = new Color(255, 255, 0, 85);
       g2.setStroke(new BasicStroke(3.0F));
 
-      for(Shape shape : this.shapeList) {
+      for (Shape shape : this.shapeList) {
          g2.setColor(in);
          g2.fill(shape);
          g2.setColor(r);

@@ -58,7 +58,6 @@ public class gleisbildFrame extends JFrame implements SessionClose {
    private JLabel userName;
 
    gleisbildFrame(UserContext uc, GleisAdapter m, playersPanel kp, players_gleisbildModel glb, players_aid aid, gleisbildLoadPanel parent) {
-      super();
       this.my_main = m;
       this.kp = kp;
       this.glbModel = glb;
@@ -117,7 +116,7 @@ public class gleisbildFrame extends JFrame implements SessionClose {
       if (devent != null) {
          Method[] methods = this.getClass().getDeclaredMethods();
 
-         for(Method m : methods) {
+         for (Method m : methods) {
             if (m.getName().equals("handle")) {
                Parameter[] params = m.getParameters();
                Parameter p = params[0];
@@ -395,10 +394,6 @@ public class gleisbildFrame extends JFrame implements SessionClose {
    }
 
    public class CIFactory implements ICFactory<gleisbildFrame.ChannelInput> {
-      public CIFactory() {
-         super();
-      }
-
       public gleisbildFrame.ChannelInput newInstance(ChatNG chat, String name) {
          if (gleisbildFrame.this.my_input == null) {
             gleisbildFrame.this.my_input = gleisbildFrame.this.new ChannelInput(chat, name);

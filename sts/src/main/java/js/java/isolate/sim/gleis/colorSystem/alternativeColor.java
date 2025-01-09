@@ -4,7 +4,6 @@ import java.awt.Color;
 
 class alternativeColor extends colorStruct {
    alternativeColor(colorStruct base) {
-      super();
       base.cloneTo(this);
       this.col_stellwerk_rotein = new Color(102, 102, 255);
       this.col_stellwerk_rotaus = new Color(17, 17, 102);

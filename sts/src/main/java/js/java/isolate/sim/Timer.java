@@ -15,7 +15,6 @@ public class Timer implements ActionListener, SessionClose {
    private final javax.swing.Timer tickTimer = new javax.swing.Timer(500, this);
 
    public Timer(timedelivery tm, JTextField t, textticker f) {
-      super();
       this.timed = tm;
       this.zeitFeld = t;
       this.textFeld = f;

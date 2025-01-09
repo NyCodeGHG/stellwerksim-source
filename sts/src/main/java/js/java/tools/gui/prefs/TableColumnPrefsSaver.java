@@ -40,14 +40,13 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
    }
 
    public TableColumnPrefsSaver(JTable aTable, Preferences saveRootNode, int defaultColumnWidth) {
-      super();
       this.table = aTable;
       this.saveRootNode = saveRootNode;
       this.defaultColumnWidth = defaultColumnWidth;
       if (defaultColumnWidth > 0) {
          this.table.setAutoResizeMode(0);
 
-         for(TableColumn column : this.getColumns()) {
+         for (TableColumn column : this.getColumns()) {
             column.setPreferredWidth(defaultColumnWidth);
          }
       }
@@ -62,7 +61,7 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
 
       this.sizeColumns();
 
-      for(TableColumn column : this.getColumns()) {
+      for (TableColumn column : this.getColumns()) {
          column.addPropertyChangeListener(this);
       }
 
@@ -97,7 +96,7 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
    }
 
    public void dispose() {
-      for(TableColumn column : this.getColumns()) {
+      for (TableColumn column : this.getColumns()) {
          column.removePropertyChangeListener(this);
       }
 
@@ -122,11 +121,11 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
 
    private void sizeColumns() {
       if (this.isSaveSizeMatching()) {
-         for(TableColumn column : this.getColumns()) {
+         for (TableColumn column : this.getColumns()) {
             int width = this.getWidthPrefs().getInt(this.getColumnKey(column), this.defaultColumnWidth);
             if (width > 0) {
                this.table.setAutoResizeMode(0);
-               this.changed |= width != this.defaultColumnWidth;
+               this.changed = this.changed | width != this.defaultColumnWidth;
                column.setPreferredWidth(width);
             }
          }
@@ -141,7 +140,7 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
 
    private void saveColumnWidth() {
       if (this.changed) {
-         for(int i = 0; i < this.table.getColumnModel().getColumnCount(); ++i) {
+         for (int i = 0; i < this.table.getColumnModel().getColumnCount(); i++) {
             this.saveColumnWidth(this.table.getColumn(i));
          }
       }
@@ -175,7 +174,7 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
 
    private void orderColumns() {
       if (this.isSaveOrderMatching()) {
-         for(TableColumn column : this.getColumns()) {
+         for (TableColumn column : this.getColumns()) {
             int newIndex = this.getOrderPrefs().getInt(this.getColumnKey(column), 0);
             int currentIndex = this.getIndexOfColumn(column);
             int columnCount = this.table.getColumnCount();
@@ -198,7 +197,7 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
             return;
          }
 
-         for(int i = 0; i < this.table.getColumnModel().getColumnCount(); ++i) {
+         for (int i = 0; i < this.table.getColumnModel().getColumnCount(); i++) {
             this.getOrderPrefs().putInt(this.getColumnKey(this.table.getColumnName(i)), i);
          }
       }
@@ -222,7 +221,7 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
    private List<String> getAllColumnKeys() {
       List<String> keys = new ArrayList();
 
-      for(TableColumn column : this.getColumns()) {
+      for (TableColumn column : this.getColumns()) {
          keys.add(this.getColumnKey(column));
       }
 

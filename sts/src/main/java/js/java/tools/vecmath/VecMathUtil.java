@@ -10,6 +10,5 @@ class VecMathUtil {
    }
 
    private VecMathUtil() {
-      super();
    }
 }

@@ -38,11 +38,11 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
    public void updatePlan(LinkedList<zugUndPlanPanel.gleisPlan> bplan) {
       this.simutime = this.timer.getSimutime() - 600000L;
 
-      for(zugUndPlanPanel.gleisPlan bgp : bplan) {
+      for (zugUndPlanPanel.gleisPlan bgp : bplan) {
          int start = (int)((bgp.gd.an - this.simutime) / 60000L) + 1;
          int stop = (int)((bgp.gd.ab - this.simutime) / 60000L);
          if (bgp.gd.flags.hasFlag('E')) {
-            --stop;
+            stop--;
          }
 
          if (start > stop) {
@@ -58,7 +58,7 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
          this.plan.add(gp);
       }
 
-      for(int i = 0; i < this.minutes.length; ++i) {
+      for (int i = 0; i < this.minutes.length; i++) {
          this.columns = Math.max(this.columns, this.minutes[i]);
       }
 
@@ -70,12 +70,11 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
    }
 
    belegungsPlanPanel(timedelivery timer, boolean gleisMode) {
-      super();
       this.gleisMode = gleisMode;
       this.timer = timer;
       this.dim = new Dimension(1, 840);
 
-      for(int i = 0; i < this.minutes.length; ++i) {
+      for (int i = 0; i < this.minutes.length; i++) {
          this.minutes[i] = 0;
       }
 
@@ -87,7 +86,7 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
    private int incMinutes(int start, int stop) {
       int ret = 1;
 
-      for(int i = start; i <= stop; ++i) {
+      for (int i = start; i <= stop; i++) {
          if (i >= 0 && i < this.minutes.length) {
             this.minutes[i]++;
             ret = Math.max(ret, this.minutes[i]);
@@ -126,7 +125,7 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
       g2.fillRect(0, 0, this.getWidth(), this.getHeight());
       g2.setColor(this.bgcol1.darker());
 
-      for(int min = 0; min < 70; ++min) {
+      for (int min = 0; min < 70; min++) {
          long t = this.simutime + (long)min * 60000L;
          int h = (int)(t / 3600000L);
          int m = (int)(t / 60000L) % 60;
@@ -138,7 +137,7 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
       g2.setColor(Color.WHITE);
       g2.drawLine(0, this.rasterY * 12, this.getWidth(), this.rasterY * 12);
 
-      for(belegungsPlanPanel.gleisPlan gp : this.plan) {
+      for (belegungsPlanPanel.gleisPlan gp : this.plan) {
          int x = this.colwidth * (gp.col - 1);
          Color c = Color.CYAN;
          if (gp.gp.gd.befehlgleisAlt) {
@@ -202,7 +201,6 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
       }
 
       belegungsZeitPanel(timedelivery timer) {
-         super();
          this.timer = timer;
          this.dim = new Dimension(45, 840);
          this.setBackground(this.bgcol1);
@@ -228,7 +226,7 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
          g2.setColor(Color.RED);
          g2.drawLine(0, tm * 12 / 60, this.getWidth(), tm * 12 / 60);
 
-         for(int min = 0; min < 70; ++min) {
+         for (int min = 0; min < 70; min++) {
             long t = this.simutime + (long)min * 60000L;
             int h = (int)(t / 3600000L);
             int m = (int)(t / 60000L) % 60;
@@ -262,7 +260,6 @@ class belegungsPlanPanel extends JComponent implements MouseMotionListener {
       int x = 0;
 
       private gleisPlan() {
-         super();
       }
    }
 }

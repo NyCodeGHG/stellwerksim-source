@@ -4,7 +4,6 @@ public class PrefsChangedEvent {
    private final int sender;
 
    public PrefsChangedEvent(Object sender) {
-      super();
       this.sender = sender.hashCode();
    }
 

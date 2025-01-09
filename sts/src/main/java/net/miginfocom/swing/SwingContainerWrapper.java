@@ -20,7 +20,7 @@ public final class SwingContainerWrapper extends SwingComponentWrapper implement
       Container c = (Container)this.getComponent();
       ComponentWrapper[] cws = new ComponentWrapper[c.getComponentCount()];
 
-      for(int i = 0; i < cws.length; ++i) {
+      for (int i = 0; i < cws.length; i++) {
          cws[i] = new SwingComponentWrapper(c.getComponent(i));
       }
 

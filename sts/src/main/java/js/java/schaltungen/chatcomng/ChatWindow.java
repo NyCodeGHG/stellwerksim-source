@@ -184,7 +184,6 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
    private JToolBar toolBar;
 
    public ChatWindow(UserContextMini uc, boolean withTray) {
-      super();
       this.uc = uc;
       this.withTray = withTray;
       this.asettings = uc.getAudioSettings();
@@ -309,7 +308,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
          this.tipTryCount = 0;
          SwingUtilities.invokeLater(() -> this.setStatus(event.tip.getText()));
       } else {
-         ++this.tipTryCount;
+         this.tipTryCount++;
          if (this.tipTryCount < 10) {
             this.loadTip();
          }
@@ -322,7 +321,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
          Arrays.sort(names);
          LinkedList<Integer> hashList = new LinkedList();
 
-         for(String n : names) {
+         for (String n : names) {
             hashList.add(this.totdNode.getInt(n, 0));
          }
 
@@ -330,7 +329,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
             return true;
          }
 
-         while(hashList.size() > 10) {
+         while (hashList.size() > 10) {
             hashList.removeFirst();
          }
 
@@ -338,9 +337,9 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
          this.totdNode.clear();
          int n = 100;
 
-         for(int hash : hashList) {
+         for (int hash : hashList) {
             this.totdNode.putInt(Integer.toString(n), hash);
-            ++n;
+            n++;
          }
 
          this.totdNode.flush();
@@ -459,11 +458,11 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
    }
 
    private void newChannelAwt(ConnectedChannelsEvent ch) {
-      for(IrcChannel i : ch.channels) {
+      for (IrcChannel i : ch.channels) {
          if (i.userChannel) {
             boolean found = false;
 
-            for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+            for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
                if (c.channelName.equals(i.channel)) {
                   found = true;
                   break;
@@ -485,11 +484,11 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
       do {
          repeatUntil = false;
 
-         for(ChatWindow.JoinedChannel e : this.cmodel.channels) {
+         for (ChatWindow.JoinedChannel e : this.cmodel.channels) {
             boolean found = false;
 
-            for(IrcChannel i : ch.channels) {
-               if (i.channel.equals(e.channelName)) {
+            for (IrcChannel ix : ch.channels) {
+               if (ix.channel.equals(e.channelName)) {
                   found = true;
                   break;
                }
@@ -504,7 +503,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
                break;
             }
          }
-      } while(repeatUntil);
+      } while (repeatUntil);
 
       if (this.currentChannel.isEmpty() && this.cmodel.getSize() > 0) {
          this.channelList.setRowSelectionInterval(0, 0);
@@ -521,7 +520,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
    private void enterChannelAwt(EnterChannel event) {
       int idx = 0;
 
-      for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+      for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
          if (c.channelName.name.equals(event.channelname)) {
             idx = this.channelList.convertRowIndexToView(idx);
             this.channelList.setRowSelectionInterval(idx, idx);
@@ -529,7 +528,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
             break;
          }
 
-         ++idx;
+         idx++;
       }
    }
 
@@ -539,7 +538,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
    }
 
    private void usersAwt(ChannelUsersEvent cu) {
-      for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+      for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
          if (c.channelName.equals(cu.channelname)) {
             this.dataMonitor.gotData();
             c.users.clear();
@@ -564,7 +563,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
    }
 
    private void userEvent(boolean join, String channelname, ChatUser user, UserLeftEvent.REASON reason, ChatUser originator) {
-      for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+      for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
          if (c.channelName.name.equals(channelname)) {
             this.dataMonitor.gotData();
             String color = "9999ff";
@@ -612,7 +611,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
    }
 
    public void userAwt(ChatUser u) {
-      for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+      for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
          if (c.channelName.name.equals(this.currentChannel)) {
             this.updateUsers(c);
             break;
@@ -636,7 +635,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
          if ("PIEP".equals(text)) {
             ChatWindow.JoinedChannel beepc = null;
 
-            for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+            for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
                if (c.channelName.name.equals(channelname)) {
                   beepc = c;
                   break;
@@ -644,8 +643,8 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
             }
 
             if (beepc != null) {
-               for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
-                  if (c != beepc && "dchannel".equals(c.channelName.customdata)) {
+               for (ChatWindow.JoinedChannel cx : this.cmodel.channels) {
+                  if (cx != beepc && "dchannel".equals(cx.channelName.customdata)) {
                      this.chatCallPlayer.play();
                      this.uc.showTopLevelMessage(sender + " möchte dich auf Kanal " + beepc.channelName.title + " hinweisen.", 20);
                      this.uc.showTrayMessage("Chat Hinweis", sender + " möchte dich auf Kanal " + beepc.channelName.title + " hinweisen.", MessageType.INFO);
@@ -655,17 +654,17 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
             }
          }
 
-         for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
-            if (c.channelName.name.equals(channelname)) {
+         for (ChatWindow.JoinedChannel cxx : this.cmodel.channels) {
+            if (cxx.channelName.name.equals(channelname)) {
                this.dataMonitor.gotData();
-               if (this.audioOnButton.isSelected() && this.isVisible() && !c.unread) {
+               if (this.audioOnButton.isSelected() && this.isVisible() && !cxx.unread) {
                   this.chatPlayer.play();
                }
 
                if (actionMessage) {
-                  this.messageAdd(c, "<i>" + sender + " " + text + "</i><br>", false, false);
+                  this.messageAdd(cxx, "<i>" + sender + " " + text + "</i><br>", false, false);
                } else {
-                  this.messageAdd(c, "<b>" + sender + "</b>: " + text + "<br>", false, myself);
+                  this.messageAdd(cxx, "<b>" + sender + "</b>: " + text + "<br>", false, myself);
                }
 
                if (text.toLowerCase().contains(this.uc.getUsername().toLowerCase())) {
@@ -673,12 +672,12 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
                      this.chatCallPlayer.play();
                   }
 
-                  this.uc.showTrayMessage("Chat Meldung", c.channelName.title + ": " + text, MessageType.INFO);
+                  this.uc.showTrayMessage("Chat Meldung", cxx.channelName.title + ": " + text, MessageType.INFO);
                }
 
                if (!channelname.equals(this.currentChannel)) {
-                  c.unread = true;
-                  this.cmodel.fireTableCellUpdated(this.cmodel.getIndex(c), 0);
+                  cxx.unread = true;
+                  this.cmodel.fireTableCellUpdated(this.cmodel.getIndex(cxx), 0);
                }
                break;
             }
@@ -691,7 +690,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
       if (!SwingUtilities.isEventDispatchThread()) {
          SwingUtilities.invokeLater(() -> this.link(msg));
       } else {
-         for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+         for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
             if (c.channelName.name.equals(msg.channel)) {
                this.setVisible(true);
                int idx = this.cmodel.getIndex(c);
@@ -708,7 +707,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
       if (!SwingUtilities.isEventDispatchThread()) {
          SwingUtilities.invokeLater(() -> this.link(event));
       } else {
-         for(ChatWindow.JoinedChannel c : this.cmodel.channels) {
+         for (ChatWindow.JoinedChannel c : this.cmodel.channels) {
             if (c.channelName.name.equals(event.channel)) {
                this.setVisible(true);
                int idx = this.cmodel.getIndex(c);
@@ -750,7 +749,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
 
       c.text.add(line);
 
-      while(c.text.size() > 100) {
+      while (c.text.size() > 100) {
          c.text.removeFirst();
       }
 
@@ -800,7 +799,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
    private void buildUnignoreMenu() {
       this.ignoreUserListMenu.removeAll();
 
-      for(String u : this.ignoreUserList) {
+      for (String u : this.ignoreUserList) {
          JMenuItem m = new JMenuItem(u);
          m.addActionListener(l -> this.removeIgnoreUser(u));
          this.ignoreUserListMenu.add(m);
@@ -857,9 +856,9 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
       this.umodel.clear();
       int playing = 0;
 
-      for(ChatUser cu : c.users) {
+      for (ChatUser cu : c.users) {
          if (cu.getPlay() != null) {
-            ++playing;
+            playing++;
          }
 
          this.umodel.addElement(this.showByName.isSelected() ? cu.toStringByName() : cu.toStringByPlay());
@@ -901,7 +900,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
                   EventBusService.getInstance().publish(new BuildEvent(this.uc.getBuild() + 1));
                } else if (event.msg.startsWith("!sts event2")) {
                   BuildEvent be = new BuildEvent(this.uc.getBuild() + 1);
-                  ++be.apiLevel;
+                  be.apiLevel++;
                   EventBusService.getInstance().publish(be);
                }
             } else {
@@ -1390,7 +1389,6 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
       private final ArrayList<ChatWindow.JoinedChannel> channels = new ArrayList();
 
       private ChannelModel() {
-         super();
       }
 
       public Class<?> getColumnClass(int columnIndex) {
@@ -1442,7 +1440,7 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
 
       public Object getValueAt(int rowIndex, int columnIndex) {
          ChatWindow.JoinedChannel ch = (ChatWindow.JoinedChannel)this.channels.get(rowIndex);
-         switch(columnIndex) {
+         switch (columnIndex) {
             case 0:
                return ch.unread ? "!" : "";
             case 1:
@@ -1464,7 +1462,6 @@ public class ChatWindow extends JFrame implements ChatWindowMBean {
       private final String topic;
 
       private JoinedChannel(IrcChannel i) {
-         super();
          this.channelName = i.channel;
          String t = i.getTopic();
          if (t != null) {

@@ -58,7 +58,6 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
    }
 
    public BasicEventBus(ExecutorService executorService, boolean waitForHandlers) {
-      super();
       Thread eventQueueThread = new Thread(new BasicEventBus.EventQueueRunner(), "EventQueue Consumer Thread");
       eventQueueThread.setDaemon(true);
       eventQueueThread.start();
@@ -80,7 +79,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
    public void subscribe(Object subscriber) {
       boolean subscribedAlready = false;
 
-      for(BasicEventBus.HandlerInfo info : this.handlers) {
+      for (BasicEventBus.HandlerInfo info : this.handlers) {
          Object otherSubscriber = info.getSubscriber();
          if (otherSubscriber == null) {
             try {
@@ -96,7 +95,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
       if (!subscribedAlready) {
          Method[] methods = subscriber.getClass().getDeclaredMethods();
 
-         for(Method method : methods) {
+         for (Method method : methods) {
             EventHandler eh = (EventHandler)method.getAnnotation(EventHandler.class);
             if (eh != null) {
                Class<?>[] parameters = method.getParameterTypes();
@@ -104,14 +103,14 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
                   throw new IllegalArgumentException("EventHandler methods must specify a single Object paramter.");
                }
 
-               BasicEventBus.HandlerInfo info;
+               BasicEventBus.HandlerInfo infox;
                if (eh.weak()) {
-                  info = new BasicEventBus.WeakHandlerInfo(parameters[0], method, subscriber, eh);
+                  infox = new BasicEventBus.WeakHandlerInfo(parameters[0], method, subscriber, eh);
                } else {
-                  info = new BasicEventBus.StrongHandlerInfo(parameters[0], method, subscriber, eh);
+                  infox = new BasicEventBus.StrongHandlerInfo(parameters[0], method, subscriber, eh);
                }
 
-               this.handlers.add(info);
+               this.handlers.add(infox);
                if (!this.handlerTypeExecutor.containsKey(parameters[0])) {
                   this.handlerTypeExecutor.put(parameters[0], new BasicEventBus.HandlerTypeInfo(parameters[0]));
                }
@@ -149,14 +148,14 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
    public void unsubscribe(Object subscriber) {
       List<BasicEventBus.HandlerInfo> killList = new ArrayList();
 
-      for(BasicEventBus.HandlerInfo info : this.handlers) {
+      for (BasicEventBus.HandlerInfo info : this.handlers) {
          Object obj = info.getSubscriber();
          if (obj == null || obj == subscriber) {
             killList.add(info);
          }
       }
 
-      for(BasicEventBus.HandlerInfo kill : killList) {
+      for (BasicEventBus.HandlerInfo kill : killList) {
          this.handlers.remove(kill);
          kill.shutdown();
       }
@@ -165,7 +164,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
    @Override
    public void registerTypeListener(Class<?> eventtype, EventPublishListener listener) {
       BasicEventBus.HandlerTypeInfo hti;
-      synchronized(this.handlerTypeExecutor) {
+      synchronized (this.handlerTypeExecutor) {
          hti = (BasicEventBus.HandlerTypeInfo)this.handlerTypeExecutor.get(eventtype);
          if (hti == null) {
             hti = new BasicEventBus.HandlerTypeInfo(eventtype);
@@ -188,13 +187,13 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
                   this.putLock.lockInterruptibly();
 
                   try {
-                     while(true) {
+                     while (true) {
                         int max = hti.maxCount - hti.messageCount;
                         Class<?> c = event.getClass();
 
-                        for(Object o : this.queue) {
+                        for (Object o : this.queue) {
                            if (c.isInstance(o)) {
-                              --max;
+                              max--;
                            }
                         }
 
@@ -216,7 +215,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
                   }
                }
 
-               ++hti.messages;
+               hti.messages++;
                this.queue.put(event);
                hti.publishNotification(event);
             }
@@ -240,14 +239,14 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
    private void shutdown() {
       this.shutdown = true;
 
-      for(BasicEventBus.HandlerInfo h : this.handlers) {
+      for (BasicEventBus.HandlerInfo h : this.handlers) {
          h.shutdown();
       }
 
       this.handlers.clear();
       this.queue.clear();
 
-      for(BasicEventBus.HandlerTypeInfo h : this.handlerTypeExecutor.values()) {
+      for (BasicEventBus.HandlerTypeInfo h : this.handlerTypeExecutor.values()) {
          h.shutdown();
       }
 
@@ -266,7 +265,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
       List<BasicEventBus.HandlerInfoCallable> vetoList = new ArrayList();
       final List<BasicEventBus.HandlerInfoCallable> reguList = new ArrayList();
 
-      for(BasicEventBus.HandlerInfo info : this.handlers) {
+      for (BasicEventBus.HandlerInfo info : this.handlers) {
          if (info.matchesEvent(evt)) {
             BasicEventBus.HandlerInfoCallable hc = new BasicEventBus.HandlerInfoCallable(info, evt);
             if (info.isVetoHandler()) {
@@ -280,8 +279,8 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
       boolean vetoCalled = false;
 
       try {
-         for(Future<Boolean> f : this.executorService.invokeAll(vetoList)) {
-            if (f.get()) {
+         for (Future<Boolean> f : this.executorService.invokeAll(vetoList)) {
+            if ((Boolean)f.get()) {
                vetoCalled = true;
             }
          }
@@ -303,18 +302,18 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
             }
          } else {
             final BasicEventBus.HandlerTypeInfo hti = this.findBestTypeInfo(evt.getClass());
-            ++hti.working;
-            ++hti.messageCount;
+            hti.working++;
+            hti.messageCount++;
             hti.executor.submit(new Runnable() {
                public void run() {
                   try {
-                     for(BasicEventBus.HandlerInfoCallable hic : reguList) {
+                     for (BasicEventBus.HandlerInfoCallable hic : reguList) {
                         hic.call();
                      }
                   } catch (Exception var28) {
                      BasicEventBus.logger.log(Level.SEVERE, null, var28);
                   } finally {
-                     --hti.messageCount;
+                     hti.messageCount--;
                      BasicEventBus.this.putLock.lock();
 
                      try {
@@ -340,7 +339,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
    private BasicEventBus.HandlerTypeInfo findBestTypeInfo(Class c) {
       BasicEventBus.HandlerTypeInfo ret = (BasicEventBus.HandlerTypeInfo)this.handlerTypeExecutor.get(c);
       if (ret == null) {
-         for(Entry<Class<?>, BasicEventBus.HandlerTypeInfo> e : this.handlerTypeExecutor.entrySet()) {
+         for (Entry<Class<?>, BasicEventBus.HandlerTypeInfo> e : this.handlerTypeExecutor.entrySet()) {
             if (((Class)e.getKey()).isAssignableFrom(c)) {
                ret = (BasicEventBus.HandlerTypeInfo)e.getValue();
                break;
@@ -353,12 +352,11 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
 
    private class EventQueueRunner implements Runnable {
       private EventQueueRunner() {
-         super();
       }
 
       public void run() {
          try {
-            while(!BasicEventBus.this.shutdown) {
+            while (!BasicEventBus.this.shutdown) {
                BasicEventBus.this.notifySubscribers(BasicEventBus.this.queue.take());
                BasicEventBus.this.putLock.lock();
 
@@ -386,14 +384,13 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
       private final EventFilter[] filters;
 
       public HandlerInfo(Class<?> eventClass, Method method, EventHandler eh) {
-         super();
          this.eventClass = eventClass;
          this.method = method;
          this.vetoHandler = eh.canVeto();
          Filter[] filtersAnnos = eh.filters();
          this.filters = new EventFilter[filtersAnnos.length];
 
-         for(int i = 0; i < filtersAnnos.length; ++i) {
+         for (int i = 0; i < filtersAnnos.length; i++) {
             try {
                this.filters[i] = (EventFilter)filtersAnnos[i].value().newInstance();
             } catch (IllegalAccessException | InstantiationException var8) {
@@ -419,7 +416,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
       }
 
       public boolean matchesEvent(Object event) {
-         for(EventFilter f : this.filters) {
+         for (EventFilter f : this.filters) {
             if (f != null) {
                Object sub = this.getSubscriber();
                if (sub != null && !f.accept(sub, event)) {
@@ -466,7 +463,6 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
       private final Object event;
 
       public HandlerInfoCallable(BasicEventBus.HandlerInfo handlerInfo, Object event) {
-         super();
          this.handlerInfo = handlerInfo;
          this.event = event;
       }
@@ -486,7 +482,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
             Throwable cause = var3;
             this.handlerInfo.exceptions++;
 
-            while(cause.getCause() != null) {
+            while (cause.getCause() != null) {
                cause = cause.getCause();
             }
 
@@ -524,7 +520,6 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
       private ObjectName name;
 
       HandlerTypeInfo(Class<?> type) {
-         super();
          this.type = type;
          Message m = (Message)type.getAnnotation(Message.class);
          int threads = 1;
@@ -540,7 +535,7 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
             threads = m.parallelism();
          }
 
-         synchronized(BasicEventBus.this.executorGroup) {
+         synchronized (BasicEventBus.this.executorGroup) {
             if (m != null && !m.threadgroup().isEmpty() && BasicEventBus.this.executorGroup.containsKey(m.threadgroup())) {
                this.executor = (ExecutorService)BasicEventBus.this.executorGroup.get(m.threadgroup());
             } else {
@@ -616,12 +611,11 @@ public final class BasicEventBus implements EventBus, BasicEventBusMBean {
 
    private class KillQueueRunner implements Runnable {
       private KillQueueRunner() {
-         super();
       }
 
       public void run() {
          try {
-            while(!BasicEventBus.this.shutdown) {
+            while (!BasicEventBus.this.shutdown) {
                BasicEventBus.HandlerInfo info = (BasicEventBus.HandlerInfo)BasicEventBus.this.killQueue.take();
                if (info.getSubscriber() == null) {
                   BasicEventBus.this.handlers.remove(info);

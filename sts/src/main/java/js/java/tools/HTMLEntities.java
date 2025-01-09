@@ -258,12 +258,11 @@ public class HTMLEntities {
    private static final HashMap unhtmlentities_map = new HashMap();
 
    public HTMLEntities() {
-      super();
       initializeEntitiesTables();
    }
 
    private static void initializeEntitiesTables() {
-      for(int i = 0; i < html_entities_table.length; ++i) {
+      for (int i = 0; i < html_entities_table.length; i++) {
          htmlentities_map.put(html_entities_table[i][1], html_entities_table[i][0]);
          unhtmlentities_map.put(html_entities_table[i][0], html_entities_table[i][1]);
       }
@@ -283,7 +282,7 @@ public class HTMLEntities {
 
          StringBuilder buf = new StringBuilder();
 
-         for(int i = 0; i < str.length(); ++i) {
+         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
             String entity = (String)htmlentities_map.get(new Integer(ch));
             if (entity == null) {
@@ -308,7 +307,7 @@ public class HTMLEntities {
 
       StringBuilder buf = new StringBuilder();
 
-      for(int i = 0; i < str.length(); ++i) {
+      for (int i = 0; i < str.length(); i++) {
          char ch = str.charAt(i);
          if (ch == '&') {
             int semi = str.indexOf(59, i + 1);

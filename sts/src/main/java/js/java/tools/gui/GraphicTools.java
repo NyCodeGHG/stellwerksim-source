@@ -11,10 +11,6 @@ import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
 
 public class GraphicTools {
-   public GraphicTools() {
-      super();
-   }
-
    public static void enableTextAA(Graphics2D g2) {
       g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
    }

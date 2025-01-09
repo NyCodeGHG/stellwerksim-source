@@ -27,7 +27,6 @@ public class BoundSize implements Serializable {
    }
 
    public BoundSize(UnitValue min, UnitValue preferred, UnitValue max, boolean gapPush, String createString) {
-      super();
       this.min = min;
       this.pref = preferred;
       this.max = max;
@@ -68,7 +67,7 @@ public class BoundSize implements Serializable {
    }
 
    final UnitValue getSize(int sizeType) {
-      switch(sizeType) {
+      switch (sizeType) {
          case 0:
             return this.min;
          case 1:

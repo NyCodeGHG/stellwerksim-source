@@ -88,15 +88,15 @@ public abstract class gleisevent extends event {
    private long getFilterLimit(LinkedList<gleis> ll, gleisevent.filterQ f) {
       TreeSet<Long> max = new TreeSet();
 
-      for(gleis gl : ll) {
+      for (gleis gl : ll) {
          max.add(f.getCnt(gl));
       }
 
       long limit = 0L;
       int i = 0;
 
-      for(Iterator<Long> itl = max.descendingIterator(); itl.hasNext(); ++i) {
-         limit = itl.next();
+      for (Iterator<Long> itl = max.descendingIterator(); itl.hasNext(); i++) {
+         limit = (Long)itl.next();
          if (i > 20) {
             break;
          }
@@ -109,7 +109,7 @@ public abstract class gleisevent extends event {
       long limit = this.getFilterLimit(ll, this.fq_zg);
       Iterator<gleis> it = ll.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          if (gl.getCntZug() < limit) {
             it.remove();
@@ -121,7 +121,7 @@ public abstract class gleisevent extends event {
       long limit = this.getFilterLimit(ll, this.fq_st);
       Iterator<gleis> it = ll.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          if (gl.getCntStellung() < limit) {
             it.remove();
@@ -135,7 +135,6 @@ public abstract class gleisevent extends event {
 
    private class fq_stellung implements gleisevent.filterQ {
       private fq_stellung() {
-         super();
       }
 
       @Override
@@ -146,7 +145,6 @@ public abstract class gleisevent extends event {
 
    private class fq_zug implements gleisevent.filterQ {
       private fq_zug() {
-         super();
       }
 
       @Override

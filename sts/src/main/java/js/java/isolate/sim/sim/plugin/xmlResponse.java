@@ -13,12 +13,10 @@ public class xmlResponse implements responseSender {
    public static final String EOR = "***EOR***";
 
    public xmlResponse() {
-      super();
       this.oldMode = false;
    }
 
    public xmlResponse(boolean oldMode) {
-      super();
       this.oldMode = oldMode;
    }
 
@@ -29,7 +27,7 @@ public class xmlResponse implements responseSender {
       b.append(tag);
       b.append(" ");
 
-      for(Entry<String, String> e : attr.entrySet()) {
+      for (Entry<String, String> e : attr.entrySet()) {
          if (e.getValue() != null) {
             b.append((String)e.getKey());
             b.append("='");
@@ -52,7 +50,7 @@ public class xmlResponse implements responseSender {
       b.append(cmd);
       b.append(" ");
 
-      for(Entry<String, String> e : attr.entrySet()) {
+      for (Entry<String, String> e : attr.entrySet()) {
          if (e.getValue() != null) {
             b.append((String)e.getKey());
             b.append("='");
@@ -73,7 +71,7 @@ public class xmlResponse implements responseSender {
       b.append(cmd);
       b.append(" ");
 
-      for(Entry<String, String> e : attr.entrySet()) {
+      for (Entry<String, String> e : attr.entrySet()) {
          if (e.getValue() != null) {
             b.append((String)e.getKey());
             b.append("='");
@@ -102,7 +100,7 @@ public class xmlResponse implements responseSender {
       if ((v.length & 1) == 0) {
          HashMap<String, String> m = new HashMap();
 
-         for(int i = 0; i < v.length; i += 2) {
+         for (int i = 0; i < v.length; i += 2) {
             m.put(v[i], v[i + 1]);
          }
 
@@ -117,7 +115,7 @@ public class xmlResponse implements responseSender {
       if ((v.length & 1) == 0) {
          HashMap<String, String> m = new HashMap();
 
-         for(int i = 0; i < v.length; i += 2) {
+         for (int i = 0; i < v.length; i += 2) {
             m.put(v[i], v[i + 1]);
          }
 

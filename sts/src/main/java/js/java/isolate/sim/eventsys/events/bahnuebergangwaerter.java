@@ -28,7 +28,7 @@ public class bahnuebergangwaerter extends gleisevent {
    protected boolean init(eventContainer e) {
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_WBAHNÜBERGANG});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis b = (gleis)it.next();
          this.registerForStellung(b);
          this.registerForZug(b);
@@ -51,7 +51,7 @@ public class bahnuebergangwaerter extends gleisevent {
    public boolean init(int enr) {
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE, enr});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis b = (gleis)it.next();
          this.registerForStellung(b);
          this.registerForZug(b);
@@ -74,7 +74,7 @@ public class bahnuebergangwaerter extends gleisevent {
    public void close(int enr) {
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE, enr});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis b = (gleis)it.next();
          this.unregisterForStellung(b);
          this.unregisterForZug(b);
@@ -118,7 +118,7 @@ public class bahnuebergangwaerter extends gleisevent {
    public boolean pong() {
       long t = this.my_main.getSimutime();
 
-      for(bahnuebergangwaerter.timeStore ts : this.closeTime.values()) {
+      for (bahnuebergangwaerter.timeStore ts : this.closeTime.values()) {
          ts.check(t);
       }
 
@@ -129,7 +129,7 @@ public class bahnuebergangwaerter extends gleisevent {
    public Vector getStructure() {
       Vector v = super.getStructure();
 
-      for(bahnuebergangwaerter.timeStore ts : this.closeTime.values()) {
+      for (bahnuebergangwaerter.timeStore ts : this.closeTime.values()) {
          v.addElement(ts.enr + ": enr");
          v.addElement(Integer.toString(ts.enr));
          v.addElement(ts.enr + ": name");
@@ -176,7 +176,6 @@ public class bahnuebergangwaerter extends gleisevent {
       private gleis monitorSignal = null;
 
       timeStore(gleis g) {
-         super();
          this.gls.add(g);
          this.enr = g.getENR();
       }
@@ -229,7 +228,7 @@ public class bahnuebergangwaerter extends gleisevent {
 
       void check(long t) {
          if (this.reservingWait && this.waitUntilTime <= t) {
-            for(gleis gl : this.gls) {
+            for (gleis gl : this.gls) {
                int status = gl.getFluentData().getStatus();
                if (status == 3) {
                   gl.getFluentData().setStellung(gleis.ST_BAHNÜBERGANG_GESCHLOSSEN);

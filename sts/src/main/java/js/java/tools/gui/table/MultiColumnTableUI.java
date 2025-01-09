@@ -13,7 +13,6 @@ public class MultiColumnTableUI extends BasicTableUI {
    private CMap map;
 
    public MultiColumnTableUI(CMap m) {
-      super();
       this.map = m;
    }
 
@@ -25,7 +24,7 @@ public class MultiColumnTableUI extends BasicTableUI {
          lastRow = this.table.getRowCount() - 1;
       }
 
-      for(int i = firstRow; i <= lastRow; ++i) {
+      for (int i = firstRow; i <= lastRow; i++) {
          this.paintRow(i, g);
       }
    }
@@ -33,12 +32,12 @@ public class MultiColumnTableUI extends BasicTableUI {
    private void paintRow(int row, Graphics g) {
       Rectangle r = g.getClipBounds();
 
-      for(int i = 0; i < this.table.getColumnCount(); ++i) {
+      for (int i = 0; i < this.table.getColumnCount(); i++) {
          Rectangle r1 = this.table.getCellRect(row, i, true);
          if (r1.intersects(r)) {
             int sk = this.map.visibleCell(row, i);
 
-            for(int j = 1; j < this.map.span(row, sk); ++j) {
+            for (int j = 1; j < this.map.span(row, sk); j++) {
                Rectangle r2 = this.table.getCellRect(row, i + j, true);
                r1 = (Rectangle)r1.createUnion(r2);
             }

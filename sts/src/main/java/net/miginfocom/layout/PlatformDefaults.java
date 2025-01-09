@@ -65,11 +65,10 @@ public final class PlatformDefaults {
    }
 
    private PlatformDefaults() {
-      super();
    }
 
    public static void setPlatform(int plaf) {
-      switch(plaf) {
+      switch (plaf) {
          case 0:
             setRelatedGap(LPX4, LPY4);
             setUnrelatedGap(LPX7, LPY9);
@@ -112,7 +111,7 @@ public final class PlatformDefaults {
    }
 
    private static int getPlatformDPI(int plaf) {
-      switch(plaf) {
+      switch (plaf) {
          case 0:
          case 2:
             return 96;
@@ -147,7 +146,7 @@ public final class PlatformDefaults {
    public static void setHorizontalScaleFactor(Float f) {
       if (!LayoutUtil.equals(horScale, f)) {
          horScale = f;
-         ++MOD_COUNT;
+         MOD_COUNT++;
       }
    }
 
@@ -158,7 +157,7 @@ public final class PlatformDefaults {
    public static void setVerticalScaleFactor(Float f) {
       if (!LayoutUtil.equals(verScale, f)) {
          verScale = f;
-         ++MOD_COUNT;
+         MOD_COUNT++;
       }
    }
 
@@ -173,7 +172,7 @@ public final class PlatformDefaults {
          }
 
          LP_BASE = base;
-         ++MOD_COUNT;
+         MOD_COUNT++;
       }
    }
 
@@ -206,12 +205,12 @@ public final class PlatformDefaults {
          DEF_VGAP = new BoundSize(y, y, null, null);
       }
 
-      ++MOD_COUNT;
+      MOD_COUNT++;
    }
 
    public static void setMinimumButtonWidth(UnitValue width) {
       BUTT_WIDTH = width;
-      ++MOD_COUNT;
+      MOD_COUNT++;
    }
 
    public static UnitValue getMinimumButtonWidth() {
@@ -227,7 +226,7 @@ public final class PlatformDefaults {
    }
 
    public static final void setUnitValue(String[] unitStrings, UnitValue x, UnitValue y) {
-      for(String unitString : unitStrings) {
+      for (String unitString : unitStrings) {
          String s = unitString.toLowerCase().trim();
          if (x != null) {
             HOR_DEFS.put(s, x);
@@ -238,7 +237,7 @@ public final class PlatformDefaults {
          }
       }
 
-      ++MOD_COUNT;
+      MOD_COUNT++;
    }
 
    static int convertToPixels(float value, String unit, boolean isHor, float ref, ContainerWrapper parent, ComponentWrapper comp) {
@@ -252,11 +251,11 @@ public final class PlatformDefaults {
 
    public static void setButtonOrder(String order) {
       BUTTON_FORMAT = order;
-      ++MOD_COUNT;
+      MOD_COUNT++;
    }
 
    static String getTagForChar(char c) {
-      switch(c) {
+      switch (c) {
          case 'a':
             return "apply";
          case 'b':
@@ -329,7 +328,7 @@ public final class PlatformDefaults {
          DIALOG_INS[3] = right;
       }
 
-      ++MOD_COUNT;
+      MOD_COUNT++;
    }
 
    public static UnitValue getPanelInsets(int side) {
@@ -353,7 +352,7 @@ public final class PlatformDefaults {
          PANEL_INS[3] = right;
       }
 
-      ++MOD_COUNT;
+      MOD_COUNT++;
    }
 
    public static float getLabelAlignPercentage() {
@@ -383,7 +382,7 @@ public final class PlatformDefaults {
    }
 
    public void invalidate() {
-      ++MOD_COUNT;
+      MOD_COUNT++;
    }
 
    public static int getDefaultHorizontalUnit() {
@@ -394,7 +393,7 @@ public final class PlatformDefaults {
       if (unit >= 0 && unit <= 27) {
          if (DEF_H_UNIT != unit) {
             DEF_H_UNIT = unit;
-            ++MOD_COUNT;
+            MOD_COUNT++;
          }
       } else {
          throw new IllegalArgumentException("Illegal Unit: " + unit);
@@ -409,7 +408,7 @@ public final class PlatformDefaults {
       if (unit >= 0 && unit <= 27) {
          if (DEF_V_UNIT != unit) {
             DEF_V_UNIT = unit;
-            ++MOD_COUNT;
+            MOD_COUNT++;
          }
       } else {
          throw new IllegalArgumentException("Illegal Unit: " + unit);

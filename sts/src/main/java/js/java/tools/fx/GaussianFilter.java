@@ -12,7 +12,6 @@ public class GaussianFilter extends ConvolveFilter {
    }
 
    public GaussianFilter(float radius) {
-      super();
       this.setRadius(radius);
    }
 
@@ -52,18 +51,18 @@ public class GaussianFilter extends ConvolveFilter {
       int cols = kernel.getWidth();
       int cols2 = cols / 2;
 
-      for(int y = 0; y < height; ++y) {
+      for (int y = 0; y < height; y++) {
          int index = y;
          int ioffset = y * width;
 
-         for(int x = 0; x < width; ++x) {
+         for (int x = 0; x < width; x++) {
             float r = 0.0F;
             float g = 0.0F;
             float b = 0.0F;
             float a = 0.0F;
             int moffset = cols2;
 
-            for(int col = -cols2; col <= cols2; ++col) {
+            for (int col = -cols2; col <= cols2; col++) {
                float f = matrix[moffset + col];
                if (f != 0.0F) {
                   int ix = x + col;
@@ -123,13 +122,13 @@ public class GaussianFilter extends ConvolveFilter {
       float[] matrix = new float[rows];
       float sigma = radius / 3.0F;
       float sigma22 = 2.0F * sigma * sigma;
-      float sigmaPi2 = ((float) (Math.PI * 2)) * sigma;
+      float sigmaPi2 = (float) (Math.PI * 2) * sigma;
       float sqrtSigmaPi2 = (float)Math.sqrt((double)sigmaPi2);
       float radius2 = radius * radius;
       float total = 0.0F;
       int index = 0;
 
-      for(int row = -r; row <= r; ++row) {
+      for (int row = -r; row <= r; row++) {
          float distance = (float)(row * row);
          if (distance > radius2) {
             matrix[index] = 0.0F;
@@ -138,10 +137,10 @@ public class GaussianFilter extends ConvolveFilter {
          }
 
          total += matrix[index];
-         ++index;
+         index++;
       }
 
-      for(int i = 0; i < rows; ++i) {
+      for (int i = 0; i < rows; i++) {
          matrix[i] /= total;
       }
 

@@ -22,7 +22,6 @@ public class players_aid implements Comparable {
    Color heatColor = Color.WHITE;
 
    players_aid(int _aid, playersPanel m) {
-      super();
       this.my_main = m;
       this.aid = _aid;
       this.name = m.getParameter("aidname" + this.aid);
@@ -31,7 +30,6 @@ public class players_aid implements Comparable {
    }
 
    players_aid(playersPanel m, int _aid, String _name, String _tel) {
-      super();
       this.my_main = m;
       this.aid = _aid;
       this.name = _name;
@@ -55,11 +53,7 @@ public class players_aid implements Comparable {
    }
 
    public boolean equals(Object o) {
-      if (o instanceof players_aid) {
-         return this.aid == ((players_aid)o).aid;
-      } else {
-         return false;
-      }
+      return o instanceof players_aid ? this.aid == ((players_aid)o).aid : false;
    }
 
    public int hashCode() {

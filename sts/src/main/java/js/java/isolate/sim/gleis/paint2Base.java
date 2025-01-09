@@ -14,7 +14,6 @@ public class paint2Base extends gleisDecorBase {
    }
 
    public paint2Base(paint2Base p) {
-      super();
       this.parent = p;
    }
 

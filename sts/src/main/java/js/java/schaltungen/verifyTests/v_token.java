@@ -14,7 +14,6 @@ public class v_token extends InitTestBase {
    private boolean awtOpen = false;
 
    public v_token() {
-      super();
       this.pnode = Preferences.userNodeForPackage(v_token.class);
    }
 

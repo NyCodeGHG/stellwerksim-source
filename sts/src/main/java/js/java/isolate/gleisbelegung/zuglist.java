@@ -6,7 +6,6 @@ class zuglist extends TreeSet<zuggleis> {
    public final int zid;
 
    zuglist(int _zid) {
-      super();
       this.zid = _zid;
    }
 }

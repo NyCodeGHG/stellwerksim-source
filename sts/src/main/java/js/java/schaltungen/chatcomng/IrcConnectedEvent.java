@@ -9,7 +9,6 @@ public class IrcConnectedEvent {
    public final boolean ipV6;
 
    IrcConnectedEvent(boolean v6) {
-      super();
       this.ipV6 = v6;
    }
 }

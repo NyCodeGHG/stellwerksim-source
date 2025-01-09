@@ -25,7 +25,7 @@ public class CountInputStream extends FilterInputStream {
    public int read() throws IOException {
       int ret = this.in.read();
       if (ret >= 0) {
-         ++this.counter;
+         this.counter++;
          if (isDebug()) {
             debugMode.writeln("Got(" + this.counter + "): " + ret);
          }

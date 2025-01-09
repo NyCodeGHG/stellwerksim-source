@@ -74,7 +74,7 @@ class paint_ausfahrt extends paint_text_base {
       int y0 = (int)((double)yscal / 2.0);
       gl.paintBigKnob(g, x0, y0, xscal);
       gleisElements.RICHTUNG r = gl.richtung;
-      switch(r) {
+      switch (r) {
          case right:
             gl.paintAusfahrt(g, 0, yscal * 3 / 4, fscal, Math.PI * 3.0 / 2.0);
             break;

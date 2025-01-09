@@ -80,7 +80,7 @@ public class signalausfall extends signalstoerung {
             + this.signal.getElementName()
             + "</b> auf Rot gefallen! Fahrstraße nicht aufgelöst, Streckenfreifahrt per Ersatzsignal (ErsGT) nötig!";
          this.showMessageNow(this.text);
-         --this.cnt;
+         this.cnt--;
          if (this.cnt <= 0) {
             this.unregisterForStellung(this.signal);
             this.eventDone();

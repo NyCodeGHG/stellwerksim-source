@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class texttest2 implements dtest {
-   public texttest2() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Gleisschild";
@@ -25,11 +21,11 @@ public class texttest2 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_GLEISLABEL});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          int ncnt = 0;
 
-         for(Iterator<gleis> git = gl.getNachbarn(); git.hasNext(); ++ncnt) {
+         for (Iterator<gleis> git = gl.getNachbarn(); git.hasNext(); ncnt++) {
             git.next();
          }
 

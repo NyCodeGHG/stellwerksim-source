@@ -10,7 +10,6 @@ public class ConstructWindowMenu implements ActionListener {
    private DesktopMediator desktopMediator;
 
    public ConstructWindowMenu(JMenu sourceMenu, DesktopMediator desktopMediator, boolean tileMode) {
-      super();
       this.desktopMediator = desktopMediator;
       this.constructMenuItems(sourceMenu, tileMode);
    }
@@ -25,9 +24,9 @@ public class ConstructWindowMenu implements ActionListener {
       JRadioButtonMenuItem radioItem = new RootRadioButtonMenuItem(this, "Tile", 84, -1, tileMode);
       autoMenu.add(radioItem);
       autoMenuGroup.add(radioItem);
-      JRadioButtonMenuItem var6 = new RootRadioButtonMenuItem(this, "Cascade", 67, -1, !tileMode);
-      autoMenu.add(var6);
-      autoMenuGroup.add(var6);
+      radioItem = new RootRadioButtonMenuItem(this, "Cascade", 67, -1, !tileMode);
+      autoMenu.add(radioItem);
+      autoMenuGroup.add(radioItem);
       sourceMenu.add(autoMenu);
       sourceMenu.addSeparator();
       sourceMenu.add(new RootMenuItem(this, "Close", 83, 90));

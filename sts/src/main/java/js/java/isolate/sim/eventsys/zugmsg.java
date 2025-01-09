@@ -10,7 +10,6 @@ public class zugmsg extends eventmsg {
    public final zug zielzug;
 
    public zugmsg(zug _z, gleis _g, gleis _before_gl) {
-      super();
       this.g = _g;
       this.before_gl = _before_gl;
       this.z = _z;
@@ -18,7 +17,6 @@ public class zugmsg extends eventmsg {
    }
 
    public zugmsg(zug _z, zug _zielzug) {
-      super();
       this.g = null;
       this.before_gl = null;
       this.z = _z;
@@ -26,7 +24,6 @@ public class zugmsg extends eventmsg {
    }
 
    public zugmsg(zug _z) {
-      super();
       this.g = null;
       this.before_gl = null;
       this.z = _z;

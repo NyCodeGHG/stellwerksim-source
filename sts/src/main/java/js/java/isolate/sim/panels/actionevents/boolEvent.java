@@ -6,7 +6,6 @@ public class boolEvent extends AbstractStringEvent {
    private final boolean b;
 
    public boolEvent(boolean _b) {
-      super();
       this.b = _b;
    }
 

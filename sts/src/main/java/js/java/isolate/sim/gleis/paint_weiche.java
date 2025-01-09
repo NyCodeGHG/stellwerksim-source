@@ -21,12 +21,12 @@ class paint_weiche extends paint2Base {
       int links = 0;
       Iterator<gleis.nachbarGleis> it = gl.p_getNachbarn();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis.nachbarGleis gl2 = (gleis.nachbarGleis)it.next();
          if (gl2.gl.getCol() > gl.getCol()) {
-            ++rechts;
+            rechts++;
          } else if (gl2.gl.getCol() < gl.getCol()) {
-            ++links;
+            links++;
          }
       }
 
@@ -72,15 +72,17 @@ class paint_weiche extends paint2Base {
       int rechts = 0;
       int links = 0;
       boolean nweiche = false;
+      Iterator<gleis> it = gl.getNachbarn();
 
-      gleis gl2;
-      for(Iterator<gleis> it = gl.getNachbarn(); it.hasNext(); nweiche |= gl2.telement == gl.telement) {
-         gl2 = (gleis)it.next();
+      while (it.hasNext()) {
+         gleis gl2 = (gleis)it.next();
          if (gl2.getCol() > gl.getCol()) {
-            ++rechts;
+            rechts++;
          } else if (gl2.getCol() < gl.getCol()) {
-            ++links;
+            links++;
          }
+
+         nweiche |= gl2.telement == gl.telement;
       }
 
       if (!nweiche || (gl.getCol() & 1) == 0) {
@@ -100,7 +102,7 @@ class paint_weiche extends paint2Base {
          int w = gl.printwidth(g2, gl.getShortElementName(), 8);
          g2.setColor(gleis.colors.col_stellwerk_gleis);
          if (links < rechts) {
-            --tx;
+            tx--;
             g2.drawLine(tx - w + 4, by, xscal / 2, by);
             g2.drawLine(xscal / 2, by, xscal / 2, yscal / 2);
          } else {

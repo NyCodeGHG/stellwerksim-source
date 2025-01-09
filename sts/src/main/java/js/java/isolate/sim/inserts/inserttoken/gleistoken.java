@@ -12,13 +12,11 @@ public class gleistoken extends inserttoken {
    public gleisElements.RICHTUNG richtung = gleisElements.RICHTUNG.right;
 
    public gleistoken(element _element, gleisElements.RICHTUNG _richtung) {
-      super();
       this.element = _element;
       this.richtung = _richtung;
    }
 
    public gleistoken(element _element, gleisElements.RICHTUNG _richtung, String _bgcolor) {
-      super();
       this.element = _element;
       this.richtung = _richtung;
       this.bgcolor = _bgcolor;

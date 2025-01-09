@@ -53,7 +53,7 @@ class levelDisplay extends JDialog implements ActionListener, Runnable {
    }
 
    public void addConsumer(levelDisplay.CONSUMENT c) {
-      switch(c) {
+      switch (c) {
          case LIGHT:
             this.con = 3;
             break;

@@ -11,7 +11,6 @@ public class structDeliverer {
    protected final HashMap<Integer, structinfo> idhash = new HashMap();
 
    public structDeliverer(stellwerksim_main my_main) {
-      super();
       this.my_main = my_main;
    }
 
@@ -30,7 +29,7 @@ public class structDeliverer {
       this.idhash.clear();
       Vector v = this.my_main.getStructInfo();
 
-      for(int i = 0; i < v.size(); ++i) {
+      for (int i = 0; i < v.size(); i++) {
          Vector vv = (Vector)v.get(i);
          String type = (String)vv.get(0);
          String name = (String)vv.get(1);
@@ -49,7 +48,7 @@ public class structDeliverer {
          int l = v.size() / 2;
          int c = 0;
 
-         for(int i = 0; i < v.size(); i += 2) {
+         for (int i = 0; i < v.size(); i += 2) {
             String key = "";
             String value = "";
 
@@ -67,7 +66,7 @@ public class structDeliverer {
 
             String data = "<line line='" + c + "' totallines='" + l + "' key='" + key + "' value='" + value + "' />\n";
             output.write(data);
-            ++c;
+            c++;
          }
       }
    }

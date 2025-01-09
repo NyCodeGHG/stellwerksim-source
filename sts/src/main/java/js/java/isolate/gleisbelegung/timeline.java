@@ -22,7 +22,6 @@ class timeline extends JComponent {
    public static Color bgcol = new Color(187, 187, 255);
 
    timeline() {
-      super();
       this.setBackground(bgcol);
    }
 
@@ -36,14 +35,14 @@ class timeline extends JComponent {
       g2.setBackground(bgcol);
       g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-      for(int s = VON; s < BIS; ++s) {
+      for (int s = VON; s < BIS; s++) {
          g2.setColor(bgcol.darker());
          g2.drawLine((s - VON) * MINUTEWIDTH * 60 - 1, 0, (s - VON) * MINUTEWIDTH * 60 - 1, this.getHeight());
          g2.setColor(bgcol.brighter());
          g2.drawLine((s - VON) * MINUTEWIDTH * 60, 0, (s - VON) * MINUTEWIDTH * 60, this.getHeight());
          g2.setColor(Color.BLUE);
 
-         for(int m = 0; m < 60; ++m) {
+         for (int m = 0; m < 60; m++) {
             int f = 20;
             if (m % 5 == 0) {
                f = 17;
@@ -52,7 +51,7 @@ class timeline extends JComponent {
             g2.drawLine((s - VON) * MINUTEWIDTH * 60 + m * MINUTEWIDTH, mfont.getHeight() + f, (s - VON) * MINUTEWIDTH * 60 + m * MINUTEWIDTH, this.getHeight());
          }
 
-         for(int m = 0; m < 60; m += 10) {
+         for (int m = 0; m < 60; m += 10) {
             g2.setColor(Color.BLUE);
             g2.drawLine((s - VON) * MINUTEWIDTH * 60 + m * MINUTEWIDTH, mfont.getHeight() + 5, (s - VON) * MINUTEWIDTH * 60 + m * MINUTEWIDTH, this.getHeight());
             g2.setColor(Color.BLACK);

@@ -33,7 +33,6 @@ public class gleisColor {
    }
 
    protected gleisColor(gleisColor.COLORTYPE t) {
-      super();
       this.type = t;
       this.mycolorbase = new colorStruct();
       this.init();
@@ -53,23 +52,23 @@ public class gleisColor {
       this.mycolorbase.col_aktiv = new Color(224, 255, 224);
       int j = 0;
 
-      for(int i = 0; i < this.mycolorbase.col_aktiv2.length / 2; ++j) {
+      for (int i = 0; i < this.mycolorbase.col_aktiv2.length / 2; j++) {
          this.mycolorbase.col_aktiv2[i] = new Color(224 - j * 8, 255, 224 - j * 8, 160);
          this.mycolorbase.col_aktiv3[i] = new Color(204, 0 + j * 24, 204 - j * 16, 128);
-         ++i;
+         i++;
       }
 
-      for(int i = this.mycolorbase.col_aktiv2.length / 2; i < this.mycolorbase.col_aktiv2.length; --j) {
+      for (int i = this.mycolorbase.col_aktiv2.length / 2; i < this.mycolorbase.col_aktiv2.length; j--) {
          this.mycolorbase.col_aktiv2[i] = new Color(224 - j * 8, 255, 224 - j * 8, 160);
          this.mycolorbase.col_aktiv3[i] = new Color(204, 0 + j * 24, 204 - j * 16, 128);
-         ++i;
+         i++;
       }
 
       j = 0;
 
-      for(int i = 0; i < this.mycolorbase.col_highlight.length; ++j) {
+      for (int i = 0; i < this.mycolorbase.col_highlight.length; j++) {
          this.mycolorbase.col_highlight[i] = new Color(17 + j * 18, 17 + j * 18, Math.min(240 + j * 4, 255));
-         ++i;
+         i++;
       }
 
       j = 208;
@@ -119,20 +118,20 @@ public class gleisColor {
       this.mycolorbase.col_stellwerk_masstab[0] = this.mycolorbase.col_stellwerk_back;
       int jx = 9;
 
-      for(int i = 1; i < Math.min(this.mycolorbase.col_stellwerk_masstab.length, 12); ++i) {
+      for (int i = 1; i < Math.min(this.mycolorbase.col_stellwerk_masstab.length, 12); i++) {
          float h = 0.1F * (float)jx;
          float b = 1.0F;
          float s = 0.5F + (float)(jx % 2) * 0.5F;
          this.mycolorbase.col_stellwerk_masstab[i] = Color.getHSBColor(h, s, b);
          if (jx % 10 == 4) {
             this.mycolorbase.col_stellwerk_masstab[i + 1] = this.mycolorbase.col_stellwerk_masstab[i].darker();
-            ++i;
+            i++;
          }
 
-         ++jx;
+         jx++;
       }
 
-      for(int i = 12; i < this.mycolorbase.col_stellwerk_masstab.length; ++i) {
+      for (int i = 12; i < this.mycolorbase.col_stellwerk_masstab.length; i++) {
          if (i != 12 && (i & 1) == 0) {
             this.mycolorbase.col_stellwerk_masstab[i] = this.mycolorbase.col_stellwerk_masstab[i - 12].darker();
          } else {

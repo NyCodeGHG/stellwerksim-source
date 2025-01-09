@@ -15,7 +15,6 @@ public class BalloonBorder implements Border {
    private int offset;
 
    public BalloonBorder(Color fillColor, int offset) {
-      super();
       this.fillColor = fillColor;
       this.offset = offset;
    }

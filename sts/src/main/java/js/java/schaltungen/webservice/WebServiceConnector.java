@@ -12,7 +12,6 @@ public class WebServiceConnector {
    private final UserContextMini uc;
 
    public WebServiceConnector(UserContextMini uc, String url) throws MalformedURLException {
-      super();
       this.uc = uc;
       this.webService = new ServiceAccessor(url);
       EventBusService.getInstance().subscribe(this);

@@ -20,7 +20,6 @@ class simPluginAdapter implements pluginDataAdapter {
    private final stellwerksim_main my_main;
 
    simPluginAdapter(stellwerksim_main m) {
-      super();
       this.my_main = m;
    }
 
@@ -68,7 +67,7 @@ class simPluginAdapter implements pluginDataAdapter {
    public Map<Integer, String> getZugList() {
       HashMap<Integer, String> ret = new HashMap();
 
-      for(zug z : this.my_main.getZugList()) {
+      for (zug z : this.my_main.getZugList()) {
          if (!z.isFertig()) {
             ret.put(z.getZID_num(), z.getSpezialName());
          }
@@ -114,7 +113,7 @@ class simPluginAdapter implements pluginDataAdapter {
          Iterator<zug> it = z.getAllUnseenFahrplanzeilen();
          LinkedList<pluginDataAdapter.zugPlanLine> ret = new LinkedList();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             zug zz = (zug)it.next();
             if (zz != null) {
                pluginDataAdapter.zugPlanLine zpl = new pluginDataAdapter.zugPlanLine();
@@ -240,7 +239,7 @@ class simPluginAdapter implements pluginDataAdapter {
    public List<pluginDataAdapter.pluginEventAdapter> getEvents() {
       LinkedList<pluginDataAdapter.pluginEventAdapter> l = new LinkedList();
 
-      for(event e : event.events) {
+      for (event e : event.events) {
          l.add(new simPluginAdapter.simEventAdapter(e));
       }
 
@@ -282,7 +281,6 @@ class simPluginAdapter implements pluginDataAdapter {
       private final event e;
 
       simEventAdapter(event e) {
-         super();
          this.e = e;
       }
 

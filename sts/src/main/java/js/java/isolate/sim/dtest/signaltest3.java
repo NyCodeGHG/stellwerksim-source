@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleis.gleisElements.gleisElements;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class signaltest3 implements dtest {
-   public signaltest3() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Signalumfeld 3";
@@ -27,7 +23,7 @@ public class signaltest3 implements dtest {
       if (glb.gleisbildextend.getSignalversion() == 1) {
          Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-         while(it1.hasNext()) {
+         while (it1.hasNext()) {
             gleis gl = (gleis)it1.next();
             gleisElements.RICHTUNG richtung = gl.getRichtung();
             gleis gl2 = gl.nextByRichtung(false);

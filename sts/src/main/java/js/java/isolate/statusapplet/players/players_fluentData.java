@@ -24,7 +24,7 @@ public class players_fluentData extends fluentData {
    EnumSet<OCCU_KIND> getKind() {
       EnumSet<OCCU_KIND> ret = EnumSet.noneOf(OCCU_KIND.class);
 
-      for(OCCU_KIND k : this.event.values()) {
+      for (OCCU_KIND k : this.event.values()) {
          ret.add(k);
       }
 

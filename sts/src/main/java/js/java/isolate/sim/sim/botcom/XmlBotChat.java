@@ -20,7 +20,6 @@ public abstract class XmlBotChat implements chatInterface {
    );
 
    protected XmlBotChat(UserContext uc) {
-      super();
       this.uc = uc;
    }
 

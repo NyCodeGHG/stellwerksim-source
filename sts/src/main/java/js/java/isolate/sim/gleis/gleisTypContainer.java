@@ -22,13 +22,12 @@ public class gleisTypContainer {
    private List<gleisTypContainer.block> return_blocks;
 
    private gleisTypContainer(GleisAdapter m) {
-      super();
       String p = m.getParameter("typ");
       if (p != null) {
          this.types_hash = new HashMap();
          StringTokenizer pst = new StringTokenizer(p, ",");
 
-         while(pst.hasMoreTokens()) {
+         while (pst.hasMoreTokens()) {
             String tk1 = pst.nextToken();
             StringTokenizer vst = new StringTokenizer(tk1, "=");
             String tk_key = vst.nextToken().trim();
@@ -47,7 +46,7 @@ public class gleisTypContainer {
          p = m.getParameter("richtung");
          StringTokenizer dst = new StringTokenizer(p, ",");
 
-         while(dst.hasMoreTokens()) {
+         while (dst.hasMoreTokens()) {
             String tk1 = dst.nextToken();
             StringTokenizer vst = new StringTokenizer(tk1, "=");
             String tk_key = vst.nextToken().trim();
@@ -62,7 +61,7 @@ public class gleisTypContainer {
          if (p != null) {
             dst = new StringTokenizer(p, ",");
 
-            while(dst.hasMoreTokens()) {
+            while (dst.hasMoreTokens()) {
                String tk1 = dst.nextToken();
                StringTokenizer vst = new StringTokenizer(tk1, "=");
                String tk_key = vst.nextToken().trim();
@@ -76,11 +75,11 @@ public class gleisTypContainer {
          if (p != null) {
             dst = new StringTokenizer(p, ",");
 
-            while(dst.hasMoreTokens()) {
+            while (dst.hasMoreTokens()) {
                String tk1 = dst.nextToken();
                int n = Integer.parseInt(tk1);
 
-               for(gleisTypContainer.block bl : this.return_blocks) {
+               for (gleisTypContainer.block bl : this.return_blocks) {
                   if (bl.number == n) {
                      bl.quick = true;
                   }
@@ -92,7 +91,7 @@ public class gleisTypContainer {
          if (p != null) {
             dst = new StringTokenizer(p, ",");
 
-            while(dst.hasMoreTokens()) {
+            while (dst.hasMoreTokens()) {
                try {
                   String tk1 = dst.nextToken();
                   StringTokenizer vst = new StringTokenizer(tk1, "=");
@@ -102,9 +101,9 @@ public class gleisTypContainer {
                   int typ = Integer.parseInt(tk_value[0]);
                   int elm = Integer.parseInt(tk_value[1]);
 
-                  for(gleisTypContainer.block bl : this.return_blocks) {
-                     if (bl.number == n) {
-                        bl.add(gleisHelper.findElement(typ, elm));
+                  for (gleisTypContainer.block blx : this.return_blocks) {
+                     if (blx.number == n) {
+                        blx.add(gleisHelper.findElement(typ, elm));
                      }
                   }
                } catch (Exception var13) {
@@ -121,7 +120,7 @@ public class gleisTypContainer {
       if (p != null) {
          StringTokenizer pst = new StringTokenizer(p, ",");
 
-         while(pst.hasMoreTokens()) {
+         while (pst.hasMoreTokens()) {
             String tk1 = pst.nextToken();
             StringTokenizer vst = new StringTokenizer(tk1, "=");
             String tk_key = vst.nextToken().trim();
@@ -147,7 +146,7 @@ public class gleisTypContainer {
       int[] ret = new int[this.types_hash.size()];
       int i = 0;
 
-      for(int t : this.types_hash.keySet()) {
+      for (int t : this.types_hash.keySet()) {
          ret[i++] = t;
       }
 
@@ -170,7 +169,7 @@ public class gleisTypContainer {
          ret = new int[te.elements.size()];
          int i = 0;
 
-         for(int e : te.elements.keySet()) {
+         for (int e : te.elements.keySet()) {
             ret[i++] = e;
          }
       }
@@ -209,7 +208,6 @@ public class gleisTypContainer {
       private int number;
 
       block(int n, String title) {
-         super();
          this.number = n;
          this.title = title;
       }
@@ -228,7 +226,6 @@ public class gleisTypContainer {
       public HashMap<Integer, String> elements = new HashMap();
 
       private typentry() {
-         super();
       }
    }
 }

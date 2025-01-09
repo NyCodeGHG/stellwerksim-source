@@ -24,7 +24,6 @@ public class TimeoutButton extends JButton {
    private boolean wastimeout = false;
 
    public TimeoutButton(String text, int timeout) {
-      super();
       this.setLayout(new GridLayout(1, 0));
       this.textLabel.setText(text);
       this.textLabel.setHorizontalAlignment(0);
@@ -62,7 +61,7 @@ public class TimeoutButton extends JButton {
    }
 
    private void trigger() {
-      --this.ctime;
+      this.ctime--;
       this.pBar.setValue(this.ctime);
       if (this.ctime <= 0) {
          this.ttimer.stop();

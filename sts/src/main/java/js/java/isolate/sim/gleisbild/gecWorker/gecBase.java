@@ -10,10 +10,6 @@ public class gecBase<T extends AbstractEvent> {
    private ListenerList<T> changeListeners = new ListenerList();
    protected gleisbildEditorControl gec = null;
 
-   public gecBase() {
-      super();
-   }
-
    public final void addChangeListener(AbstractListener<T> l) {
       this.changeListeners.addListener(l);
    }

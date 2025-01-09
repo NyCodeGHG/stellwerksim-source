@@ -5,10 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 
 public abstract class elementPainterBase {
-   public elementPainterBase() {
-      super();
-   }
-
    void paintelement(gleis gl, Graphics2D g2, int col, int row, int xscal, int yscal, int fscal, Color colr) {
       if (g2 != null) {
          int scx1 = col * xscal;

@@ -29,7 +29,7 @@ public class bahnuebergangoffenfrage extends gleisevent {
    protected boolean init(eventContainer e) {
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_BAHNÜBERGANG, gleis.ELEMENT_AUTOBAHNÜBERGANG});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          this.registerForStellung((gleis)it.next());
       }
 
@@ -41,7 +41,7 @@ public class bahnuebergangoffenfrage extends gleisevent {
       if (st == gleisElements.ST_BAHNÜBERGANG_OFFEN) {
          try {
             bahnuebergangoffenfrage.timeStore ts = (bahnuebergangoffenfrage.timeStore)this.closeTime.get(g.getENR());
-            --ts.cnt;
+            ts.cnt--;
             if (ts.cnt <= 0) {
                ts.openUpdate();
             }
@@ -60,7 +60,7 @@ public class bahnuebergangoffenfrage extends gleisevent {
                l.closeUpdate();
             }
 
-            ++l.cnt;
+            l.cnt++;
          }
       }
 
@@ -74,7 +74,7 @@ public class bahnuebergangoffenfrage extends gleisevent {
          int c = 0;
          Iterator<bahnuebergangoffenfrage.timeStore> it = this.closeTime.values().iterator();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             bahnuebergangoffenfrage.timeStore l = (bahnuebergangoffenfrage.timeStore)it.next();
             if (l.nextcalltime <= current) {
                if (l.open) {
@@ -100,7 +100,7 @@ public class bahnuebergangoffenfrage extends gleisevent {
                      gleis hadBü = null;
                      boolean success = true;
 
-                     while(itbü.hasNext()) {
+                     while (itbü.hasNext()) {
                         gleis bügl = (gleis)itbü.next();
                         hadBü = bügl;
                         fahrstrasse fs = bügl.getFluentData().getCurrentFS();
@@ -147,7 +147,7 @@ public class bahnuebergangoffenfrage extends gleisevent {
    public Vector getStructure() {
       Vector v = super.getStructure();
 
-      for(bahnuebergangoffenfrage.timeStore ts : this.closeTime.values()) {
+      for (bahnuebergangoffenfrage.timeStore ts : this.closeTime.values()) {
          v.addElement(ts.enr + ": enr");
          v.addElement(Integer.toString(ts.enr));
          v.addElement(ts.enr + ": name");
@@ -180,7 +180,6 @@ public class bahnuebergangoffenfrage extends gleisevent {
       boolean open = true;
 
       timeStore(gleis g, long c) {
-         super();
          this.gl = g;
          this.enr = this.gl.getENR();
          this.closetime = c;
@@ -195,7 +194,7 @@ public class bahnuebergangoffenfrage extends gleisevent {
          this.lastcalltime = bahnuebergangoffenfrage.this.my_main.getSimutime();
          this.nextcalltime = this.lastcalltime + 180000L;
          this.open = false;
-         ++this.cc;
+         this.cc++;
       }
 
       void closeUpdate() {

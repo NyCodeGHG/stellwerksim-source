@@ -34,7 +34,7 @@ class paint_zwerg extends paint2Base {
                || gleis2.getElement() == gleisElements.ELEMENT_AUTOBAHNÜBERGANG
                || gleis2.getElement() == gleisElements.ELEMENT_BAHNÜBERGANG
          );
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             if (sim && !noLabel) {
                gl.elementlabel(g, gl.getShortElementName(), xscal, yscal, invers ? 180 : 0);

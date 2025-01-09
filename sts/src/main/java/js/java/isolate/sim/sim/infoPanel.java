@@ -29,7 +29,6 @@ public class infoPanel extends JPanel {
    private JTextField timeTextField;
 
    public infoPanel(stellwerksim_main m) {
-      super();
       this.my_main = m;
       this.initComponents();
       this.textTextField = new textticker();

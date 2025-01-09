@@ -10,10 +10,6 @@ public class bahnueberganganruf_factory extends eventFactory {
    private JSpinner max;
    private JSpinner center;
 
-   public bahnueberganganruf_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bahnüberganganruf";

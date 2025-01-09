@@ -14,8 +14,6 @@ public class prefs extends Preferences {
    private boolean waschreated = false;
 
    public prefs(String root) {
-      super();
-
       try {
          this.prefs_main = Preferences.userRoot().node(root);
          this.waschreated = true;

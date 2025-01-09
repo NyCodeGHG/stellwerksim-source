@@ -18,7 +18,6 @@ public class uhrComponent extends JPanel implements bahnhofsUhr.timeDeliverer, t
    private ButtonGroup modeGroup;
 
    public uhrComponent(String titel, String hostname, int instanz) {
-      super();
       this.hostname = hostname;
       this.instanz = instanz;
       this.init(titel);
@@ -26,14 +25,12 @@ public class uhrComponent extends JPanel implements bahnhofsUhr.timeDeliverer, t
    }
 
    public uhrComponent(String titel, int instanz) {
-      super();
       this.instanz = instanz;
       this.init(titel);
       this.setStstime();
    }
 
    public uhrComponent(String titel) {
-      super();
       this.init(titel);
       this.setRealtime();
    }
@@ -82,7 +79,6 @@ public class uhrComponent extends JPanel implements bahnhofsUhr.timeDeliverer, t
 
    private class realtimer extends uhrComponent.syncedtimer {
       private realtimer() {
-         super();
       }
 
       @Override
@@ -97,7 +93,6 @@ public class uhrComponent extends JPanel implements bahnhofsUhr.timeDeliverer, t
 
    private class syncedtimer implements bahnhofsUhr.timeDeliverer {
       private syncedtimer() {
-         super();
       }
 
       protected void setTime(long t, bahnhofsUhr u) {

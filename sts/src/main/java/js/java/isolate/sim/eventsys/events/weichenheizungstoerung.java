@@ -36,7 +36,7 @@ public class weichenheizungstoerung extends weicheevent {
       long now = System.currentTimeMillis() + 600000L;
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_WEICHEN});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          this.registerForStellung(gl);
          this.lastMove.put(gl, now);
@@ -58,7 +58,7 @@ public class weichenheizungstoerung extends weicheevent {
       if (this.blockedList.contains(g)) {
          return true;
       } else {
-         int lastMoved = (int)((System.currentTimeMillis() - this.lastMove.get(g)) / 1000L);
+         int lastMoved = (int)((System.currentTimeMillis() - (Long)this.lastMove.get(g)) / 1000L);
          if (lastMoved > 60 * random(57, 70) && st != g.getFluentData().getStellung() && random(0, 10) > 6) {
             weichenausfall wa = new weichenausfall(this.my_main);
             wa.setParent(this);
@@ -103,9 +103,9 @@ public class weichenheizungstoerung extends weicheevent {
       Vector v = super.getStructure();
       long now = System.currentTimeMillis();
 
-      for(Entry<gleis, Long> e : this.lastMove.entrySet()) {
+      for (Entry<gleis, Long> e : this.lastMove.entrySet()) {
          v.addElement("Weiche " + ((gleis)e.getKey()).getElementName());
-         v.addElement((now - e.getValue()) / 1000L + " s");
+         v.addElement((now - (Long)e.getValue()) / 1000L + " s");
       }
 
       return v;

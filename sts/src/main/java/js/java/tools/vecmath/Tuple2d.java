@@ -8,25 +8,21 @@ public abstract class Tuple2d implements Serializable, Cloneable {
    public double y;
 
    public Tuple2d(double x, double y) {
-      super();
       this.x = x;
       this.y = y;
    }
 
    public Tuple2d(double[] t) {
-      super();
       this.x = t[0];
       this.y = t[1];
    }
 
    public Tuple2d(Tuple2d t1) {
-      super();
       this.x = t1.x;
       this.y = t1.y;
    }
 
    public Tuple2d() {
-      super();
       this.x = 0.0;
       this.y = 0.0;
    }
@@ -57,8 +53,8 @@ public abstract class Tuple2d implements Serializable, Cloneable {
    }
 
    public final void add(Tuple2d t1) {
-      this.x += t1.x;
-      this.y += t1.y;
+      this.x = this.x + t1.x;
+      this.y = this.y + t1.y;
    }
 
    public final void sub(Tuple2d t1, Tuple2d t2) {
@@ -67,8 +63,8 @@ public abstract class Tuple2d implements Serializable, Cloneable {
    }
 
    public final void sub(Tuple2d t1) {
-      this.x -= t1.x;
-      this.y -= t1.y;
+      this.x = this.x - t1.x;
+      this.y = this.y - t1.y;
    }
 
    public final void negate(Tuple2d t1) {
@@ -133,11 +129,7 @@ public abstract class Tuple2d implements Serializable, Cloneable {
          return false;
       } else {
          diff = this.y - t1.y;
-         if (Double.isNaN(diff)) {
-            return false;
-         } else {
-            return !((diff < 0.0 ? -diff : diff) > epsilon);
-         }
+         return Double.isNaN(diff) ? false : !((diff < 0.0 ? -diff : diff) > epsilon);
       }
    }
 

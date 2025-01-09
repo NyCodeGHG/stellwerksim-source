@@ -5,10 +5,6 @@ import js.java.isolate.sim.eventsys.eventContainer;
 import js.java.isolate.sim.eventsys.eventFactory;
 
 public class weichenheizungstoerung_factory extends eventFactory {
-   public weichenheizungstoerung_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Weichen-Heizung-Störung";

@@ -46,7 +46,6 @@ public class zidRedirect extends JPanel implements ircupdate {
    private JLabel toLabel;
 
    public zidRedirect(oneInstance m, int zid) {
-      super();
       this.my_main = m;
       this.zid = zid;
       SwingUtilities.invokeLater(new Runnable() {
@@ -80,13 +79,13 @@ public class zidRedirect extends JPanel implements ircupdate {
    }
 
    private void fillModel(LinkedList<zidRedirect.routeItem> model, int size) {
-      while(model.size() < size) {
+      while (model.size() < size) {
          model.add(new zidRedirect.routeItem(0, "-"));
       }
    }
 
    public boolean wirdAidUmfahren(players_aid a) {
-      for(zidRedirect.routeItem ri : this.skipModel) {
+      for (zidRedirect.routeItem ri : this.skipModel) {
          if (ri.aid == a.aid) {
             return true;
          }
@@ -96,7 +95,7 @@ public class zidRedirect extends JPanel implements ircupdate {
    }
 
    public boolean hatAidUmleitung(players_aid a) {
-      for(zidRedirect.routeItem ri : this.routeModel) {
+      for (zidRedirect.routeItem ri : this.routeModel) {
          if (ri.aid == a.aid) {
             return true;
          }
@@ -107,7 +106,7 @@ public class zidRedirect extends JPanel implements ircupdate {
 
    @Override
    public void updateAid(players_aid a) {
-      for(routeLabel s : this.skipLeds) {
+      for (routeLabel s : this.skipLeds) {
          players_aid d = this.my_main.getAnlage(s.getAid());
          s.setLedOn(d != null && d.spieler != null);
       }
@@ -131,7 +130,7 @@ public class zidRedirect extends JPanel implements ircupdate {
             this.skipPanel.removeAll();
             this.routeLeds.clear();
 
-            for(int i = 0; i < tokens.length; ++i) {
+            for (int i = 0; i < tokens.length; i++) {
                if (tokens[i].equals("AID")) {
                   int pos = Integer.parseInt(tokens[++i].trim());
                   int aid = Integer.parseInt(tokens[++i].trim());
@@ -155,7 +154,7 @@ public class zidRedirect extends JPanel implements ircupdate {
                this.toLabel.setText("");
             }
 
-            for(zidRedirect.routeItem s : this.routeModel) {
+            for (zidRedirect.routeItem s : this.routeModel) {
                routeLabel l = new routeLabel(s.aid, s.s);
                if (s.aid > 0) {
                   this.routeLeds.add(l);
@@ -164,7 +163,7 @@ public class zidRedirect extends JPanel implements ircupdate {
                this.routePanel.add(l);
             }
 
-            for(zidRedirect.routeItem s : this.skipModel) {
+            for (zidRedirect.routeItem s : this.skipModel) {
                routeLabel l = new routeLabel(s.aid, s.s);
                this.skipLeds.add(l);
                this.skipPanel.add(l);
@@ -173,7 +172,7 @@ public class zidRedirect extends JPanel implements ircupdate {
             }
 
             if (res == 300) {
-               for(routeLabel l : this.routeLeds) {
+               for (routeLabel l : this.routeLeds) {
                   l.setLedOn(true);
                }
 
@@ -187,12 +186,12 @@ public class zidRedirect extends JPanel implements ircupdate {
          if (res != 300) {
             int caid = 0;
 
-            for(int i = 0; i < tokens.length; ++i) {
-               if (tokens[i].equals("CUR")) {
-                  ++i;
+            for (int ix = 0; ix < tokens.length; ix++) {
+               if (tokens[ix].equals("CUR")) {
+                  ix++;
 
                   try {
-                     caid = Integer.parseInt(tokens[i].trim());
+                     caid = Integer.parseInt(tokens[ix].trim());
                   } catch (NumberFormatException var8) {
                      var8.printStackTrace();
                   }
@@ -202,7 +201,7 @@ public class zidRedirect extends JPanel implements ircupdate {
             boolean found = false;
             Iterator<routeLabel> it = this.routeLeds.descendingIterator();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                routeLabel l = (routeLabel)it.next();
                l.setLedOn(found);
                l.setBlinkOn(l.getAid() == caid);
@@ -296,7 +295,6 @@ public class zidRedirect extends JPanel implements ircupdate {
       final int aid;
 
       routeItem(int aid, String s) {
-         super();
          this.aid = aid;
          this.s = s;
       }
@@ -304,7 +302,6 @@ public class zidRedirect extends JPanel implements ircupdate {
 
    private class zrLayout implements LayoutManager {
       private zrLayout() {
-         super();
       }
 
       public void addLayoutComponent(String name, Component comp) {
@@ -329,7 +326,7 @@ public class zidRedirect extends JPanel implements ircupdate {
          int h = parent.getHeight() - insets.top - insets.bottom;
          int w = (parent.getWidth() - zidRedirect.this.middlePanel.getMinimumSize().width - insets.left - insets.right) / 2;
 
-         for(int i = 0; i < nComps; ++i) {
+         for (int i = 0; i < nComps; i++) {
             Component c = parent.getComponent(i);
             if (c == zidRedirect.this.middlePanel) {
                c.setBounds(x, y, zidRedirect.this.middlePanel.getMinimumSize().width, h);
@@ -347,7 +344,6 @@ public class zidRedirect extends JPanel implements ircupdate {
       private final String[] tokens;
 
       private zrRunnable(int res, String[] tokens) {
-         super();
          this.res = res;
          this.tokens = tokens;
       }

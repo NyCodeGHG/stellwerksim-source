@@ -18,7 +18,6 @@ public class messageBorder extends AbstractBorder {
    private Color enabledColor;
 
    public messageBorder(Color enabledColor, Color disabledColor) {
-      super();
       this.enabledColor = enabledColor;
       this.disabledColor = disabledColor;
    }

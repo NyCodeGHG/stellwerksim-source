@@ -38,7 +38,6 @@ class aidPanel extends JComponent implements ActionListener, Comparable {
    private GregorianCalendar c = new GregorianCalendar();
 
    aidPanel(kartePanel _zp, karten_container k) {
-      super();
       this.zp = _zp;
       this.kc = k;
       this.updateOutput();

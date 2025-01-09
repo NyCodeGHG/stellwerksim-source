@@ -22,7 +22,6 @@ public class MultisortTableHeaderCellRenderer extends DefaultTableHeaderCellRend
    }
 
    public MultisortTableHeaderCellRenderer(float alpha) {
-      super();
       this.alpha = alpha;
    }
 
@@ -35,9 +34,9 @@ public class MultisortTableHeaderCellRenderer extends DefaultTableHeaderCellRend
    public Icon getIcon(JTable table, int column) {
       float computedAlpha = 1.0F;
 
-      for(SortKey sortKey : table.getRowSorter().getSortKeys()) {
+      for (SortKey sortKey : table.getRowSorter().getSortKeys()) {
          if (table.convertColumnIndexToView(sortKey.getColumn()) == column) {
-            switch(sortKey.getSortOrder()) {
+            switch (sortKey.getSortOrder()) {
                case ASCENDING:
                   return new AlphaIcon(UIManager.getIcon("Table.ascendingSortIcon"), computedAlpha);
                case DESCENDING:

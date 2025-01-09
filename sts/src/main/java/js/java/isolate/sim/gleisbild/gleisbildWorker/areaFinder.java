@@ -24,18 +24,18 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
       boolean[][] kantenX = new boolean[this.glbModel.getGleisWidth()][this.glbModel.getGleisHeight()];
       boolean[][] kantenY = new boolean[this.glbModel.getGleisWidth()][this.glbModel.getGleisHeight()];
 
-      for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
-         for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+      for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
+         for (int x = 0; x < this.glbModel.getGleisWidth(); x++) {
             kantenX[x][y] = false;
             kantenY[x][y] = false;
          }
       }
 
-      for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
+      for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
          gleis lastXe = null;
          int lastXc = 0;
 
-         for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+         for (int x = 0; x < this.glbModel.getGleisWidth(); x++) {
             gleis gl = this.glbModel.getXY_null(x, y);
             if (!this.emptyGleis(gl)) {
                lastXe = gl;
@@ -43,14 +43,14 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
                kantenX[x][y] = true;
             } else {
                if (lastXe != null) {
-                  ++lastXc;
+                  lastXc++;
                   kantenX[x][y] = true;
                }
 
                if (lastXc > 1) {
                   lastXe = null;
 
-                  for(int i = lastXc; i > 0; --i) {
+                  for (int i = lastXc; i > 0; i--) {
                      kantenX[x - i + 1][y] = false;
                   }
 
@@ -62,7 +62,7 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
          if (lastXc > 0) {
             lastXe = null;
 
-            for(int i = lastXc; i > 0; --i) {
+            for (int i = lastXc; i > 0; i--) {
                kantenX[this.glbModel.getGleisWidth() - i][y] = false;
             }
 
@@ -70,27 +70,27 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
          }
       }
 
-      for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+      for (int xx = 0; xx < this.glbModel.getGleisWidth(); xx++) {
          gleis lastXe = null;
          int lastXc = 0;
 
-         for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
-            gleis gl = this.glbModel.getXY_null(x, y);
+         for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
+            gleis gl = this.glbModel.getXY_null(xx, y);
             if (!this.emptyGleis(gl)) {
                lastXe = gl;
                lastXc = 0;
-               kantenY[x][y] = true;
+               kantenY[xx][y] = true;
             } else {
                if (lastXe != null) {
-                  ++lastXc;
-                  kantenY[x][y] = true;
+                  lastXc++;
+                  kantenY[xx][y] = true;
                }
 
                if (lastXc > 1) {
                   lastXe = null;
 
-                  for(int i = lastXc; i > 0; --i) {
-                     kantenY[x][y - i + 1] = false;
+                  for (int i = lastXc; i > 0; i--) {
+                     kantenY[xx][y - i + 1] = false;
                   }
 
                   lastXc = 0;
@@ -101,19 +101,19 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
          if (lastXc > 0) {
             lastXe = null;
 
-            for(int i = lastXc; i > 0; --i) {
-               kantenY[x][this.glbModel.getGleisHeight() - i] = false;
+            for (int i = lastXc; i > 0; i--) {
+               kantenY[xx][this.glbModel.getGleisHeight() - i] = false;
             }
 
             boolean var21 = false;
          }
       }
 
-      for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
-         for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
-            kantenX[x][y] |= kantenY[x][y];
-            if (y == 0 || x == 0 || y == this.glbModel.getGleisHeight() - 1 || x == this.glbModel.getGleisWidth() - 1) {
-               kantenX[x][y] = false;
+      for (int yx = 0; yx < this.glbModel.getGleisHeight(); yx++) {
+         for (int xx = 0; xx < this.glbModel.getGleisWidth(); xx++) {
+            kantenX[xx][yx] = kantenX[xx][yx] | kantenY[xx][yx];
+            if (yx == 0 || xx == 0 || yx == this.glbModel.getGleisHeight() - 1 || xx == this.glbModel.getGleisWidth() - 1) {
+               kantenX[xx][yx] = false;
             }
          }
       }
@@ -122,7 +122,7 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
 
       do {
          this.findLines();
-      } while(this.findRects(ret));
+      } while (this.findRects(ret));
 
       System.out.println("done");
       return ret;
@@ -132,16 +132,16 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
       this.hlines.clear();
       this.vlines.clear();
 
-      for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
+      for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
          int startx = 0;
 
-         for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+         for (int x = 0; x < this.glbModel.getGleisWidth(); x++) {
             if (this.kanten[x][y]) {
                if (x - startx > 2) {
                   boolean add = false;
 
                   try {
-                     for(int i = startx; i < x; ++i) {
+                     for (int i = startx; i < x; i++) {
                         if (this.kanten[i][y - 1] || this.kanten[i][y + 1]) {
                            add = true;
                            break;
@@ -165,8 +165,8 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
             boolean add = false;
 
             try {
-               for(int i = startx; i < this.glbModel.getGleisWidth(); ++i) {
-                  if (this.kanten[i][y - 1] || this.kanten[i][y + 1]) {
+               for (int ix = startx; ix < this.glbModel.getGleisWidth(); ix++) {
+                  if (this.kanten[ix][y - 1] || this.kanten[ix][y + 1]) {
                      add = true;
                      break;
                   }
@@ -182,17 +182,17 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
          }
       }
 
-      for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+      for (int xx = 0; xx < this.glbModel.getGleisWidth(); xx++) {
          int starty = 0;
 
-         for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
-            if (this.kanten[x][y]) {
+         for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
+            if (this.kanten[xx][y]) {
                if (y - starty > 2) {
                   boolean add = false;
 
                   try {
-                     for(int i = starty; i < y; ++i) {
-                        if (this.kanten[x - 1][i] || this.kanten[x + 1][i]) {
+                     for (int ixx = starty; ixx < y; ixx++) {
+                        if (this.kanten[xx - 1][ixx] || this.kanten[xx + 1][ixx]) {
                            add = true;
                            break;
                         }
@@ -202,7 +202,7 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
                   }
 
                   if (add) {
-                     areaFinder.line l = new areaFinder.line(x, starty, x, y);
+                     areaFinder.line l = new areaFinder.line(xx, starty, xx, y);
                      this.vlines.add(l);
                   }
                }
@@ -215,8 +215,8 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
             boolean add = false;
 
             try {
-               for(int i = starty; i < this.glbModel.getGleisHeight(); ++i) {
-                  if (this.kanten[x - 1][i] || this.kanten[x + 1][i]) {
+               for (int ixxx = starty; ixxx < this.glbModel.getGleisHeight(); ixxx++) {
+                  if (this.kanten[xx - 1][ixxx] || this.kanten[xx + 1][ixxx]) {
                      add = true;
                      break;
                   }
@@ -226,14 +226,14 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
             }
 
             if (add) {
-               areaFinder.line l = new areaFinder.line(x, starty, x, this.glbModel.getGleisHeight() - 1);
+               areaFinder.line l = new areaFinder.line(xx, starty, xx, this.glbModel.getGleisHeight() - 1);
                this.vlines.add(l);
             }
          }
       }
 
-      for(areaFinder.line hl : this.hlines) {
-         for(areaFinder.line vl : this.vlines) {
+      for (areaFinder.line hl : this.hlines) {
+         for (areaFinder.line vl : this.vlines) {
             if (hl.intersectsLine(vl)) {
                hl.intersects.add(vl);
                vl.intersects.add(hl);
@@ -243,12 +243,12 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
    }
 
    private boolean findRects(LinkedList<areaFinder.rectangle> rects) {
-      for(areaFinder.line l : this.hlines) {
+      for (areaFinder.line l : this.hlines) {
          this.glbModel.clearMarkedGleis();
          if (l.intersects.size() >= 2) {
             TreeSet<areaFinder.line> matching = new TreeSet();
 
-            for(areaFinder.line vl : l.intersects) {
+            for (areaFinder.line vl : l.intersects) {
                if (vl.intersects.size() >= 2) {
                   matching.add(vl);
                }
@@ -257,12 +257,12 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
             if (!matching.isEmpty()) {
                TreeSet<areaFinder.rectangle> result = new TreeSet();
 
-               for(areaFinder.line vl : matching) {
-                  for(areaFinder.line hl : vl.intersects) {
+               for (areaFinder.line vlx : matching) {
+                  for (areaFinder.line hl : vlx.intersects) {
                      if (hl.y1 != l.y1 && (l.x1 <= hl.x1 && l.x2 >= hl.x1 || l.x1 <= hl.x2 && l.x2 >= hl.x2)) {
-                        for(areaFinder.line vl2 : matching) {
-                           if (vl2 != vl && vl2.intersects.contains(hl)) {
-                              areaFinder.rectangle r = new areaFinder.rectangle(l.getIntersect(vl));
+                        for (areaFinder.line vl2 : matching) {
+                           if (vl2 != vlx && vl2.intersects.contains(hl)) {
+                              areaFinder.rectangle r = new areaFinder.rectangle(l.getIntersect(vlx));
                               r.add(hl.getIntersect(vl2));
                               if (this.containtKanten(r) && this.borderKanten(r)) {
                                  result.add(r);
@@ -277,7 +277,7 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
                   areaFinder.rectangle min = (areaFinder.rectangle)result.first();
                   int minh = min.height;
 
-                  for(areaFinder.rectangle r : result) {
+                  for (areaFinder.rectangle r : result) {
                      if (r.height < minh) {
                         min = r;
                         minh = r.height;
@@ -302,8 +302,8 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
    }
 
    private boolean containtKanten(Rectangle r) {
-      for(int y = 0; y < r.height; ++y) {
-         for(int x = 0; x < r.width; ++x) {
+      for (int y = 0; y < r.height; y++) {
+         for (int x = 0; x < r.width; x++) {
             if (this.kanten[x + r.x][y + r.y]) {
                return true;
             }
@@ -323,12 +323,12 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
       boolean kleft = false;
       boolean kright = false;
 
-      for(int xx = 0; xx < width; ++xx) {
+      for (int xx = 0; xx < width; xx++) {
          ktop |= this.kanten[x + xx][y];
          kbottom |= this.kanten[x + xx][y + height];
       }
 
-      for(int yy = 0; yy < height; ++yy) {
+      for (int yy = 0; yy < height; yy++) {
          kleft |= this.kanten[x][y + yy];
          kright |= this.kanten[x + width][y + yy];
       }
@@ -337,8 +337,8 @@ public class areaFinder extends gleisbildWorkerBase<gleisbildModel> {
    }
 
    private void clearKanten(Rectangle r) {
-      for(int y = 0; y < r.height; ++y) {
-         for(int x = 0; x < r.width; ++x) {
+      for (int y = 0; y < r.height; y++) {
+         for (int x = 0; x < r.width; x++) {
             this.kanten[x + r.x][y + r.y] = false;
          }
       }

@@ -26,7 +26,6 @@ class FPEaidData implements Comparable, xmllistener {
    private int linecnt = 0;
 
    public FPEaidData(int _aid, fahrplaneditor m) {
-      super();
       this.aid = _aid;
       this.my_main = m;
       this.name = m.getParameter("aidname" + this.aid);
@@ -143,7 +142,7 @@ class FPEaidData implements Comparable, xmllistener {
             this.linecnt = 0;
          }
       } else if (this.validate_match && tag.equalsIgnoreCase("aid")) {
-         ++this.linecnt;
+         this.linecnt++;
          this.my_main.setLoad(this.linecnt);
          enritem ei = null;
          int e = Integer.parseInt(attrs.getValue("element"));

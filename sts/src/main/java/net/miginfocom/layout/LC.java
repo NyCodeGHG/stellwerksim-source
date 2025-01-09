@@ -30,10 +30,6 @@ public final class LC implements Externalizable {
    private boolean noGrid = false;
    private boolean visualPadding = true;
 
-   public LC() {
-      super();
-   }
-
    public boolean isNoCache() {
       return this.noCache;
    }

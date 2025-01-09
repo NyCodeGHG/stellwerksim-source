@@ -6,10 +6,6 @@ import js.java.isolate.sim.eventsys.eventFactory;
 import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 
 public class stellwerkausfall_factory extends eventFactory {
-   public stellwerkausfall_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Stellwerksausfall";

@@ -5,10 +5,6 @@ import js.java.schaltungen.UserContextMini;
 public class v_irc extends InitTestBase {
    private String error = "";
 
-   public v_irc() {
-      super();
-   }
-
    @Override
    public String name() {
       return "IRC & Kontrollserver Verbindungstest" + this.error;

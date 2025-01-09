@@ -3,10 +3,6 @@ package js.java.tools;
 import java.util.Comparator;
 
 public class AlphanumComparator implements Comparator<String> {
-   public AlphanumComparator() {
-      super();
-   }
-
    private boolean isDigit(char ch) {
       return ch >= '0' && ch <= '9';
    }
@@ -15,26 +11,26 @@ public class AlphanumComparator implements Comparator<String> {
       StringBuilder chunk = new StringBuilder();
       char c = s.charAt(marker);
       chunk.append(c);
-      ++marker;
+      marker++;
       if (this.isDigit(c)) {
-         while(marker < slength) {
+         while (marker < slength) {
             c = s.charAt(marker);
             if (!this.isDigit(c)) {
                break;
             }
 
             chunk.append(c);
-            ++marker;
+            marker++;
          }
       } else {
-         while(marker < slength) {
+         while (marker < slength) {
             c = s.charAt(marker);
             if (this.isDigit(c)) {
                break;
             }
 
             chunk.append(c);
-            ++marker;
+            marker++;
          }
       }
 
@@ -49,7 +45,7 @@ public class AlphanumComparator implements Comparator<String> {
       int s1Length = s1.length();
       int s2Length = s2.length();
 
-      while(thisMarker < s1Length && thatMarker < s2Length) {
+      while (thisMarker < s1Length && thatMarker < s2Length) {
          String thisChunk = this.getChunk(s1, s1Length, thisMarker);
          thisMarker += thisChunk.length();
          String thatChunk = this.getChunk(s2, s2Length, thatMarker);
@@ -59,7 +55,7 @@ public class AlphanumComparator implements Comparator<String> {
             int thisChunkLength = thisChunk.length();
             result = thisChunkLength - thatChunk.length();
             if (result == 0) {
-               for(int i = 0; i < thisChunkLength; ++i) {
+               for (int i = 0; i < thisChunkLength; i++) {
                   result = thisChunk.charAt(i) - thatChunk.charAt(i);
                   if (result != 0) {
                      return result;

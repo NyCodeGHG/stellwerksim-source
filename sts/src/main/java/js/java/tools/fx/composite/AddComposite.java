@@ -22,7 +22,7 @@ public final class AddComposite extends RGBComposite {
       public void composeRGB(int[] src, int[] dst, float alpha) {
          int w = src.length;
 
-         for(int i = 0; i < w; i += 4) {
+         for (int i = 0; i < w; i += 4) {
             int sr = src[i];
             int dir = dst[i];
             int sg = src[i + 1];

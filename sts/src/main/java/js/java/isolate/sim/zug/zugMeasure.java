@@ -185,11 +185,11 @@ public class zugMeasure extends JDialog implements ActionListener {
          .setModel(new DefaultTableModel(new Object[0][], new String[]{"Ort", "Fahrdauer", "seit Signal", "seit Bahnsteig", "Gesamtzeit", "Simzeit"}) {
             Class[] types = new Class[]{String.class, String.class, String.class, String.class, String.class, String.class};
             boolean[] canEdit = new boolean[]{false, false, false, false, false, false};
-   
+
             public Class getColumnClass(int columnIndex) {
                return this.types[columnIndex];
             }
-   
+
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                return this.canEdit[columnIndex];
             }
@@ -230,7 +230,6 @@ public class zugMeasure extends JDialog implements ActionListener {
       Object[] o;
 
       private addRunner(String ort, long last, long start, long ssigt, long sbstt, long sim, boolean bst) {
-         super();
          long d = last / 1000L;
          int sec = (int)(d % 60L);
          int min = (int)(d / 60L);

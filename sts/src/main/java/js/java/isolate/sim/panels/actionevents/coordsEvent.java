@@ -7,7 +7,6 @@ public class coordsEvent extends AbstractStringEvent {
    private final int y;
 
    public coordsEvent(int _x, int _y) {
-      super();
       this.x = _x;
       this.y = _y;
    }

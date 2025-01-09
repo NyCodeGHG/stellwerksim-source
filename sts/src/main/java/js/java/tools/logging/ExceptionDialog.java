@@ -15,10 +15,6 @@ public class ExceptionDialog implements UncaughtExceptionHandler {
    private String heading = "An error occurred during execution:";
    private boolean inShowing = false;
 
-   public ExceptionDialog() {
-      super();
-   }
-
    public void show(String atext, Throwable ex) {
       this.show(null, atext, ex);
    }

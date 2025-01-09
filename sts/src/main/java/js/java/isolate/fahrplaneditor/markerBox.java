@@ -16,7 +16,6 @@ class markerBox extends JToggleButton {
    private GradientPaint rollovergp;
 
    markerBox() {
-      super();
       this.setMargin(new Insets(0, 0, 0, 0));
       this.gp = new GradientPaint(0.0F, 0.0F, new Color(153, 153, 153), 0.0F, 10.0F, new Color(221, 221, 221), true);
       this.rollovergp = new GradientPaint(0.0F, 0.0F, new Color(153, 153, 187), 0.0F, 10.0F, new Color(187, 187, 255), true);

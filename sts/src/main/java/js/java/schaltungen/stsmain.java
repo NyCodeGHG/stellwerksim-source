@@ -113,7 +113,6 @@ public class stsmain implements UserContextMini, stsmainMBean, SingleInstanceLis
    }
 
    private stsmain(String token, String uid, String username) throws RemoteException, MalformedURLException, IOException {
-      super();
       this.token = token;
       this.uid = uid;
       this.username = username;
@@ -184,7 +183,7 @@ public class stsmain implements UserContextMini, stsmainMBean, SingleInstanceLis
    public void noExceptionsDialog() {
       Handler[] h = Logger.getLogger("stslogger").getHandlers();
 
-      for(int i = h.length - 1; i >= 0; --i) {
+      for (int i = h.length - 1; i >= 0; i--) {
          if (h[i] instanceof DialogHandler) {
             Logger.getLogger("stslogger").removeHandler(h[i]);
          }
@@ -579,7 +578,6 @@ public class stsmain implements UserContextMini, stsmainMBean, SingleInstanceLis
       final String kpass;
 
       MyAuthenticator(String user, String pass) {
-         super();
          this.kuser = user;
          this.kpass = pass;
       }

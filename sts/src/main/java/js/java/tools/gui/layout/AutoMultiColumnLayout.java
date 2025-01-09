@@ -22,12 +22,12 @@ public class AutoMultiColumnLayout extends ColumnLayout implements ThinkingLayou
 
    @Override
    public Dimension preferredLayoutSize(Container parent) {
-      synchronized(parent.getTreeLock()) {
+      synchronized (parent.getTreeLock()) {
          int ncomponents = parent.getComponentCount();
          int w = 0;
          int h = 0;
 
-         for(int i = 0; i < ncomponents; ++i) {
+         for (int i = 0; i < ncomponents; i++) {
             Component comp = parent.getComponent(i);
             Dimension d = comp.getPreferredSize();
             if (w < d.width) {
@@ -51,7 +51,7 @@ public class AutoMultiColumnLayout extends ColumnLayout implements ThinkingLayou
       int w = 0;
       int h = 0;
 
-      for(int i = 0; i < ncomponents; ++i) {
+      for (int i = 0; i < ncomponents; i++) {
          Component comp = parent.getComponent(i);
          Dimension d = comp.getMinimumSize();
          if (w < d.width) {
@@ -98,10 +98,6 @@ public class AutoMultiColumnLayout extends ColumnLayout implements ThinkingLayou
    }
 
    public static class MaxHeight extends AutoMultiColumnLayout.PlacingAlgorithm {
-      public MaxHeight() {
-         super();
-      }
-
       @Override
       int calcCols(Container parent, int containerWidth, int containerHeight, int minElementWidth, int minElementHeight) {
          if (containerHeight > 0 && minElementHeight > 0) {
@@ -113,7 +109,7 @@ public class AutoMultiColumnLayout extends ColumnLayout implements ThinkingLayou
             int c = parent.getComponentCount();
             int cols = c / mh;
             if (c % mh > 0) {
-               ++cols;
+               cols++;
             }
 
             if (cols < 1) {
@@ -138,10 +134,6 @@ public class AutoMultiColumnLayout extends ColumnLayout implements ThinkingLayou
    }
 
    public static class MaxWidth extends AutoMultiColumnLayout.PlacingAlgorithm {
-      public MaxWidth() {
-         super();
-      }
-
       @Override
       int calcCols(Container parent, int containerWidth, int containerHeight, int minElementWidth, int minElementHeight) {
          if (containerWidth > 0) {
@@ -173,10 +165,6 @@ public class AutoMultiColumnLayout extends ColumnLayout implements ThinkingLayou
    }
 
    public abstract static class PlacingAlgorithm {
-      public PlacingAlgorithm() {
-         super();
-      }
-
       public boolean overideWidth() {
          return false;
       }

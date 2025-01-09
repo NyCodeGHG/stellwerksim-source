@@ -18,7 +18,6 @@ public class IdentServer implements Runnable {
    private Socket _clientSocket = null;
 
    public IdentServer(String userName) {
-      super();
       this._userName = userName;
       Thread t = new Thread(this);
       t.setName("IdentServer");
@@ -70,7 +69,7 @@ public class IdentServer implements Runnable {
          String line;
          do {
             line = is.readLine();
-         } while(line == null);
+         } while (line == null);
 
          String resp = line + " : USERID : UNIX : " + this._userName;
          os.writeBytes(resp);

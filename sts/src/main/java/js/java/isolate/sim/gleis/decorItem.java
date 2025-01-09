@@ -23,10 +23,6 @@ class decorItem {
    public elementPainterBase elementPaint = new elementPainterCenteredLight();
    public String namePrefix = null;
 
-   decorItem() {
-      super();
-   }
-
    decorItem allowVerbund() {
       this.allowsVerbund = true;
       return this;

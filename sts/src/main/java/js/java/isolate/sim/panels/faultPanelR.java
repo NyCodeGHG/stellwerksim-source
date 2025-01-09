@@ -56,7 +56,7 @@ public class faultPanelR extends basePanel implements SessionClose {
       ButtonGroup gp = new ButtonGroup();
       this.scalePanel.setLayout(new ColumnLayout(2));
 
-      for(String scale : scaleHolder.possibleScales) {
+      for (String scale : scaleHolder.possibleScales) {
          this.addScale(gp, scale);
       }
 
@@ -222,7 +222,7 @@ public class faultPanelR extends basePanel implements SessionClose {
             final LinkedList<Rectangle> rl = gw.getAreas();
             SwingUtilities.invokeLater(new Runnable() {
                public void run() {
-                  for(Rectangle r : rl) {
+                  for (Rectangle r : rl) {
                      faultPanelR.this.areasCB.addItem(r);
                   }
                }
@@ -250,7 +250,7 @@ public class faultPanelR extends basePanel implements SessionClose {
          public void run() {
             elementConnectorFinder gw = new elementConnectorFinder(faultPanelR.this.glbControl.getModel(), faultPanelR.this.my_main);
             elementConnectorFinder.analyser aa;
-            switch(faultPanelR.this.reducedVGraph.getSelectedIndex()) {
+            switch (faultPanelR.this.reducedVGraph.getSelectedIndex()) {
                case 0:
                default:
                   aa = new elementConnectorFinder.fullAnalyser();
@@ -281,7 +281,7 @@ public class faultPanelR extends basePanel implements SessionClose {
             LinkedList<eaConnectionTracking.eaConnection> result = eac.run();
             StringBuilder res = new StringBuilder();
 
-            for(eaConnectionTracking.eaConnection ea : result) {
+            for (eaConnectionTracking.eaConnection ea : result) {
                res.append(ea.toString());
                res.append('\n');
             }

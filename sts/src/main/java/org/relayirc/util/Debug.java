@@ -3,10 +3,6 @@ package org.relayirc.util;
 public class Debug {
    private static boolean _debug = false;
 
-   public Debug() {
-      super();
-   }
-
    public static void setDebug(boolean flag) {
       _debug = flag;
       if (_debug) {

@@ -5,7 +5,6 @@ class enritem implements Comparable {
    public int enr;
 
    enritem(String t, int e) {
-      super();
       this.text = t;
       this.enr = e;
    }

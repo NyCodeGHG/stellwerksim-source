@@ -18,7 +18,7 @@ public class appletmaster extends simpleappletmaster {
    }
 
    protected boolean removeMe() {
-      for(Entry<String, appletmaster> e : parallels.entrySet()) {
+      for (Entry<String, appletmaster> e : parallels.entrySet()) {
          if (e.getValue() == this) {
             parallels.remove(e.getKey());
             return true;
@@ -38,7 +38,6 @@ public class appletmaster extends simpleappletmaster {
    }
 
    public appletmaster() {
-      super();
       main = this;
    }
 

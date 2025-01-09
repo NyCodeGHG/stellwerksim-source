@@ -20,7 +20,7 @@ class paint_zdeckung extends paint2Base {
          ? gleis.colors.col_stellwerk_rotaus
          : gleis.colors.col_stellwerk_rotein;
       Color col_kenn = gl.fdata.stellung == gleisElements.ST_ZDSIGNAL_GRÜN ? gleis.colors.col_stellwerk_zs1 : gleis.colors.col_stellwerk_frei;
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             if (sim) {
             }

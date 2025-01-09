@@ -21,10 +21,6 @@ public class massLenNextGen extends massSpeed05 {
    private static final int[] masstabValues = new int[]{0, 65537, 131074, 196611, 262148, 327685, 393222, 458759, 131073, 2, 131072, 262144, 524288};
    private static final double[] masstabLength = new double[]{1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 20.0};
 
-   public massLenNextGen() {
-      super();
-   }
-
    @Override
    protected int calcLaengeImpl(int masstab, int laenge) {
       masstab >>= 16;

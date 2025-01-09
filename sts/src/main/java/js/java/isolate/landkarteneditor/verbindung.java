@@ -17,7 +17,6 @@ class verbindung extends Double implements Comparable {
    private int direction = 0;
 
    verbindung(control main, knotenList p, int kid1, int kid2) {
-      super();
       this.my_main = main;
       this.parent = p;
       this.kid1 = kid1;

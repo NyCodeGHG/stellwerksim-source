@@ -9,7 +9,6 @@ public class twoWayQuestionIcon extends twoWayIcon {
    protected final ImageIcon knowIconSmall = new ImageIcon(this.getClass().getResource("/js/java/tools/resources/question32.png"));
 
    public twoWayQuestionIcon() {
-      super();
       this.knowIconLarge = new ImageIcon(this.getClass().getResource("/js/java/tools/resources/question48.png"));
       this.line1col = new Color(230, 80, 0, 128);
    }

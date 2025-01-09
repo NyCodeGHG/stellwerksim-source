@@ -6,7 +6,6 @@ public class StoreLatencies {
    public final int delay;
 
    public StoreLatencies(String name, String params, int delay) {
-      super();
       this.name = name;
       this.params = params;
       this.delay = delay;

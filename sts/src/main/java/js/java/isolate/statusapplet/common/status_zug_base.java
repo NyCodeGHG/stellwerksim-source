@@ -27,7 +27,6 @@ public abstract class status_zug_base {
    public static final int ST_DELETE = 3;
 
    public status_zug_base() {
-      super();
       this.sdf = DateFormat.getTimeInstance(3, Locale.GERMAN);
    }
 }

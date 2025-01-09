@@ -24,7 +24,7 @@ public enum OCCU_KIND {
    }
 
    public static OCCU_KIND find(String k) {
-      for(OCCU_KIND o : values()) {
+      for (OCCU_KIND o : values()) {
          if (k.charAt(0) == o.c) {
             return o;
          }

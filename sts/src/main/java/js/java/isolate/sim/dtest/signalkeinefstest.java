@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class signalkeinefstest implements dtest {
-   public signalkeinefstest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "keine FS";
@@ -26,12 +22,12 @@ public class signalkeinefstest implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ALLE_STARTSIGNALE});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          boolean found = false;
          Iterator<fahrstrasse> it2 = glb.fahrstrassenIterator();
 
-         while(it2.hasNext()) {
+         while (it2.hasNext()) {
             fahrstrasse fs = (fahrstrasse)it2.next();
             if (!fs.getExtend().isDeleted() && fs.getStart() == gl) {
                found = true;

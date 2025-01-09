@@ -296,7 +296,6 @@ public class stCodeFrame extends JDialog {
       private final String code;
 
       codeTimer(String code) {
-         super();
          this.code = code;
       }
 

@@ -14,7 +14,6 @@ abstract class editBase implements MouseListener, MouseMotionListener {
    private Rectangle lineIntersec = new Rectangle(0, 0, 5, 5);
 
    editBase(control main, knotenList klist, bahnhofList bhflist, landkarte lk) {
-      super();
       this.my_main = main;
       this.klist = klist;
       this.bhflist = bhflist;
@@ -34,7 +33,7 @@ abstract class editBase implements MouseListener, MouseMotionListener {
       y = this.translateY(y);
       Iterator<knoten> kit = this.klist.knotenIterator();
 
-      while(kit.hasNext()) {
+      while (kit.hasNext()) {
          knoten k = (knoten)kit.next();
          if (k.contains(x, y)) {
             return k;
@@ -50,7 +49,7 @@ abstract class editBase implements MouseListener, MouseMotionListener {
       this.lineIntersec.setLocation(x, y);
       Iterator<verbindung> kit = this.klist.verbindungIterator();
 
-      while(kit.hasNext()) {
+      while (kit.hasNext()) {
          verbindung k = (verbindung)kit.next();
          if (k.getShape().intersects(this.lineIntersec)) {
             return k;

@@ -17,6 +17,7 @@ import js.java.isolate.sim.stellwerk_editor;
 import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildEditorControl;
 import js.java.isolate.sim.gleisbild.gleisbildModelStore;
+import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.gecWorker.gecBase;
 import js.java.isolate.sim.panels.actionevents.warningEvent;
 import js.java.schaltungen.moduleapi.SessionClose;
@@ -183,13 +184,15 @@ public class savePanel extends basePanel implements SessionClose {
 
       boolean dosave = true;
       if (this.glbControl.getModel().gl_overmaxsize() > 0) {
+         StringBuilder var10001 = new StringBuilder().append("Achtung! Die Größe überschreitet ");
+         gleisbildModelSts var10002 = this.glbControl.getModel();
          int r = JOptionPane.showConfirmDialog(
             this,
-            "Achtung! Die Größe überschreitet "
-               + 10000
-               + " Felder um "
-               + this.glbControl.getModel().gl_overmaxsize()
-               + " Felder,\ndie Anlage wird sich dann mit hoher Wahrscheinlichkeit\nnicht mehr laden lassen.\n\nSoll  trotzdem gespeichert werden?",
+            var10001.append(10000)
+               .append(" Felder um ")
+               .append(this.glbControl.getModel().gl_overmaxsize())
+               .append(" Felder,\ndie Anlage wird sich dann mit hoher Wahrscheinlichkeit\nnicht mehr laden lassen.\n\nSoll  trotzdem gespeichert werden?")
+               .toString(),
             "Anlage zu groß!",
             0,
             2

@@ -14,7 +14,6 @@ public class ServiceAccessor {
    private final ExecutorService tpool;
 
    public ServiceAccessor(String url) throws MalformedURLException {
-      super();
       BindingProvider bp = (BindingProvider)this.port;
       bp.getRequestContext().put("javax.xml.ws.service.endpoint.address", url);
       this.tpool = Executors.newSingleThreadExecutor();

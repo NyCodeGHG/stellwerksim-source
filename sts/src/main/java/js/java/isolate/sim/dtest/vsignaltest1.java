@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class vsignaltest1 implements dtest {
-   public vsignaltest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Vorsignal in der Einfahrt";
@@ -25,7 +21,7 @@ public class vsignaltest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_EINFAHRT});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gls = (gleis)it1.next();
          boolean ok = true;
          gleis before_gl = gls;
@@ -50,7 +46,7 @@ public class vsignaltest1 implements dtest {
                      break;
                   }
                }
-            } while(next_gl != null);
+            } while (next_gl != null);
          }
 
          if (!ok) {

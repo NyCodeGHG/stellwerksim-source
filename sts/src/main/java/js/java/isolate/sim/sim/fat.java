@@ -65,7 +65,7 @@ public class fat extends JFrame {
       Vector v = si.getStructure();
       FATwriteln(modul, "DUMP start " + si.getStructName() + "-------------------");
 
-      for(int i = 0; i < v.size(); i += 2) {
+      for (int i = 0; i < v.size(); i += 2) {
          FATwriteln(modul, i / 2 + 1 + ". " + v.elementAt(i) + ": " + v.elementAt(i + 1));
       }
 
@@ -73,7 +73,6 @@ public class fat extends JFrame {
    }
 
    public fat(UserContext uc, fatcodeprovider m) {
-      super();
       this.uc = uc;
       this.my_main = m;
       this.initComponents();
@@ -388,7 +387,7 @@ public class fat extends JFrame {
             }
          });
       } else {
-         ++this.responseCnt;
+         this.responseCnt++;
          SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                fat.this.statusText.setText("Code NICHT akzeptiert.");
@@ -425,7 +424,6 @@ public class fat extends JFrame {
       final int res;
 
       public FatResponseEvent(int res) {
-         super();
          this.res = res;
       }
    }

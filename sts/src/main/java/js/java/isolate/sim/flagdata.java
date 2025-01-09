@@ -11,7 +11,6 @@ public class flagdata implements Iterable<Integer> {
    private final LinkedList<flagdata.flagelem> staticfl = new LinkedList();
 
    public flagdata(String flags) throws IllegalFormatFlagsException {
-      super();
       boolean inBracket = false;
       boolean needBracket = false;
       boolean inBracket2 = false;
@@ -20,7 +19,7 @@ public class flagdata implements Iterable<Integer> {
       flags = flags.toUpperCase().trim();
       flagdata.flagelem fe = null;
 
-      for(int i = 0; i < flags.length(); ++i) {
+      for (int i = 0; i < flags.length(); i++) {
          char f = flags.charAt(i);
          if (f >= 'A' && f <= 'Z' && !inBracket && !needBracket && !inBracket2) {
             fe = new flagdata.flagelem();
@@ -64,7 +63,7 @@ public class flagdata implements Iterable<Integer> {
             param = new StringBuffer();
          } else if (f == ']' && inBracket2) {
             inBracket2 = false;
-            --needBracket2;
+            needBracket2--;
             if (param.length() <= 0) {
                throw new IllegalFormatFlagsException("[]-Klammern ohne Inhalt");
             }
@@ -98,7 +97,6 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public flagdata(String flags, String flagd, String flagparam) {
-      super();
       flagdata.flagelem fe = null;
       StringTokenizer ft = new StringTokenizer(flagd, ",");
       String[] p = null;
@@ -106,13 +104,13 @@ public class flagdata implements Iterable<Integer> {
          p = flagparam.split(":");
       }
 
-      for(int i = 0; i < flags.length(); ++i) {
+      for (int i = 0; i < flags.length(); i++) {
          char f = flags.charAt(i);
          if (f >= 'A' && f <= 'Z') {
             fe = new flagdata.flagelem();
             fe.flag = f;
             fe.longflag = f + "";
-            switch(f) {
+            switch (f) {
                case 'E':
                case 'F':
                case 'K':
@@ -125,7 +123,7 @@ public class flagdata implements Iterable<Integer> {
             }
 
             if (p != null) {
-               for(int j = 0; j < p.length; ++j) {
+               for (int j = 0; j < p.length; j++) {
                   if (p[j].startsWith(f + "=")) {
                      fe.addParam(p[j].substring(2).toLowerCase());
                   }
@@ -141,13 +139,11 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public flagdata(flagdata old) {
-      super();
-
-      for(flagdata.flagelem f : old.fl) {
+      for (flagdata.flagelem f : old.fl) {
          this.fl.addLast(new flagdata.flagelem(f));
       }
 
-      for(flagdata.flagelem f : old.staticfl) {
+      for (flagdata.flagelem f : old.staticfl) {
          this.staticfl.addLast(new flagdata.flagelem(f));
       }
    }
@@ -161,7 +157,7 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public boolean hasFlag(char flag) {
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          if (f.flag == flag) {
             return true;
          }
@@ -171,7 +167,7 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public boolean hadFlag(char flag) {
-      for(flagdata.flagelem f : this.staticfl) {
+      for (flagdata.flagelem f : this.staticfl) {
          if (f.flag == flag) {
             return true;
          }
@@ -181,7 +177,7 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public boolean hasLongFlag(String flag) {
-      for(flagdata.flagelem f : this.staticfl) {
+      for (flagdata.flagelem f : this.staticfl) {
          if (f.longflag.equalsIgnoreCase(flag)) {
             return true;
          }
@@ -191,7 +187,7 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public String getLongFlag(char flag) {
-      for(flagdata.flagelem f : this.staticfl) {
+      for (flagdata.flagelem f : this.staticfl) {
          if (f.flag == flag) {
             return f.longflag;
          }
@@ -203,7 +199,7 @@ public class flagdata implements Iterable<Integer> {
    public boolean replaceFlag(char oldflag, char newflag) {
       boolean ret = false;
 
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          if (f.flag == oldflag) {
             f.flag = newflag;
             ret = true;
@@ -214,7 +210,7 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public int dataOfFlag(char flag) {
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          if (f.flag == flag) {
             return f.data;
          }
@@ -224,7 +220,7 @@ public class flagdata implements Iterable<Integer> {
    }
 
    public ArrayList<String> paramsOfFlag(char flag) {
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          if (f.flag == flag) {
             return f.param;
          }
@@ -236,7 +232,7 @@ public class flagdata implements Iterable<Integer> {
    public boolean flagHasParam(char flag, String p) {
       p = p.toLowerCase();
 
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          if (f.flag == flag) {
             return f.param.contains(p);
          }
@@ -249,7 +245,7 @@ public class flagdata implements Iterable<Integer> {
       boolean ret = false;
       Iterator<flagdata.flagelem> it = this.fl.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          flagdata.flagelem f = (flagdata.flagelem)it.next();
          if (f.flag == flag) {
             it.remove();
@@ -264,7 +260,7 @@ public class flagdata implements Iterable<Integer> {
       this.removeFlag(flag);
       Iterator<flagdata.flagelem> it = this.staticfl.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          flagdata.flagelem f = (flagdata.flagelem)it.next();
          if (f.flag == flag) {
             it.remove();
@@ -275,7 +271,7 @@ public class flagdata implements Iterable<Integer> {
    public String toString() {
       StringBuilder r = new StringBuilder();
 
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          r.append(f.longflag);
          if (f.data > 0) {
             r.append('(');
@@ -284,7 +280,7 @@ public class flagdata implements Iterable<Integer> {
          }
 
          if (f.param != null) {
-            for(String p : f.param) {
+            for (String p : f.param) {
                r.append('[');
                r.append(p);
                r.append(']');
@@ -298,7 +294,7 @@ public class flagdata implements Iterable<Integer> {
    public String getFlags() {
       StringBuilder r = new StringBuilder();
 
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          r.append(f.longflag);
       }
 
@@ -308,7 +304,7 @@ public class flagdata implements Iterable<Integer> {
    public String getFlagdata() {
       StringBuilder r = new StringBuilder();
 
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          if (f.data > 0) {
             if (r.length() > 0) {
                r.append(',');
@@ -324,9 +320,9 @@ public class flagdata implements Iterable<Integer> {
    public String getFlagparam() {
       StringBuilder r = new StringBuilder();
 
-      for(flagdata.flagelem f : this.fl) {
+      for (flagdata.flagelem f : this.fl) {
          if (f.param != null) {
-            for(String p : f.param) {
+            for (String p : f.param) {
                if (r.length() > 0) {
                   r.append(':');
                }
@@ -351,7 +347,6 @@ public class flagdata implements Iterable<Integer> {
       private Iterator<flagdata.flagelem> i;
 
       private fditerator(Iterator<flagdata.flagelem> iterator) {
-         super();
          this.i = iterator;
       }
 
@@ -375,11 +370,9 @@ public class flagdata implements Iterable<Integer> {
       public ArrayList<String> param = null;
 
       flagelem() {
-         super();
       }
 
       flagelem(flagdata.flagelem other) {
-         super();
          this.flag = other.flag;
          this.longflag = other.longflag;
          this.data = other.data;
@@ -401,7 +394,6 @@ public class flagdata implements Iterable<Integer> {
       private Iterator<flagdata.flagelem> i;
 
       private flagiterator(Iterator<flagdata.flagelem> iterator) {
-         super();
          this.i = iterator;
       }
 

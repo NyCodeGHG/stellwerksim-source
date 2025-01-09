@@ -18,7 +18,6 @@ public class OccurancesSystem {
    private long firstMessage = 0L;
 
    public OccurancesSystem(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.bus = EventBusService.getInstance();
       this.bus.subscribe(this);

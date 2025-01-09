@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.fahrstrassen.fahrstrasse;
 
 public class fahrstrassetest3 implements dtest {
-   public fahrstrassetest3() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Fahrstrassen 3";
@@ -24,13 +20,13 @@ public class fahrstrassetest3 implements dtest {
    public LinkedList<dtestresult> runTest(gleisbildModelSts glb) {
       LinkedList<dtestresult> r = new LinkedList();
 
-      for(int i = 0; i < glb.countFahrwege(); ++i) {
+      for (int i = 0; i < glb.countFahrwege(); i++) {
          fahrstrasse f = glb.getFahrweg(i);
          if (f.hasÜP()) {
             LinkedList<gleis> gw = f.getGleisweg();
             boolean üpfound = false;
 
-            for(gleis g : gw) {
+            for (gleis g : gw) {
                if (g.getElement() == gleis.ELEMENT_ÜBERGABEPUNKT) {
                   üpfound = true;
                }

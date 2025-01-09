@@ -18,7 +18,6 @@ public class ColorRenderer extends JLabel implements TableCellRenderer {
    private boolean renderSpecial = false;
 
    public ColorRenderer() {
-      super();
       this.setOpaque(true);
    }
 

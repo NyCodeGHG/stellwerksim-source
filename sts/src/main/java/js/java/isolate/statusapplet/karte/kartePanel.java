@@ -73,7 +73,6 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
    });
 
    public kartePanel(stellwerk_karte m, JScrollPane sp, zugListPanel zugList) {
-      super();
       this.my_main = m;
       this.zuglist = zugList;
       this.meldung = "Initialer Datenempfang...";
@@ -124,7 +123,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
          this.aid4();
          TreeSet<aidPanel> sort = new TreeSet();
 
-         for(karten_container kc : this.namen.values()) {
+         for (karten_container kc : this.namen.values()) {
             kc.panel = new aidPanel(this, kc);
             sort.add(kc.panel);
             kc.panel.setViewport(this.myvp);
@@ -132,17 +131,17 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
 
          int i = 0;
 
-         for(aidPanel a : sort) {
+         for (aidPanel a : sort) {
             this.add(a, i);
             a.resize();
-            ++i;
+            i++;
          }
       }
    }
 
    public void cleanMap() {
       if (this.namen != null) {
-         for(karten_container kc : this.namen.values()) {
+         for (karten_container kc : this.namen.values()) {
             kc.panel.remove();
          }
       }
@@ -158,7 +157,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
    public void run(MapBotChat my_chat) {
       System.out.println("run");
 
-      for(int dlcnt = 0; this.runnning; --dlcnt) {
+      for (int dlcnt = 0; this.runnning; dlcnt--) {
          if (dlcnt <= 0) {
             String updateurl = this.my_main.getParameter("url");
             xmlreader xmlr = new xmlreader(this.my_main.getDataLed());
@@ -166,7 +165,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
             xmlr.registerTag("zeit", this);
             System.out.println("load");
 
-            for(karten_zug z : this.zuglist.zuegelist) {
+            for (karten_zug z : this.zuglist.zuegelist) {
                if (z.status != 3) {
                   z.status = 1;
                }
@@ -181,11 +180,11 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
 
             my_chat.sendStatus(BOTCOMMAND.ALIVE, "");
 
-            for(karten_zug z : this.zuglist.zuegelist) {
-               if (z.status == 1) {
-                  z.status = 3;
+            for (karten_zug zx : this.zuglist.zuegelist) {
+               if (zx.status == 1) {
+                  zx.status = 3;
                } else {
-                  z.status = 2;
+                  zx.status = 2;
                }
             }
 
@@ -234,7 +233,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
    public void actionPerformed(ActionEvent e) {
       this.wtimer.stop();
 
-      for(karten_container kc : this.namen.values()) {
+      for (karten_container kc : this.namen.values()) {
          if (kc.panel != null) {
             kc.panel.resize();
          }
@@ -245,7 +244,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
       System.out.println("alte Daten wegräumen");
       Iterator<karten_zug> it = this.zuglist.zuegelist.iterator();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          karten_zug z = (karten_zug)it.next();
          if (z.status == 3) {
             it.remove();
@@ -385,7 +384,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
                String[] tokens = TextHelper.tokenizerToArray(new StringTokenizer(r + " ", ":"));
                int zid = 0;
 
-               for(int i = 0; i < tokens.length; ++i) {
+               for (int i = 0; i < tokens.length; i++) {
                   if (tokens[i].trim().equals("ZID")) {
                      zid = Integer.parseInt(tokens[i + 1].trim());
                      break;
@@ -426,7 +425,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
          long minHeat = Long.MAX_VALUE;
          long maxHeat = Long.MIN_VALUE;
 
-         for(karten_container ad : this.aids.values()) {
+         for (karten_container ad : this.aids.values()) {
             if (ad.spieler != null) {
                minHeat = Math.min(minHeat, ad.heat);
                maxHeat = Math.max(maxHeat, ad.heat);
@@ -437,26 +436,26 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
             long sum = 0L;
             int cnt = 0;
 
-            for(karten_container ad : this.aids.values()) {
+            for (karten_container adx : this.aids.values()) {
                int r = 0;
-               if (ad.heat > 0L) {
+               if (adx.heat > 0L) {
                   if (maxHeat != 0L) {
-                     r = (int)((ad.heat - 0L) * 255L / (maxHeat - 0L));
+                     r = (int)((adx.heat - 0L) * 255L / (maxHeat - 0L));
                   }
 
-                  ad.heatColor = new Color(255, 255 - r, 255 - r);
+                  adx.heatColor = new Color(255, 255 - r, 255 - r);
                } else {
                   if (minHeat != 0L) {
-                     r = 255 - (int)((ad.heat - minHeat) * 255L / (0L - minHeat));
+                     r = 255 - (int)((adx.heat - minHeat) * 255L / (0L - minHeat));
                   }
 
-                  ad.heatColor = new Color(255 - r, 255, 255 - r);
+                  adx.heatColor = new Color(255 - r, 255, 255 - r);
                }
 
-               ad.heatSize = r;
-               if (ad.spieler != null) {
-                  sum += ad.heat;
-                  ++cnt;
+               adx.heatSize = r;
+               if (adx.spieler != null) {
+                  sum += adx.heat;
+                  cnt++;
                }
             }
 
@@ -475,7 +474,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
    karten_zug findZug(int zid) {
       karten_zug z = null;
 
-      for(karten_zug zz : this.zuglist.zuegelist) {
+      for (karten_zug zz : this.zuglist.zuegelist) {
          if (zz.zid == zid) {
             z = zz;
             break;
@@ -528,7 +527,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
    private void fillMap(String name, HashMap<Integer, karten_container> m, String keys) {
       String[] tt = keys.trim().split(",");
 
-      for(String v : tt) {
+      for (String v : tt) {
          v = v.trim();
          if (!v.isEmpty()) {
             int vi = Integer.parseInt(v);
@@ -556,7 +555,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
    private void aid4() {
       int n = Integer.parseInt(this.getParameter("elements"));
 
-      for(int i = 0; i < n; ++i) {
+      for (int i = 0; i < n; i++) {
          int aid4 = Integer.parseInt(this.getParameter("aid4aid" + i));
          int element4 = Integer.parseInt(this.getParameter("aid4element" + i));
          int enr4 = Integer.parseInt(this.getParameter("aid4enr" + i));
@@ -593,7 +592,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
          int aid1 = 0;
          int aid2 = 0;
 
-         for(szug_plan_base pos : z.plan) {
+         for (szug_plan_base pos : z.plan) {
             if (pos.aid != aid1) {
                aid1 = pos.aid;
                if (aid2 > 0) {
@@ -630,8 +629,8 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
    public void recalcMarks() {
       this.markVcols.clear();
 
-      for(connectColor cc : this.markVkids) {
-         for(int kid : cc.markVkids) {
+      for (connectColor cc : this.markVkids) {
+         for (int kid : cc.markVkids) {
             this.markVcols.put(kid, cc.col);
          }
       }
@@ -641,20 +640,21 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
 
    private Dimension getMinsize() {
       Dimension d = new Dimension(1, 1);
+      Iterator it = this.namen.keySet().iterator();
 
-      int y2;
-      for(Iterator it = this.namen.keySet().iterator(); it.hasNext(); d.height = Math.max(y2, d.height)) {
+      while (it.hasNext()) {
          karten_container k = (karten_container)this.namen.get(it.next());
          int x2 = Math.round(((float)k.x + 4.0F + 1.0F) * 25.0F);
-         y2 = Math.round(((float)k.y + 1.0F) * 25.0F) + 70 + 40;
+         int y2 = Math.round(((float)k.y + 1.0F) * 25.0F) + 70 + 40;
          d.width = Math.max(x2, d.width);
+         d.height = Math.max(y2, d.height);
       }
 
       return d;
    }
 
    private void updateZugList() {
-      for(karten_zug z : this.zuglist.zuegelist) {
+      for (karten_zug z : this.zuglist.zuegelist) {
          if (z.currentKC == null) {
             karten_container kc = (karten_container)this.aids.get(z.getAid());
             if (kc != null) {
@@ -685,7 +685,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
          g.setColor(this.bgcolor);
          g.fillRect(0, 0, 0, 0);
 
-         for(karten_container k : this.namen.values()) {
+         for (karten_container k : this.namen.values()) {
             if (k.heatSize > 0 && k.spieler != null) {
                int x1 = Math.round((float)k.x * this.scale);
                int y1 = Math.round((float)k.y * this.scale);
@@ -705,17 +705,17 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
             }
          }
 
-         for(int vkid : this.kids.keySet()) {
-            karten_container k = (karten_container)this.kids.get(vkid);
-            karten_container k1 = (karten_container)this.namen.get(k.kid1);
-            karten_container k2 = (karten_container)this.namen.get(k.kid2);
+         for (int vkid : this.kids.keySet()) {
+            karten_container kx = (karten_container)this.kids.get(vkid);
+            karten_container k1 = (karten_container)this.namen.get(kx.kid1);
+            karten_container k2 = (karten_container)this.namen.get(kx.kid2);
             int x1 = Math.round(((float)k1.x + 2.0F) * this.scale);
             int y1 = Math.round(((float)k1.y + 0.5F) * this.scale);
             int x2 = Math.round(((float)k2.x + 2.0F) * this.scale);
             int y2 = Math.round(((float)k2.y + 0.5F) * this.scale);
             if (this.markVcols.containsKey(vkid)) {
                g.setColor((Color)this.markVcols.get(vkid));
-            } else if (k.kiduep) {
+            } else if (kx.kiduep) {
                g.setColor(this.üplinecol);
             } else {
                g.setColor(this.linecol);
@@ -729,7 +729,7 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
             }
 
             if (!this.anims.isEmpty()) {
-               for(kartePanel.AnimDetails ad : this.anims) {
+               for (kartePanel.AnimDetails ad : this.anims) {
                   if (k1.kid == ad.kid1 && k2.kid == ad.kid2 || ad.kid2 == k1.kid && ad.kid1 == k2.kid) {
                      if (allowInc) {
                         ad.position += 2;
@@ -791,7 +791,6 @@ public class kartePanel extends JComponent implements xmllistener, ActionListene
       Paint cache = null;
 
       AnimDetails(int kid1, int kid2) {
-         super();
          this.kid1 = kid1;
          this.kid2 = kid2;
       }

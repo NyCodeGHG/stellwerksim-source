@@ -14,7 +14,6 @@ public class MultiLineListRenderer extends DefaultListCellRenderer {
    private JSeparator sep = new JSeparator();
 
    public MultiLineListRenderer() {
-      super();
       this.txtfield.setOpaque(true);
       this.panel.setOpaque(true);
       this.panel.setLayout(new BorderLayout());

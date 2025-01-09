@@ -27,7 +27,6 @@ public final class fsallocator {
    }
 
    public fsallocator(GleisAdapter sim) {
-      super();
       this.my_main = sim;
    }
 
@@ -71,7 +70,7 @@ public final class fsallocator {
 
    public int isFreeToSignal(zug z, int ein_enr, boolean byüp) {
       gleisbildModelFahrweg my_gleisbild = this.my_main.getGleisbild();
-      synchronized(this) {
+      synchronized (this) {
          if (my_gleisbild.checkToSignal(ein_enr, byüp, z)) {
             int ur = this.userRequest(ein_enr, z);
             if (ur > 0) {
@@ -151,7 +150,7 @@ public final class fsallocator {
    public String gotReserveMessage(int ein_enr, boolean reserve) {
       gleisbildModelFahrweg my_gleisbild = this.my_main.getGleisbild();
       String msg = "NOK";
-      synchronized(this) {
+      synchronized (this) {
          if (reserve) {
             boolean isfree = my_gleisbild.checkToSignal(ein_enr, false, null);
             if (isfree) {
@@ -216,7 +215,7 @@ public final class fsallocator {
 
    private void blockAusfahrt(gleis pos_gl, int v) {
       gleisbildModelFahrweg my_gleisbild = this.my_main.getGleisbild();
-      synchronized(this) {
+      synchronized (this) {
          my_gleisbild.statusÜPAusfahrt(pos_gl, v);
       }
    }

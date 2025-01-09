@@ -117,7 +117,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
 
    private void init() {
       if (this.firstVisit) {
-         for(stoerungEditPanel.ef_item f : this.stlist) {
+         for (stoerungEditPanel.ef_item f : this.stlist) {
             f.ef.initGui(this.glbControl.getModel());
          }
 
@@ -157,7 +157,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
                   }
 
                   if (ev.getFactory() != null) {
-                     for(int i = 0; i < this.stlist.length; ++i) {
+                     for (int i = 0; i < this.stlist.length; i++) {
                         if (this.stlist[i].ef.getClass() == ev.getFactory().getClass()) {
                            this.stbuts[i].setSelected(true);
                            this.eventTypSelected(i);
@@ -196,7 +196,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
       this.stbuts = new JToggleButton[this.stlist.length];
       int i = 0;
 
-      for(stoerungEditPanel.ef_item f : this.stlist) {
+      for (stoerungEditPanel.ef_item f : this.stlist) {
          Box pan;
          if (this.ef_groups.containsKey(f.group)) {
             pan = (Box)this.ef_groups.get(f.group);
@@ -216,7 +216,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
          b.setToolTipText(f.ef.getDescription());
          b.setFocusPainted(false);
          b.setMargin(new Insets(0, 0, 0, 0));
-         ++i;
+         i++;
          b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                int a = Integer.parseInt(e.getActionCommand());
@@ -227,7 +227,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
          });
          int addpos = -1;
 
-         for(int c = 0; c < pan.getComponentCount(); ++c) {
+         for (int c = 0; c < pan.getComponentCount(); c++) {
             JToggleButton bb = (JToggleButton)pan.getComponent(c);
             if (bb.getText().compareToIgnoreCase(b.getText()) > 0) {
                addpos = c;
@@ -242,8 +242,8 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
          }
       }
 
-      for(Box pan : this.ef_groups.values()) {
-         this.eventList.add(pan);
+      for (Box panx : this.ef_groups.values()) {
+         this.eventList.add(panx);
       }
 
       this.cardList.setModel(this.cmodel);
@@ -256,7 +256,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
       if (this.selectedF != null) {
          Iterator it = this.selectedF.getCards();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             Object o = it.next();
             this.cmodel.addElement(o);
          }
@@ -268,7 +268,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
    }
 
    private void selectedTyp(eventContainer ev) {
-      for(int i = 0; i < this.stlist.length; ++i) {
+      for (int i = 0; i < this.stlist.length; i++) {
          if (ev.getFactory().getClass() == this.stlist[i].ef.getClass()) {
             this.stbuts[i].setSelected(true);
             this.updateMenu();
@@ -286,7 +286,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
 
       boolean searchEna = false;
 
-      for(int i = 0; i < this.stlist.length; ++i) {
+      for (int i = 0; i < this.stlist.length; i++) {
          boolean ena = false;
          if (signalevent.class.isAssignableFrom(this.stlist[i].ef.getEventTyp())) {
             if (e == gleis.ELEMENT_SIGNAL) {
@@ -315,7 +315,7 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
       }
 
       if (searchEna) {
-         for(int i = 2; i < this.stlist.length; ++i) {
+         for (int i = 2; i < this.stlist.length; i++) {
             if (this.stbuts[i].isEnabled()) {
                this.stbuts[i].setSelected(true);
                this.getSelectedE(this.lastec);
@@ -411,7 +411,6 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
       String group;
 
       ef_item(eventFactory _ef, String _group) {
-         super();
          this.ef = _ef;
          this.group = _group;
       }
@@ -421,7 +420,6 @@ public class stoerungEditPanel extends basePanel implements SessionClose {
       JToggleButton b;
 
       togglesort(JToggleButton _b) {
-         super();
          this.b = _b;
       }
 

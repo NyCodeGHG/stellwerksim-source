@@ -75,7 +75,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    private void dumpData() {
       System.out.println("event log dump: start");
 
-      for(eventHaeufigkeiten.dumpLog l : this.eventLog) {
+      for (eventHaeufigkeiten.dumpLog l : this.eventLog) {
          System.out.println(l.toString());
       }
 
@@ -87,7 +87,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
       out.println("Runtime: " + (System.currentTimeMillis() - this.startTime) / 1000L / 60L + " Minuten");
       out.println("event log dump: start");
 
-      for(eventHaeufigkeiten.dumpLog l : this.eventLog) {
+      for (eventHaeufigkeiten.dumpLog l : this.eventLog) {
          out.println(l.toString());
       }
 
@@ -95,12 +95,11 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    }
 
    public eventHaeufigkeiten(gleisbildModelEventsys _my_gleisbild, Simulator sim) {
-      super();
       this.my_gleisbild = _my_gleisbild;
       this.sim = sim;
       if (sim != null) {
          simPrefs prefs = new simPrefs();
-         switch(prefs.getInt("plannedtime", 1)) {
+         switch (prefs.getInt("plannedtime", 1)) {
             case 0:
                this.MODUS_FACTOR = 0.7;
                break;
@@ -142,8 +141,8 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    public void close() {
       this.eventLog.clear();
 
-      for(LinkedList<eventContainer> e : this.events.values()) {
-         for(eventContainer ee : e) {
+      for (LinkedList<eventContainer> e : this.events.values()) {
+         for (eventContainer ee : e) {
             ee.close();
          }
 
@@ -185,7 +184,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    public long random(eventHaeufigkeiten.HAEUFIGKEITEN h) {
       double ret = 0.0;
       long l = this.getSimutime();
-      switch(h) {
+      switch (h) {
          case sehrselten:
             ret = (double)this.rnd2(h, l, 300) * this.MODUS_FACTOR;
             break;
@@ -228,7 +227,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
          } else {
             Iterator<eventContainer> it = a.iterator();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                eventContainer ev = (eventContainer)it.next();
                if (event.createEvent(ev, this.my_gleisbild, this.sim) != null) {
                   lastOccure[h.ordinal()] = this.getSimutime();
@@ -315,7 +314,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
       };
       this.messuretime = 86400000L;
 
-      for(eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
+      for (eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
          this.events.put(h, new LinkedList());
          lastOccure[h.ordinal()] = this.getSimutime();
          nextOccure[h.ordinal()] = this.random(h);
@@ -323,14 +322,14 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
 
       HashMap<eventContainer, eventHaeufigkeiten.messureResult> ret = new HashMap();
 
-      for(eventContainer ev : this.my_gleisbild.events) {
+      for (eventContainer ev : this.my_gleisbild.events) {
          if (ev != null && ev.getFactory() != null) {
             if (ev.getFactory().isRandom()) {
                eventHaeufigkeiten.HAEUFIGKEITEN v = ev.getFactory().getOccurrence(ev);
                int w = ev.getFactory().getWeight(ev);
-               LinkedList<eventContainer> a = (LinkedList)this.events.get(v);
+               LinkedList<eventContainer> a = (LinkedList<eventContainer>)this.events.get(v);
 
-               for(int i = 0; i < w; ++i) {
+               for (int i = 0; i < w; i++) {
                   a.add(ev);
                }
             }
@@ -339,19 +338,19 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
          }
       }
 
-      for(int n = 0; n < num / 15; ++n) {
+      for (int n = 0; n < num / 15; n++) {
          this.messuretime = 86400000L + (long)(n * 15) * 1000L;
          if (mu != null) {
             mu.update(n * 15);
          }
 
-         for(eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
-            LinkedList<eventContainer> a = (LinkedList)this.events.get(h);
+         for (eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
+            LinkedList<eventContainer> a = (LinkedList<eventContainer>)this.events.get(h);
             if (!a.isEmpty()) {
-               eventContainer ev = this.occureMessure(h, a);
-               if (ev != null) {
-                  eventHaeufigkeiten.messureResult cnt = (eventHaeufigkeiten.messureResult)ret.get(ev);
-                  ++cnt.cnt;
+               eventContainer evx = this.occureMessure(h, a);
+               if (evx != null) {
+                  eventHaeufigkeiten.messureResult cnt = (eventHaeufigkeiten.messureResult)ret.get(evx);
+                  cnt.cnt++;
                   cnt.time.add((this.getSimutime() - 86400000L) / 60000L);
                }
             }
@@ -379,7 +378,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
          }
       };
 
-      for(eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
+      for (eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
          this.events.put(h, new LinkedList());
          nextOccure[h.ordinal()] = this.random(h);
          lastOccure[h.ordinal()] = this.getSimutime();
@@ -396,7 +395,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
          boolean stellwerkausfall = true;
          boolean buestoerung = false;
 
-         for(eventContainer ev : this.my_gleisbild.events) {
+         for (eventContainer ev : this.my_gleisbild.events) {
             if (ev.isAllowUse()) {
                if (ev.getFactory() != null) {
                   Class<? extends event> e = ev.getFactory().getEventTyp();
@@ -415,9 +414,9 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
                   } else {
                      eventHaeufigkeiten.HAEUFIGKEITEN v = ev.getFactory().getOccurrence(ev);
                      int w = ev.getFactory().getWeight(ev);
-                     LinkedList<eventContainer> a = (LinkedList)this.events.get(v);
+                     LinkedList<eventContainer> a = (LinkedList<eventContainer>)this.events.get(v);
 
-                     for(int i = 0; i < w; ++i) {
+                     for (int i = 0; i < w; i++) {
                         a.add(ev);
                      }
                   }
@@ -429,64 +428,64 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
 
          if (this.my_gleisbild.events.size() < 30) {
             if (!randomWei) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, randomweichestoerung.class);
-               ev.setIntValue("dauer", eventFactory.random(7, 20));
-               ev.setValue("stark", true);
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.regelmaessig, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, randomweichestoerung.class);
+               evx.setIntValue("dauer", eventFactory.random(7, 20));
+               evx.setValue("stark", true);
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.regelmaessig, evx);
             }
 
             if (!randomSig) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, randomsignalstoerung.class);
-               ev.setIntValue("dauer", eventFactory.random(7, 20));
-               ev.setValue("stark", true);
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.regelmaessig, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, randomsignalstoerung.class);
+               evx.setIntValue("dauer", eventFactory.random(7, 20));
+               evx.setValue("stark", true);
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.regelmaessig, evx);
             }
 
             if (!wfsstoerung) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, weichenfsstoerung.class);
-               ev.setIntValue("dauer", eventFactory.random(7, 15));
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.selten, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, weichenfsstoerung.class);
+               evx.setIntValue("dauer", eventFactory.random(7, 15));
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.selten, evx);
             }
 
             if (!dispstoerung) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, displayausfall.class);
-               ev.setIntValue("dauer", eventFactory.random(4, 18));
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.selten, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, displayausfall.class);
+               evx.setIntValue("dauer", eventFactory.random(4, 18));
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.selten, evx);
             }
 
             if (!relaisstoerung) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, relaisgruppestoerung.class);
-               ev.setIntValue("dauer", eventFactory.random(4, 18));
-               ev.setValue("stark", true);
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, relaisgruppestoerung.class);
+               evx.setIntValue("dauer", eventFactory.random(4, 18));
+               evx.setValue("stark", true);
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, evx);
             }
 
             if (!weichenuebstoerung) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, weichenueberwachung.class);
-               ev.setIntValue("dauer", eventFactory.random(4, 10));
-               ev.setValue("stark", true);
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, weichenueberwachung.class);
+               evx.setIntValue("dauer", eventFactory.random(4, 10));
+               evx.setValue("stark", true);
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, evx);
             }
 
             if (!sicherungausfall) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, sicherungausfall.class);
-               ev.setIntValue("dauer", eventFactory.random(4, 10));
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, sicherungausfall.class);
+               evx.setIntValue("dauer", eventFactory.random(4, 10));
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, evx);
             }
 
             if (!stellwerkausfall) {
-               eventContainer ev = new eventContainer(this.my_gleisbild, stellwerkausfall.class);
-               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, ev);
+               eventContainer evx = new eventContainer(this.my_gleisbild, stellwerkausfall.class);
+               this.add2(eventHaeufigkeiten.HAEUFIGKEITEN.gelegentlich, evx);
             }
          }
 
-         eventContainer ev = new eventContainer(this.my_gleisbild, bahnuebergangoffenfrage.class);
-         this.add(eventHaeufigkeiten.HAEUFIGKEITEN.immer, ev);
-         ev = new eventContainer(this.my_gleisbild, bahnuebergangwaerter.class);
-         this.add(eventHaeufigkeiten.HAEUFIGKEITEN.immer, ev);
+         eventContainer evx = new eventContainer(this.my_gleisbild, bahnuebergangoffenfrage.class);
+         this.add(eventHaeufigkeiten.HAEUFIGKEITEN.immer, evx);
+         evx = new eventContainer(this.my_gleisbild, bahnuebergangwaerter.class);
+         this.add(eventHaeufigkeiten.HAEUFIGKEITEN.immer, evx);
          if (thema.isThema("schwerer_Winter") && thema.userVotedThema("schwerer_Winter") && eventFactory.random(0, 20) > 14) {
-            ev = new eventContainer(this.my_gleisbild, weichenheizungstoerung.class);
-            this.add(eventHaeufigkeiten.HAEUFIGKEITEN.immer, ev);
+            evx = new eventContainer(this.my_gleisbild, weichenheizungstoerung.class);
+            this.add(eventHaeufigkeiten.HAEUFIGKEITEN.immer, evx);
          }
 
          this.tjm_add();
@@ -501,11 +500,11 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
             this.lastping = this.getControl().getSimTime().getSimutime();
             boolean stopNext = false;
 
-            for(eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
+            for (eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
                if (h != eventHaeufigkeiten.HAEUFIGKEITEN.immer && stopNext) {
                   nextOccure[h.ordinal()] = this.random(h);
                } else {
-                  LinkedList<eventContainer> a = (LinkedList)this.events.get(h);
+                  LinkedList<eventContainer> a = (LinkedList<eventContainer>)this.events.get(h);
                   if (!a.isEmpty()) {
                      stopNext |= this.occure(h, a);
                   }
@@ -518,7 +517,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    }
 
    public void add(eventHaeufigkeiten.HAEUFIGKEITEN h, eventContainer ev) {
-      LinkedList<eventContainer> a = (LinkedList)this.events.get(h);
+      LinkedList<eventContainer> a = (LinkedList<eventContainer>)this.events.get(h);
       ev.setOnce(true);
 
       try {
@@ -529,7 +528,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    }
 
    public void add2(eventHaeufigkeiten.HAEUFIGKEITEN h, eventContainer ev) {
-      LinkedList<eventContainer> a = (LinkedList)this.events.get(h);
+      LinkedList<eventContainer> a = (LinkedList<eventContainer>)this.events.get(h);
 
       try {
          a.add(ev);
@@ -539,7 +538,7 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    }
 
    private void remove(eventHaeufigkeiten.HAEUFIGKEITEN h, eventContainer ev) {
-      LinkedList<eventContainer> a = (LinkedList)this.events.get(h);
+      LinkedList<eventContainer> a = (LinkedList<eventContainer>)this.events.get(h);
       a.remove(ev);
    }
 
@@ -557,12 +556,12 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
       v.addElement("time");
       v.addElement(this.getSimutime());
 
-      for(eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
+      for (eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
          v.addElement("next " + h.name());
          v.addElement(nextOccure[h.ordinal()] + "");
       }
 
-      for(eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
+      for (eventHaeufigkeiten.HAEUFIGKEITEN h : eventHaeufigkeiten.HAEUFIGKEITEN.values()) {
          v.addElement("last " + h.name());
          v.addElement(lastOccure[h.ordinal()] + "");
       }
@@ -593,7 +592,6 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
       private final long tret;
 
       private dl_random(eventHaeufigkeiten.HAEUFIGKEITEN h, long t, long l, double ret, double tret) {
-         super();
          this.h = h;
          this.t = t;
          this.l = l;
@@ -624,7 +622,6 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
       private final int mode;
 
       private dl_rnd(eventHaeufigkeiten.HAEUFIGKEITEN h, int mode, int m, long r) {
-         super();
          this.h = h;
          this.r = r;
          this.mode = mode;
@@ -641,7 +638,6 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
       private final String s;
 
       dl_str(String s) {
-         super();
          this.s = s;
       }
 
@@ -655,7 +651,6 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
       protected String time = eventHaeufigkeiten.this.getSimutimeString();
 
       private dumpLog() {
-         super();
       }
 
       public String toString() {
@@ -666,10 +661,6 @@ public class eventHaeufigkeiten extends trigger implements structinfo {
    public class messureResult {
       public int cnt = 0;
       public LinkedList<Long> time = new LinkedList();
-
-      public messureResult() {
-         super();
-      }
    }
 
    public interface messureUpdate {

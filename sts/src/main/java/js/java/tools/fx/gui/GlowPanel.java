@@ -30,7 +30,6 @@ public class GlowPanel extends JComponent {
    private Color bgcolor = new Color(0, 0, 0, 220);
 
    public GlowPanel() {
-      super();
       this.text = "hello world";
       this.font = new Font("lucida sans demibold", 0, 48);
       this.scale = 1.02;

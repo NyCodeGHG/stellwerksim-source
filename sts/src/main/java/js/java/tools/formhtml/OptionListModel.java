@@ -24,10 +24,6 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
    protected EventListenerList listenerList = new EventListenerList();
    protected boolean leadAnchorNotificationEnabled = true;
 
-   OptionListModel() {
-      super();
-   }
-
    public int getMinSelectionIndex() {
       return this.isSelectionEmpty() ? -1 : this.minIndex;
    }
@@ -45,7 +41,7 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
    }
 
    public void setSelectionMode(int selectionMode) {
-      switch(selectionMode) {
+      switch (selectionMode) {
          case 0:
          case 1:
          case 2:
@@ -88,7 +84,7 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
       Object[] listeners = this.listenerList.getListenerList();
       ListSelectionEvent e = null;
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == ListSelectionListener.class) {
             if (e == null) {
                e = new ListSelectionEvent(this, firstIndex, lastIndex, isAdjusting);
@@ -132,18 +128,18 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
          option.setSelection(false);
          this.markAsDirty(r);
          if (r == this.minIndex) {
-            ++this.minIndex;
+            this.minIndex++;
 
-            while(this.minIndex <= this.maxIndex && !this.value.get(this.minIndex)) {
-               ++this.minIndex;
+            while (this.minIndex <= this.maxIndex && !this.value.get(this.minIndex)) {
+               this.minIndex++;
             }
          }
 
          if (r == this.maxIndex) {
-            --this.maxIndex;
+            this.maxIndex--;
 
-            while(this.minIndex <= this.maxIndex && !this.value.get(this.maxIndex)) {
-               --this.maxIndex;
+            while (this.minIndex <= this.maxIndex && !this.value.get(this.maxIndex)) {
+               this.maxIndex--;
             }
          }
 
@@ -190,7 +186,7 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
    }
 
    private void changeSelection(int clearMin, int clearMax, int setMin, int setMax, boolean clearFirst) {
-      for(int i = Math.min(setMin, clearMin); i <= Math.max(setMax, clearMax); ++i) {
+      for (int i = Math.min(setMin, clearMin); i <= Math.max(setMax, clearMax); i++) {
          boolean shouldClear = this.contains(clearMin, clearMax, i);
          boolean shouldSet = this.contains(setMin, setMax, i);
          if (shouldSet && shouldClear) {
@@ -274,13 +270,13 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
       int insMinIndex = before ? index : index + 1;
       int insMaxIndex = insMinIndex + length - 1;
 
-      for(int i = this.maxIndex; i >= insMinIndex; --i) {
+      for (int i = this.maxIndex; i >= insMinIndex; i--) {
          this.setState(i + length, this.value.get(i));
       }
 
       boolean setInsertedValues = this.value.get(index);
 
-      for(int i = insMinIndex; i <= insMaxIndex; ++i) {
+      for (int i = insMinIndex; i <= insMaxIndex; i++) {
          this.setState(i, setInsertedValues);
       }
    }
@@ -290,7 +286,7 @@ class OptionListModel<E> extends DefaultListModel<E> implements ListSelectionMod
       int rmMaxIndex = Math.max(index0, index1);
       int gapLength = rmMaxIndex - rmMinIndex + 1;
 
-      for(int i = rmMinIndex; i <= this.maxIndex; ++i) {
+      for (int i = rmMinIndex; i <= this.maxIndex; i++) {
          this.setState(i, this.value.get(i + gapLength));
       }
    }

@@ -20,7 +20,7 @@ class c_ausfahrt extends baseChain1Chain {
          }
 
          if (z.exitMode && z.zugbelegt.size() == 0) {
-            ++z.üpwaitc;
+            z.üpwaitc++;
             if (z.üpwaitc > 60) {
                z.üpwaitc = 0;
             }
@@ -49,11 +49,11 @@ class c_ausfahrt extends baseChain1Chain {
             }
          } else {
             z.namefarbe = 0;
-            z.tempo_pos += z.ist_tempo;
+            z.tempo_pos = z.tempo_pos + z.ist_tempo;
             if (z.tempo_pos > (double)z.calcMaxSpeed(z.lastmasstab)) {
-               z.tempo_pos %= (double)z.calcMaxSpeed(z.lastmasstab);
+               z.tempo_pos = z.tempo_pos % (double)z.calcMaxSpeed(z.lastmasstab);
 
-               for(int i = 0; i < 2 && z.zugbelegt.size() > 0; ++i) {
+               for (int i = 0; i < 2 && z.zugbelegt.size() > 0; i++) {
                   gleis gl = (gleis)z.zugbelegt.removeFirst();
                   gl.getFluentData().setStatusByZug(0, z);
                   ret = true;

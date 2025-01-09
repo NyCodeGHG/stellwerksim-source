@@ -4,10 +4,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleis.gleisElements.gleisElements;
 
 public class c_signalTempo extends baseChain {
-   public c_signalTempo() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       boolean unterwegsZwerg = false;

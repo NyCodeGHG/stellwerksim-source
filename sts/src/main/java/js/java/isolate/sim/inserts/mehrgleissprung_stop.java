@@ -48,14 +48,14 @@ public class mehrgleissprung_stop extends insert {
       String bgcolor = "normal";
       int anzahl = 1;
       if (this.enr == 0 && !this.allenrs.isEmpty()) {
-         this.enr = this.allenrs.firstKey();
+         this.enr = (Integer)this.allenrs.firstKey();
       }
 
       if (this.enr != 0) {
-         ll = (LinkedList)this.allenrs.get(this.enr);
+         ll = (LinkedList<gleis>)this.allenrs.get(this.enr);
          if (ll == null && !this.allenrs.isEmpty()) {
-            this.enr = this.allenrs.firstKey();
-            ll = (LinkedList)this.allenrs.get(this.enr);
+            this.enr = (Integer)this.allenrs.firstKey();
+            ll = (LinkedList<gleis>)this.allenrs.get(this.enr);
          }
       }
 
@@ -64,7 +64,7 @@ public class mehrgleissprung_stop extends insert {
          bgcolor = ((gleis)ll.getFirst()).getExtendFarbe();
       }
 
-      for(int i = 0; i < anzahl; ++i) {
+      for (int i = 0; i < anzahl; i++) {
          bgcolortoken bt = new bgcolortoken(bgcolor);
          l.add(bt);
          gleistoken gt = new enrgleistoken(gleis.ELEMENT_SPRUNG, gleisElements.RICHTUNG.left, "enr" + i);
@@ -118,7 +118,7 @@ public class mehrgleissprung_stop extends insert {
          } else {
             gl2 = null;
          }
-      } while(gl2 != null);
+      } while (gl2 != null);
 
       return n;
    }
@@ -129,7 +129,7 @@ public class mehrgleissprung_stop extends insert {
       HashSet<Integer> seenenrs = new HashSet();
       Iterator<gleis> it = this.glbModel.findIterator(gleis.ELEMENT_SPRUNG);
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          if (!seenenrs.contains(gl.getENR())) {
             seenenrs.add(gl.getENR());
@@ -138,7 +138,7 @@ public class mehrgleissprung_stop extends insert {
                this.allenrs.put(gl.getENR(), b);
                this.allowedenrs.add(gl);
 
-               for(gleis g : b) {
+               for (gleis g : b) {
                   seenenrs.add(g.getENR());
                }
             }
@@ -162,23 +162,23 @@ public class mehrgleissprung_stop extends insert {
       LinkedList<gleis> ll = null;
       BitSet bs = this.glbModel.getENRbitset();
       if (this.enr == 0 && !this.allenrs.isEmpty()) {
-         this.enr = this.allenrs.firstKey();
+         this.enr = (Integer)this.allenrs.firstKey();
       }
 
       if (this.enr != 0) {
-         ll = (LinkedList)this.allenrs.get(this.enr);
+         ll = (LinkedList<gleis>)this.allenrs.get(this.enr);
          if (ll == null && !this.allenrs.isEmpty()) {
-            this.enr = this.allenrs.firstKey();
-            ll = (LinkedList)this.allenrs.get(this.enr);
+            this.enr = (Integer)this.allenrs.firstKey();
+            ll = (LinkedList<gleis>)this.allenrs.get(this.enr);
          }
       }
 
       if (ll != null) {
          int i = 0;
 
-         for(gleis g : ll) {
+         for (gleis g : ll) {
             this.storage.put("enr" + i, g.getENR() + "");
-            ++i;
+            i++;
          }
       } else {
          int e = bs.nextClearBit(1);

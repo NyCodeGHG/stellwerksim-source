@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.sim.TEXTTYPE;
 
 class c_isausfahrt extends baseChain {
-   c_isausfahrt() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);

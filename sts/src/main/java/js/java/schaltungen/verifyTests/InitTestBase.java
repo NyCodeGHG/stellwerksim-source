@@ -16,10 +16,6 @@ public abstract class InitTestBase {
    public final LedComponent green = new LedComponent(LEDCOLOR.GREEN);
    private boolean blicked = true;
 
-   public InitTestBase() {
-      super();
-   }
-
    public final int runtest(UserContextMini uc) {
       if (this.lastret != 0) {
          return this.lastret;

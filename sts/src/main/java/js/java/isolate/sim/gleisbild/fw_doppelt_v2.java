@@ -11,7 +11,6 @@ public class fw_doppelt_v2 implements fw_doppelt_interface {
    private final fwdoppeltPanel pan;
 
    public fw_doppelt_v2(stellwerk_editor e, fwdoppeltPanel p, ArrayList<fahrstrasse> old) {
-      super();
       this.ed = e;
       this.pan = p;
       this.pan.clear();

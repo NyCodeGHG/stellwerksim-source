@@ -6,7 +6,6 @@ public class ChannelActionMessageEvent {
    public final String text;
 
    ChannelActionMessageEvent(String channelname, ChatUser sender, String text) {
-      super();
       this.channelname = channelname;
       this.sender = sender;
       this.text = text;

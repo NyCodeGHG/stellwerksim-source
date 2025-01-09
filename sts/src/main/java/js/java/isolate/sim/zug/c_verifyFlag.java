@@ -18,10 +18,12 @@ class c_verifyFlag extends baseChain2Chain {
       this.visiting(z);
       if (z.next_gl.getElement() == gleis.ELEMENT_AUSFAHRT || z.next_gl.getElement() == gleis.ELEMENT_ÜBERGABEPUNKT && z.next_gl.forUs(z.pos_gl)) {
          boolean match = z.aus_enr == 0 && z.aus_stw == null || this.hasMatchingFlag(z);
-         zug zz;
          if (!match && z.unterzuege != null) {
-            for(Iterator<zug> it = z.unterzuege.values().iterator(); it.hasNext() && !match; match |= this.hasMatchingFlag(zz)) {
-               zz = (zug)it.next();
+            Iterator<zug> it = z.unterzuege.values().iterator();
+
+            while (it.hasNext() && !match) {
+               zug zz = (zug)it.next();
+               match |= this.hasMatchingFlag(zz);
             }
          }
 

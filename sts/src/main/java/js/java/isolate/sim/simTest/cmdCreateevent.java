@@ -9,10 +9,6 @@ import js.java.isolate.sim.sim.stellwerksim_main;
 import js.java.isolate.sim.structServ.structinfo;
 
 class cmdCreateevent implements simCmd {
-   cmdCreateevent() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "createevent";
@@ -36,7 +32,7 @@ class cmdCreateevent implements simCmd {
    private void showStruct(Vector vv, PrintWriter out) {
       Vector sv = ((structinfo)vv.get(2)).getStructure();
 
-      for(int i = 0; i < sv.size(); i += 2) {
+      for (int i = 0; i < sv.size(); i += 2) {
          out.println(sv.get(i) + ": " + sv.get(i + 1));
       }
    }

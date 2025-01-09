@@ -14,7 +14,6 @@ public class DesktopMediator implements DesktopConstants {
    private DesktopMenu dMenu;
 
    public DesktopMediator(JScrollDesktopPane mainPane) {
-      super();
       mainPane.add(this.desktopResizableToolbar, "North");
       mainPane.add(this.desktopScrollpane, "Center");
       mainPane.addComponentListener(this.dListener);

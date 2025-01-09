@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class swwertVmaxtest implements dtest {
-   public swwertVmaxtest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "SW-Wert Vmax";
@@ -25,7 +21,7 @@ public class swwertVmaxtest implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ELEMENT_SETVMAX});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          String sw = gl.getSWWert();
          if (sw != null && !sw.isEmpty() && sw.charAt(0) == '+') {

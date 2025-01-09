@@ -23,7 +23,6 @@ public class LatencyMeasure implements SessionClose {
    }
 
    public LatencyMeasure(UserContext uc, String name) {
-      super();
       this.uc = uc;
       this.name = name;
       uc.addCloseObject(this);
@@ -40,7 +39,7 @@ public class LatencyMeasure implements SessionClose {
 
    public void receivingCommand(String params) {
       if (this.commands.containsKey(params)) {
-         long l = this.commands.remove(params);
+         long l = (Long)this.commands.remove(params);
          int delay = (int)(System.currentTimeMillis() - l);
          this.uc.busPublish(new StoreLatencies(this.name, params, delay));
          if (debug != null) {

@@ -17,10 +17,6 @@ public class DisableInputLayerUI extends LayerUI<JPanel> {
    private BufferedImageOp fxOperation;
    private boolean isRunning = false;
 
-   public DisableInputLayerUI() {
-      super();
-   }
-
    public void paint(Graphics g, JComponent c) {
       if (!this.isRunning) {
          super.paint(g, c);

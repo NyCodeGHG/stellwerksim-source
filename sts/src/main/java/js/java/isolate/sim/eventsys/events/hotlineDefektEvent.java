@@ -36,7 +36,7 @@ public class hotlineDefektEvent extends event {
 
    @Override
    public boolean pong() {
-      --this.counter;
+      this.counter--;
       if (this.counter > 0) {
          this.callMeIn(1);
          this.inPong = true;

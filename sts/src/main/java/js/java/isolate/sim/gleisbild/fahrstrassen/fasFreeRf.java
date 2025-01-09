@@ -13,7 +13,7 @@ class fasFreeRf extends fahrstrassenState {
       if (suc) {
          int rl = this.getFS().rangierlänge;
 
-         for(gleis g : this.getFS().gleisweg) {
+         for (gleis g : this.getFS().gleisweg) {
             if (rl <= 0) {
                break;
             }
@@ -22,7 +22,7 @@ class fasFreeRf extends fahrstrassenState {
                g.getFluentData().setStatusByFs(0, this.getFS());
             }
 
-            --rl;
+            rl--;
          }
 
          this.getStart().getFluentData().setStartingFS(null);

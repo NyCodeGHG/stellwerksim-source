@@ -7,10 +7,6 @@ import javax.swing.UIManager;
 public class LinuxContentDesign extends DefaultContentDesign {
    ICommandLinkPainter commandButtonPainter;
 
-   public LinuxContentDesign() {
-      super();
-   }
-
    @Override
    public void updateUIDefaults() {
       super.updateUIDefaults();

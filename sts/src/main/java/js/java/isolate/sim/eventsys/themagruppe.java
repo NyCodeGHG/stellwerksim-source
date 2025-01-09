@@ -20,7 +20,6 @@ public class themagruppe {
    }
 
    private themagruppe(String n) {
-      super();
       gp.put(n, this);
       this.name = n;
    }

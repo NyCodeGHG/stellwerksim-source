@@ -26,10 +26,6 @@ public class ArrayListModel<T> extends ArrayList<T> implements ListModel {
    private T remove_o;
    private boolean remove_b;
 
-   public ArrayListModel() {
-      super();
-   }
-
    public Object getElementAt(int index) {
       return this.get(index);
    }
@@ -61,7 +57,7 @@ public class ArrayListModel<T> extends ArrayList<T> implements ListModel {
    private void notifyListenersEventLoop() {
       ListDataEvent le = new ListDataEvent(this, 0, 0, this.getSize());
 
-      for(int i = 0; i < this.listeners.size(); ++i) {
+      for (int i = 0; i < this.listeners.size(); i++) {
          ((ListDataListener)this.listeners.get(i)).contentsChanged(le);
       }
    }

@@ -13,7 +13,7 @@ public abstract class paint_text_base extends paint2Base {
    }
 
    protected void preparePaint1(String t1, gleis gl, Graphics2D g, int xscal, int yscal, int fscal) {
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case left:
             this.preparePaint2(t1, gl, g, xscal, yscal, 180);
             break;
@@ -35,7 +35,7 @@ public abstract class paint_text_base extends paint2Base {
       double offset = this.blockOffset(rot);
       double theta = 0.0;
       textr.y -= yscal / 2;
-      switch(rot) {
+      switch (rot) {
          case 0:
             textr.x = textr.x - xscal / 2 + (int)(offset * (double)xscal);
             break;

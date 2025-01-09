@@ -28,7 +28,6 @@ public class AudioLevelPanel extends JPanel {
    private JButton playButton;
 
    public AudioLevelPanel(String name, AudioSettings.SoundSettings asetting, AudioPlayer.SAMPLES sample) {
-      super();
       this.name = name;
       this.asetting = asetting;
       this.initComponents();

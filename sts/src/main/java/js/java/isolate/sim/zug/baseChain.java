@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 abstract class baseChain {
-   baseChain() {
-      super();
-   }
-
    boolean call(zug z) {
       return false;
    }

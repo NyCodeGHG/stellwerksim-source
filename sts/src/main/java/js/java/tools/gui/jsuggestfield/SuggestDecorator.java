@@ -45,7 +45,6 @@ public class SuggestDecorator {
    private final JTextField textfield;
 
    public SuggestDecorator(Window owner, JTextField textfield) {
-      super();
       this.textfield = textfield;
       this.data = new Vector();
       this.suggestions = new Vector();
@@ -213,7 +212,7 @@ public class SuggestDecorator {
    private void fireActionEvent() {
       ActionEvent event = new ActionEvent(this, 0, this.textfield.getText());
 
-      for(ActionListener listener : this.listeners) {
+      for (ActionListener listener : this.listeners) {
          listener.actionPerformed(event);
       }
    }
@@ -245,7 +244,7 @@ public class SuggestDecorator {
    private void relocate() {
       try {
          this.location = this.textfield.getLocationOnScreen();
-         this.location.y += this.textfield.getHeight();
+         this.location.y = this.location.y + this.textfield.getHeight();
          this.d.setLocation(this.location);
       } catch (IllegalComponentStateException var2) {
       }
@@ -312,7 +311,6 @@ public class SuggestDecorator {
       private volatile boolean stop;
 
       private InterruptableMatcher() {
-         super();
       }
 
       public void run() {
@@ -321,7 +319,7 @@ public class SuggestDecorator {
             Iterator<String> it = SuggestDecorator.this.suggestions.iterator();
             String word = SuggestDecorator.this.textfield.getText();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                if (this.stop) {
                   return;
                }

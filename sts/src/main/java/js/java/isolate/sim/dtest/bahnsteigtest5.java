@@ -8,10 +8,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class bahnsteigtest5 implements dtest {
-   public bahnsteigtest5() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bahnsteig Schreibweise";
@@ -28,7 +24,7 @@ public class bahnsteigtest5 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ELEMENT_BAHNSTEIG});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          String name = gl.getSWWert_special();
          String uName = name.toLowerCase();

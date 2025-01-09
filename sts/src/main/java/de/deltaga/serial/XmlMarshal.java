@@ -17,7 +17,6 @@ public class XmlMarshal {
    private JAXBContext context = null;
 
    public XmlMarshal(Class... classes) {
-      super();
       this.classes = classes;
    }
 
@@ -34,7 +33,7 @@ public class XmlMarshal {
    }
 
    public boolean isAllowedPackage(Class c) {
-      for(Class cs : this.classes) {
+      for (Class cs : this.classes) {
          if (cs == c) {
             return true;
          }

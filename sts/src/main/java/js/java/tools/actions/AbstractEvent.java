@@ -6,7 +6,6 @@ public abstract class AbstractEvent<T> {
    protected transient T source;
 
    protected AbstractEvent(T source) {
-      super();
       this.source = source;
       this.serialnumber = ++serialnumbercnt;
    }

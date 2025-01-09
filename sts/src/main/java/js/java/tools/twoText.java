@@ -5,13 +5,11 @@ public class twoText implements Comparable {
    private String cmptext = "";
 
    public twoText(String _text, String _cmptext) {
-      super();
       this.text = _text;
       this.cmptext = _cmptext;
    }
 
    public twoText(String _text) {
-      super();
       this.text = _text;
       this.cmptext = _text;
    }

@@ -10,10 +10,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 public class sicherungausfall_factory extends eventFactory {
    private JSpinner dauer;
 
-   public sicherungausfall_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Sicherung geflogen";
@@ -40,7 +36,7 @@ public class sicherungausfall_factory extends eventFactory {
    @Override
    public void readContainer(eventContainer ev) {
       super.readContainer(ev);
-      ev.setIntValue("dauer", Math.max(this.dauer.getValue(), 3));
+      ev.setIntValue("dauer", Math.max((Integer)this.dauer.getValue(), 3));
    }
 
    @Override

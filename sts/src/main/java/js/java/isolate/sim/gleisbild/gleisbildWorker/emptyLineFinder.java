@@ -28,10 +28,10 @@ public class emptyLineFinder extends gleisbildWorkerBase<gleisbildModel> {
          emptyCols.clear();
          LinkedList<Integer> noneemptyCols = new LinkedList();
 
-         for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
+         for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
             boolean lineEmpty = true;
 
-            for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
+            for (int x = 0; x < this.glbModel.getGleisWidth(); x++) {
                gleis gl = this.glbModel.getXY_null(x, y);
                if (gl == null || !gleis.ELEMENT_LEER.matches(gl.getElement()) || !gl.getExtendFarbe().equalsIgnoreCase("normal")) {
                   lineEmpty = false;
@@ -44,17 +44,17 @@ public class emptyLineFinder extends gleisbildWorkerBase<gleisbildModel> {
             }
          }
 
-         for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
-            if (!noneemptyCols.contains(x)) {
-               emptyCols.add(x);
+         for (int xx = 0; xx < this.glbModel.getGleisWidth(); xx++) {
+            if (!noneemptyCols.contains(xx)) {
+               emptyCols.add(xx);
             }
          }
 
          if (mark) {
-            for(int y = 0; y < this.glbModel.getGleisHeight(); ++y) {
-               for(int x = 0; x < this.glbModel.getGleisWidth(); ++x) {
-                  gleis gl = this.glbModel.getXY_null(x, y);
-                  if (emptyCols.contains(x) || emptyRows.contains(y)) {
+            for (int y = 0; y < this.glbModel.getGleisHeight(); y++) {
+               for (int xxx = 0; xxx < this.glbModel.getGleisWidth(); xxx++) {
+                  gleis gl = this.glbModel.getXY_null(xxx, y);
+                  if (emptyCols.contains(xxx) || emptyRows.contains(y)) {
                      this.glbModel.addMarkedGleis(gl);
                   }
                }

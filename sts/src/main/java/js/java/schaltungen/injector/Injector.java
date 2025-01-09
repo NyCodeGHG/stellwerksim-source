@@ -48,7 +48,6 @@ public class Injector extends JFrame implements xmllistener {
    private JTextField statusTF;
 
    public Injector(UserContextMini uc, String sandboxUrl) {
-      super();
       this.uc = uc;
       this.sandboxUrl = sandboxUrl;
       this.initComponents();
@@ -58,7 +57,7 @@ public class Injector extends JFrame implements xmllistener {
          JToolBar tb = new JToolBar();
          tb.setOrientation(1);
 
-         for(Module m : Module.values()) {
+         for (Module m : Module.values()) {
             if (!m.testfile.isEmpty()) {
                JButton b = new JButton(m.title);
                b.addActionListener(e -> EventBusService.getInstance().publish(new LaunchModule(m, url)));
@@ -180,11 +179,10 @@ public class Injector extends JFrame implements xmllistener {
       private int count = 0;
 
       private ReadTask() {
-         super();
       }
 
       public void run() {
-         ++this.count;
+         this.count++;
          if (this.count >= 10) {
             this.count = 0;
             Injector.this.readUrl();

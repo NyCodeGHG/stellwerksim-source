@@ -15,10 +15,6 @@ public class MirrorFilter extends AbstractBufferedImageOp {
    private float rotation;
    private float gap;
 
-   public MirrorFilter() {
-      super();
-   }
-
    public void setAngle(float angle) {
       this.angle = angle;
    }

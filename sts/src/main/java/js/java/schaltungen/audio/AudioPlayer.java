@@ -23,13 +23,11 @@ public class AudioPlayer implements LineListener {
    private float gain = 0.0F;
 
    public AudioPlayer(AudioPlayer.SAMPLES s, int loop) {
-      super();
       this.sample = s;
       this.loop = loop;
    }
 
    public AudioPlayer(AudioPlayer.SAMPLES s) {
-      super();
       this.sample = s;
       this.loop = s.plannedLoop;
    }

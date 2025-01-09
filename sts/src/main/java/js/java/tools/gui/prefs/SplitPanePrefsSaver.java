@@ -11,7 +11,6 @@ public class SplitPanePrefsSaver implements PropertyChangeListener {
    private final JSplitPane spane;
 
    public SplitPanePrefsSaver(JSplitPane spane, Preferences saveRootNode) {
-      super();
       this.spane = spane;
       this.saveRootNode = saveRootNode;
       SwingUtilities.invokeLater(() -> {

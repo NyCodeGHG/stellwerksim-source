@@ -107,7 +107,6 @@ public class hinweisRenderer extends rendererBase {
 
    private class timerRunner extends TimerTask {
       private timerRunner() {
-         super();
       }
 
       public void run() {

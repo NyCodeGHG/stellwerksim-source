@@ -85,7 +85,7 @@ public class structServer extends structDeliverer implements Runnable {
          output.write(":AID:" + this.my_main.getGleisbild().getAid());
          output.flush();
 
-         while(this.running) {
+         while (this.running) {
             String cmd = input.readLine();
             this.runCommand2(cmd, output);
          }

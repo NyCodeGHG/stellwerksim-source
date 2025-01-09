@@ -4,11 +4,9 @@ public class analysisWriter {
    private String moduleName = "";
 
    public analysisWriter() {
-      super();
    }
 
    public analysisWriter(String m) {
-      super();
       this.moduleName = m;
    }
 
@@ -32,7 +30,7 @@ public class analysisWriter {
       StackTraceElement[] se = Thread.currentThread().getStackTrace();
       String r = "Stack dump:\n";
 
-      for(int i = 0; i < se.length; ++i) {
+      for (int i = 0; i < se.length; i++) {
          r = r + se[i].toString() + "\n";
       }
 

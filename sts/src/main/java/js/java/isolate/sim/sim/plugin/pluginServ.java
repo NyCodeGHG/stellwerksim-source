@@ -76,7 +76,6 @@ public class pluginServ extends ServImpl {
    }
 
    public pluginServ(pluginDataAdapter m, ServImpl.OutputWriter client) {
-      super();
       this.my_main = m;
       this.initInterface();
       this.attachClient(client);
@@ -126,7 +125,7 @@ public class pluginServ extends ServImpl {
 
    private void debug(pluginServ.pluginData pd, HashMap<String, String> h) {
       if (pd.debug) {
-         for(Entry<String, String> e : h.entrySet()) {
+         for (Entry<String, String> e : h.entrySet()) {
             System.out.println("Plugin[" + pd.name + "]: " + (String)e.getKey() + "=" + (String)e.getValue());
          }
       }
@@ -172,7 +171,7 @@ public class pluginServ extends ServImpl {
    protected void finish(ServImpl.OutputWriter output) {
       pluginServ.pluginData pd = (pluginServ.pluginData)this.pluginList.remove(output);
       if (pd != null) {
-         for(pluginDataAdapter.pluginEventHandle peh : pd.registeredEvents) {
+         for (pluginDataAdapter.pluginEventHandle peh : pd.registeredEvents) {
             peh.close();
          }
       }
@@ -325,12 +324,12 @@ public class pluginServ extends ServImpl {
    private void bahnsteigliste(pluginServ.pluginData pd, BufferedWriter output, Attributes attrs) throws IOException {
       pd.sender.sendOpeningLine(output, "bahnsteigliste");
 
-      for(String bst : this.my_main.getAlleBahnsteige()) {
+      for (String bst : this.my_main.getAlleBahnsteige()) {
          boolean isHp = this.my_main.bahnsteigIsHaltepunkt(bst);
          pd.sender.sendOpeningLine(output, "bahnsteig", "name", bst, "haltepunkt", Boolean.toString(isHp));
          Iterator<String> it = this.my_main.findNeighborBahnsteig(bst);
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             String n = (String)it.next();
             if (!n.equals(bst)) {
                pd.sender.sendLine(output, "n", "name", n);
@@ -348,7 +347,7 @@ public class pluginServ extends ServImpl {
       pd.sender.sendOpeningLine(output, "zugliste");
       Map<Integer, String> zl = this.my_main.getZugList();
 
-      for(Entry<Integer, String> z : zl.entrySet()) {
+      for (Entry<Integer, String> z : zl.entrySet()) {
          pd.sender.sendLine(output, "zug", "zid", z.getKey() + "", "name", (String)z.getValue());
       }
 
@@ -400,7 +399,7 @@ public class pluginServ extends ServImpl {
          if (zl != null) {
             pd.sender.sendOpeningLine(output, "zugfahrplan", "zid", zid + "");
 
-            for(pluginDataAdapter.zugPlanLine zz : zl) {
+            for (pluginDataAdapter.zugPlanLine zz : zl) {
                HashMap<String, String> h = new HashMap();
                h.put("plan", zz.plan);
                h.put("name", zz.name);
@@ -458,7 +457,7 @@ public class pluginServ extends ServImpl {
 
    private void eventOccure(pluginServ.pluginData pd, BufferedWriter output, Attributes attrs) throws IOException {
       pluginServ.pluginData.eventOccureData eod;
-      while((eod = (pluginServ.pluginData.eventOccureData)pd.eventQueue.poll()) != null) {
+      while ((eod = (pluginServ.pluginData.eventOccureData)pd.eventQueue.poll()) != null) {
          pluginDataAdapter.zugDetails z = this.my_main.getZugDetails(eod.zid);
          if (z != null) {
             HashMap<String, String> h = new HashMap();
@@ -498,7 +497,7 @@ public class pluginServ extends ServImpl {
          pd.idhash.clear();
          Vector v = this.my_main.getStructInfo();
 
-         for(int i = 0; i < v.size(); ++i) {
+         for (int i = 0; i < v.size(); i++) {
             Vector vv = (Vector)v.get(i);
             String type = (String)vv.get(0);
             String name = (String)vv.get(1);
@@ -519,7 +518,7 @@ public class pluginServ extends ServImpl {
             int l = v.size() / 2;
             int c = 0;
 
-            for(int i = 0; i < v.size(); i += 2) {
+            for (int i = 0; i < v.size(); i += 2) {
                String key = "";
                String value = "";
 
@@ -536,7 +535,7 @@ public class pluginServ extends ServImpl {
                }
 
                pd.sender.sendLine(output, "structentry", "line", c + "", "totallines", l + "", "key", key, "value", value);
-               ++c;
+               c++;
             }
          }
 
@@ -569,7 +568,7 @@ public class pluginServ extends ServImpl {
       if (pd.tablet) {
          pd.sender.sendOpeningLine(output, "stoerungen");
 
-         for(pluginDataAdapter.pluginEventAdapter e : this.my_main.getEvents()) {
+         for (pluginDataAdapter.pluginEventAdapter e : this.my_main.getEvents()) {
             String s = e.funkName();
             if (s != null) {
                String aw = e.funkAntwort();
@@ -607,7 +606,7 @@ public class pluginServ extends ServImpl {
       List<pluginDataAdapter.WegElement> weg = this.my_main.getWege();
       pd.sender.sendOpeningLine(output, "wege");
 
-      for(pluginDataAdapter.WegElement e : weg) {
+      for (pluginDataAdapter.WegElement e : weg) {
          pd.sender.sendLine(output, e.xmlelement, e.attrs);
       }
 
@@ -695,7 +694,6 @@ public class pluginServ extends ServImpl {
 
    private class bcastRunner implements Runnable {
       private bcastRunner() {
-         super();
       }
 
       public void run() {
@@ -706,17 +704,17 @@ public class pluginServ extends ServImpl {
             byte[] magic = "STSBCASTCLIENT".getBytes("latin1");
             DatagramPacket data = new DatagramPacket(recvBuf, recvBuf.length);
 
-            while(pluginServ.this.running) {
+            while (pluginServ.this.running) {
                try {
                   pluginServ.this.bcastSocket.receive(data);
                   if (data.getLength() >= magic.length) {
                      boolean found = true;
                      int i = 0;
 
-                     while(true) {
+                     while (true) {
                         if (i < magic.length) {
                            if (recvBuf[i] == magic[i]) {
-                              ++i;
+                              i++;
                               continue;
                            }
 
@@ -754,7 +752,6 @@ public class pluginServ extends ServImpl {
       private final ServImpl.OutputWriter output;
 
       eventCallback(pluginServ.pluginData pd, ServImpl.OutputWriter output) {
-         super();
          this.pd = pd;
          this.output = output;
       }
@@ -774,7 +771,6 @@ public class pluginServ extends ServImpl {
       private final pluginServ.pluginData pd;
 
       fsSetResponseHook(pluginServ.pluginData pd, BufferedWriter output, int enr1, int enr2, ServBase.FAILREASON success) {
-         super();
          this.success = success;
          this.pd = pd;
          this.enr1 = enr1;
@@ -809,16 +805,11 @@ public class pluginServ extends ServImpl {
       public final LinkedList<pluginDataAdapter.pluginEventHandle> registeredEvents = new LinkedList();
       public final ConcurrentLinkedQueue<pluginServ.pluginData.eventOccureData> eventQueue = new ConcurrentLinkedQueue();
 
-      protected pluginData() {
-         super();
-      }
-
       static class eventOccureData {
          final int zid;
          final pluginDataAdapter.EVENTKINDS kind;
 
          eventOccureData(int zid, pluginDataAdapter.EVENTKINDS kind) {
-            super();
             this.zid = zid;
             this.kind = kind;
          }

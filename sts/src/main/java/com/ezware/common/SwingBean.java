@@ -6,10 +6,6 @@ import java.beans.PropertyChangeSupport;
 public class SwingBean {
    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-   public SwingBean() {
-      super();
-   }
-
    public void addPropertyListener(PropertyChangeListener pl) {
       this.propertyChangeSupport.addPropertyChangeListener(pl);
    }

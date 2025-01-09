@@ -4,10 +4,6 @@ import java.util.LinkedList;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class klaengetest implements dtest {
-   public klaengetest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "altes Maßstabsystem";

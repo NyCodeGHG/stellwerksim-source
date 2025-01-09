@@ -7,7 +7,6 @@ public class warningItems {
    private JMenuItem menu = null;
 
    public warningItems(String m) {
-      super();
       this.message = m;
    }
 

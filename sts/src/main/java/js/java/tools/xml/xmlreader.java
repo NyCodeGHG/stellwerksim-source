@@ -38,7 +38,6 @@ public class xmlreader extends DefaultHandler {
    private LinkedList stack = null;
 
    public xmlreader() {
-      super();
       this.listeners = new WeakHashMap();
    }
 
@@ -74,19 +73,19 @@ public class xmlreader extends DefaultHandler {
       boolean inkl = false;
       boolean otherc = false;
 
-      for(int i = 0; i < data.length(); ++i) {
+      for (int i = 0; i < data.length(); i++) {
          char c = data.charAt(i);
-         switch(c) {
+         switch (c) {
             case '/':
                if (inkl) {
-                  --klc;
+                  klc--;
                   if (!otherc) {
-                     ++slc;
+                     slc++;
                   }
                }
                break;
             case '<':
-               ++klc;
+               klc++;
                inkl = true;
                otherc = false;
                break;
@@ -162,8 +161,8 @@ public class xmlreader extends DefaultHandler {
          ip = new DataDisplayInputStream(inputC, this.dtdc);
       }
 
-      FilterInputStream var38 = new DataInputStream(ip);
-      BufferedReader input = new BufferedReader(new InputStreamReader(var38, "UTF-8"));
+      ip = new DataInputStream(ip);
+      BufferedReader input = new BufferedReader(new InputStreamReader(ip, "UTF-8"));
       Throwable var41 = null;
 
       try {
@@ -222,8 +221,8 @@ public class xmlreader extends DefaultHandler {
          ip = new DataDisplayInputStream(inputC, this.dtdc);
       }
 
-      FilterInputStream var19 = new DataInputStream(ip);
-      BufferedReader input = new BufferedReader(new InputStreamReader(var19, "UTF-8"));
+      ip = new DataInputStream(ip);
+      BufferedReader input = new BufferedReader(new InputStreamReader(ip, "UTF-8"));
       Throwable var5 = null;
 
       try {

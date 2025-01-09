@@ -8,7 +8,6 @@ import js.java.isolate.sim.eventsys.eventContainer;
 
 public class ComboEventRenderer extends JLabel implements ListCellRenderer {
    public ComboEventRenderer() {
-      super();
       this.setOpaque(true);
       this.setHorizontalAlignment(2);
       this.setVerticalAlignment(0);

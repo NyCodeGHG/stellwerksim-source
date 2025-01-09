@@ -6,10 +6,6 @@ import js.java.isolate.sim.eventsys.zugmsg;
 import js.java.isolate.sim.gleis.gleis;
 
 class c_isbahnsteig extends baseChain {
-   c_isbahnsteig() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);
@@ -24,10 +20,10 @@ class c_isbahnsteig extends baseChain {
             if (z.bstgRedirectSpecial) {
                Iterator<zug> it = z.getAllUnseenFahrplanzeilen();
 
-               while(it.hasNext()) {
+               while (it.hasNext()) {
                   zug zz = (zug)it.next();
                   if (zz.zielgleis.equalsIgnoreCase(z.pos_gl.getSWWert()) || z.my_main.getBahnsteige().isNeighborBahnsteigOf(zz.zielgleis, z.pos_gl)) {
-                     for(;
+                     for (;
                         !zz.zielgleis.equalsIgnoreCase(z.zielgleis) && !z.unterzuege.isEmpty() && !z.flags.hasFlag('F') && !z.flags.hasFlag('W');
                         z.nextUnterzug()
                      ) {
@@ -55,7 +51,7 @@ class c_isbahnsteig extends baseChain {
 
             if (z.befehl_zielgleis != null) {
                _gleis = z.befehl_zielgleis;
-               ++z.c_geaendertbahnsteig;
+               z.c_geaendertbahnsteig++;
             }
 
             if (zug.debugMode != null) {
@@ -71,9 +67,9 @@ class c_isbahnsteig extends baseChain {
                z.lastAbfahrt = z.warankunft;
                z.updateHeat(true, z.verspaetung, z.lastVerspaetung);
                z.lastVerspaetung = z.verspaetung;
-               z.outputValueChanged |= z.verspaetung != overspaetung;
+               z.outputValueChanged = z.outputValueChanged | z.verspaetung != overspaetung;
                z.gleiswarok = true;
-               ++z.c_richtigbahnsteig;
+               z.c_richtigbahnsteig++;
                z.my_main.reportFahrplanAn(z.zid, z.cur_azid, z.gestopptgleis, z.gleiswarok, z.verspaetung, z.lastVerspaetung);
                z.my_main.reportFahrplanAb(z.zid, z.cur_azid, z.verspaetung);
                if (z.hasHook(eventGenerator.T_ZUG_ANKUNFT)) {
@@ -91,14 +87,14 @@ class c_isbahnsteig extends baseChain {
                z.ambahnsteig = true;
                z.ist_tempo = 0.0;
                if (z.verspaetung < 0) {
-                  int overspaetung = z.verspaetung;
+                  int overspaetungx = z.verspaetung;
                   z.verspaetung = 0;
                   z.lastVerspaetung = z.verspaetung;
-                  z.outputValueChanged |= z.verspaetung != overspaetung;
+                  z.outputValueChanged = z.outputValueChanged | z.verspaetung != overspaetungx;
                } else {
-                  int overspaetung = (int)((z.mytime - z.an) / 60000L);
-                  if (overspaetung > 0) {
-                     z.updateHeat(false, overspaetung, z.lastVerspaetung);
+                  int overspaetungx = (int)((z.mytime - z.an) / 60000L);
+                  if (overspaetungx > 0) {
+                     z.updateHeat(false, overspaetungx, z.lastVerspaetung);
                   }
                }
 
@@ -109,7 +105,7 @@ class c_isbahnsteig extends baseChain {
                }
 
                z.outputValueChanged = true;
-               ++z.c_richtigbahnsteig;
+               z.c_richtigbahnsteig++;
                tl_vorsignal.remove(z);
                tl_langsam.remove(z);
                tl_sichtfahrt.remove(z);
@@ -129,14 +125,14 @@ class c_isbahnsteig extends baseChain {
                z.ambahnsteig = true;
                z.ist_tempo = 0.0;
                if (z.verspaetung < 0) {
-                  int overspaetung = z.verspaetung;
+                  int overspaetungx = z.verspaetung;
                   z.verspaetung = 0;
                   z.lastVerspaetung = z.verspaetung;
-                  z.outputValueChanged |= z.verspaetung != overspaetung;
+                  z.outputValueChanged = z.outputValueChanged | z.verspaetung != overspaetungx;
                } else {
-                  int overspaetung = (int)((z.mytime - z.an) / 60000L);
-                  if (overspaetung > 0) {
-                     z.updateHeat(false, overspaetung, z.lastVerspaetung);
+                  int overspaetungx = (int)((z.mytime - z.an) / 60000L);
+                  if (overspaetungx > 0) {
+                     z.updateHeat(false, overspaetungx, z.lastVerspaetung);
                   }
                }
 
@@ -146,7 +142,7 @@ class c_isbahnsteig extends baseChain {
                   z.glbModel.befreieBisSignal(z.pos_gl, z.before_gl);
                }
 
-               ++z.c_falschbahnsteig;
+               z.c_falschbahnsteig++;
                tl_vorsignal.remove(z);
                tl_langsam.remove(z);
                tl_sichtfahrt.remove(z);

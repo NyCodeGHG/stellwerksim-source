@@ -5,10 +5,9 @@ import java.util.Map.Entry;
 
 class massstabColor extends colorStruct {
    massstabColor(colorStruct base) {
-      super();
       base.cloneTo(this);
 
-      for(Entry<String, Color> e : this.col_stellwerk_backmulti.entrySet()) {
+      for (Entry<String, Color> e : this.col_stellwerk_backmulti.entrySet()) {
          String s = (String)e.getKey();
          Color c = (Color)e.getValue();
          if (s.compareTo("normal") == 0) {

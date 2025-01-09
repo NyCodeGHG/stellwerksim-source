@@ -53,8 +53,6 @@ public class timedeliverySynced extends timedeliveryBase implements timedelivery
    }
 
    public timedeliverySynced(String url) {
-      super();
-
       try {
          this.tsync = new timeSync(new URL(url), this);
       } catch (UnresolvedAddressException | MalformedURLException var5) {
@@ -73,8 +71,6 @@ public class timedeliverySynced extends timedeliveryBase implements timedelivery
    }
 
    public timedeliverySynced(String host, int instance) {
-      super();
-
       try {
          this.tsync = new timeSync(host, instance, this);
       } catch (IOException var4) {
@@ -93,7 +89,6 @@ public class timedeliverySynced extends timedeliveryBase implements timedelivery
 
    private class syncTimer extends TimerTask {
       private syncTimer() {
-         super();
       }
 
       public void run() {

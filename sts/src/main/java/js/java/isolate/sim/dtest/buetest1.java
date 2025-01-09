@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class buetest1 implements dtest {
-   public buetest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bahnübergang-ENR";
@@ -25,7 +21,7 @@ public class buetest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          int x = gl.getCol();
          int y = gl.getRow() + 2;

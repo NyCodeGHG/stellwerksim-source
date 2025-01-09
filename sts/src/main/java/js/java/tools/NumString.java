@@ -4,7 +4,6 @@ public class NumString implements Comparable, CharSequence {
    private String s;
 
    public NumString(String _s) {
-      super();
       this.s = _s;
    }
 
@@ -30,7 +29,7 @@ public class NumString implements Comparable, CharSequence {
       int ret = 0;
       int i1 = 0;
 
-      for(int i2 = 0; i1 < l; ++i2) {
+      for (int i2 = 0; i1 < l; i2++) {
          char b1;
          try {
             b1 = this.s.charAt(i1);
@@ -49,18 +48,18 @@ public class NumString implements Comparable, CharSequence {
 
          if (Character.isDigit(b1) && Character.isDigit(b2)) {
             StringBuilder digit1;
-            for(digit1 = new StringBuilder(); i1 < this.s.length() && Character.isDigit(this.s.charAt(i1)); ++i1) {
+            for (digit1 = new StringBuilder(); i1 < this.s.length() && Character.isDigit(this.s.charAt(i1)); i1++) {
                digit1.append(this.s.charAt(i1));
             }
 
-            --i1;
+            i1--;
 
             StringBuilder digit2;
-            for(digit2 = new StringBuilder(); i2 < s2.length() && Character.isDigit(s2.charAt(i2)); ++i2) {
+            for (digit2 = new StringBuilder(); i2 < s2.length() && Character.isDigit(s2.charAt(i2)); i2++) {
                digit2.append(s2.charAt(i2));
             }
 
-            --i2;
+            i2--;
             int z1 = Integer.parseInt(digit1.toString());
             int z2 = Integer.parseInt(digit2.toString());
             if (z1 != z2) {
@@ -72,7 +71,7 @@ public class NumString implements Comparable, CharSequence {
             break;
          }
 
-         ++i1;
+         i1++;
       }
 
       return ret;

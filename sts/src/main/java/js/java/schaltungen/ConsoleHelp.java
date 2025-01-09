@@ -41,7 +41,7 @@ public class ConsoleHelp extends JDialog {
    }
 
    private void checkDelay(ConsoleHelp.CountDownData cdd) {
-      --cdd.counter;
+      cdd.counter--;
       if (cdd.counter < 1) {
          this.closeButton.setEnabled(true);
          this.closeButton.setText("Ok");
@@ -112,7 +112,6 @@ public class ConsoleHelp extends JDialog {
       Timer timer;
 
       private CountDownData() {
-         super();
       }
    }
 }

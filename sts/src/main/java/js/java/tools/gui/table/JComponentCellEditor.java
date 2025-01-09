@@ -17,10 +17,6 @@ public class JComponentCellEditor implements TableCellEditor, Serializable {
    protected transient ChangeEvent changeEvent = null;
    protected JComponent editorComponent = null;
 
-   public JComponentCellEditor() {
-      super();
-   }
-
    public Component getComponent() {
       return this.editorComponent;
    }
@@ -66,7 +62,7 @@ public class JComponentCellEditor implements TableCellEditor, Serializable {
    public void fireEditingStopped() {
       Object[] listeners = this.listenerList.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == CellEditorListener.class) {
             if (this.changeEvent == null) {
                this.changeEvent = new ChangeEvent(this);
@@ -80,7 +76,7 @@ public class JComponentCellEditor implements TableCellEditor, Serializable {
    protected void fireEditingCanceled() {
       Object[] listeners = this.listenerList.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == CellEditorListener.class) {
             if (this.changeEvent == null) {
                this.changeEvent = new ChangeEvent(this);

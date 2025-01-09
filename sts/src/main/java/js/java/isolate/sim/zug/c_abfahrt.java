@@ -16,7 +16,7 @@ class c_abfahrt extends baseChain1Chain {
    @Override
    boolean run(zug z) {
       this.visiting(z);
-      ++z.bahnsteigcnt;
+      z.bahnsteigcnt++;
       if (z.bahnsteigcnt > 1000) {
          z.bahnsteigcnt = 0;
          z.my_main.reportZugPosition(z.zid, z.gestopptgleis, z.pos_gl);
@@ -26,7 +26,7 @@ class c_abfahrt extends baseChain1Chain {
          boolean needsK = false;
          String k = z.zielgleis + "/" + z.zid + "/" + z.ab;
          if (zug.flagZug.containsKey(k)) {
-            int kzug = zug.flagZug.get(k);
+            int kzug = (Integer)zug.flagZug.get(k);
             if (kzug > 0) {
                zug neuzug = z.my_main.findZug(kzug);
                if (neuzug != null) {
@@ -34,7 +34,7 @@ class c_abfahrt extends baseChain1Chain {
                   if (neuzug.unterzuege != null) {
                      Iterator<zug> it = neuzug.unterzuege.values().iterator();
 
-                     while(!needsK && it.hasNext()) {
+                     while (!needsK && it.hasNext()) {
                         zug zz = (zug)it.next();
                         needsK = zz.flags.hasFlag('K');
                         if (needsK && z.positionMelden) {
@@ -48,19 +48,19 @@ class c_abfahrt extends baseChain1Chain {
 
          if (!needsK && (z.ready2go || z.flags.hasFlag('A') || z.variables.calcAbfahrt(z.mytime, z.warankunft, z.an, z.ab, z.zielgleis, z.gleiswarok))) {
             z.ready2go = true;
-            z.outputValueChanged |= z.abfahrt.setBGColor(4);
+            z.outputValueChanged = z.abfahrt.setBGColor(4) | z.outputValueChanged;
             int overspaetung = z.verspaetung;
             z.verspaetung = (int)((z.mytime - z.ab) / 60000L);
             z.lastAbfahrt = z.mytime;
             z.updateHeat(false, z.verspaetung, z.lastVerspaetung);
-            z.outputValueChanged |= z.verspaetung != overspaetung;
+            z.outputValueChanged = z.outputValueChanged | z.verspaetung != overspaetung;
             if (zug.debugMode != null) {
                zug.debugMode.writeln("zug (" + z.getName() + ")", "will abfahren");
             }
 
             z.updateData();
             if (z.hasHook(eventGenerator.T_ZUG_ABFAHRT) && !z.call(eventGenerator.T_ZUG_ABFAHRT, new zugmsg(z, z.pos_gl, z.before_gl))) {
-               z.outputValueChanged |= z.abfahrt.setBGColor(7);
+               z.outputValueChanged = z.abfahrt.setBGColor(7) | z.outputValueChanged;
                if (z.positionMelden) {
                   z.melde("Stehe am Bahnsteig " + z.gestopptgleis + ".");
                }
@@ -86,7 +86,7 @@ class c_abfahrt extends baseChain1Chain {
                   LinkedList<gleis> newzugbelegt = new LinkedList();
 
                   try {
-                     while(z.zugbelegt.size() > 0) {
+                     while (z.zugbelegt.size() > 0) {
                         newzugbelegt.addFirst(z.zugbelegt.removeFirst());
                      }
                   } catch (NoSuchElementException var8) {
@@ -120,7 +120,7 @@ class c_abfahrt extends baseChain1Chain {
                z.ist_tempo = 0.2;
                z.my_main.setZugOnBahnsteig(z.gestopptgleis, null, null);
                z.my_main.reportFahrplanAb(z.zid, z.cur_azid, z.verspaetung);
-               z.outputValueChanged |= z.abfahrt.setBGColor(0);
+               z.outputValueChanged = z.abfahrt.setBGColor(0) | z.outputValueChanged;
                if (z.isBahnsteig && z.flags.hasFlag('f')) {
                   zug neuzug = z.my_main.findZug(z.flags.dataOfFlag('f'));
                   if (neuzug != null && neuzug.ambahnsteig) {
@@ -139,7 +139,7 @@ class c_abfahrt extends baseChain1Chain {
             }
          } else {
             if (!needsK) {
-               z.outputValueChanged |= z.abfahrt.setBGColor(3);
+               z.outputValueChanged = z.abfahrt.setBGColor(3) | z.outputValueChanged;
             }
 
             if (z.positionMelden) {
@@ -154,11 +154,11 @@ class c_abfahrt extends baseChain1Chain {
          }
 
          if (z.mytime > z.ab - 30000L) {
-            z.outputValueChanged |= z.abfahrt.setBGColor(13);
+            z.outputValueChanged = z.abfahrt.setBGColor(13) | z.outputValueChanged;
          } else if (z.mytime > z.ab - 60000L) {
-            z.outputValueChanged |= z.abfahrt.setBGColor(12);
+            z.outputValueChanged = z.abfahrt.setBGColor(12) | z.outputValueChanged;
          } else if (z.mytime > z.ab - 60000L * 2L) {
-            z.outputValueChanged |= z.abfahrt.setBGColor(11);
+            z.outputValueChanged = z.abfahrt.setBGColor(11) | z.outputValueChanged;
          }
 
          return false;

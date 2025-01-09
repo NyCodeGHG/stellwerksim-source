@@ -3,10 +3,6 @@ package js.java.isolate.sim.zug;
 import js.java.tools.ColorText;
 
 class gleisHandler extends zugHandler {
-   gleisHandler() {
-      super();
-   }
-
    @Override
    protected int compareImpl(ZugColorText ct, frozenZug z, ZugColorText other, frozenZug otherz) {
       return z.getGleis().compareToIgnoreCase(otherz.getGleis());

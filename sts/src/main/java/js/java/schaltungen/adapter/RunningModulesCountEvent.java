@@ -5,7 +5,6 @@ public class RunningModulesCountEvent {
    public final boolean singleRun;
 
    RunningModulesCountEvent(int size, boolean singleRun) {
-      super();
       this.count = size;
       this.singleRun = singleRun;
    }

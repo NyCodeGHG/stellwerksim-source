@@ -9,7 +9,6 @@ public class ExponentialSmoothing {
    private final double smooth;
 
    public ExponentialSmoothing(int historySize, double smooth) {
-      super();
       this.historySize = historySize;
       this.smooth = smooth;
    }
@@ -27,9 +26,9 @@ public class ExponentialSmoothing {
 
    private double calcForcast(Iterator<Double> it) {
       if (!it.hasNext()) {
-         return this.data.getLast();
+         return (Double)this.data.getLast();
       } else {
-         double y = it.next();
+         double y = (Double)it.next();
          return this.smooth * y + (1.0 - this.smooth) * this.calcForcast(it);
       }
    }

@@ -8,14 +8,13 @@ public class SwitchValueManipulator {
    private final DataSwitch dataSwitch;
 
    public SwitchValueManipulator(DataSwitch dataSwitch) {
-      super();
       this.dataSwitch = dataSwitch;
    }
 
    public void dump() {
       Field[] fields = this.dataSwitch.getClass().getFields();
 
-      for(Field f : fields) {
+      for (Field f : fields) {
          SwitchOption so = (SwitchOption)f.getAnnotation(SwitchOption.class);
          if (so != null) {
             try {
@@ -30,7 +29,7 @@ public class SwitchValueManipulator {
    public void set(String name, boolean enabled) {
       Field[] fields = this.dataSwitch.getClass().getFields();
 
-      for(Field f : fields) {
+      for (Field f : fields) {
          SwitchOption so = (SwitchOption)f.getAnnotation(SwitchOption.class);
          if (so != null && so.value().equalsIgnoreCase(name)) {
             this.set(f, enabled);

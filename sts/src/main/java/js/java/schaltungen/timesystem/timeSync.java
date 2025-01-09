@@ -22,20 +22,18 @@ public class timeSync implements Runnable, SessionClose {
    private Timer repeatTimer = new Timer();
 
    public timeSync(String host, int instanz, timerecipient client) throws IOException {
-      super();
       this.instanz = (byte)instanz;
       this.client = client;
       this.init(host);
    }
 
    public timeSync(URL url, timerecipient client) throws IOException {
-      super();
       this.client = client;
       String h = url.getHost();
       String q = url.getQuery();
       String[] params = q.split("&");
 
-      for(String param : params) {
+      for (String param : params) {
          try {
             String name = param.split("=")[0];
             String value = param.split("=")[1];
@@ -126,7 +124,7 @@ public class timeSync implements Runnable, SessionClose {
    public void run() {
       ByteBuffer receivepacket = this.getBuffer();
 
-      while(this.running) {
+      while (this.running) {
          try {
             receivepacket.rewind();
             this.udp.read(receivepacket);
@@ -148,7 +146,6 @@ public class timeSync implements Runnable, SessionClose {
 
    private class syncTimer extends TimerTask {
       private syncTimer() {
-         super();
       }
 
       public void run() {

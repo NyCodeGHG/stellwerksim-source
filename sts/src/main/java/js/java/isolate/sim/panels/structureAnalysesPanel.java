@@ -190,7 +190,7 @@ public class structureAnalysesPanel extends basePanel {
             final LinkedList<Rectangle> rl = gw.getAreas();
             SwingUtilities.invokeLater(new Runnable() {
                public void run() {
-                  for(Rectangle r : rl) {
+                  for (Rectangle r : rl) {
                      structureAnalysesPanel.this.areasCB.addItem(r);
                   }
                }
@@ -218,7 +218,7 @@ public class structureAnalysesPanel extends basePanel {
          public void run() {
             elementConnectorFinder gw = new elementConnectorFinder(structureAnalysesPanel.this.glbControl.getModel(), structureAnalysesPanel.this.my_main);
             elementConnectorFinder.analyser aa;
-            switch(structureAnalysesPanel.this.reducedVGraph.getSelectedIndex()) {
+            switch (structureAnalysesPanel.this.reducedVGraph.getSelectedIndex()) {
                case 0:
                default:
                   aa = new elementConnectorFinder.fullAnalyser();
@@ -253,7 +253,7 @@ public class structureAnalysesPanel extends basePanel {
             LinkedList<eaConnectionTracking.eaConnection> result = eac.run();
             StringBuilder res = new StringBuilder();
 
-            for(eaConnectionTracking.eaConnection ea : result) {
+            for (eaConnectionTracking.eaConnection ea : result) {
                res.append(ea.toString());
                res.append('\n');
             }

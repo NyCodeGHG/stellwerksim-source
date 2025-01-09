@@ -9,11 +9,9 @@ class StoredItem {
    public String zielnachbar;
 
    public StoredItem() {
-      super();
    }
 
    StoredItem(msgItem item) {
-      super();
       this.signal = item.signal.getENR();
       this.ziel = item.ziel;
       this.zielnachbar = item.zielnachbar;

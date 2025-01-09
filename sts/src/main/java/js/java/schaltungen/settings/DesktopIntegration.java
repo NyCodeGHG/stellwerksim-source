@@ -31,7 +31,6 @@ public class DesktopIntegration extends JPanel {
    private JCheckBox startMenuCB;
 
    DesktopIntegration(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
 

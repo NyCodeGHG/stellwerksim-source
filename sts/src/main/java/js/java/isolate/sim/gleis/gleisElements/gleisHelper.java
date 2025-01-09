@@ -8,12 +8,8 @@ public class gleisHelper {
    static LinkedList<element_typElement> allElements = new LinkedList();
    static HashMap<Integer, element_typElement> defaultElements = new HashMap();
 
-   public gleisHelper() {
-      super();
-   }
-
    public static element findElement(int typ, int element) {
-      for(element_typElement e : allElements) {
+      for (element_typElement e : allElements) {
          if (e.getTyp() == typ && e.getElement() == element) {
             return e;
          }
@@ -25,7 +21,7 @@ public class gleisHelper {
    public static List<element> allElements() {
       LinkedList<element> l = new LinkedList();
 
-      for(element_typElement e : allElements) {
+      for (element_typElement e : allElements) {
          l.add(e);
       }
 
@@ -57,7 +53,7 @@ public class gleisHelper {
 
    public static element calcSizeDisplay(int size) {
       element r;
-      switch(size) {
+      switch (size) {
          case 2:
             r = gleisElements.ELEMENT_2ZDISPLAY;
             break;
@@ -88,7 +84,7 @@ public class gleisHelper {
       if (!_richtung.isEmpty()) {
          char r = _richtung.charAt(0);
 
-         for(gleisElements.RICHTUNG ra : gleisElements.RICHTUNG.values()) {
+         for (gleisElements.RICHTUNG ra : gleisElements.RICHTUNG.values()) {
             if (ra.getChar() == r) {
                return ra;
             }

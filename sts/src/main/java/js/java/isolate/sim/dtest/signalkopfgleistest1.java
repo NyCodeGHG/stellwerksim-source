@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class signalkopfgleistest1 implements dtest {
-   public signalkopfgleistest1() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Signalkopfgleis";
@@ -25,7 +21,7 @@ public class signalkopfgleistest1 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it = glb.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          if (gl.nextByRichtung(false) == null) {
             dtestresult d = new dtestresult(2, "Hinter einem Signal endet die Strecke. Kopfgleise benötigen ein zusätzliches Gleis!", gl);

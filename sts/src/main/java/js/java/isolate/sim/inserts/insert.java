@@ -79,7 +79,6 @@ public abstract class insert extends JPanel implements SessionClose {
    }
 
    public insert(GleisAdapter m, gleisbildModel glb) {
-      super();
       this.my_main = m;
       this.glbModel = glb;
       this.initComponents();
@@ -118,7 +117,7 @@ public abstract class insert extends JPanel implements SessionClose {
       gridBagConstraints.gridwidth = 2;
       gridBagConstraints.insets = new Insets(2, 0, 0, 0);
       this.add(p, gridBagConstraints);
-      ++this.gy;
+      this.gy++;
       JLabel l = new JLabel(label);
       l.setForeground(UIManager.getDefaults().getColor("TitledBorder.titleColor"));
       p.add(l);
@@ -167,17 +166,17 @@ public abstract class insert extends JPanel implements SessionClose {
       this.height = 0;
       int w = 0;
 
-      for(inserttoken t : this.layout) {
+      for (inserttoken t : this.layout) {
          if (t instanceof newlinetoken) {
-            ++this.height;
+            this.height++;
             this.width = Math.max(this.width, w);
             w = 0;
          } else if (t.isElement()) {
-            ++w;
+            w++;
          }
       }
 
-      ++this.height;
+      this.height++;
       this.width = Math.max(this.width, w);
    }
 
@@ -222,7 +221,7 @@ public abstract class insert extends JPanel implements SessionClose {
          JPanel pan = new ThinkingPanel();
          pan.setLayout(new AutoMultiColumnLayout(new MaxWidth()));
 
-         for(int i = 0; i < names.length; i += 2) {
+         for (int i = 0; i < names.length; i += 2) {
             String blabel = names[i];
             final String key = names[i + 1];
             JToggleButton r = new JRadioButton(blabel);
@@ -254,7 +253,7 @@ public abstract class insert extends JPanel implements SessionClose {
          JPanel pan = new JPanel();
          pan.setLayout(new AutoMultiColumnLayout(new MaxWidth()));
 
-         for(int i = 0; i < names.size(); i += 2) {
+         for (int i = 0; i < names.size(); i += 2) {
             String blabel = (String)names.get(i);
             final String key = (String)names.get(i);
             JToggleButton r = new JRadioButton(blabel);
@@ -284,12 +283,12 @@ public abstract class insert extends JPanel implements SessionClose {
       TreeMap<Integer, gleis> allenrs = new TreeMap();
       Iterator<gleis> it = this.glbModel.findIterator(element);
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          allenrs.put(gl.getENR(), gl);
       }
 
-      for(Integer i : allenrs.keySet()) {
+      for (Integer i : allenrs.keySet()) {
          n.addItem(allenrs.get(i));
       }
 
@@ -310,13 +309,13 @@ public abstract class insert extends JPanel implements SessionClose {
       n.setEditable(false);
       TreeMap<Integer, gleis> allenrs = new TreeMap();
 
-      for(gleis gl : lg) {
+      for (gleis gl : lg) {
          if (gl.typRequiresENR() && gl.getENR() > 0) {
             allenrs.put(gl.getENR(), gl);
          }
       }
 
-      for(Integer i : allenrs.keySet()) {
+      for (Integer i : allenrs.keySet()) {
          n.addItem(allenrs.get(i));
       }
 
@@ -337,7 +336,7 @@ public abstract class insert extends JPanel implements SessionClose {
       n.setEditable(false);
       TreeMap<String, Color> cols = gleisColor.getInstance().getBGcolors();
 
-      for(String k : cols.keySet()) {
+      for (String k : cols.keySet()) {
          ColorText c = new ColorText(k, (Color)cols.get(k));
          n.addItem(c);
          if (k.equalsIgnoreCase(def)) {
@@ -380,7 +379,7 @@ public abstract class insert extends JPanel implements SessionClose {
       gridBagConstraints.weightx = 1.0;
       gridBagConstraints.gridwidth = 2;
       this.add(sep, gridBagConstraints);
-      ++this.gy;
+      this.gy++;
       this.refreshPreview();
    }
 
@@ -414,7 +413,7 @@ public abstract class insert extends JPanel implements SessionClose {
    private void initlist(boolean leftright) {
       this.initVariables(leftright);
 
-      for(inserttoken t : this.layout) {
+      for (inserttoken t : this.layout) {
          t.init();
       }
    }
@@ -433,10 +432,10 @@ public abstract class insert extends JPanel implements SessionClose {
       int cx = x;
       int cy = y;
 
-      for(inserttoken t : this.layout) {
+      for (inserttoken t : this.layout) {
          if (t instanceof newlinetoken) {
             cx = x;
-            ++cy;
+            cy++;
          } else {
             gleis gl = glb.getXY(cx, cy);
 
@@ -470,10 +469,10 @@ public abstract class insert extends JPanel implements SessionClose {
       int cx = x;
       int cy = y;
 
-      for(inserttoken t : this.layout) {
+      for (inserttoken t : this.layout) {
          if (t instanceof newlinetoken) {
             cx = x;
-            ++cy;
+            cy++;
          } else {
             if (t.isVisible()) {
                lp.add(new Point(cx, cy));

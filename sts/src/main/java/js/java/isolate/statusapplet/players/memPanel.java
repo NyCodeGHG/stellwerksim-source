@@ -18,7 +18,6 @@ public class memPanel extends JPanel implements ActionListener, SessionClose {
    private JProgressBar memoryBar;
 
    public memPanel() {
-      super();
       this.initComponents();
       this.memTimer.start();
    }

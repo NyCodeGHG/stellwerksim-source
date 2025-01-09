@@ -6,7 +6,6 @@ public class SimControlMessage {
    public final int instanz;
 
    public SimControlMessage(String text, boolean ispublic, int instanz) {
-      super();
       this.msg = text;
       this.ispublic = ispublic;
       this.instanz = instanz;

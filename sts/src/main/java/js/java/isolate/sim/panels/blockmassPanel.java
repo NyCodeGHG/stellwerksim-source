@@ -36,7 +36,7 @@ public class blockmassPanel extends basePanel {
          this.buttonsPanel.removeAll();
          massBase.MasstabItem[] m = this.glbControl.getModel().getMasstabCalculator().getMasstabList();
 
-         for(massBase.MasstabItem it : m) {
+         for (massBase.MasstabItem it : m) {
             JButton b = new JButton();
             b.setIcon(new ColorTextIcon(it.label));
             b.setText("<html>" + it.label.getText() + "</html>");
@@ -73,7 +73,7 @@ public class blockmassPanel extends basePanel {
    }
 
    private void blockEnabled(boolean e) {
-      for(Component c : this.buttonsPanel.getComponents()) {
+      for (Component c : this.buttonsPanel.getComponents()) {
          c.setEnabled(e);
       }
    }

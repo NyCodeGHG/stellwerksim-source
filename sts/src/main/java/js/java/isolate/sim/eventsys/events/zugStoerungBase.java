@@ -37,7 +37,7 @@ public abstract class zugStoerungBase extends zugevent {
       this.dtext = ev.getValue("text");
       this.rtypes = EnumSet.noneOf(eventGenerator.TYPES.class);
 
-      for(eventGenerator.TYPES t : ts) {
+      for (eventGenerator.TYPES t : ts) {
          List<zug> zl = this.findAZug(t);
          if (zl.isEmpty()) {
             this.unregisterAll();
@@ -47,7 +47,7 @@ public abstract class zugStoerungBase extends zugevent {
 
          this.rtypes.add(t);
 
-         for(zug z : zl) {
+         for (zug z : zl) {
             this.registered.add(z);
             this.register(t, z);
          }
@@ -62,12 +62,12 @@ public abstract class zugStoerungBase extends zugevent {
    }
 
    protected final void unregisterAll() {
-      for(zug z : this.registered) {
-         for(eventGenerator.TYPES t : this.rtypes) {
+      for (zug z : this.registered) {
+         for (eventGenerator.TYPES t : this.rtypes) {
             z.unregisterHook(t, this);
          }
 
-         for(eventGenerator.TYPES t : eventGenerator.TYPES.values()) {
+         for (eventGenerator.TYPES t : eventGenerator.TYPES.values()) {
             z.unregisterHook(t, this);
          }
       }
@@ -89,7 +89,7 @@ public abstract class zugStoerungBase extends zugevent {
    protected List<zug> findAZug(eventGenerator.TYPES t) {
       LinkedList<zug> ret = new LinkedList();
 
-      for(zug z : this.my_main.getZugList()) {
+      for (zug z : this.my_main.getZugList()) {
          boolean add = true;
          add &= !z.isFertig();
          add &= this.zname == null || this.zname.isEmpty() || z.getSpezialName().startsWith(this.zname);
@@ -147,7 +147,7 @@ public abstract class zugStoerungBase extends zugevent {
       v.addElement("registered z");
       String zs = "";
 
-      for(zug z : this.registered) {
+      for (zug z : this.registered) {
          zs = zs + "[" + z.getName() + "] ";
       }
 

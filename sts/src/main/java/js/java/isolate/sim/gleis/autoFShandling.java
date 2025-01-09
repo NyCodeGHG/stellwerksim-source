@@ -30,7 +30,6 @@ public class autoFShandling {
    }
 
    autoFShandling(gleis parent) {
-      super();
       this.my_gleis = parent;
    }
 
@@ -127,14 +126,14 @@ public class autoFShandling {
 
    public void incFWcount(fahrstrasse f) {
       if (!f.getExtend().isDeleted()) {
-         ++this.fw_start_count;
+         this.fw_start_count++;
          if (f.getExtend().getFSType() == 2) {
             this.my_fahrstrasse = f;
          } else if (f.getExtend().getFSType() == 0 && this.my_fahrstrasse == null) {
             this.my_fahrstrasse = f;
          }
 
-         ++f.getStop().autoFW.fw_stop_count;
+         f.getStop().autoFW.fw_stop_count++;
       }
    }
 
@@ -144,7 +143,7 @@ public class autoFShandling {
 
    private void disableManualDestination() {
       try {
-         --this.manualFS.getStop().autoFW.manualFSdestination;
+         this.manualFS.getStop().autoFW.manualFSdestination--;
          if (this.manualFS.getStop().autoFW.manualFSdestination < 0) {
             this.manualFS.getStop().autoFW.manualFSdestination = 0;
          }
@@ -154,14 +153,14 @@ public class autoFShandling {
 
    private void enableManualDestination() {
       try {
-         ++this.manualFS.getStop().autoFW.manualFSdestination;
+         this.manualFS.getStop().autoFW.manualFSdestination++;
       } catch (NullPointerException var2) {
       }
    }
 
    void disableAutoFW() {
       if (this.manualFS != null) {
-         --manualFScount;
+         manualFScount--;
          if (manualFScount < 0) {
             manualFScount = 0;
          }
@@ -179,7 +178,7 @@ public class autoFShandling {
       this.disableManualDestination();
       if (manualFScount < ((gleisbildModelFahrweg)this.my_gleis.getParentGleisbild()).countFahrwege() / 6) {
          if (this.manualFS == null) {
-            ++manualFScount;
+            manualFScount++;
          }
 
          this.autoFW = true;
@@ -237,7 +236,7 @@ public class autoFShandling {
 
    void triggerApproachingFS() {
       if (this.autoFW) {
-         this.setFS |= this.triggeredFW;
+         this.setFS = this.setFS | this.triggeredFW;
          if (this.setFS && this.triggeredFW) {
             if (this.my_gleis.getFluentData().getStellung() != gleisElements.ST_SIGNAL_GRÜN && this.my_gleis.fdata.fsspeicher == null) {
                this.my_gleis.tjmAdd();

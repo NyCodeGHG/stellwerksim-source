@@ -39,7 +39,6 @@ public class gleisbildLoadPanel extends JPanel implements ircupdate {
    private JButton testAID4Button;
 
    public gleisbildLoadPanel(UserContext uc, GleisAdapter m, oneInstance irc, playersPanel kp) {
-      super();
       this.uc = uc;
       this.my_main = m;
       this.my_instance = irc;
@@ -56,7 +55,7 @@ public class gleisbildLoadPanel extends JPanel implements ircupdate {
 
    public void setProgress(int p) {
       if (p == 100) {
-         for(gleisbildFrame f : this.frames.values()) {
+         for (gleisbildFrame f : this.frames.values()) {
             f.setClosable(true);
          }
 
@@ -103,7 +102,7 @@ public class gleisbildLoadPanel extends JPanel implements ircupdate {
       new gleisbildLoadPanel.itemMediator(gleis.ELEMENT_ÜBERGABEAKZEPTOR).clearDecorPainter();
       decor d = decor.getDecor();
 
-      for(element elm : gleisHelper.allElements()) {
+      for (element elm : gleisHelper.allElements()) {
          d.replaceElementPainter(elm, painter);
       }
    }
@@ -113,7 +112,7 @@ public class gleisbildLoadPanel extends JPanel implements ircupdate {
       players_aid selected = (players_aid)this.aidCB.getSelectedItem();
       this.aidCB.removeAllItems();
 
-      for(players_aid pd : sort) {
+      for (players_aid pd : sort) {
          this.aidCB.addItem(pd);
       }
 
@@ -122,7 +121,7 @@ public class gleisbildLoadPanel extends JPanel implements ircupdate {
 
    @Override
    public void updateAid(players_aid d) {
-      synchronized(this) {
+      synchronized (this) {
          if (!this.added.containsKey(d.aid)) {
             this.added.put(d.aid, new gleisbildModelAdapter(this.my_main, d));
             this.updateCB();
@@ -144,7 +143,7 @@ public class gleisbildLoadPanel extends JPanel implements ircupdate {
 
    @Override
    public void updateZug(players_zug z) {
-      for(gleisbildFrame f : this.frames.values()) {
+      for (gleisbildFrame f : this.frames.values()) {
          f.update(z);
       }
    }
@@ -236,7 +235,6 @@ public class gleisbildLoadPanel extends JPanel implements ircupdate {
       private final element elm;
 
       itemMediator(element element) {
-         super();
          this.elm = element;
       }
 

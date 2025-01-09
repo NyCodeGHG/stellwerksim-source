@@ -26,7 +26,7 @@ class paint_vorsignal extends paint2Base {
       Color col_rot = refSt == gleisElements.ST_SIGNAL_ROT ? gleis.colors.col_stellwerk_gelbein : gleis.colors.col_stellwerk_gelbaus;
       Color col_gruen = refSt == gleisElements.ST_SIGNAL_GRÜN ? gleis.colors.col_stellwerk_gruenein : gleis.colors.col_stellwerk_gruenaus;
       Color col_signal = gleis.colors.col_stellwerk_schwarz;
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             gl.paintVorsignal(g, 0, yscal * 3 / 4, fscal, col_signal, col_rot, col_gruen, Math.PI * 3.0 / 2.0);
             break;

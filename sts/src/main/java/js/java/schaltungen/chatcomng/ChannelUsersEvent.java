@@ -11,7 +11,6 @@ public class ChannelUsersEvent {
    public final Collection<ChatUser> users;
 
    ChannelUsersEvent(String channelname, Collection<ChatUser> users) {
-      super();
       this.channelname = channelname;
       this.users = users;
    }

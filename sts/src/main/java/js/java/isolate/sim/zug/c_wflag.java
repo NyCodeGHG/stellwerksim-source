@@ -30,7 +30,7 @@ class c_wflag extends baseChain1Chain {
                zug nz = new zug(z, false, false, z.gestopptgleis, enr);
                String text = "" + nz.getSpezialName() + " bereit zum Abstellen.";
 
-               for(zug.wflagData wd : z.wflagList) {
+               for (zug.wflagData wd : z.wflagList) {
                   if (wd.an == z.an && wd.zielgleis.equals(z.zielgleis)) {
                      text = text + " Ersatzlok wird erst zur Planankunft bereitgestellt!";
                      break;

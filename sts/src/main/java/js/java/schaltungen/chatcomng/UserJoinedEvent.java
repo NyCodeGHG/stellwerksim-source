@@ -10,7 +10,6 @@ public class UserJoinedEvent {
    public final ChatUser user;
 
    UserJoinedEvent(String channel, ChatUser user) {
-      super();
       this.channel = channel;
       this.user = user;
    }

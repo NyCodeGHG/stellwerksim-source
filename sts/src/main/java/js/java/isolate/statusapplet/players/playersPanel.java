@@ -40,7 +40,6 @@ public class playersPanel extends JTable {
    private long simusynctime = 0L;
 
    public playersPanel(UserContext uc, oneInstance m, JScrollPane sp) {
-      super();
       this.uc = uc;
       this.my_main = m;
       sp.setViewportView(this);
@@ -190,7 +189,7 @@ public class playersPanel extends JTable {
                   pz.prevverspaetung = pz.verspaetung;
                   pz.verspaetung = v;
                   pz.verspaetungSeen = false;
-                  ++pz.verspaetungCounter;
+                  pz.verspaetungCounter++;
                   if (SwingUtilities.isEventDispatchThread()) {
                      this.updateZug(pz);
                   } else {
@@ -332,7 +331,7 @@ public class playersPanel extends JTable {
                String[] tokens = TextHelper.tokenizerToArray(new StringTokenizer(r + " ", ":"));
                int zid = 0;
 
-               for(int i = 0; i < tokens.length; ++i) {
+               for (int i = 0; i < tokens.length; i++) {
                   if (tokens[i].equals("ZID")) {
                      zid = Integer.parseInt(tokens[i + 1].trim());
                      break;
@@ -362,14 +361,14 @@ public class playersPanel extends JTable {
          var26.printStackTrace();
       }
 
-      ++this.maintcnt;
+      this.maintcnt++;
       if (this.maintcnt > 1000) {
          this.maintcnt = 0;
       }
    }
 
    public boolean wirdAidUmfahren(players_aid a) {
-      for(zidRedirect zr : this.redirects.values()) {
+      for (zidRedirect zr : this.redirects.values()) {
          if (zr.wirdAidUmfahren(a)) {
             return true;
          }
@@ -379,7 +378,7 @@ public class playersPanel extends JTable {
    }
 
    public boolean hatAidUmleitung(players_aid a) {
-      for(zidRedirect zr : this.redirects.values()) {
+      for (zidRedirect zr : this.redirects.values()) {
          if (zr.hatAidUmleitung(a)) {
             return true;
          }
@@ -411,7 +410,7 @@ public class playersPanel extends JTable {
          players_aid a = new players_aid(this, aid, name, tel);
          this.aids.put(aid, a);
 
-         for(players_zug z : this.zids.values()) {
+         for (players_zug z : this.zids.values()) {
             if (z.currentaid == null && z.aid == aid) {
                z.aid = 0;
                z.updateAid(aid);
@@ -429,7 +428,7 @@ public class playersPanel extends JTable {
    public TreeSet<players_aid> getSortedAids() {
       TreeSet<players_aid> sort = new TreeSet();
 
-      for(players_aid ad : this.aids.values()) {
+      for (players_aid ad : this.aids.values()) {
          sort.add(ad);
       }
 
@@ -457,13 +456,13 @@ public class playersPanel extends JTable {
          long minHeat = Long.MAX_VALUE;
          long maxHeat = Long.MIN_VALUE;
 
-         for(players_aid ad : this.aids.values()) {
+         for (players_aid ad : this.aids.values()) {
             minHeat = Math.min(minHeat, ad.heat);
             maxHeat = Math.max(maxHeat, ad.heat);
          }
 
          if (minHeat != maxHeat) {
-            for(players_aid ad : this.aids.values()) {
+            for (players_aid ad : this.aids.values()) {
                int r = 0;
                if (ad.heat > 0L) {
                   if (maxHeat != 0L) {
@@ -490,7 +489,7 @@ public class playersPanel extends JTable {
          z.currentaid.update();
       }
 
-      for(ircupdate i : this.hooks) {
+      for (ircupdate i : this.hooks) {
          i.updateZug(z);
       }
    }
@@ -498,7 +497,7 @@ public class playersPanel extends JTable {
    private void updateAid(players_aid d) {
       boolean found = false;
 
-      for(int i = 0; i < this.model.getRowCount(); ++i) {
+      for (int i = 0; i < this.model.getRowCount(); i++) {
          if (d.spieler == null) {
             if (d == (players_aid)this.model.getValueAt(i, 0)) {
                this.model.removeRow(i);
@@ -516,8 +515,8 @@ public class playersPanel extends JTable {
          this.model.addRow(line);
       }
 
-      for(ircupdate i : this.hooks) {
-         i.updateAid(d);
+      for (ircupdate ix : this.hooks) {
+         ix.updateAid(d);
       }
 
       this.refreshHeat();
@@ -540,9 +539,9 @@ public class playersPanel extends JTable {
    public int numberOfSpieler() {
       int ret = 0;
 
-      for(players_aid a : this.aids.values()) {
+      for (players_aid a : this.aids.values()) {
          if (a.spieler != null) {
-            ++ret;
+            ret++;
          }
       }
 
@@ -552,9 +551,9 @@ public class playersPanel extends JTable {
    public int numberOfStitz() {
       int ret = 0;
 
-      for(players_aid a : this.aids.values()) {
+      for (players_aid a : this.aids.values()) {
          if (a.spieler != null && a.canstitz) {
-            ++ret;
+            ret++;
          }
       }
 
@@ -564,9 +563,9 @@ public class playersPanel extends JTable {
    public int numberOfSichtbar() {
       int ret = 0;
 
-      for(players_zug z : this.zids.values()) {
+      for (players_zug z : this.zids.values()) {
          if (z.visible && z.lastChangedMinutes() < 120) {
-            ++ret;
+            ret++;
          }
       }
 
@@ -576,9 +575,9 @@ public class playersPanel extends JTable {
    public int numberOfAusfahrt() {
       int ret = 0;
 
-      for(players_zug z : this.zids.values()) {
+      for (players_zug z : this.zids.values()) {
          if (z.laststopdone) {
-            ++ret;
+            ret++;
          }
       }
 
@@ -588,7 +587,7 @@ public class playersPanel extends JTable {
    public int numberOfTemplates() {
       HashSet<Integer> cnt = new HashSet();
 
-      for(players_zug z : this.zids.values()) {
+      for (players_zug z : this.zids.values()) {
          if (z.visible && z.lastChangedMinutes() < 120) {
             cnt.add(z.rzid);
          }
@@ -603,10 +602,10 @@ public class playersPanel extends JTable {
       int c = 0;
       double sum = 0.0;
 
-      for(players_zug z : this.zids.values()) {
+      for (players_zug z : this.zids.values()) {
          if (z.lastChangedMinutes() < 30) {
             sum += (double)z.verspaetung;
-            ++c;
+            c++;
             zeiten.add(z.verspaetung);
          }
       }
@@ -638,12 +637,12 @@ public class playersPanel extends JTable {
          long[] values = new long[this.aids.size()];
          int i = 0;
 
-         for(players_aid ad : this.aids.values()) {
+         for (players_aid ad : this.aids.values()) {
             minHeat = Math.min(minHeat, ad.heat);
             maxHeat = Math.max(maxHeat, ad.heat);
             sum += ad.heat;
             values[i] = ad.heat;
-            ++i;
+            i++;
          }
 
          sum /= (long)this.aids.size();
@@ -675,7 +674,7 @@ public class playersPanel extends JTable {
    public long[] spieldauer() {
       LinkedList<Long> zeiten = new LinkedList();
 
-      for(players_aid a : this.aids.values()) {
+      for (players_aid a : this.aids.values()) {
          if (a.starttime > 0L) {
             long stoptime = System.currentTimeMillis();
             if (a.stoptime > 0L) {
@@ -704,7 +703,6 @@ public class playersPanel extends JTable {
       private final players_aid d;
 
       aidRunnable(players_aid d) {
-         super();
          this.d = d;
       }
 
@@ -717,7 +715,6 @@ public class playersPanel extends JTable {
       final players_zug pz;
 
       pzRunnable(players_zug pz) {
-         super();
          this.pz = pz;
       }
 

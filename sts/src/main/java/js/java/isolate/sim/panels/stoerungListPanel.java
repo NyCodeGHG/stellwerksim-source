@@ -134,13 +134,13 @@ public class stoerungListPanel extends basePanel {
          ev = (eventContainer)this.tmod.getValueAt(selectedRow, 0);
       }
 
-      while(this.mod.getRowCount() > 0) {
+      while (this.mod.getRowCount() > 0) {
          this.mod.removeRow(0);
       }
 
       int v = this.eventFilterCB.getSelectedIndex();
 
-      for(eventContainer e : this.glbControl.getModel().events) {
+      for (eventContainer e : this.glbControl.getModel().events) {
          Object[] rowData = new Object[]{e, e.getName()};
          Class c = event.getEventTyp(e);
          if (v == 0
@@ -160,7 +160,7 @@ public class stoerungListPanel extends basePanel {
       if (ev != null && lastselected) {
          selectedRow = -1;
 
-         for(int i = 0; i < this.tmod.getRowCount(); ++i) {
+         for (int i = 0; i < this.tmod.getRowCount(); i++) {
             if (ev == this.tmod.getValueAt(i, 0)) {
                selectedRow = i;
                break;
@@ -277,7 +277,7 @@ public class stoerungListPanel extends basePanel {
       this.updateOutput(false);
       int selectedRow = -1;
 
-      for(int i = 0; i < this.tmod.getRowCount(); ++i) {
+      for (int i = 0; i < this.tmod.getRowCount(); i++) {
          if (ev == this.tmod.getValueAt(i, 0)) {
             selectedRow = i;
             break;

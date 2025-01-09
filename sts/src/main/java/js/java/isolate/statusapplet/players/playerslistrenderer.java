@@ -18,7 +18,6 @@ class playerslistrenderer implements TableCellRenderer {
    private final JPanel umPanel = new JPanel(new GridLayout(1, 0));
 
    playerslistrenderer(playersPanel _pp) {
-      super();
       this.pp = _pp;
       this.lab.setOpaque(true);
       this.umPanel.add(this.roLed);
@@ -39,7 +38,7 @@ class playerslistrenderer implements TableCellRenderer {
       try {
          players_aid z = (players_aid)value;
          if (z != null) {
-            switch(column) {
+            switch (column) {
                case 0:
                   text = "<b>" + z.name + "</b>";
                   break;
@@ -71,7 +70,7 @@ class playerslistrenderer implements TableCellRenderer {
                   this.lab.setHorizontalAlignment(4);
                   break;
                case 5:
-                  for(players_zug pz : z.zuege) {
+                  for (players_zug pz : z.zuege) {
                      if (pz.visible) {
                         if (!text.isEmpty()) {
                            text = text + ", ";

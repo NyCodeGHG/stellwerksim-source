@@ -27,7 +27,6 @@ public class CloseQuestionDefaults extends JPanel {
    private JCheckBox simCloseCB;
 
    public CloseQuestionDefaults(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       this.prefs = new closePrefs();

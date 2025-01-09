@@ -10,7 +10,6 @@ public class displaySelectedEvent extends AbstractStringEvent {
    private final gleis display;
 
    public displaySelectedEvent() {
-      super();
       this.display = null;
       this.selected = null;
    }

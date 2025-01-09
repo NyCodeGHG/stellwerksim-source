@@ -17,7 +17,7 @@ public class fasCanFreeFS extends fasChecker {
          ret = true;
          Iterator<gleis> it = this.getFS().gleisweg.iterator();
 
-         while(it.hasNext() && ret) {
+         while (it.hasNext() && ret) {
             gleis g = (gleis)it.next();
             if (this.getFS().lastZD == g) {
                break;

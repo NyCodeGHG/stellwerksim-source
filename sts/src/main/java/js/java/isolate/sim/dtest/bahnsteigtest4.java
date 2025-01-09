@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class bahnsteigtest4 implements dtest {
-   public bahnsteigtest4() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bahnsteig bis Signal";
@@ -25,13 +21,13 @@ public class bahnsteigtest4 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_BAHNSTEIG});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          gleis pos_gl = gl.nextByRichtung(false);
+         gleis before_gl = gl;
 
-         gleis next_gl;
-         for(gleis before_gl = gl; pos_gl != null; pos_gl = next_gl) {
-            next_gl = pos_gl.next(before_gl);
+         while (pos_gl != null) {
+            gleis next_gl = pos_gl.next(before_gl);
             if (next_gl == null || next_gl == pos_gl || next_gl.getElement().matches(gleis.ELEMENT_SIGNAL) && next_gl.forUs(pos_gl)) {
                break;
             }
@@ -67,6 +63,7 @@ public class bahnsteigtest4 implements dtest {
             }
 
             before_gl = pos_gl;
+            pos_gl = next_gl;
          }
       }
 

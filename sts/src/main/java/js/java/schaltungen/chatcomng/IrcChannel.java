@@ -11,7 +11,6 @@ public class IrcChannel implements ChannelListener {
    public final ConcurrentHashMap<String, String> userNicks = new ConcurrentHashMap();
 
    public IrcChannel(ChatNG chat, String name, String title, boolean userChannel) {
-      super();
       this.chat = chat;
       if (title == null) {
          throw new IllegalArgumentException("Title is null: " + name);
@@ -22,7 +21,6 @@ public class IrcChannel implements ChannelListener {
    }
 
    public IrcChannel(ChatNG chat, ChannelsNameParser.ChannelName name, boolean userChannel) {
-      super();
       this.chat = chat;
       this.channel = name;
       this.userChannel = userChannel;
@@ -59,7 +57,7 @@ public class IrcChannel implements ChannelListener {
    public void onJoins(ChannelEvent event) {
       String[] jusers = event.getValue().toString().split(" ");
 
-      for(String u : jusers) {
+      for (String u : jusers) {
          if (u.startsWith("@") || u.startsWith("+") || u.startsWith("%")) {
             u = u.substring(1);
          }

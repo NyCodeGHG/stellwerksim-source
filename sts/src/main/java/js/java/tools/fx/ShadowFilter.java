@@ -21,11 +21,9 @@ public class ShadowFilter extends AbstractBufferedImageOp {
    private int shadowColor = -16777216;
 
    public ShadowFilter() {
-      super();
    }
 
    public ShadowFilter(float radius, float xOffset, float yOffset, float opacity) {
-      super();
       this.radius = radius;
       this.angle = (float)Math.atan2((double)yOffset, (double)xOffset);
       this.distance = (float)Math.sqrt((double)(xOffset * xOffset + yOffset * yOffset));
@@ -94,8 +92,8 @@ public class ShadowFilter extends AbstractBufferedImageOp {
       if (this.addMargins) {
          float xOffset = this.distance * (float)Math.cos((double)this.angle);
          float yOffset = -this.distance * (float)Math.sin((double)this.angle);
-         r.width += (int)(Math.abs(xOffset) + 2.0F * this.radius);
-         r.height += (int)(Math.abs(yOffset) + 2.0F * this.radius);
+         r.width = r.width + (int)(Math.abs(xOffset) + 2.0F * this.radius);
+         r.height = r.height + (int)(Math.abs(yOffset) + 2.0F * this.radius);
       }
 
       return r;

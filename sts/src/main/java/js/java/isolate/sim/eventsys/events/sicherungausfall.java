@@ -41,8 +41,8 @@ public class sicherungausfall extends event {
          String bereich = "" + (char)(65 + xa) + (ya + 1);
          this.dauer = e.getIntValue("dauer");
 
-         for(int y = 20 * ya; y < Math.min(this.glbModel.getGleisHeight(), 20 * (ya + 1)); ++y) {
-            for(int x = 30 * xa; x < Math.min(this.glbModel.getGleisWidth(), 30 * (xa + 1)); ++x) {
+         for (int y = 20 * ya; y < Math.min(this.glbModel.getGleisHeight(), 20 * (ya + 1)); y++) {
+            for (int x = 30 * xa; x < Math.min(this.glbModel.getGleisWidth(), 30 * (xa + 1)); x++) {
                gleis gl = this.glbModel.getXY_null(x, y);
                if (gl != null && (gleis.ALLE_GLEISE.matches(gl.getElement()) || gleis.ALLE_DISPLAYS.matches(gl.getElement()))) {
                   gl.getFluentData().setPowerOff(true);
@@ -68,7 +68,7 @@ public class sicherungausfall extends event {
 
    @Override
    public boolean pong() {
-      for(gleis gl : this.poweroffgleise) {
+      for (gleis gl : this.poweroffgleise) {
          gl.getFluentData().setPowerOff(false);
       }
 

@@ -25,8 +25,6 @@ public class DataTipManager {
    private static boolean allowUntrustedUsage = true;
 
    private DataTipManager() {
-      super();
-
       try {
          long eventMask = 131120L;
          Toolkit.getDefaultToolkit().addAWTEventListener(new DataTipManager.MouseEventModifier(), eventMask);
@@ -144,7 +142,6 @@ public class DataTipManager {
 
    private class MouseEventModifier implements AWTEventListener {
       private MouseEventModifier() {
-         super();
       }
 
       public void eventDispatched(AWTEvent event) {

@@ -7,7 +7,6 @@ public class UserLeftEvent {
    public final ChatUser originator;
 
    UserLeftEvent(String channel, ChatUser user, UserLeftEvent.REASON r) {
-      super();
       this.channel = channel;
       this.user = user;
       this.reason = r;
@@ -15,7 +14,6 @@ public class UserLeftEvent {
    }
 
    UserLeftEvent(String channel, ChatUser user, UserLeftEvent.REASON r, ChatUser originator) {
-      super();
       this.channel = channel;
       this.user = user;
       this.reason = r;

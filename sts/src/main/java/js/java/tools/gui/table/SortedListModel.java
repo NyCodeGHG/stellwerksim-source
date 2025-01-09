@@ -18,7 +18,6 @@ public class SortedListModel extends AbstractListModel {
    private SortedListModel.SortOrder sortOrder;
 
    private SortedListModel() {
-      super();
    }
 
    public SortedListModel(ListModel model) {
@@ -30,7 +29,6 @@ public class SortedListModel extends AbstractListModel {
    }
 
    public SortedListModel(ListModel model, SortedListModel.SortOrder sortOrder, Comparator comp) {
-      super();
       this.unsortedModel = model;
       this.unsortedModel.addListDataListener(new ListDataListener() {
          public void intervalAdded(ListDataEvent e) {
@@ -60,7 +58,7 @@ public class SortedListModel extends AbstractListModel {
       int size = this.unsortedModel.getSize();
       this.sortedModel = new ArrayList(size);
 
-      for(int x = 0; x < size; ++x) {
+      for (int x = 0; x < size; x++) {
          SortedListModel.SortedListEntry entry = new SortedListModel.SortedListEntry(x);
          int insertionPoint = this.findInsertionPoint(entry);
          this.sortedModel.add(insertionPoint, entry);
@@ -86,7 +84,7 @@ public class SortedListModel extends AbstractListModel {
       int[] unsortedSelectedIndices = new int[sortedSelectedIndices.length];
       int x = 0;
 
-      for(int sortedIndex : sortedSelectedIndices) {
+      for (int sortedIndex : sortedSelectedIndices) {
          unsortedSelectedIndices[x++] = this.toUnsortedModelIndex(sortedIndex);
       }
 
@@ -98,8 +96,8 @@ public class SortedListModel extends AbstractListModel {
       int sortedIndex = -1;
       int x = -1;
 
-      for(SortedListModel.SortedListEntry entry : this.sortedModel) {
-         ++x;
+      for (SortedListModel.SortedListEntry entry : this.sortedModel) {
+         x++;
          if (entry.getIndex() == unsortedIndex) {
             sortedIndex = x;
             break;
@@ -113,7 +111,7 @@ public class SortedListModel extends AbstractListModel {
       int[] sortedModelIndices = new int[unsortedModelIndices.length];
       int x = 0;
 
-      for(int unsortedIndex : unsortedModelIndices) {
+      for (int unsortedIndex : unsortedModelIndices) {
          sortedModelIndices[x++] = this.toSortedModelIndex(unsortedIndex);
       }
 
@@ -124,7 +122,7 @@ public class SortedListModel extends AbstractListModel {
    private void resetModelData() {
       int index = 0;
 
-      for(SortedListModel.SortedListEntry entry : this.sortedModel) {
+      for (SortedListModel.SortedListEntry entry : this.sortedModel) {
          entry.setIndex(index++);
       }
    }
@@ -160,14 +158,14 @@ public class SortedListModel extends AbstractListModel {
       int end = e.getIndex1();
       int nElementsAdded = end - begin + 1;
 
-      for(SortedListModel.SortedListEntry entry : this.sortedModel) {
+      for (SortedListModel.SortedListEntry entry : this.sortedModel) {
          int index = entry.getIndex();
          if (index >= begin) {
             entry.setIndex(index + nElementsAdded);
          }
       }
 
-      for(int x = begin; x <= end; ++x) {
+      for (int x = begin; x <= end; x++) {
          SortedListModel.SortedListEntry newEntry = new SortedListModel.SortedListEntry(x);
          int insertionPoint = this.findInsertionPoint(newEntry);
          this.sortedModel.add(insertionPoint, newEntry);
@@ -182,7 +180,7 @@ public class SortedListModel extends AbstractListModel {
       int sortedSize = this.sortedModel.size();
       boolean[] bElementRemoved = new boolean[sortedSize];
 
-      for(int x = sortedSize - 1; x >= 0; --x) {
+      for (int x = sortedSize - 1; x >= 0; x--) {
          SortedListModel.SortedListEntry entry = (SortedListModel.SortedListEntry)this.sortedModel.get(x);
          int index = entry.getIndex();
          if (index > end) {
@@ -193,9 +191,9 @@ public class SortedListModel extends AbstractListModel {
          }
       }
 
-      for(int x = bElementRemoved.length - 1; x >= 0; --x) {
-         if (bElementRemoved[x]) {
-            this.fireIntervalRemoved(2, x, x);
+      for (int xx = bElementRemoved.length - 1; xx >= 0; xx--) {
+         if (bElementRemoved[xx]) {
+            this.fireIntervalRemoved(2, xx, xx);
          }
       }
    }
@@ -231,11 +229,9 @@ public class SortedListModel extends AbstractListModel {
       private int index;
 
       private SortedListEntry() {
-         super();
       }
 
       SortedListEntry(int index) {
-         super();
          this.index = index;
       }
 

@@ -6,10 +6,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public final class LambdaExceptionUtil {
-   public LambdaExceptionUtil() {
-      super();
-   }
-
    public static <T, E extends Exception> Consumer<T> rethrowConsumer(LambdaExceptionUtil.Consumer_WithExceptions<T, E> consumer) {
       return t -> {
          try {

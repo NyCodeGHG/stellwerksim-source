@@ -5,10 +5,6 @@ import js.java.schaltungen.moduleapi.SessionClose;
 public class simTimeHolder implements timedelivery, SessionClose {
    private timedeliveryBase simTime = new timedeliveryLoaded();
 
-   public simTimeHolder() {
-      super();
-   }
-
    protected void finalize() throws Throwable {
       try {
          if (this.simTime != null) {

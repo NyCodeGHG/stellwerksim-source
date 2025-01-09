@@ -7,7 +7,6 @@ public abstract class WriterQueue extends Thread {
    private boolean running = true;
 
    public WriterQueue() {
-      super();
       this.start();
    }
 
@@ -21,7 +20,7 @@ public abstract class WriterQueue extends Thread {
    }
 
    public void run() {
-      while(this.running) {
+      while (this.running) {
          try {
             String m = (String)this.messages.take();
             this.write(m);

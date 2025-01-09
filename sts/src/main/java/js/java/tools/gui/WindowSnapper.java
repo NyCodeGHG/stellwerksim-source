@@ -15,7 +15,6 @@ public class WindowSnapper extends ComponentAdapter {
    }
 
    public WindowSnapper(int distance) {
-      super();
       this.distance = distance;
    }
 

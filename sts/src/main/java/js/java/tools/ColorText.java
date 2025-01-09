@@ -25,37 +25,31 @@ public class ColorText implements Comparable {
    public static final int CT_LIGHTGREEN3 = 13;
 
    protected ColorText() {
-      super();
    }
 
    public ColorText(String t) {
-      super();
       this.text = t;
       this.spezialtext = t;
    }
 
    public ColorText(String t, String st) {
-      super();
       this.text = t;
       this.spezialtext = st;
    }
 
    public ColorText(String t, int coltype) {
-      super();
       this.text = t;
       this.spezialtext = t;
       this.setBGColor(coltype);
    }
 
    public ColorText(String t, String st, int coltype) {
-      super();
       this.text = t;
       this.spezialtext = st;
       this.setBGColor(coltype);
    }
 
    public ColorText(String t, Color col) {
-      super();
       this.text = t;
       this.spezialtext = t;
       this.color = col;
@@ -98,7 +92,7 @@ public class ColorText implements Comparable {
    public static Color[] getColorsOf(int coltype) {
       Color color = null;
       Color fgcolor = null;
-      switch(coltype) {
+      switch (coltype) {
          case 0:
             color = null;
             fgcolor = null;

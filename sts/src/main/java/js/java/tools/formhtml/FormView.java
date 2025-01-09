@@ -146,15 +146,15 @@ public class FormView extends ComponentView implements ActionListener {
          field.addActionListener(this);
          this.maxIsPreferred = 3;
       } else if (type.equals("password")) {
-         JPasswordField field = new JPasswordField();
-         c = field;
+         JPasswordField fieldx = new JPasswordField();
+         c = fieldx;
          if (model != null) {
-            field.setDocument((Document)model);
+            fieldx.setDocument((Document)model);
          }
 
-         int size = HTML.getIntegerAttributeValue(attr, Attribute.SIZE, -1);
-         field.setColumns(size > 0 ? size : 20);
-         field.addActionListener(this);
+         int sizex = HTML.getIntegerAttributeValue(attr, Attribute.SIZE, -1);
+         fieldx.setColumns(sizex > 0 ? sizex : 20);
+         fieldx.addActionListener(this);
          this.maxIsPreferred = 3;
       }
 
@@ -166,21 +166,21 @@ public class FormView extends ComponentView implements ActionListener {
          DefaultButtonModel buttonModel = (DefaultButtonModel)model;
          String listenerClass = "javax.swing.AbstractButton$Handler";
 
-         for(ActionListener listener : buttonModel.getActionListeners()) {
+         for (ActionListener listener : buttonModel.getActionListeners()) {
             if (listenerClass.equals(listener.getClass().getName())) {
                buttonModel.removeActionListener(listener);
             }
          }
 
-         for(ChangeListener listener : buttonModel.getChangeListeners()) {
-            if (listenerClass.equals(listener.getClass().getName())) {
-               buttonModel.removeChangeListener(listener);
+         for (ChangeListener listenerx : buttonModel.getChangeListeners()) {
+            if (listenerClass.equals(listenerx.getClass().getName())) {
+               buttonModel.removeChangeListener(listenerx);
             }
          }
 
-         for(ItemListener listener : buttonModel.getItemListeners()) {
-            if (listenerClass.equals(listener.getClass().getName())) {
-               buttonModel.removeItemListener(listener);
+         for (ItemListener listenerxx : buttonModel.getItemListeners()) {
+            if (listenerClass.equals(listenerxx.getClass().getName())) {
+               buttonModel.removeItemListener(listenerxx);
             }
          }
       } else if (model instanceof AbstractListModel) {
@@ -188,9 +188,9 @@ public class FormView extends ComponentView implements ActionListener {
          String listenerClass1 = "javax.swing.plaf.basic.BasicListUI$Handler";
          String listenerClass2 = "javax.swing.plaf.basic.BasicComboBoxUI$Handler";
 
-         for(ListDataListener listener : listModel.getListDataListeners()) {
-            if (listenerClass1.equals(listener.getClass().getName()) || listenerClass2.equals(listener.getClass().getName())) {
-               listModel.removeListDataListener(listener);
+         for (ListDataListener listenerxxx : listModel.getListDataListeners()) {
+            if (listenerClass1.equals(listenerxxx.getClass().getName()) || listenerClass2.equals(listenerxxx.getClass().getName())) {
+               listModel.removeListDataListener(listenerxxx);
             }
          }
       } else if (model instanceof AbstractDocument) {
@@ -198,16 +198,16 @@ public class FormView extends ComponentView implements ActionListener {
          String listenerClass2 = "javax.swing.text.DefaultCaret$Handler";
          AbstractDocument docModel = (AbstractDocument)model;
 
-         for(DocumentListener listener : docModel.getDocumentListeners()) {
-            if (listenerClass1.equals(listener.getClass().getName()) || listenerClass2.equals(listener.getClass().getName())) {
-               docModel.removeDocumentListener(listener);
+         for (DocumentListener listenerxxxx : docModel.getDocumentListeners()) {
+            if (listenerClass1.equals(listenerxxxx.getClass().getName()) || listenerClass2.equals(listenerxxxx.getClass().getName())) {
+               docModel.removeDocumentListener(listenerxxxx);
             }
          }
       }
    }
 
    public float getMaximumSpan(int axis) {
-      switch(axis) {
+      switch (axis) {
          case 0:
             if ((this.maxIsPreferred & 1) == 1) {
                super.getMaximumSpan(axis);
@@ -250,7 +250,7 @@ public class FormView extends ComponentView implements ActionListener {
    }
 
    private Element getFormElement() {
-      for(Element elem = this.getElement(); elem != null; elem = elem.getParentElement()) {
+      for (Element elem = this.getElement(); elem != null; elem = elem.getParentElement()) {
          if (elem.getAttributes().getAttribute(StyleConstants.NameAttribute) == Tag.FORM) {
             return elem;
          }
@@ -265,7 +265,7 @@ public class FormView extends ComponentView implements ActionListener {
          ElementIterator it = new ElementIterator(formE);
 
          Element next;
-         while((next = it.next()) != null) {
+         while ((next = it.next()) != null) {
             if (this.isControl(next)) {
                String type = (String)next.getAttributes().getAttribute(Attribute.TYPE);
                if ((type == null || !type.equals("submit") || next == this.getElement()) && (type == null || !type.equals("image"))) {
@@ -373,9 +373,9 @@ public class FormView extends ComponentView implements ActionListener {
       if (name != null) {
          Object m = attr.getAttribute(StyleConstants.ModelAttribute);
          if (m instanceof OptionListModel) {
-            OptionListModel<Option> model = (OptionListModel)m;
+            OptionListModel<Option> model = (OptionListModel<Option>)m;
 
-            for(int i = 0; i < model.getSize(); ++i) {
+            for (int i = 0; i < model.getSize(); i++) {
                if (model.isSelectedIndex(i)) {
                   Option option = (Option)model.getElementAt(i);
                   this.appendBuffer(buffer, name, option.getValue());
@@ -394,9 +394,9 @@ public class FormView extends ComponentView implements ActionListener {
    private void setSelectData(AttributeSet attr, String value) {
       Object m = attr.getAttribute(StyleConstants.ModelAttribute);
       if (m instanceof OptionListModel) {
-         OptionListModel<Option> model = (OptionListModel)m;
+         OptionListModel<Option> model = (OptionListModel<Option>)m;
 
-         for(int i = 0; i < model.getSize(); ++i) {
+         for (int i = 0; i < model.getSize(); i++) {
             Option option = (Option)model.getElementAt(i);
             if (option.getValue().equalsIgnoreCase(value)) {
                model.setSelectionInterval(i, i);
@@ -406,8 +406,8 @@ public class FormView extends ComponentView implements ActionListener {
       } else if (m instanceof ComboBoxModel) {
          ComboBoxModel model = (ComboBoxModel)m;
 
-         for(int i = 0; i < model.getSize(); ++i) {
-            Option option = (Option)model.getElementAt(i);
+         for (int ix = 0; ix < model.getSize(); ix++) {
+            Option option = (Option)model.getElementAt(ix);
             if (option.getValue().equalsIgnoreCase(value)) {
                model.setSelectedItem(option);
                break;
@@ -423,9 +423,9 @@ public class FormView extends ComponentView implements ActionListener {
       } else {
          Object m = attr.getAttribute(StyleConstants.ModelAttribute);
          if (m instanceof OptionListModel) {
-            OptionListModel<Option> model = (OptionListModel)m;
+            OptionListModel<Option> model = (OptionListModel<Option>)m;
 
-            for(int i = 0; i < model.getSize(); ++i) {
+            for (int i = 0; i < model.getSize(); i++) {
                if (model.isSelectedIndex(i)) {
                   Option option = (Option)model.getElementAt(i);
                   return option.getValue();
@@ -465,7 +465,7 @@ public class FormView extends ComponentView implements ActionListener {
          ElementIterator it = new ElementIterator(parent);
 
          Element next;
-         while((next = it.next()) != null) {
+         while ((next = it.next()) != null) {
             if (this.isControl(next)) {
                AttributeSet elemAttr = next.getAttributes();
                Object m = elemAttr.getAttribute(StyleConstants.ModelAttribute);
@@ -500,13 +500,13 @@ public class FormView extends ComponentView implements ActionListener {
                   OptionListModel model = (OptionListModel)m;
                   int size = model.getSize();
 
-                  for(int i = 0; i < size; ++i) {
+                  for (int i = 0; i < size; i++) {
                      model.removeIndexInterval(i, i);
                   }
 
                   BitSet selectionRange = model.getInitialSelection();
 
-                  for(int i = 0; i < selectionRange.size(); ++i) {
+                  for (int i = 0; i < selectionRange.size(); i++) {
                      if (selectionRange.get(i)) {
                         model.addSelectionInterval(i, i);
                      }
@@ -571,7 +571,7 @@ public class FormView extends ComponentView implements ActionListener {
          ElementIterator it = new ElementIterator(formE);
 
          Element next;
-         while((next = it.next()) != null) {
+         while ((next = it.next()) != null) {
             if (this.isControl(next)) {
                AttributeSet attr = next.getAttributes();
                String name = (String)attr.getAttribute(Attribute.NAME);
@@ -608,7 +608,7 @@ public class FormView extends ComponentView implements ActionListener {
          ElementIterator it = new ElementIterator(formE);
 
          Element next;
-         while((next = it.next()) != null) {
+         while ((next = it.next()) != null) {
             if (this.isControl(next)) {
                AttributeSet attr = next.getAttributes();
                String name = (String)attr.getAttribute(Attribute.NAME);

@@ -10,7 +10,6 @@ public class Option implements Serializable {
    private AttributeSet attr;
 
    public Option(AttributeSet attr) {
-      super();
       this.attr = attr.copyAttributes();
       this.selected = attr.getAttribute(Attribute.SELECTED) != null;
    }

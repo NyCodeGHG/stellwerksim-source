@@ -20,7 +20,6 @@ public class bahnsteigDetailStore implements SessionClose {
    }
 
    public bahnsteigDetailStore(gleisbildModel glbModel, boolean highlight) {
-      super();
       this.glbModel = glbModel;
       this.highlight = highlight;
       this.doCache();
@@ -35,7 +34,7 @@ public class bahnsteigDetailStore implements SessionClose {
       Iterator<gleis> it = this.glbModel.findIterator(gleis.ALLE_BAHNSTEIGE);
       this.alleBahnsteige = new TreeMap();
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          String bst = gl.getSWWert();
          bahnsteigDetailStore.subStore s = (bahnsteigDetailStore.subStore)this.alleBahnsteige.get(bst);
@@ -46,20 +45,20 @@ public class bahnsteigDetailStore implements SessionClose {
          }
       }
 
-      for(Entry<String, bahnsteigDetailStore.subStore> e : this.alleBahnsteige.entrySet()) {
+      for (Entry<String, bahnsteigDetailStore.subStore> e : this.alleBahnsteige.entrySet()) {
          TreeSet<String> nachbarn = this.glbModel.findNeighborBahnsteig(((bahnsteigDetailStore.subStore)e.getValue()).gleise, this.highlight);
          ((bahnsteigDetailStore.subStore)e.getValue()).nachbarn.addAll(nachbarn);
          Set<gleis> connected = this.glbModel.findAllConnectedBahnsteig((String)e.getKey(), this.highlight);
 
-         for(gleis g : connected) {
+         for (gleis g : connected) {
             ((bahnsteigDetailStore.subStore)e.getValue()).connected.add(g.getSWWert());
          }
 
          TreeSet<String> nachbarn2 = this.glbModel.findNeighborBahnsteig(connected, this.highlight);
          ((bahnsteigDetailStore.subStore)e.getValue()).nachbarn2.addAll(nachbarn2);
 
-         for(String n : nachbarn2) {
-            for(gleis g : this.glbModel.findAllConnectedBahnsteig(this.glbModel.findBahnsteig(n), this.highlight)) {
+         for (String n : nachbarn2) {
+            for (gleis g : this.glbModel.findAllConnectedBahnsteig(this.glbModel.findBahnsteig(n), this.highlight)) {
                ((bahnsteigDetailStore.subStore)e.getValue()).connected2.add(g.getSWWert());
             }
          }
@@ -138,7 +137,6 @@ public class bahnsteigDetailStore implements SessionClose {
       final HashSet<String> connected2 = new HashSet();
 
       private subStore(gleis gl) {
-         super();
          this.gleise.add(gl);
       }
    }

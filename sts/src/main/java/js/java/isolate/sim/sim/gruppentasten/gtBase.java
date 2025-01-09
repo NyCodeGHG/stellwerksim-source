@@ -14,7 +14,6 @@ public abstract class gtBase implements ActionListener {
    private TasterButton taster = null;
 
    public gtBase(stellwerksim_main m, gleisbildSimControl glb) {
-      super();
       this.my_main = m;
       this.glbControl = glb;
    }

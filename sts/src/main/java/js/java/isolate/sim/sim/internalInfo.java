@@ -211,7 +211,7 @@ public class internalInfo extends JDialog implements structListPanel.selectionLi
       Vector v = this.my_main.getStructInfo();
       Enumeration e = v.elements();
 
-      while(e.hasMoreElements()) {
+      while (e.hasMoreElements()) {
          Vector vv = (Vector)e.nextElement();
          this.structList.add(vv);
       }
@@ -261,16 +261,16 @@ public class internalInfo extends JDialog implements structListPanel.selectionLi
             z.setParam(pa);
          }
       } else if (p[1].equalsIgnoreCase("aflag")) {
-         zug z;
+         zug zx;
          try {
             int zid = Integer.parseInt(p[2]);
-            z = this.my_main.findZug(zid);
+            zx = this.my_main.findZug(zid);
          } catch (Exception var5) {
-            z = this.my_main.findZugByShortName(p[2]);
+            zx = this.my_main.findZugByShortName(p[2]);
          }
 
-         if (z != null) {
-            flagdata fd = z.getFlags();
+         if (zx != null) {
+            flagdata fd = zx.getFlags();
             fd.addFlag('A');
          }
       } else if (p[1].equalsIgnoreCase("bü")) {

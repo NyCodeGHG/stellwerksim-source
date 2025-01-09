@@ -33,7 +33,7 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
    }
 
    private elementConnectorFinder.shape shapeOf(gleis wg) {
-      for(elementConnectorFinder.shape s : this.shapes) {
+      for (elementConnectorFinder.shape s : this.shapes) {
          if (s.g1 == wg) {
             return s;
          }
@@ -43,7 +43,7 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
    }
 
    private elementConnectorFinder.connection connectionOf(elementConnectorFinder.connection c) {
-      for(elementConnectorFinder.connection cc : this.cons) {
+      for (elementConnectorFinder.connection cc : this.cons) {
          if (cc.equals(c)) {
             return cc;
          }
@@ -66,10 +66,6 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
    public abstract static class analyser {
       protected elementConnectorFinder parent;
 
-      public analyser() {
-         super();
-      }
-
       protected abstract void run();
    }
 
@@ -80,13 +76,11 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
       public boolean bothReachable = false;
 
       private connection(gleis g1, gleis g2) {
-         super();
          this.g1 = g1;
          this.g2 = g2;
       }
 
       private connection(elementConnectorFinder.connection c) {
-         super();
          this.g1 = c.g1;
          this.g2 = c.g2;
          this.invisible = c.invisible;
@@ -150,7 +144,6 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
       private int cluster_n = 0;
 
       private formatter(gleisbildModelFahrweg glbModel) {
-         super();
          this.glbModel = glbModel;
       }
 
@@ -166,7 +159,7 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
          element_list eaelm = new element_list(gleis.ELEMENT_AUSFAHRT, gleis.ELEMENT_EINFAHRT);
          HashMap<String, LinkedList<elementConnectorFinder.shape>> ea = new HashMap();
 
-         for(elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
+         for (elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
             if (eaelm.matches(sp.g1.getElement())) {
                String n = sp.g1.getSWWert_special();
                this.add2hash(ea, n, sp);
@@ -180,7 +173,7 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
          Pattern p = Pattern.compile("(\\D*)(\\d.*)");
          HashMap<String, LinkedList<elementConnectorFinder.shape>> ea = new HashMap();
 
-         for(elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
+         for (elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
             if (gleis.ALLE_BAHNSTEIGE.matches(sp.g1.getElement())) {
                String n = sp.g1.getSWWert_special();
                Matcher m = p.matcher(n);
@@ -198,18 +191,18 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
       private StringBuilder clusterShape(HashMap<String, LinkedList<elementConnectorFinder.shape>> ea) {
          StringBuilder s = new StringBuilder();
 
-         for(Entry<String, LinkedList<elementConnectorFinder.shape>> cluster : ea.entrySet()) {
+         for (Entry<String, LinkedList<elementConnectorFinder.shape>> cluster : ea.entrySet()) {
             s.append("subgraph cluster_").append(this.cluster_n).append(" {\n");
             s.append("color=lightgrey;\n");
             s.append("style=filled;\n");
 
-            for(elementConnectorFinder.shape sp : (LinkedList)cluster.getValue()) {
+            for (elementConnectorFinder.shape sp : (LinkedList)cluster.getValue()) {
                s.append(sp.toDotString());
                s.append("\n");
             }
 
             s.append("}\n");
-            ++this.cluster_n;
+            this.cluster_n++;
          }
 
          return s;
@@ -218,13 +211,13 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
       private StringBuilder groupShape(HashMap<String, LinkedList<elementConnectorFinder.shape>> ea, String rank) {
          StringBuilder s = new StringBuilder();
 
-         for(Entry<String, LinkedList<elementConnectorFinder.shape>> cluster : ea.entrySet()) {
+         for (Entry<String, LinkedList<elementConnectorFinder.shape>> cluster : ea.entrySet()) {
             s.append("subgraph a_").append(this.cluster_n).append(" {\n");
             s.append("group=\"").append(this.cluster_n).append("\";\n");
             s.append("rankdir=\"TB\";\n");
             int x = -1;
 
-            for(elementConnectorFinder.shape sp : (LinkedList)cluster.getValue()) {
+            for (elementConnectorFinder.shape sp : (LinkedList)cluster.getValue()) {
                x = sp.g1.getCol();
                s.append(sp.toDotString());
                s.append("\n");
@@ -242,7 +235,7 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
 
             s.append("rank=\"").append(r).append("\";\n");
             s.append("}\n");
-            ++this.cluster_n;
+            this.cluster_n++;
          }
 
          return s;
@@ -256,14 +249,14 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
          element_list skipElm = new element_list(gleis.ELEMENT_AUSFAHRT, gleis.ELEMENT_EINFAHRT);
          s.append(this.clusterShape(this.eaCluster()));
 
-         for(elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
+         for (elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
             if (!skipElm.matches(sp.g1.getElement())) {
                s.append(sp.toDotString());
                s.append('\n');
             }
          }
 
-         for(elementConnectorFinder.connection c : elementConnectorFinder.this.cons) {
+         for (elementConnectorFinder.connection c : elementConnectorFinder.this.cons) {
             s.append(c.toDotString());
             s.append('\n');
          }
@@ -273,21 +266,17 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
       }
 
       public void forEach(Consumer<Map<String, String>> s, Consumer<Map<String, String>> c) {
-         for(elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
+         for (elementConnectorFinder.shape sp : elementConnectorFinder.this.shapes) {
             s.accept(sp.toXml());
          }
 
-         for(elementConnectorFinder.connection cn : elementConnectorFinder.this.cons) {
+         for (elementConnectorFinder.connection cn : elementConnectorFinder.this.cons) {
             c.accept(cn.toXml());
          }
       }
    }
 
    public static class fullAnalyser extends elementConnectorFinder.analyser {
-      public fullAnalyser() {
-         super();
-      }
-
       @Override
       protected void run() {
          this.runEinfahrten();
@@ -297,7 +286,7 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
       private void runEinfahrten() {
          Iterator<gleis> it = this.parent.glbModel.findIterator(new Object[]{gleis.ELEMENT_EINFAHRT});
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             gleis eingl = (gleis)it.next();
             elementConnectorFinder.shape s = new elementConnectorFinder.shape(eingl);
             this.parent.shapes.add(s);
@@ -318,14 +307,14 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
                   this.parent.cons.add(c);
                   break;
                }
-            } while(next_gl == null);
+            } while (next_gl == null);
          }
       }
 
       private void runFahrstrassen() {
          Iterator<fahrstrasse> it = this.parent.glbModel.fahrstrassenIterator();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             fahrstrasse fs = (fahrstrasse)it.next();
             if (!fs.getExtend().isDeleted()
                && fs.getStart().getElement().matches(gleis.ELEMENT_SIGNAL)
@@ -335,7 +324,7 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
                elementConnectorFinder.shape s = new elementConnectorFinder.shape(gl);
                this.parent.shapes.add(s);
 
-               for(gleis wg : fs.getGleisweg()) {
+               for (gleis wg : fs.getGleisweg()) {
                   if (wg != fs.getStart() && wg != fs.getStop() && this.match(wg, before_gl)) {
                      s = null;
                      if (gleis.ALLE_WEICHEN.matches(wg.getElement())) {
@@ -382,12 +371,10 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
       public gleis bothReachable = null;
 
       private shape(gleis g1) {
-         super();
          this.g1 = g1;
       }
 
       private shape(elementConnectorFinder.shape s) {
-         super();
          this.g1 = s.g1;
          this.bothReachable = s.bothReachable;
       }
@@ -472,10 +459,6 @@ public class elementConnectorFinder extends gleisbildWorkerBase<gleisbildModelFa
    }
 
    public static class signal2signalAnalyser extends elementConnectorFinder.fullAnalyser {
-      public signal2signalAnalyser() {
-         super();
-      }
-
       @Override
       protected boolean match(gleis wg, gleis before_gl) {
          return gleis.ELEMENT_SIGNAL.matches(wg.getElement()) || gleis.ALLE_BAHNSTEIGE.matches(wg.getElement()) && wg.forUs(before_gl);

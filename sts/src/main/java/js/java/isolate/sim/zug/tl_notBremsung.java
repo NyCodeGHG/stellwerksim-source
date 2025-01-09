@@ -1,10 +1,6 @@
 package js.java.isolate.sim.zug;
 
 class tl_notBremsung implements tl_base {
-   tl_notBremsung() {
-      super();
-   }
-
    @Override
    public double calc_tempo(zug z, double omx) {
       return 0.0;

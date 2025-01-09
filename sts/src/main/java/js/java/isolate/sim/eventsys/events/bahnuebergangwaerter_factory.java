@@ -5,10 +5,6 @@ import js.java.isolate.sim.eventsys.eventContainer;
 import js.java.isolate.sim.eventsys.eventFactory;
 
 public class bahnuebergangwaerter_factory extends eventFactory {
-   public bahnuebergangwaerter_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Bahnübergangwärter";

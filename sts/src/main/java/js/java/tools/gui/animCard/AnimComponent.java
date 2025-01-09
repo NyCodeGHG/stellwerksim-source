@@ -53,7 +53,6 @@ public class AnimComponent extends JComponent implements ActionListener {
    }
 
    public AnimComponent(Component _oldpanel, Component _newpanel) {
-      super();
       long start = System.nanoTime();
       this.oldpanel = _oldpanel;
       this.newpanel = _newpanel;
@@ -78,7 +77,6 @@ public class AnimComponent extends JComponent implements ActionListener {
    }
 
    public AnimComponent(Component _oldpanel) {
-      super();
       this.oldpanel = _oldpanel;
       this.newpanel = null;
       this.layer = findLayer(this.oldpanel);

@@ -10,7 +10,6 @@ public class loadPanel extends JPanel {
    private JProgressBar loadingBar;
 
    public loadPanel(oneInstance irc) {
-      super();
       this.my_instance = irc;
       this.initComponents();
    }

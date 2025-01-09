@@ -29,7 +29,6 @@ public class planPanel extends JPanel implements MouseListener, MouseMotionListe
    private EventListenerList filterListener = new EventListenerList();
 
    public planPanel(int width) {
-      super();
       this.siderulerwidth = width;
       this.addMouseListener(this);
       this.addMouseMotionListener(this);
@@ -128,7 +127,7 @@ public class planPanel extends JPanel implements MouseListener, MouseMotionListe
       } else {
          int nComps = this.getComponentCount();
 
-         for(int i = 0; i < nComps; ++i) {
+         for (int i = 0; i < nComps; i++) {
             Component c = this.getComponent(i);
             if (c.isVisible() && c instanceof bahnhof) {
                int y0 = c.getY();
@@ -146,7 +145,7 @@ public class planPanel extends JPanel implements MouseListener, MouseMotionListe
    protected void fireFilterChanged(boolean floating) {
       Object[] listeners = this.filterListener.getListenerList();
 
-      for(int i = listeners.length - 2; i >= 0; i -= 2) {
+      for (int i = listeners.length - 2; i >= 0; i -= 2) {
          if (listeners[i] == planPanel.filterEventListener.class) {
             ((planPanel.filterEventListener)listeners[i + 1]).changed(floating);
          }
@@ -214,14 +213,13 @@ public class planPanel extends JPanel implements MouseListener, MouseMotionListe
 
    private class simpleVerifier implements planPanel.positionVerifier {
       private simpleVerifier() {
-         super();
       }
 
       @Override
       public int getBestMatch(int pos) {
          int nComps = planPanel.this.getComponentCount();
 
-         for(int i = 0; i < nComps; ++i) {
+         for (int i = 0; i < nComps; i++) {
             Component c = planPanel.this.getComponent(i);
             if (c.isVisible()) {
                int y0 = c.getY();

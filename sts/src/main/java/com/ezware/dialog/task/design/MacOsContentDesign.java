@@ -11,10 +11,6 @@ import net.miginfocom.swing.MigLayout;
 public class MacOsContentDesign extends DefaultContentDesign {
    private ICommandLinkPainter commandButtonPainter;
 
-   public MacOsContentDesign() {
-      super();
-   }
-
    @Override
    public void updateUIDefaults() {
       super.updateUIDefaults();

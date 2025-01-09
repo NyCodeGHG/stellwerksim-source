@@ -10,10 +10,6 @@ public class DisplaceFilter extends TransformFilter {
    private int dw;
    private int dh;
 
-   public DisplaceFilter() {
-      super();
-   }
-
    public void setDisplacementMap(BufferedImage displacementMap) {
       this.displacementMap = displacementMap;
    }
@@ -43,34 +39,34 @@ public class DisplaceFilter extends TransformFilter {
       this.ymap = new int[this.dw * this.dh];
       int i = 0;
 
-      for(int y = 0; y < this.dh; ++y) {
-         for(int x = 0; x < this.dw; ++x) {
+      for (int y = 0; y < this.dh; y++) {
+         for (int x = 0; x < this.dw; x++) {
             int rgb = mapPixels[i];
             int r = rgb >> 16 & 0xFF;
             int g = rgb >> 8 & 0xFF;
             int b = rgb & 0xFF;
             mapPixels[i] = (r + g + b) / 8;
-            ++i;
+            i++;
          }
       }
 
       i = 0;
 
-      for(int y = 0; y < this.dh; ++y) {
+      for (int y = 0; y < this.dh; y++) {
          int j1 = (y + this.dh - 1) % this.dh * this.dw;
          int j2 = y * this.dw;
          int j3 = (y + 1) % this.dh * this.dw;
 
-         for(int x = 0; x < this.dw; ++x) {
+         for (int x = 0; x < this.dw; x++) {
             int k1 = (x + this.dw - 1) % this.dw;
             int k3 = (x + 1) % this.dw;
             this.xmap[i] = mapPixels[k1 + j1] + mapPixels[k1 + j2] + mapPixels[k1 + j3] - mapPixels[k3 + j1] - mapPixels[k3 + j2] - mapPixels[k3 + j3];
             this.ymap[i] = mapPixels[k1 + j3] + mapPixels[x + j3] + mapPixels[k3 + j3] - mapPixels[k1 + j1] - mapPixels[x + j1] - mapPixels[k3 + j1];
-            ++i;
+            i++;
          }
       }
 
-      int[] var17 = null;
+      mapPixels = null;
       dst = super.filter(src, dst);
       this.xmap = this.ymap = null;
       return dst;

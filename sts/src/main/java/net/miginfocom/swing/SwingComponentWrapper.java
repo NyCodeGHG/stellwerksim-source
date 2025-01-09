@@ -61,7 +61,6 @@ public class SwingComponentWrapper implements ComponentWrapper {
    private static Method IMS_METHOD;
 
    public SwingComponentWrapper(Component c) {
-      super();
       this.c = c;
    }
 
@@ -72,7 +71,7 @@ public class SwingComponentWrapper implements ComponentWrapper {
       } else {
          try {
             Object[] args = new Object[]{width < 0 ? this.c.getWidth() : width, height < 0 ? this.c.getHeight() : height};
-            return BL_METHOD.invoke(this.c, args);
+            return (Integer)BL_METHOD.invoke(this.c, args);
          } catch (Exception var4) {
             return -1;
          }
@@ -86,7 +85,7 @@ public class SwingComponentWrapper implements ComponentWrapper {
 
    @Override
    public final float getPixelUnitFactor(boolean isHor) {
-      switch(PlatformDefaults.getLogicalPixelBase()) {
+      switch (PlatformDefaults.getLogicalPixelBase()) {
          case 100:
             Font font = this.c.getFont();
             FontMetrics fm = this.c.getFontMetrics(font != null ? font : SUBST_FONT);
@@ -195,7 +194,7 @@ public class SwingComponentWrapper implements ComponentWrapper {
    private boolean isMaxSet(Component c) {
       if (IMS_METHOD != null) {
          try {
-            return IMS_METHOD.invoke(c, (Object[])null);
+            return (Boolean)IMS_METHOD.invoke(c, (Object[])null);
          } catch (Exception var3) {
             IMS_METHOD = null;
          }
@@ -390,7 +389,7 @@ public class SwingComponentWrapper implements ComponentWrapper {
 
    static {
       try {
-         BL_METHOD = Component.class.getDeclaredMethod("getBaseline", Integer.TYPE, Integer.TYPE);
+         BL_METHOD = Component.class.getDeclaredMethod("getBaseline", int.class, int.class);
          BL_RES_METHOD = Component.class.getDeclaredMethod("getBaselineResizeBehavior");
       } catch (Throwable var2) {
       }

@@ -21,7 +21,7 @@ public class fasIsFreeRf extends fasChecker {
             int wcc = this.getFS().weichen.size();
             Iterator<gleis> it = this.getFS().gleisweg.iterator();
 
-            while(it.hasNext() && ret) {
+            while (it.hasNext() && ret) {
                gleis g = (gleis)it.next();
                if (g.getElement() == gleis.ELEMENT_ZDECKUNGSSIGNAL && this.getFS().zdeckungssignale.contains(g)) {
                   if (g.getFluentData().getStellung() == gleis.ST_ZDSIGNAL_FESTGELEGT) {
@@ -45,9 +45,9 @@ public class fasIsFreeRf extends fasChecker {
                   break;
                }
 
-               ++this.getFS().rangierlänge;
+               this.getFS().rangierlänge++;
                if (g.getElement() == gleis.ELEMENT_WEICHEOBEN || g.getElement() == gleis.ELEMENT_WEICHEUNTEN) {
-                  --wcc;
+                  wcc--;
                }
             }
 

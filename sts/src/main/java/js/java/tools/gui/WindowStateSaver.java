@@ -19,7 +19,6 @@ public class WindowStateSaver implements WindowListener {
    private boolean saved = false;
 
    public WindowStateSaver(final JFrame frame, WindowStateSaver.STORESTATES storestate) {
-      super();
       this.frame = new WindowStateSaver.WindowAdapter() {
          @Override
          public int getX() {
@@ -80,7 +79,6 @@ public class WindowStateSaver implements WindowListener {
    }
 
    public WindowStateSaver(final JDialog frame, WindowStateSaver.STORESTATES storestate) {
-      super();
       this.frame = new WindowStateSaver.WindowAdapter() {
          @Override
          public int getX() {
@@ -176,7 +174,7 @@ public class WindowStateSaver implements WindowListener {
       GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
       GraphicsDevice[] lstGDs = ge.getScreenDevices();
 
-      for(GraphicsDevice gd : lstGDs) {
+      for (GraphicsDevice gd : lstGDs) {
          bounds.add(gd.getDefaultConfiguration().getBounds());
       }
 

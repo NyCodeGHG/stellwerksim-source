@@ -39,7 +39,6 @@ public class stellwerksim extends JPanel implements GleisAdapter, SessionExit, M
    private JProgressBar queueFill;
 
    public stellwerksim(UserContext uc) {
-      super();
       this.uc = uc;
       zug.clear();
       event.clear();

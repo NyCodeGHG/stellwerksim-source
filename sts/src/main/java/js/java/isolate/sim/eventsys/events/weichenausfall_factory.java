@@ -11,10 +11,6 @@ import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 public class weichenausfall_factory extends eventFactory {
    private JSpinner num;
 
-   public weichenausfall_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Weichenausfall";
@@ -41,7 +37,7 @@ public class weichenausfall_factory extends eventFactory {
    @Override
    public void readContainer(eventContainer ev) {
       super.readContainer(ev);
-      ev.setIntValue("dauer", Math.max(this.num.getValue(), 1));
+      ev.setIntValue("dauer", Math.max((Integer)this.num.getValue(), 1));
    }
 
    @Override

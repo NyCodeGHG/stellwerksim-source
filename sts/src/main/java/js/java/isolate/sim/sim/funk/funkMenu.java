@@ -25,7 +25,6 @@ public class funkMenu extends JPanel implements Scrollable {
    private static final Color[] cols = new Color[]{new Color(255, 255, 255), new Color(255, 255, 240)};
 
    public funkMenu(zugUndPlanPanel.funkAdapter fa, zug z, int unterzugAZid) {
-      super();
       this.z = z;
       this.fa = fa;
       this.initComponents();
@@ -65,7 +64,7 @@ public class funkMenu extends JPanel implements Scrollable {
       p.setOpaque(false);
       p.setLayout(new WrapLayout(0));
 
-      for(funkAuftragBase.funkValueItem fvi : befehl.getValues()) {
+      for (funkAuftragBase.funkValueItem fvi : befehl.getValues()) {
          funkMenu.fButton b = new funkMenu.fButton(befehl, fvi);
          if (fvi.iconName != null) {
             try {
@@ -77,7 +76,7 @@ public class funkMenu extends JPanel implements Scrollable {
          }
 
          p.add(b);
-         ++commands;
+         commands++;
       }
 
       o.add(p);
@@ -88,7 +87,7 @@ public class funkMenu extends JPanel implements Scrollable {
    }
 
    public void updateLayout() {
-      for(int i = 0; i < this.getComponentCount(); ++i) {
+      for (int i = 0; i < this.getComponentCount(); i++) {
          this.getComponent(i).doLayout();
       }
 

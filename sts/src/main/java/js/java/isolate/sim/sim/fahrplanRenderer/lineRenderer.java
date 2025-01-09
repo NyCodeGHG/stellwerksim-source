@@ -48,13 +48,13 @@ public class lineRenderer extends clickableRenderer {
 
       int l = 1;
       if (zpl.kErwartet != null || zpl.flagK || zpl.flagF) {
-         ++l;
+         l++;
       }
 
       if (zpl.hinweistext != null && !zpl.hinweistext.trim().isEmpty()) {
          this.hrLine = new hinweisRenderer(zr, zpl.hinweistext, l, zpl.azid);
          this.add(this.hrLine);
-         ++l;
+         l++;
       }
 
       this.dim = new Dimension(100, this.LINEHEIGHT * l + 2);
@@ -230,7 +230,7 @@ public class lineRenderer extends clickableRenderer {
          }
 
          this.clickArea.x += 10;
-         ++l;
+         l++;
       } else if (this.zpl.flagK) {
          if (this.zpl.flagZiel != null) {
             this.drawString(g2, this.plainFont, "kuppelt mit |" + this.zpl.flagZiel + "|", x, this.LINEHEIGHT * l, this.zpl.flagZielZid);
@@ -239,7 +239,7 @@ public class lineRenderer extends clickableRenderer {
          }
 
          this.clickArea.x += 10;
-         ++l;
+         l++;
       } else if (this.zpl.flagF) {
          if (this.zpl.flagZiel != null) {
             this.drawString(g2, this.plainFont, "flügelt |" + this.zpl.flagZiel + "|", x, this.LINEHEIGHT * l, this.zpl.flagZielZid);
@@ -248,7 +248,7 @@ public class lineRenderer extends clickableRenderer {
          }
 
          this.clickArea.x += 10;
-         ++l;
+         l++;
       }
 
       if (this.zpl.flagK) {

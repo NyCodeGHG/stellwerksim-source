@@ -9,7 +9,6 @@ public class gleisbildModelAdapter {
    private final players_aid paid;
 
    gleisbildModelAdapter(GleisAdapter m, players_aid aid) {
-      super();
       this.my_main = m;
       this.paid = aid;
    }

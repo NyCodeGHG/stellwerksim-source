@@ -31,7 +31,6 @@ public class GraphicFixes extends JPanel {
    private JButton setButton;
 
    GraphicFixes(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.initComponents();
       this.prefs = new prefs("/org/js-home/stellwerksim/gfxfixes");

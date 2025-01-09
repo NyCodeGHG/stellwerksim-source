@@ -15,7 +15,7 @@ class paint_anruecker extends paint2Base {
    protected void paint(gleis gl, Graphics2D g, int xscal, int yscal, int fscal) {
       int x1 = 0;
       int y1 = 0;
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case down:
          case up:
             x1 = xscal - 2;

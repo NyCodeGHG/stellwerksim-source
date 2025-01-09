@@ -11,7 +11,6 @@ class TableDataTipCell implements DataTipCell {
    private final int columnIndex;
 
    TableDataTipCell(JTable table, int rowIndex, int columnIndex) {
-      super();
       this.table = table;
       this.rowIndex = rowIndex;
       this.columnIndex = columnIndex;
@@ -38,11 +37,7 @@ class TableDataTipCell implements DataTipCell {
          return true;
       } else if (o != null && this.getClass() == o.getClass()) {
          TableDataTipCell cellPosition = (TableDataTipCell)o;
-         if (this.columnIndex != cellPosition.columnIndex) {
-            return false;
-         } else {
-            return this.rowIndex == cellPosition.rowIndex;
-         }
+         return this.columnIndex != cellPosition.columnIndex ? false : this.rowIndex == cellPosition.rowIndex;
       } else {
          return false;
       }

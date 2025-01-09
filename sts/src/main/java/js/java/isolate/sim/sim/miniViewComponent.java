@@ -9,7 +9,6 @@ public class miniViewComponent extends JComponent {
    private gleisbildSimControl my_gleisbild;
 
    public miniViewComponent(gleisbildSimControl glb) {
-      super();
       this.my_gleisbild = glb;
    }
 

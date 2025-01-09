@@ -46,7 +46,7 @@ public class sperreelementeaufzeit extends gleisevent {
       this.sperrgleise.clear();
       TreeSet<String> locktext = new TreeSet();
 
-      for(gleis g : this.ec.getGleisList()) {
+      for (gleis g : this.ec.getGleisList()) {
          if (SPERRGLEISE.matches(g.getElement())) {
             this.sperrgleise.add(g);
             locktext.add(g.getElementName());
@@ -55,7 +55,7 @@ public class sperreelementeaufzeit extends gleisevent {
 
       this.glstring = "";
 
-      for(String n : locktext) {
+      for (String n : locktext) {
          if (!this.glstring.isEmpty()) {
             this.glstring = this.glstring + ", ";
          }
@@ -91,7 +91,7 @@ public class sperreelementeaufzeit extends gleisevent {
    public boolean pong() {
       boolean ret = false;
       if (this.step != sperreelementeaufzeit.STEPS.DONE) {
-         switch(this.step) {
+         switch (this.step) {
             case WARNING1:
                this.showWarning(sperreelementeaufzeit.STEPS.WARNING2, false);
                break;
@@ -152,7 +152,7 @@ public class sperreelementeaufzeit extends gleisevent {
 
    @Override
    public void clicked(String url) {
-      for(gleis g : this.sperrgleise) {
+      for (gleis g : this.sperrgleise) {
          g.setHightlight(true);
       }
 
@@ -160,7 +160,7 @@ public class sperreelementeaufzeit extends gleisevent {
    }
 
    private void setHooks() {
-      for(gleis g : this.sperrgleise) {
+      for (gleis g : this.sperrgleise) {
          if (g.getElement() == gleis.ELEMENT_SIGNAL) {
             if (g.getFluentData().getStellung() == gleisElements.ST_SIGNAL_ROT) {
                g.getFluentData().setGesperrt(true);
@@ -196,7 +196,7 @@ public class sperreelementeaufzeit extends gleisevent {
    private void wait4Rot() {
       boolean allLocked = true;
 
-      for(gleis g : this.sperrgleise) {
+      for (gleis g : this.sperrgleise) {
          if (g.getElement() == gleis.ELEMENT_SIGNAL) {
             allLocked &= g.getFluentData().isGesperrt();
             if (!g.getFluentData().isGesperrt() && g.getFluentData().getStellung() == gleisElements.ST_SIGNAL_ROT && g.getFluentData().getStatus() == 0) {
@@ -211,7 +211,7 @@ public class sperreelementeaufzeit extends gleisevent {
       }
 
       if (allLocked) {
-         for(gleis g : this.sperrgleise) {
+         for (gleis g : this.sperrgleise) {
             if (g.getElement() == gleis.ELEMENT_WEICHEOBEN || g.getElement() == gleis.ELEMENT_WEICHEUNTEN) {
                String sw = this.ec.getValue(g, "details");
                if (sw != null) {
@@ -244,7 +244,7 @@ public class sperreelementeaufzeit extends gleisevent {
    private void reenableAll() {
       this.showMessageNow("Streckensperrung beendet!");
 
-      for(gleis g : this.sperrgleise) {
+      for (gleis g : this.sperrgleise) {
          this.unregisterForStellung(g);
          g.getFluentData().setGesperrt(false);
          this.my_main.reportElementOccurance(g, OCCU_KIND.UNLOCKED, "sperreelementeaufzeit", this.code);

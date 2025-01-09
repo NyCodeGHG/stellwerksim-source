@@ -17,9 +17,7 @@ public class Computer extends Player {
    ArrayList<Layer> layers = new ArrayList();
 
    public Computer(String l) {
-      super();
-
-      for(int i = 0; i < 9; ++i) {
+      for (int i = 0; i < 9; i++) {
          this.layerFiles[i] = new File(l + (i + 1) + ".nodes");
          if (!this.layerFiles[i].exists()) {
             try {
@@ -38,15 +36,15 @@ public class Computer extends Player {
    }
 
    public void evaluate() {
-      for(int i = 0; i < 9; ++i) {
+      for (int i = 0; i < 9; i++) {
          Layer l = (Layer)this.layers.get(i);
 
-         for(int j = 0; j < l.nodes.size(); ++j) {
+         for (int j = 0; j < l.nodes.size(); j++) {
             String x = "";
             String o = "";
             String s = ((Node)l.nodes.get(j)).id;
 
-            for(int k = 0; k < 9; ++k) {
+            for (int k = 0; k < 9; k++) {
                char ch = s.charAt(k);
                if (ch == '1') {
                   x = x + (k + 1);
@@ -56,7 +54,7 @@ public class Computer extends Player {
             }
 
             int r = TicTacToe.checkWin2(x, o);
-            switch(r) {
+            switch (r) {
                case -1:
                   ((Node)l.nodes.get(j)).nodeType = 1;
                case 0:
@@ -78,12 +76,12 @@ public class Computer extends Player {
       int i = 0;
 
       try {
-         for(int l = 0; l < 9; ++l) {
+         for (int l = 0; l < 9; l++) {
             this.layers.add(new Layer(l + 1));
             FileReader f = new FileReader(this.layerFiles[l]);
             BufferedReader r = new BufferedReader(f);
 
-            while(r.readLine() != null) {
+            while (r.readLine() != null) {
                Node temp = new Node(r.readLine(), l + 1, this);
                temp.subNodes = r.readLine();
                String no = r.readLine();
@@ -94,8 +92,8 @@ public class Computer extends Player {
             }
          }
 
-         for(int l = 0; l < 9; ++l) {
-            for(int j = 0; j < ((Layer)this.layers.get(l)).nodes.size(); ++j) {
+         for (int l = 0; l < 9; l++) {
+            for (int j = 0; j < ((Layer)this.layers.get(l)).nodes.size(); j++) {
                ((Node)((Layer)this.layers.get(l)).nodes.get(j)).extractNodes();
             }
          }
@@ -105,22 +103,22 @@ public class Computer extends Player {
    }
 
    public void saveMind() {
-      for(int i = 7; i >= 0; --i) {
+      for (int i = 7; i >= 0; i--) {
          ((Layer)this.layers.get(i)).refreshLayer();
       }
 
       try {
-         for(int i = 0; i < 9; ++i) {
+         for (int i = 0; i < 9; i++) {
             Layer l = (Layer)this.layers.get(i);
             PrintWriter p = new PrintWriter(new BufferedWriter(new FileWriter(this.layerFiles[i])));
 
-            for(int j = 0; j < l.nodes.size(); ++j) {
+            for (int j = 0; j < l.nodes.size(); j++) {
                Node temp = (Node)l.nodes.get(j);
                p.println("***********************************************");
                p.println(temp.id);
                String s = "";
 
-               for(int k = 0; k < temp.sub_nodes.size(); ++k) {
+               for (int k = 0; k < temp.sub_nodes.size(); k++) {
                   s = s + ((Node)temp.sub_nodes.get(k)).id + ",";
                }
 
@@ -148,87 +146,87 @@ public class Computer extends Player {
       this.layers.add(new Layer(8));
       this.layers.add(new Layer(9));
 
-      for(int i1 = 0; i1 <= 2; ++i1) {
-         for(int i2 = 0; i2 <= 2; ++i2) {
-            for(int i3 = 0; i3 <= 2; ++i3) {
-               for(int i4 = 0; i4 <= 2; ++i4) {
-                  for(int i5 = 0; i5 <= 2; ++i5) {
-                     for(int i6 = 0; i6 <= 2; ++i6) {
-                        for(int i7 = 0; i7 <= 2; ++i7) {
-                           for(int i8 = 0; i8 <= 2; ++i8) {
-                              for(int i9 = 0; i9 <= 2; ++i9) {
+      for (int i1 = 0; i1 <= 2; i1++) {
+         for (int i2 = 0; i2 <= 2; i2++) {
+            for (int i3 = 0; i3 <= 2; i3++) {
+               for (int i4 = 0; i4 <= 2; i4++) {
+                  for (int i5 = 0; i5 <= 2; i5++) {
+                     for (int i6 = 0; i6 <= 2; i6++) {
+                        for (int i7 = 0; i7 <= 2; i7++) {
+                           for (int i8 = 0; i8 <= 2; i8++) {
+                              for (int i9 = 0; i9 <= 2; i9++) {
                                  int l = 9;
                                  if (i1 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i2 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i3 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i4 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i5 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i6 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i7 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i8 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  if (i9 == 0) {
-                                    --l;
+                                    l--;
                                  }
 
                                  int x = 0;
                                  if (i1 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i2 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i3 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i4 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i5 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i6 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i7 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i8 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  if (i9 == 1) {
-                                    ++x;
+                                    x++;
                                  }
 
                                  int o = l - x;
@@ -246,14 +244,14 @@ public class Computer extends Player {
          }
       }
 
-      for(int l = 1; l < 9; ++l) {
-         for(int j = 0; j < ((Layer)this.layers.get(l)).nodes.size(); ++j) {
-            Node node = (Node)((Layer)this.layers.get(l)).nodes.get(j);
+      for (int lx = 1; lx < 9; lx++) {
+         for (int j = 0; j < ((Layer)this.layers.get(lx)).nodes.size(); j++) {
+            Node node = (Node)((Layer)this.layers.get(lx)).nodes.get(j);
 
-            for(int i = 0; i < 9; ++i) {
+            for (int i = 0; i < 9; i++) {
                String newId = "";
 
-               for(int k = 0; k < 9; ++k) {
+               for (int k = 0; k < 9; k++) {
                   char ch = node.id.charAt(k);
                   if (k == i) {
                      ch = '0';
@@ -264,7 +262,7 @@ public class Computer extends Player {
 
                if (!newId.equals(node.id)) {
                   try {
-                     ((Layer)this.layers.get(l - 1)).searchById(newId).sub_nodes.add(node);
+                     ((Layer)this.layers.get(lx - 1)).searchById(newId).sub_nodes.add(node);
                   } catch (NullPointerException var14) {
                   }
                }

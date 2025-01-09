@@ -14,7 +14,6 @@ public class UpdateChecker implements Runnable {
    private final UserContextMini uc;
 
    public UpdateChecker(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.url = "http://" + uc.getParameter(UserContextMini.DATATYPE.WEBSERVER) + "/.*";
    }
@@ -26,14 +25,14 @@ public class UpdateChecker implements Runnable {
          ResourceSpec[] results = service.getCachedResources(spec);
          System.out.println("Cached:");
 
-         for(ResourceSpec rs : results) {
+         for (ResourceSpec rs : results) {
             System.out.println(rs.getUrl() + "//" + rs.getLastModified() + "//" + new Date(rs.getLastModified()).toString());
          }
 
          ResourceSpec[] uresults = service.getUpdateAvailableResources(spec);
          System.out.println("Updates:");
 
-         for(ResourceSpec rs : uresults) {
+         for (ResourceSpec rs : uresults) {
             System.out.println(rs.getUrl() + "//" + rs.getLastModified() + "//" + new Date(rs.getLastModified()).toString());
          }
       } catch (IOException | UnavailableServiceException var9) {

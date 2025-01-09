@@ -22,7 +22,6 @@ public class CompactLayout implements LayoutManager {
    private int dHeight;
 
    public CompactLayout(int c) {
-      super();
       this.columns = c;
    }
 
@@ -48,7 +47,7 @@ public class CompactLayout implements LayoutManager {
          newElement.addAll(suffix);
          this.executor(newElement);
       } else {
-         for(int i = 0; i < suffix.size(); ++i) {
+         for (int i = 0; i < suffix.size(); i++) {
             ArrayList<Component> newPrefix = new ArrayList(prefix);
             newPrefix.add(suffix.get(i));
             ArrayList<Component> newSuffix = new ArrayList(suffix);
@@ -62,12 +61,12 @@ public class CompactLayout implements LayoutManager {
       int h = 0;
       int col = 0;
 
-      for(Component cc : current) {
+      for (Component cc : current) {
          Rectangle r = (Rectangle)this.poslist.get(cc);
          h += r.height;
          if (h >= this.dHeight) {
             h = 0;
-            ++col;
+            col++;
          }
       }
 
@@ -89,7 +88,7 @@ public class CompactLayout implements LayoutManager {
          this.preferredWidth = this.preferredHeight = 0;
          this.minWidth = this.minHeight = 0;
 
-         for(int i = 0; i < nComps; ++i) {
+         for (int i = 0; i < nComps; i++) {
             Component c = parent.getComponent(i);
             Rectangle r = new Rectangle();
             r.setSize(c.getPreferredSize());
@@ -104,7 +103,7 @@ public class CompactLayout implements LayoutManager {
          this.restsize = Integer.MAX_VALUE;
          this.permutations(plist);
 
-         for(Component cc : this.bestmatch) {
+         for (Component cc : this.bestmatch) {
             Rectangle r = (Rectangle)this.poslist.get(cc);
             r.x = x;
             r.y = y;
@@ -112,11 +111,11 @@ public class CompactLayout implements LayoutManager {
             this.minHeight = this.preferredHeight = Math.max(this.minHeight, y);
             if (y >= this.dHeight) {
                y = insets.top;
-               ++x;
+               x++;
             }
          }
 
-         this.minHeight = this.preferredHeight += insets.bottom;
+         this.minHeight = this.preferredHeight = this.preferredHeight + insets.bottom;
          this.minWidth = this.minWidth * 2 + insets.left + insets.right;
          this.preferredWidth = this.minWidth;
          this.needRecalc = false;
@@ -140,7 +139,7 @@ public class CompactLayout implements LayoutManager {
       int startx = insets.left;
       int w = (parent.getWidth() - insets.left - insets.right) / this.columns;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c = parent.getComponent(i);
          Rectangle r = (Rectangle)this.poslist.get(c);
          c.setSize(w, r.height);

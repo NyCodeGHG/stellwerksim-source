@@ -27,6 +27,7 @@ import js.java.isolate.sim.stellwerk_editor;
 import js.java.isolate.sim.gleisbild.StructureChangeEvent;
 import js.java.isolate.sim.gleisbild.gleisbildEditorControl;
 import js.java.isolate.sim.gleisbild.gleisbildModel;
+import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 import js.java.isolate.sim.gleisbild.gecWorker.gecBase;
 import js.java.tools.actions.AbstractEvent;
 import js.java.tools.gui.NumberTextField;
@@ -66,7 +67,7 @@ public class sizePanel extends basePanel {
       this.initComponents();
       ButtonGroup mgrp = new ButtonGroup();
 
-      for(String n : this.masse.keySet()) {
+      for (String n : this.masse.keySet()) {
          JRadioButton rb = new JRadioButton(n);
          this.massPanel.add(rb);
          mgrp.add(rb);
@@ -88,7 +89,7 @@ public class sizePanel extends basePanel {
                         return;
                      }
                   }
-   
+
                   sizePanel.this.glbControl.getModel().setMasstabCalculator(v);
                }
             }
@@ -109,8 +110,8 @@ public class sizePanel extends basePanel {
    public void shown(String n, gecBase gec) {
       int v = this.glbControl.getModel().getMasstabCalculatorName();
 
-      for(Entry<JRadioButton, Integer> m : this.massButtons.entrySet()) {
-         if (m.getValue() == v) {
+      for (Entry<JRadioButton, Integer> m : this.massButtons.entrySet()) {
+         if ((Integer)m.getValue() == v) {
             ((JRadioButton)m.getKey()).setSelected(true);
             break;
          }
@@ -341,13 +342,15 @@ public class sizePanel extends basePanel {
       int w = this.myinput_width.getInt();
       int h = this.myinput_height.getInt();
       if (this.glbControl.getModel().gl_overmaxsize(w, h) > 0) {
+         StringBuilder var10001 = new StringBuilder().append("Achtung! Die Größe überschreitet ");
+         gleisbildModelSts var10002 = this.glbControl.getModel();
          int r = JOptionPane.showConfirmDialog(
             this,
-            "Achtung! Die Größe überschreitet "
-               + 10000
-               + " Felder um "
-               + this.glbControl.getModel().gl_overmaxsize(w, h)
-               + " Felder,\ndie Anlage wird sich dann mit hoher Wahrscheinlichkeit\nnicht mehr laden lassen.\n\nSoll die Größe trotzdem geändert werden?",
+            var10001.append(10000)
+               .append(" Felder um ")
+               .append(this.glbControl.getModel().gl_overmaxsize(w, h))
+               .append(" Felder,\ndie Anlage wird sich dann mit hoher Wahrscheinlichkeit\nnicht mehr laden lassen.\n\nSoll die Größe trotzdem geändert werden?")
+               .toString(),
             "Anlage zu groß!",
             0,
             2
@@ -367,10 +370,10 @@ public class sizePanel extends basePanel {
    }
 
    private void nHorizSpinnerStateChanged(ChangeEvent evt) {
-      this.glbControl.getModel().gleisbildextend.setNachbarbahnsteigLookupWidth(this.nHorizSpinner.getValue());
+      this.glbControl.getModel().gleisbildextend.setNachbarbahnsteigLookupWidth((Integer)this.nHorizSpinner.getValue());
    }
 
    private void nVertSpinnerStateChanged(ChangeEvent evt) {
-      this.glbControl.getModel().gleisbildextend.setNachbarbahnsteighoriz(this.nVertSpinner.getValue());
+      this.glbControl.getModel().gleisbildextend.setNachbarbahnsteighoriz((Integer)this.nVertSpinner.getValue());
    }
 }

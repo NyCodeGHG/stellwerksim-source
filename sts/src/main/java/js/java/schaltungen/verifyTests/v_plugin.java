@@ -10,10 +10,6 @@ public class v_plugin extends InitTestBase {
    private static final int PLUGINSERVPORT = 3691;
    private boolean failed = false;
 
-   public v_plugin() {
-      super();
-   }
-
    @Override
    public String name() {
       return this.failed ? "Keine Plugin möglich" : "Plugins möglich";

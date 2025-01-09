@@ -4,10 +4,6 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 public class QuickSort {
-   public QuickSort() {
-      super();
-   }
-
    private static void swap(Vector v, int i, int j) {
       Object tmp = v.elementAt(i);
       v.setElementAt(v.elementAt(j), i);
@@ -25,7 +21,7 @@ public class QuickSort {
          swap(v, left, (left + right) / 2);
          int last = left;
 
-         for(int i = left + 1; i <= right; ++i) {
+         for (int i = left + 1; i <= right; i++) {
             IComparable ic = (IComparable)v.elementAt(i);
             IComparable icleft = (IComparable)v.elementAt(left);
             if (ascending && ic.compareTo(icleft) < 0) {
@@ -46,7 +42,7 @@ public class QuickSort {
          swap(arr, left, (left + right) / 2);
          int last = left;
 
-         for(int i = left + 1; i <= right; ++i) {
+         for (int i = left + 1; i <= right; i++) {
             if (ascending && arr[i].compareTo(arr[left]) < 0) {
                swap(arr, ++last, i);
             } else if (!ascending && arr[i].compareTo(arr[left]) < 0) {
@@ -62,13 +58,15 @@ public class QuickSort {
 
    public static boolean needsSorting(Vector v) {
       IComparable prev = null;
+      Enumeration e = v.elements();
 
-      IComparable curr;
-      for(Enumeration e = v.elements(); e.hasMoreElements(); prev = curr) {
-         curr = (IComparable)e.nextElement();
+      while (e.hasMoreElements()) {
+         IComparable curr = (IComparable)e.nextElement();
          if (prev != null && prev.compareTo(curr) != 0) {
             return true;
          }
+
+         prev = curr;
       }
 
       return false;

@@ -19,7 +19,7 @@ public class funk_zugWarten extends funk_zugBase {
       if (sel.id == -1) {
          Iterator<zug> it = this.my_main.zugIterator();
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             zug zz = (zug)it.next();
             zz.warten();
          }

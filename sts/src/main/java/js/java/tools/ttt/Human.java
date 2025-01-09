@@ -1,16 +1,12 @@
 package js.java.tools.ttt;
 
 public class Human extends Player {
-   public Human() {
-      super();
-   }
-
    @Override
    void playTurn(int pl, int turn) {
-      while(TicTacToe.butClicked == 0) {
+      while (TicTacToe.butClicked == 0) {
       }
 
-      switch(TicTacToe.butClicked) {
+      switch (TicTacToe.butClicked) {
          case 1:
             TicTacToe.state[0][0] = pl;
             break;

@@ -31,18 +31,18 @@ class c_fflag extends baseChain1Chain {
                   z.updateData();
 
                   try {
-                     z.laenge -= neuzug.laenge;
+                     z.laenge = z.laenge - neuzug.laenge;
                      if (z.laenge < 2) {
                         z.laenge = 2;
                         System.out.println("Warnung: Flügel länger als Urzug!");
                      }
 
                      if (neuzug.laenge > z.laenge) {
-                        while(neuzug.zugbelegt.size() < neuzug.calcLaenge(z.lastmasstab) && z.zugbelegt.size() > 2 || neuzug.zugbelegt.size() < 2) {
+                        while (neuzug.zugbelegt.size() < neuzug.calcLaenge(z.lastmasstab) && z.zugbelegt.size() > 2 || neuzug.zugbelegt.size() < 2) {
                            neuzug.zugbelegt.addLast(z.zugbelegt.removeFirst());
                         }
                      } else {
-                        while(z.zugbelegt.size() > z.calcLaenge(z.lastmasstab) || neuzug.zugbelegt.size() < 2) {
+                        while (z.zugbelegt.size() > z.calcLaenge(z.lastmasstab) || neuzug.zugbelegt.size() < 2) {
                            neuzug.zugbelegt.addLast(z.zugbelegt.removeFirst());
                         }
                      }

@@ -15,7 +15,6 @@ public class WaitForResponse<E, R> {
    private final E event;
 
    public WaitForResponse(EventBus bus, E event, Class<R> clazz, BiFunction<E, R, Boolean> validator) {
-      super();
       this.clazz = clazz;
       this.validator = validator;
       this.bus = bus;
@@ -37,7 +36,7 @@ public class WaitForResponse<E, R> {
       this.bus.subscribe(this, this.m, this.clazz);
 
       try {
-         synchronized(this) {
+         synchronized (this) {
             this.bus.publish(this.event);
             this.wait();
          }
@@ -52,7 +51,7 @@ public class WaitForResponse<E, R> {
       this.bus.subscribe(this, this.m, this.clazz);
 
       try {
-         synchronized(this) {
+         synchronized (this) {
             this.bus.publish(this.event);
             this.wait(unit.toMillis(timeout));
          }
@@ -69,7 +68,7 @@ public class WaitForResponse<E, R> {
 
    @EventHandler
    public void eventReceiver(Object event) {
-      if (this.validator.apply(this.event, event)) {
+      if ((Boolean)this.validator.apply(this.event, event)) {
          this.received((R)event);
       }
    }

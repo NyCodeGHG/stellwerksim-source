@@ -51,7 +51,6 @@ public class TaskDialogContent extends JPanel implements TaskDialog.Details, Tas
    }
 
    public TaskDialogContent() {
-      super();
       this.pExpandable.setOpaque(false);
       this.pComponent.setOpaque(false);
       this.cbDetails.addItemListener(new ItemListener() {
@@ -86,7 +85,7 @@ public class TaskDialogContent extends JPanel implements TaskDialog.Details, Tas
       String group = lockButtonSize ? "sgx commands, " : "";
       TaskDialog owner = this.getOwner();
 
-      for(TaskDialog.Command c : commands) {
+      for (TaskDialog.Command c : commands) {
          String tag = c.getTag() == null ? "" : c.getTag().toString();
          this.pCommands.add(new JButton(new TaskDialogContent.CommandAction(c, owner)), group + "aligny top, " + tag);
       }

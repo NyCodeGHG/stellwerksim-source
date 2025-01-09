@@ -6,7 +6,6 @@ public class GetTipResponse {
    public final TipAnswer tip;
 
    GetTipResponse(TipAnswer tip) {
-      super();
       this.tip = tip;
    }
 }

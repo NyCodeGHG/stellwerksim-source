@@ -27,7 +27,7 @@ public class FATwriter extends analysisWriter {
    }
 
    public void writeln(Iterator<? extends structinfo> i) {
-      while(i.hasNext()) {
+      while (i.hasNext()) {
          try {
             structinfo si = (structinfo)i.next();
             fat.FATwriteln(this.getModuleName(), si);

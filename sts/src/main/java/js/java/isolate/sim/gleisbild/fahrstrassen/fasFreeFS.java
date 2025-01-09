@@ -11,7 +11,7 @@ class fasFreeFS extends fahrstrassenState {
    public void check() {
       boolean suc = this.getStart().getFluentData().setStellung(gleisElements.ST_SIGNAL_ROT, this.getFS());
       if (suc) {
-         for(gleis g : this.getFS().gleisweg) {
+         for (gleis g : this.getFS().gleisweg) {
             if (g.getElement() == gleis.ELEMENT_ÜBERGABEPUNKT) {
                this.getFSallocator().unreserveAusfahrt(g.getENR());
             }
@@ -26,7 +26,7 @@ class fasFreeFS extends fahrstrassenState {
             g.getFluentData().setStatusByFs(0, this.getFS());
          }
 
-         for(gleis gl : this.getFS().zwerge) {
+         for (gleis gl : this.getFS().zwerge) {
             boolean zsuc = gl.getFluentData().setStellung(gleisElements.ST_SIGNAL_ROT);
             if (!zsuc) {
             }

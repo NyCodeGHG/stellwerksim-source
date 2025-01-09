@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class signaltest7 implements dtest {
-   public signaltest7() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Signalumfeld 7";
@@ -25,7 +21,7 @@ public class signaltest7 implements dtest {
       LinkedList<dtestresult> r = new LinkedList();
       Iterator<gleis> it1 = glb.findIterator(new Object[]{gleis.ELEMENT_SIGNAL});
 
-      while(it1.hasNext()) {
+      while (it1.hasNext()) {
          gleis gl = (gleis)it1.next();
          gleis gl2 = gl.nextByRichtung(false);
          if (gl2 != null && gl2.getElement() == gleis.ELEMENT_KREUZUNGBRUECKE) {

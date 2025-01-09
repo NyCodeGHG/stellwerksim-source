@@ -25,10 +25,6 @@ public class landkarte extends JComponent implements SessionClose {
    private knoten stopk = null;
    private Point calcPosition = null;
 
-   public landkarte() {
-      super();
-   }
-
    @Override
    public void close() {
       this.startk = null;
@@ -43,10 +39,11 @@ public class landkarte extends JComponent implements SessionClose {
 
    public void updateSize() {
       Rectangle r = new Rectangle(0, 0, 10, 10);
+      Iterator<knoten> kit = this.klist.knotenIterator();
 
-      knoten k;
-      for(Iterator<knoten> kit = this.klist.knotenIterator(); kit.hasNext(); r = r.union(k)) {
-         k = (knoten)kit.next();
+      while (kit.hasNext()) {
+         knoten k = (knoten)kit.next();
+         r = r.union(k);
       }
 
       this.size = new Dimension((int)r.getWidth() + 100, (int)r.getHeight() + 100);
@@ -113,14 +110,14 @@ public class landkarte extends JComponent implements SessionClose {
 
          Iterator<verbindung> vit = this.klist.verbindungIterator();
 
-         while(vit.hasNext()) {
+         while (vit.hasNext()) {
             verbindung v = (verbindung)vit.next();
             v.paint(g2);
          }
 
          Iterator<knoten> kit = this.klist.knotenIterator();
 
-         while(kit.hasNext()) {
+         while (kit.hasNext()) {
             knoten k = (knoten)kit.next();
             k.paint(g2);
          }

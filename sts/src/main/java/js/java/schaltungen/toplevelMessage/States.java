@@ -40,7 +40,7 @@ public enum States {
    SHOWWAITING {
       @Override
       void run(TopLevelMessage frame) {
-         --frame.waiting;
+         frame.waiting--;
          if (frame.waiting <= 0) {
             frame.setState(MOVEOUT);
          }

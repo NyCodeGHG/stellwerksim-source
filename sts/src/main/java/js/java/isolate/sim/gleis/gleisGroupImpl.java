@@ -6,16 +6,12 @@ public class gleisGroupImpl extends gleisGroup {
    private final LinkedList<gleis> gleise = new LinkedList();
    private boolean belegt = false;
 
-   public gleisGroupImpl() {
-      super();
-   }
-
    @Override
    void updateStatus(gleis gl, int status) {
       if (status == 2 || status == 0) {
          boolean b = false;
 
-         for(gleis gls : this.gleise) {
+         for (gleis gls : this.gleise) {
             b |= gls.getFluentData().getStatus() == 2;
             if (b) {
                break;

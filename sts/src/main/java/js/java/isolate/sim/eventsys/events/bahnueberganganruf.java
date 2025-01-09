@@ -48,7 +48,7 @@ public class bahnueberganganruf extends anrufbueevent {
          this.callMeIn(3);
          Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_ANRUFÜBERGANG, this.büenr});
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             this.registerForStellung((gleis)it.next());
          }
 
@@ -64,7 +64,7 @@ public class bahnueberganganruf extends anrufbueevent {
          this.event_running = false;
          Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_ANRUFÜBERGANG, this.büenr});
 
-         while(it.hasNext()) {
+         while (it.hasNext()) {
             this.unregisterForStellung((gleis)it.next());
          }
 
@@ -82,27 +82,27 @@ public class bahnueberganganruf extends anrufbueevent {
             this.event_running = false;
             Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_ANRUFÜBERGANG, this.büenr});
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                this.unregisterForStellung((gleis)it.next());
             }
 
             this.eventDone();
          } else {
-            ++this.callcnt;
+            this.callcnt++;
             if (this.callcnt >= 5) {
                this.text = "Du Blödmann, dann drücke ich eben die Schranke selbst auf! (" + this.bü.getElementName() + ")";
                this.showCallMessageNow(this.text);
                this.event_running = false;
                Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ELEMENT_ANRUFÜBERGANG, this.büenr});
 
-               while(it.hasNext()) {
+               while (it.hasNext()) {
                   this.unregisterForStellung((gleis)it.next());
                }
 
                this.eventDone();
                it = this.glbModel.findIterator(new Object[]{this.büenr, gleis.ELEMENT_ANRUFÜBERGANG});
 
-               while(it.hasNext()) {
+               while (it.hasNext()) {
                   gleis bügl = (gleis)it.next();
                   fahrstrasse fs = bügl.getFluentData().getCurrentFS();
                   if (fs != null) {

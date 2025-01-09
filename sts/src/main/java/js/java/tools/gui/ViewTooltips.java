@@ -52,7 +52,6 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
    private ViewTooltips.Hider hider = null;
 
    private ViewTooltips() {
-      super();
    }
 
    public static void register(JComponent comp) {
@@ -77,7 +76,7 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
 
       comp.addMouseListener(this);
       comp.addMouseMotionListener(this);
-      ++this.refcount;
+      this.refcount++;
    }
 
    private int detachFrom(JComponent comp) {
@@ -192,7 +191,7 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
    }
 
    private void ensureOldPopupsHidden() {
-      for(int i = 0; i < this.popups.length; ++i) {
+      for (int i = 0; i < this.popups.length; i++) {
          if (this.popups[i] != null) {
             this.popups[i].hide();
             this.popups[i] = null;
@@ -217,12 +216,12 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
 
       Rectangle r = pane.getViewportBorderBounds();
       r.translate(-r.x, -r.y);
-      r.width -= ins1.left + ins1.right;
-      r.width -= ins2.left + ins2.right;
-      r.height -= ins1.top + ins1.bottom;
-      r.height -= ins2.top + ins2.bottom;
-      r.x -= ins2.left;
-      r.x -= ins3.left;
+      r.width = r.width - (ins1.left + ins1.right);
+      r.width = r.width - (ins2.left + ins2.right);
+      r.height = r.height - (ins1.top + ins1.bottom);
+      r.height = r.height - (ins2.top + ins2.bottom);
+      r.x = r.x - ins2.left;
+      r.x = r.x - ins3.left;
       Point p = pane.getViewport().getViewPosition();
       r.translate(p.x, p.y);
       return SwingUtilities.convertRectangle(pane.getViewport(), r, pane);
@@ -246,8 +245,8 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
 
       int i = 0;
 
-      while(i < result.length) {
-         ++i;
+      while (i < result.length) {
+         i++;
       }
 
       return result;
@@ -256,14 +255,14 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
    private void showPopups(Rectangle[] rects, Rectangle bds, Rectangle visible, JComponent comp, JScrollPane view) {
       boolean shown = false;
 
-      for(int i = 0; i < rects.length; ++i) {
+      for (int i = 0; i < rects.length; i++) {
          Rectangle sect = rects[i];
          sect.translate(-bds.x, -bds.y);
          ViewTooltips.ImgComp part = this.painter.getPartial(sect, bds.x + rects[i].x < visible.x);
          Point pos = new Point(bds.x + rects[i].x, bds.y + rects[i].y);
          SwingUtilities.convertPointToScreen(pos, comp);
          if (comp instanceof JList) {
-            --pos.y;
+            pos.y--;
          }
 
          if (pos.x > 0) {
@@ -314,7 +313,6 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
       private boolean detached = false;
 
       Hider(JComponent comp, JScrollPane pane) {
-         super();
          if (comp instanceof JTree) {
             this.tree = (JTree)comp;
             this.list = null;
@@ -465,11 +463,9 @@ public final class ViewTooltips extends MouseAdapter implements MouseMotionListe
       boolean isRight = false;
 
       ImgComp() {
-         super();
       }
 
       ImgComp(BufferedImage img, Rectangle off, boolean right) {
-         super();
          this.img = img;
          this.at = AffineTransform.getTranslateInstance((double)(-off.x), 0.0);
          this.d = new Dimension(off.width, off.height);

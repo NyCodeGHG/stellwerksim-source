@@ -5,10 +5,6 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 
 public class MacOsCommandLinkPainter implements ICommandLinkPainter {
-   public MacOsCommandLinkPainter() {
-      super();
-   }
-
    @Override
    public void intialize(JComponent source) {
    }

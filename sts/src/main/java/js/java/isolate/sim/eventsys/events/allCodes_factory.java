@@ -6,10 +6,6 @@ import js.java.isolate.sim.eventsys.eventFactory;
 import js.java.isolate.sim.gleisbild.gleisbildModelEventsys;
 
 public class allCodes_factory extends eventFactory {
-   public allCodes_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Alle Hotline Codes";
@@ -32,7 +28,7 @@ public class allCodes_factory extends eventFactory {
    @Override
    public boolean serverEvent(eventContainer ev, gleisbildModelEventsys glb, String parameter) {
       try {
-         for(event e : event.events) {
+         for (event e : event.events) {
             event.startActivityCall(e, "");
          }
       } catch (Exception var6) {

@@ -16,7 +16,6 @@ public class ResizableToolBar extends JToolBar implements ComponentListener {
    private int maxButtonWidth;
 
    public ResizableToolBar(int minButtonWidth, int maxButtonWidth) {
-      super();
       this.setFloatable(false);
       this.minButtonWidth = minButtonWidth;
       this.maxButtonWidth = maxButtonWidth;
@@ -52,7 +51,7 @@ public class ResizableToolBar extends JToolBar implements ComponentListener {
             JToggleButton b = null;
             Enumeration e = ResizableToolBar.this.getElements();
 
-            for(float currentButtonXLocation = 0.0F; e.hasMoreElements(); currentButtonXLocation += exactButtonWidth) {
+            for (float currentButtonXLocation = 0.0F; e.hasMoreElements(); currentButtonXLocation += exactButtonWidth) {
                b = (JToggleButton)e.nextElement();
                int buttonWidth = Math.round(currentButtonXLocation + exactButtonWidth) - Math.round(currentButtonXLocation);
                ResizableToolBar.this.assignWidth(b, buttonWidth);

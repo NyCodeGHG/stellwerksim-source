@@ -16,14 +16,13 @@ public final class LinkHandler {
    private static final ArrayList<HashMap<String, int[]>> VALUES_TEMP = new ArrayList(4);
 
    private LinkHandler() {
-      super();
    }
 
    public static synchronized Integer getValue(Object layout, String key, int type) {
       Integer ret = null;
       boolean cont = true;
 
-      for(int i = LAYOUTS.size() - 1; i >= 0; --i) {
+      for (int i = LAYOUTS.size() - 1; i >= 0; i--) {
          Object l = ((WeakReference)LAYOUTS.get(i)).get();
          if (ret == null && l == layout) {
             int[] rect = (int[])((HashMap)VALUES_TEMP.get(i)).get(key);
@@ -52,10 +51,10 @@ public final class LinkHandler {
    }
 
    static synchronized boolean setBounds(Object layout, String key, int x, int y, int width, int height, boolean temporary, boolean incCur) {
-      for(int i = LAYOUTS.size() - 1; i >= 0; --i) {
+      for (int i = LAYOUTS.size() - 1; i >= 0; i--) {
          Object l = ((WeakReference)LAYOUTS.get(i)).get();
          if (l == layout) {
-            HashMap<String, int[]> map = (HashMap)(temporary ? VALUES_TEMP : VALUES).get(i);
+            HashMap<String, int[]> map = (HashMap<String, int[]>)(temporary ? VALUES_TEMP : VALUES).get(i);
             int[] old = (int[])map.get(key);
             if (old != null && old[0] == x && old[1] == y && old[2] == width && old[3] == height) {
                return false;
@@ -127,7 +126,7 @@ public final class LinkHandler {
    }
 
    public static synchronized boolean clearBounds(Object layout, String key) {
-      for(int i = LAYOUTS.size() - 1; i >= 0; --i) {
+      for (int i = LAYOUTS.size() - 1; i >= 0; i--) {
          Object l = ((WeakReference)LAYOUTS.get(i)).get();
          if (l == layout) {
             return ((HashMap)VALUES.get(i)).remove(key) != null;
@@ -138,7 +137,7 @@ public final class LinkHandler {
    }
 
    static synchronized void clearTemporaryBounds(Object layout) {
-      for(int i = LAYOUTS.size() - 1; i >= 0; --i) {
+      for (int i = LAYOUTS.size() - 1; i >= 0; i--) {
          Object l = ((WeakReference)LAYOUTS.get(i)).get();
          if (l == layout) {
             ((HashMap)VALUES_TEMP.get(i)).clear();

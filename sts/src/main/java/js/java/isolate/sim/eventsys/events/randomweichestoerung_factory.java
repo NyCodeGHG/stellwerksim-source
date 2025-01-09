@@ -12,10 +12,6 @@ public class randomweichestoerung_factory extends eventFactory {
    private JSpinner num;
    private JCheckBox stark;
 
-   public randomweichestoerung_factory() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "zufällige Weichenstörung";
@@ -47,7 +43,7 @@ public class randomweichestoerung_factory extends eventFactory {
    @Override
    public void readContainer(eventContainer ev) {
       super.readContainer(ev);
-      ev.setIntValue("dauer", Math.max(this.num.getValue(), 1));
+      ev.setIntValue("dauer", Math.max((Integer)this.num.getValue(), 1));
       ev.setValue("stark", this.stark.isSelected());
    }
 

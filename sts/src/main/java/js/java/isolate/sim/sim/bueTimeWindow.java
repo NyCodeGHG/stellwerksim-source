@@ -45,7 +45,7 @@ public class bueTimeWindow extends JDialog implements ActionListener {
    private void fillBÜs() {
       Iterator<gleis> it = this.my_main.getControl().getModel().findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis gl = (gleis)it.next();
          gleis bü = this.my_main.getControl().getModel().findFirst(new Object[]{gl.getENR(), gleis.ALLE_BAHNÜBERGÄNGE});
          this.model.addBue(bü);
@@ -128,7 +128,6 @@ public class bueTimeWindow extends JDialog implements ActionListener {
       private ArrayList<gleis> bueList = new ArrayList();
 
       private BueTableModel() {
-         super();
       }
 
       public String getColumnName(int column) {
@@ -153,7 +152,7 @@ public class bueTimeWindow extends JDialog implements ActionListener {
 
       public Object getValueAt(int rowIndex, int columnIndex) {
          gleis gl = (gleis)this.bueList.get(rowIndex);
-         switch(columnIndex) {
+         switch (columnIndex) {
             case 0:
                return gl.getElementName();
             case 1:
@@ -166,7 +165,7 @@ public class bueTimeWindow extends JDialog implements ActionListener {
       public void addBue(gleis gl) {
          boolean found = false;
 
-         for(gleis g : this.bueList) {
+         for (gleis g : this.bueList) {
             if (g.getENR() == gl.getENR()) {
                found = true;
                break;
@@ -180,7 +179,7 @@ public class bueTimeWindow extends JDialog implements ActionListener {
       }
 
       void refreshTimes() {
-         for(int i = 0; i < this.bueList.size(); ++i) {
+         for (int i = 0; i < this.bueList.size(); i++) {
             this.fireTableCellUpdated(i, 1);
          }
       }

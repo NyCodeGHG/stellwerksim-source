@@ -2,10 +2,6 @@ package js.java.isolate.sim;
 
 @Deprecated
 public class parameters {
-   public parameters() {
-      super();
-   }
-
    public static String getParameter(String p) {
       if (p.compareTo("sound1") == 0) {
          return "/js/java/extras/welcome.wav";

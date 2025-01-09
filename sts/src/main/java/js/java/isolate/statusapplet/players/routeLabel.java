@@ -21,7 +21,6 @@ public class routeLabel extends JPanel implements ActionListener {
    private JLabel textField;
 
    public routeLabel(int aid, String test) {
-      super();
       this.aid = aid;
       this.setBackground(UIManager.getDefaults().getColor("List.background"));
       this.setLayout(new SimpleOneRowLayout());

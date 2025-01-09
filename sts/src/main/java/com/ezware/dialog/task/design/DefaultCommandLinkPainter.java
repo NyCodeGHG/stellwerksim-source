@@ -14,10 +14,6 @@ import javax.swing.UIManager;
 public class DefaultCommandLinkPainter implements ICommandLinkPainter {
    private static final int ARC_SIZE = 5;
 
-   public DefaultCommandLinkPainter() {
-      super();
-   }
-
    @Override
    public void intialize(JComponent source) {
       if (source instanceof AbstractButton) {

@@ -16,10 +16,6 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.MemoryCacheImageOutputStream;
 
 public class imageencoder {
-   public imageencoder() {
-      super();
-   }
-
    public static void encode(BufferedImage img, OutputStream out) throws IOException {
       Iterator<ImageWriter> iwit = ImageIO.getImageWritersByFormatName("jpeg");
       ImageWriter writer = (ImageWriter)iwit.next();

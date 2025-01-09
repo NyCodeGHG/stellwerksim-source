@@ -5,10 +5,6 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 
 class TableDataTipListener extends DataTipListener {
-   TableDataTipListener() {
-      super();
-   }
-
    @Override
    DataTipCell getCell(JComponent component, Point point) {
       JTable table = (JTable)component;

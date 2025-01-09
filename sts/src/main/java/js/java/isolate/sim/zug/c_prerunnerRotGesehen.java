@@ -3,10 +3,6 @@ package js.java.isolate.sim.zug;
 import js.java.isolate.sim.sim.TEXTTYPE;
 
 class c_prerunnerRotGesehen extends baseChain {
-   c_prerunnerRotGesehen() {
-      super();
-   }
-
    @Override
    boolean run(zug z) {
       this.visiting(z);
@@ -22,7 +18,7 @@ class c_prerunnerRotGesehen extends baseChain {
             String text = "Anruf von Triebfahrzeugführer " + z.getSpezialName() + ": <i>\"Zug fährt jetzt zum wiederholten mal auf ein rotes Signal zu.";
             z.my_main.showText(text, TEXTTYPE.ANRUF, z);
             z.my_main.playAnruf();
-            ++z.haltabstandanrufcnt;
+            z.haltabstandanrufcnt++;
          }
       }
 

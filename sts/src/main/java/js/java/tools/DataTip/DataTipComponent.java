@@ -18,7 +18,6 @@ class DataTipComponent extends JToolTip {
    private boolean isHeavyWeight;
 
    DataTipComponent(DataTipCell cell, Rectangle withoutBorderRectangle, Color backgroundColor) {
-      super();
       this.cell = cell;
       this.withoutBorderRectangle = withoutBorderRectangle;
       this.backgroundColor = backgroundColor;

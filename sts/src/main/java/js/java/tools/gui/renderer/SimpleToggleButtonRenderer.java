@@ -12,12 +12,10 @@ public class SimpleToggleButtonRenderer extends SimpleToggleButton implements Li
    private int buttonWidth = 0;
 
    public SimpleToggleButtonRenderer() {
-      super();
       this.setMargin(new Insets(0, 1, 1, 1));
    }
 
    public SimpleToggleButtonRenderer(int buttonwidth) {
-      super();
       this.setMargin(new Insets(0, 1, 1, 1));
       this.buttonWidth = buttonwidth;
    }

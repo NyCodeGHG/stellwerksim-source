@@ -13,10 +13,6 @@ public class massLenRevised extends massLenClassic {
    };
    private static final double[] masstabLength = new double[]{1.0, 1.3, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0};
 
-   public massLenRevised() {
-      super();
-   }
-
    @Override
    protected int calcLaengeImpl(int masstab, int laenge) {
       try {

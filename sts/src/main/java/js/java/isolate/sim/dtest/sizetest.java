@@ -4,10 +4,6 @@ import java.util.LinkedList;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class sizetest implements dtest {
-   public sizetest() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Grössentest";

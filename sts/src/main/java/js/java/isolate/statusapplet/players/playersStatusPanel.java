@@ -33,7 +33,6 @@ public class playersStatusPanel extends JPanel implements ircupdate, ActionListe
    private double spieldauerTotalmax = 0.0;
 
    public playersStatusPanel(oneInstance m, playersPanel kp) {
-      super();
       this.my_main = m;
       this.kp = kp;
       kp.registerHook(this);
@@ -131,7 +130,7 @@ public class playersStatusPanel extends JPanel implements ircupdate, ActionListe
          this.zug5minStat.setValue(1, (double)this.seenNow.size());
          this.zug5minStat.setValue(2, (double)this.seenMax);
          if (this.seenMax > this.seen5.size()) {
-            this.seenMax -= this.seenMax / 4;
+            this.seenMax = this.seenMax - this.seenMax / 4;
          }
       }
    }

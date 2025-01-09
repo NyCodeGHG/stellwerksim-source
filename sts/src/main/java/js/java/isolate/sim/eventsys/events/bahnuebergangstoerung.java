@@ -61,7 +61,7 @@ public class bahnuebergangstoerung extends bueevent {
             this.waitingCallback = false;
             Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE, this.büenr});
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleis gl = (gleis)it.next();
                this.my_main.reportElementOccurance(gl, OCCU_KIND.OCCURED, "bahnuebergangstoerung", this.code);
                this.registerForZug(gl);
@@ -89,7 +89,7 @@ public class bahnuebergangstoerung extends bueevent {
                this.knownZug.put(z.getZID_num(), System.currentTimeMillis());
             }
 
-            long v = this.knownZug.get(z.getZID_num());
+            long v = (Long)this.knownZug.get(z.getZID_num());
             return System.currentTimeMillis() - v > 30000L;
          }
 
@@ -107,7 +107,7 @@ public class bahnuebergangstoerung extends bueevent {
          if (url.equals("yes")) {
             Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE, this.büenr});
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleis g = (gleis)it.next();
                this.unregisterForStellung(g);
                this.unregisterForZug(g);
@@ -123,7 +123,7 @@ public class bahnuebergangstoerung extends bueevent {
          } else {
             Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE, this.büenr});
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                gleis g = (gleis)it.next();
                g.getFluentData().setGesperrtAndStellung(true, true);
             }
@@ -152,7 +152,7 @@ public class bahnuebergangstoerung extends bueevent {
 
       Iterator<gleis> it = this.glbModel.findIterator(new Object[]{gleis.ALLE_BAHNÜBERGÄNGE, this.büenr});
 
-      while(it.hasNext()) {
+      while (it.hasNext()) {
          gleis g = (gleis)it.next();
          this.unregisterForStellung(g);
          this.unregisterForZug(g);

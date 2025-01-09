@@ -51,7 +51,6 @@ public class UCProxy implements UserContext, xmllistener, UCProxyMBean {
    private final boolean noLoaderClose;
 
    UCProxy(UserContextMini root, boolean noLoaderClose) {
-      super();
       this.root = root;
       this.noLoaderClose = noLoaderClose;
       this.launchTime = System.currentTimeMillis();
@@ -135,11 +134,11 @@ public class UCProxy implements UserContext, xmllistener, UCProxyMBean {
       if (event.uc == this) {
          this.showTopLevelMessage("Modul " + this.runningModul.title + " wurde beendet.", 4);
          Logger.getLogger(MessageAdapter.class.getName()).log(Level.INFO, "Modulende {0} -----------------------", this.runningModul.title);
-         synchronized(this.closeObjects) {
+         synchronized (this.closeObjects) {
             this.runningModulObject = null;
             Iterator<SessionClose> it = this.closeObjects.descendingIterator();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                SessionClose so = (SessionClose)it.next();
 
                try {
@@ -271,7 +270,7 @@ public class UCProxy implements UserContext, xmllistener, UCProxyMBean {
 
    @Override
    public void addCloseObject(SessionClose obj) {
-      synchronized(this.closeObjects) {
+      synchronized (this.closeObjects) {
          this.closeObjects.add(obj);
       }
    }

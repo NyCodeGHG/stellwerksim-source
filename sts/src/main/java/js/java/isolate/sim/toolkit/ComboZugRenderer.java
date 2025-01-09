@@ -9,7 +9,6 @@ import js.java.isolate.sim.zug.zugMeasure;
 
 public class ComboZugRenderer extends JLabel implements ListCellRenderer {
    public ComboZugRenderer() {
-      super();
       this.setOpaque(true);
       this.setHorizontalAlignment(2);
       this.setVerticalAlignment(0);

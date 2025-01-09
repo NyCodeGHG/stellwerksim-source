@@ -9,11 +9,9 @@ public class BoxBlurFilter extends AbstractBufferedImageOp {
    private boolean premultiplyAlpha = true;
 
    public BoxBlurFilter() {
-      super();
    }
 
    public BoxBlurFilter(float hRadius, float vRadius, int iterations) {
-      super();
       this.hRadius = hRadius;
       this.vRadius = vRadius;
       this.iterations = iterations;
@@ -41,7 +39,7 @@ public class BoxBlurFilter extends AbstractBufferedImageOp {
          ImageMath.premultiply(inPixels, 0, inPixels.length);
       }
 
-      for(int i = 0; i < this.iterations; ++i) {
+      for (int i = 0; i < this.iterations; i++) {
          blur(inPixels, outPixels, width, height, this.hRadius);
          blur(outPixels, inPixels, height, width, this.vRadius);
       }
@@ -62,20 +60,20 @@ public class BoxBlurFilter extends AbstractBufferedImageOp {
       int tableSize = 2 * r + 1;
       int[] divide = new int[256 * tableSize];
 
-      for(int i = 0; i < 256 * tableSize; ++i) {
+      for (int i = 0; i < 256 * tableSize; i++) {
          divide[i] = i / tableSize;
       }
 
       int inIndex = 0;
 
-      for(int y = 0; y < height; ++y) {
+      for (int y = 0; y < height; y++) {
          int outIndex = y;
          int ta = 0;
          int tr = 0;
          int tg = 0;
          int tb = 0;
 
-         for(int i = -r; i <= r; ++i) {
+         for (int i = -r; i <= r; i++) {
             int rgb = in[inIndex + ImageMath.clamp(i, 0, width - 1)];
             ta += rgb >> 24 & 0xFF;
             tr += rgb >> 16 & 0xFF;
@@ -83,7 +81,7 @@ public class BoxBlurFilter extends AbstractBufferedImageOp {
             tb += rgb & 0xFF;
          }
 
-         for(int x = 0; x < width; ++x) {
+         for (int x = 0; x < width; x++) {
             out[outIndex] = divide[ta] << 24 | divide[tr] << 16 | divide[tg] << 8 | divide[tb];
             int i1 = x + r + 1;
             if (i1 > widthMinus1) {
@@ -113,11 +111,11 @@ public class BoxBlurFilter extends AbstractBufferedImageOp {
       float f = 1.0F / (1.0F + 2.0F * radius);
       int inIndex = 0;
 
-      for(int y = 0; y < height; ++y) {
+      for (int y = 0; y < height; y++) {
          out[y] = in[0];
          int outIndex = y + height;
 
-         for(int x = 1; x < width - 1; ++x) {
+         for (int x = 1; x < width - 1; x++) {
             int i = inIndex + x;
             int rgb1 = in[i - 1];
             int rgb2 = in[i];

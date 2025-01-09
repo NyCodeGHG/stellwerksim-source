@@ -21,7 +21,7 @@ class players_paint_zdeckungssignal extends paint2Base {
          col_rot = gleis.colors.col_stellwerk_rotein;
       }
 
-      switch(gl.getRichtung()) {
+      switch (gl.getRichtung()) {
          case right:
             gl.paintDeckungsSignal(g, 0, yscal * 3 / 4, fscal, col_rot, col_kenn, Math.PI * 3.0 / 2.0);
             break;

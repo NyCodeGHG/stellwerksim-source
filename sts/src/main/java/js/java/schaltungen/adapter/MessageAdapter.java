@@ -19,7 +19,6 @@ public class MessageAdapter implements MessageAdapterMBean {
    private boolean noLoaderClose = false;
 
    public MessageAdapter(UserContextMini uc) {
-      super();
       this.uc = uc;
       this.bus = EventBusService.getInstance();
       this.bus.subscribe(this);
@@ -76,7 +75,7 @@ public class MessageAdapter implements MessageAdapterMBean {
          this.bus.publish(new SpoolLaunchEvent(event));
       } else {
          if (!this.runningModules.isEmpty()) {
-            for(Module m : this.runningModule) {
+            for (Module m : this.runningModule) {
                if (m.singleModule && mod.singleModule) {
                   this.uc.showTopLevelMessage("Das laufende Modul " + m.title + " kann nicht zusammen mit " + mod.title + " laufen.", 5);
                   this.bus.publish(new SpoolLaunchEvent(event));
@@ -85,7 +84,7 @@ public class MessageAdapter implements MessageAdapterMBean {
             }
          }
 
-         synchronized(this.runningModules) {
+         synchronized (this.runningModules) {
             UCProxy ucp = new UCProxy(this.uc, this.noLoaderClose);
             this.runningModules.put(ucp, mod);
             this.runningModule.add(mod);
@@ -99,7 +98,7 @@ public class MessageAdapter implements MessageAdapterMBean {
    public void endEvent(EndModule event) {
       if (event.uc instanceof UCProxy) {
          UCProxy ucp = (UCProxy)event.uc;
-         synchronized(this.runningModules) {
+         synchronized (this.runningModules) {
             this.runningModules.remove(ucp);
             if (!this.runningModules.values().contains(event.modul)) {
                this.runningModule.remove(event.modul);
@@ -117,13 +116,13 @@ public class MessageAdapter implements MessageAdapterMBean {
 
    @Override
    public String[] getRunningModuleNames() {
-      synchronized(this.runningModules) {
+      synchronized (this.runningModules) {
          String[] ret = new String[this.runningModules.size()];
          int i = 0;
 
-         for(Module m : this.runningModules.values()) {
+         for (Module m : this.runningModules.values()) {
             ret[i] = m.title;
-            ++i;
+            i++;
          }
 
          return ret;

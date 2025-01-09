@@ -4,10 +4,6 @@ import java.util.HashMap;
 import js.java.isolate.sim.gleis.gleis;
 
 public abstract class inserttoken {
-   public inserttoken() {
-      super();
-   }
-
    public void init() {
    }
 

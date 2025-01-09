@@ -8,10 +8,6 @@ import javax.swing.JPanel;
 import js.java.tools.gui.layout.SimpleOneColumnLayout;
 
 public class BefehlsLayout extends SimpleOneColumnLayout {
-   public BefehlsLayout() {
-      super();
-   }
-
    public void layoutContainer(Container parent) {
       if (this.needRecalc) {
          this.setPosAndSize(parent);
@@ -23,7 +19,7 @@ public class BefehlsLayout extends SimpleOneColumnLayout {
       int x = insets.left;
       int y = insets.top;
 
-      for(int i = 0; i < nComps; ++i) {
+      for (int i = 0; i < nComps; i++) {
          Component c;
          if (this.bottomUp) {
             c = parent.getComponent(nComps - i - 1);

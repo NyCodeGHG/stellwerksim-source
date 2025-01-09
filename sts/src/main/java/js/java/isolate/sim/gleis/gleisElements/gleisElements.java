@@ -180,7 +180,7 @@ public interface gleisElements {
       }
 
       public static gleisElements.Stellungen string2stellung(String st) {
-         for(gleisElements.Stellungen s : values()) {
+         for (gleisElements.Stellungen s : values()) {
             if (st.equalsIgnoreCase(s.getSaveText())) {
                return s;
             }

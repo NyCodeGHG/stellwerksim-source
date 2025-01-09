@@ -12,7 +12,6 @@ public class ClassLoaderFactory {
    private final String title;
 
    public ClassLoaderFactory(String title) {
-      super();
       this.title = title;
    }
 

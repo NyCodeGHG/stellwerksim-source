@@ -6,10 +6,6 @@ import js.java.isolate.sim.gleis.gleis;
 import js.java.isolate.sim.gleisbild.gleisbildModelSts;
 
 public class displaytest3 extends displaytest2 {
-   public displaytest3() {
-      super();
-   }
-
    @Override
    public String getName() {
       return "Displaykontakt verbunden";

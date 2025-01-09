@@ -16,11 +16,9 @@ public class MotionBlurOp extends AbstractBufferedImageOp {
    private float zoom;
 
    public MotionBlurOp() {
-      super();
    }
 
    public MotionBlurOp(float distance, float angle, float rotation, float zoom) {
-      super();
       this.distance = distance;
       this.angle = angle;
       this.rotation = rotation;
@@ -88,7 +86,7 @@ public class MotionBlurOp extends AbstractBufferedImageOp {
       int m = 1;
 
       int log2n;
-      for(log2n = 0; m < n; ++log2n) {
+      for (log2n = 0; m < n; log2n++) {
          m *= 2;
       }
 
@@ -122,7 +120,7 @@ public class MotionBlurOp extends AbstractBufferedImageOp {
       } else {
          BufferedImage tmp = this.createCompatibleDestImage(src, null);
 
-         for(int i = 0; i < steps; ++i) {
+         for (int i = 0; i < steps; i++) {
             Graphics2D g = tmp.createGraphics();
             g.drawImage(tsrc, null, null);
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

@@ -34,9 +34,7 @@ public class eventGenerator {
    }
 
    protected eventGenerator() {
-      super();
-
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          this.hooks.put(k, new eventGenerator.hookMgr());
       }
    }
@@ -49,7 +47,7 @@ public class eventGenerator {
 
          boolean ret = true;
 
-         for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+         for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
             if (ret) {
                boolean v = ((eventGenerator.hookMgr)this.hooks.get(k)).call(typ, e);
                if (k.relevant) {
@@ -68,7 +66,7 @@ public class eventGenerator {
    }
 
    public final boolean hasHook(eventGenerator.TYPES typ) {
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          if (this.hasHook(k, typ)) {
             return true;
          }
@@ -82,7 +80,7 @@ public class eventGenerator {
    }
 
    public final boolean hasHookRegistered(eventGenerator.TYPES typ, Class<? extends eventGenerator.eventCall> e) {
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          boolean r = this.hasHookRegistered(k, typ, e);
          if (r) {
             return true;
@@ -97,7 +95,7 @@ public class eventGenerator {
    }
 
    public final boolean hasThisHookRegistered(eventGenerator.TYPES typ, eventGenerator.eventCall e) {
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          boolean r = this.hasThisHookRegistered(k, typ, e);
          if (r) {
             return true;
@@ -112,7 +110,7 @@ public class eventGenerator {
    }
 
    public final boolean hasDataHookRegistered(eventGenerator.TYPES typ, Object e) {
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          boolean r = this.hasDataHookRegistered(k, typ, e);
          if (r) {
             return true;
@@ -135,19 +133,19 @@ public class eventGenerator {
    }
 
    public void unregisterHook(eventGenerator.TYPES typ, eventGenerator.eventCall e) {
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          ((eventGenerator.hookMgr)this.hooks.get(k)).unregisterHook(typ, e);
       }
    }
 
    public void unregisterHookTypes(eventGenerator.TYPES typ, Class<? extends eventGenerator.eventCall> e) {
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          ((eventGenerator.hookMgr)this.hooks.get(k)).unregisterHookTypes(typ, e);
       }
    }
 
    public void unregisterAllHooks() {
-      for(eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
+      for (eventGenerator.HOOKKIND k : eventGenerator.HOOKKIND.values()) {
          ((eventGenerator.hookMgr)this.hooks.get(k)).unregisterAllHooks();
       }
    }
@@ -192,7 +190,7 @@ public class eventGenerator {
       hookMgr() {
          super(eventGenerator.TYPES.class);
 
-         for(eventGenerator.TYPES i : eventGenerator.TYPES.values()) {
+         for (eventGenerator.TYPES i : eventGenerator.TYPES.values()) {
             this.put(i, new CopyOnWriteArraySet());
          }
       }
@@ -205,7 +203,7 @@ public class eventGenerator {
 
             boolean ret = true;
 
-            for(eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
+            for (eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
                e.currentReturn = ret;
                ret &= ev.hookCall(typ, e);
             }
@@ -226,7 +224,7 @@ public class eventGenerator {
       public final boolean hasHookRegistered(eventGenerator.TYPES typ, Class<? extends eventGenerator.eventCall> e) {
          boolean ret = false;
 
-         for(eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
+         for (eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
             if (e.isInstance(ev)) {
                ret = true;
                break;
@@ -239,7 +237,7 @@ public class eventGenerator {
       public final boolean hasThisHookRegistered(eventGenerator.TYPES typ, eventGenerator.eventCall e) {
          boolean ret = false;
 
-         for(eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
+         for (eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
             if (ev.equals(e)) {
                ret = true;
                break;
@@ -252,7 +250,7 @@ public class eventGenerator {
       public final boolean hasDataHookRegistered(eventGenerator.TYPES typ, Object e) {
          boolean ret = false;
 
-         for(eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
+         for (eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
             if (ev.equals(e)) {
                ret = true;
                break;
@@ -277,7 +275,7 @@ public class eventGenerator {
       }
 
       public void unregisterHookTypes(eventGenerator.TYPES typ, Class<? extends eventGenerator.eventCall> e) {
-         for(eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
+         for (eventGenerator.eventCall ev : (CopyOnWriteArraySet)this.get(typ)) {
             if (e.isInstance(ev)) {
                ((CopyOnWriteArraySet)this.get(typ)).remove(ev);
             }
@@ -285,7 +283,7 @@ public class eventGenerator {
       }
 
       public void unregisterAllHooks() {
-         for(eventGenerator.TYPES i : eventGenerator.TYPES.values()) {
+         for (eventGenerator.TYPES i : eventGenerator.TYPES.values()) {
             ((CopyOnWriteArraySet)this.get(i)).clear();
          }
       }

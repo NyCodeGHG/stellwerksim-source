@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 
 public class WindowUtils {
    private WindowUtils() {
-      super();
    }
 
    public static void centerWindow(Container window) {

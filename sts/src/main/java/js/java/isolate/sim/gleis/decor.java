@@ -19,7 +19,6 @@ public class decor {
    }
 
    private decor() {
-      super();
       this.addTyp1(this.types);
       this.addTyp2(this.types);
       this.addTyp3(this.types);
@@ -32,7 +31,7 @@ public class decor {
       try {
          decorItem di = (decorItem)this.types.get(item);
          if (di != null) {
-            synchronized(di) {
+            synchronized (di) {
                di.setD(painter);
             }
          }
@@ -46,7 +45,7 @@ public class decor {
       try {
          decorItem di = (decorItem)this.types.get(item);
          if (di != null) {
-            synchronized(di) {
+            synchronized (di) {
                di.setPainter(painter);
             }
          }
@@ -60,7 +59,7 @@ public class decor {
       try {
          decorItem di = (decorItem)this.types.get(item);
          if (di != null) {
-            synchronized(di) {
+            synchronized (di) {
                di.setPainter(painter);
             }
          }
@@ -469,7 +468,6 @@ public class decor {
 
    private static class getallowsEditENR implements decor.getDecorItemItem {
       private getallowsEditENR() {
-         super();
       }
 
       @Override
@@ -480,7 +478,6 @@ public class decor {
 
    private static class getallowsEditSWwert implements decor.getDecorItemItem {
       private getallowsEditSWwert() {
-         super();
       }
 
       @Override
@@ -491,7 +488,6 @@ public class decor {
 
    private static class getallowsVerbund implements decor.getDecorItemItem {
       private getallowsVerbund() {
-         super();
       }
 
       @Override
@@ -502,7 +498,6 @@ public class decor {
 
    private static class gethasEnrPartner implements decor.getDecorItemItem {
       private gethasEnrPartner() {
-         super();
       }
 
       @Override
@@ -513,7 +508,6 @@ public class decor {
 
    private static class gethasLayer2Painter implements decor.getDecorItemItem {
       private gethasLayer2Painter() {
-         super();
       }
 
       @Override
@@ -524,7 +518,6 @@ public class decor {
 
    private static class gethasName implements decor.getDecorItemItem {
       private gethasName() {
-         super();
       }
 
       @Override
@@ -535,7 +528,6 @@ public class decor {
 
    private static class getkeepEnr implements decor.getDecorItemItem {
       private getkeepEnr() {
-         super();
       }
 
       @Override
@@ -546,7 +538,6 @@ public class decor {
 
    private static class getrequiredENR implements decor.getDecorItemItem {
       private getrequiredENR() {
-         super();
       }
 
       @Override
@@ -557,7 +548,6 @@ public class decor {
 
    private static class getrequiredSWwert implements decor.getDecorItemItem {
       private getrequiredSWwert() {
-         super();
       }
 
       @Override
@@ -568,7 +558,6 @@ public class decor {
 
    private static class getshouldhaveSWwert implements decor.getDecorItemItem {
       private getshouldhaveSWwert() {
-         super();
       }
 
       @Override

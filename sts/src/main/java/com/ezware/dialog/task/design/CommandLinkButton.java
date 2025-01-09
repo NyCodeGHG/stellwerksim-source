@@ -21,7 +21,6 @@ public class CommandLinkButton extends JToggleButton {
    private final ICommandLinkPainter painter;
 
    public CommandLinkButton(CommandLink link, ICommandLinkPainter painter) {
-      super();
       this.link = link;
       this.painter = painter;
       this.setHorizontalAlignment(2);

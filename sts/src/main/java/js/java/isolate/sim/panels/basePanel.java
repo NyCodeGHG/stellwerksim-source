@@ -13,7 +13,6 @@ public class basePanel extends JPanel implements AbstractListener {
    protected stellwerk_editor my_main;
 
    public basePanel(gleisbildEditorControl glb, stellwerk_editor e) {
-      super();
       this.glbControl = glb;
       this.my_main = e;
    }

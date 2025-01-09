@@ -7,10 +7,6 @@ import js.java.isolate.sim.gleis.fluentData;
 import js.java.isolate.sim.gleis.gleis;
 
 public class players_elementPainter extends elementPainterCentered {
-   public players_elementPainter() {
-      super();
-   }
-
    private Color getColor(gleis gl) {
       fluentData f = gl.getFluentData();
       return f.getStatus() == 1 ? Color.YELLOW : gleis.colors.col_stellwerk_gleis;

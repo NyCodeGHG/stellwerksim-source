@@ -35,7 +35,7 @@ class paint_einfahrt extends paint_ausfahrt {
       boolean hasAusfahrt = false;
       Iterator<gleis> it = gl.getNachbarn();
 
-      while(!hasAusfahrt && it.hasNext()) {
+      while (!hasAusfahrt && it.hasNext()) {
          gleis ngl = (gleis)it.next();
          if (ngl.telement == gleis.ELEMENT_AUSFAHRT) {
             hasAusfahrt = true;

@@ -35,7 +35,7 @@ class paint_uebergabepunkt extends paint2Base {
          col_back = new Color(col_back.getRed(), col_back.getGreen(), col_back.getBlue(), 187);
       }
 
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             gl.paintVSignal(g, 0, yscal * 3 / 4, fscal, col_rot, col_gruen, col_draw, col_back, Math.PI * 3.0 / 2.0, 1, 0);
             break;
@@ -64,7 +64,7 @@ class paint_uebergabepunkt extends paint2Base {
       int y1 = 0;
       int x2 = 0;
       int y2 = 0;
-      switch(gl.richtung) {
+      switch (gl.richtung) {
          case right:
             x0 += xscal - 1;
             x1 = x0;

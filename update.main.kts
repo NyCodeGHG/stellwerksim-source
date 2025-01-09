@@ -108,6 +108,7 @@ fun copyFiles(files: Sequence<Path>, rootDir: Path, decompilePath: Path) {
             destination.parent.createDirectories()
             if (destination.exists()) {
                 println("$destination already exists.")
+                continue
             }
             println("Copying $entry to $destination")
             entry.copyTo(destination)
